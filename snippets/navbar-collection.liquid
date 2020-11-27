@@ -1,0 +1,38 @@
+<style>
+    .nav-item {
+        display: inline;
+        margin: 0 50px 0 0;
+        padding: 0;
+    }
+
+    .hr1 {
+        margin: 10px 0 10px 0;
+        padding 0;
+    }
+</style>
+
+
+<!-- <hr class="hr1"> -->
+<nav class="nav1">
+    <ul class="navbar-nav"> 
+        {% for link in linklists[section.settings.nav_linklist].links %}
+            {% if link.links != blank %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{link.url}}">{{ link.title }} {% include 'icon-arrow-right' %}</a>
+                    <ul>
+                        {% for childlink in link.links %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{childlink.url}}">{{ childlink.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{{link.url}}" class="aroma-list-category">{{ link.title }}</a>        
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+<!-- <hr class="hr1"> -->

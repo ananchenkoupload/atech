@@ -1,0 +1,1178 @@
+<div class="page-width b2b-hotel">
+  <div class="custom-width-hotel">
+  <div class="grid">
+    <div class="grid__item {% unless section.settings.full_width %} medium-up--two-thirds medium-up--push-one-sixth{% endunless %}">
+      {% if section.settings.section_title != blank %}
+        <div class="rich-text__heading--{{ section.settings.text_size }} text-center">
+          <h2 class="h3">{{ section.settings.section_title | escape }}</h2>
+        </div>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="rich-text__text--{{ section.settings.text_size }} rte-setting text-center">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="grid grid--no-gutters image-bar image-bar--{{ section.settings.section_height }}">
+    {% case section.blocks.size %}
+      {% when 1 %}
+        {%- assign column_size = '' -%}
+      {% when 2 %}
+        {%- assign column_size = 'medium-up--one-half' -%}
+      {% when 3 %}
+        {%- assign column_size = 'medium-up--one-third' -%}
+      {% else %}
+        {%- assign column_size = 'medium-up--one-quarter' -%}
+    {% endcase %}
+
+    {% for block in section.blocks %}
+      <div class="grid__item {{ column_size }} js" {{ block.shopify_attributes }}>
+        {% if block.settings.link != blank %}
+          <a class="image-bar__link" href="{{ block.settings.link }}">
+            <div class="image-bar__item box ratio-container lazyload"
+                 data-bgset="{% include 'bgset', image: block.settings.image %}"
+                 data-sizes="auto"
+                 data-parent-fit="cover"
+                 style="background-position: {{ block.settings.alignment }};"
+                 data-image-loading-animation>
+        {% elsif block.settings.image != blank %}
+          <div class="image-bar__item image-bar__item--{{ block.id }} box ratio-container lazyload"
+               data-bgset="{% include 'bgset', image: block.settings.image %}"
+               data-sizes="auto"
+               data-parent-fit="cover"
+               style="background-position: {{ block.settings.alignment }};"
+               data-image-loading-animation>
+        {% else %}
+          <div class="image-bar__item">
+        {% endif %}
+        <div class="image-bar__content{% if block.settings.cta_label != blank or block.settings.link != blank %} image-bar__overlay{% endif %}">
+          {% if block.settings.image == blank %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+
+          {% if block.settings.cta_label != blank %}
+            <div class="image-bar__text">
+              <h3 class="image-bar__caption">{{ block.settings.cta_label | escape }}</h3>
+            </div>
+          {% endif %}
+        </div>
+        {% if block.settings.link != blank %}
+          </div></a>
+        {% else %}
+          </div>
+        {% endif %}
+      </div>
+      <noscript>
+        <div class="grid__item {{ column_size }}" {{ block.shopify_attributes }}>
+          <div class="image-bar__item image-bar__item--{{ block.id }}" style="background-image: url({{ block.settings.image | img_url: '2048x' }});"></div>
+        </div>
+      </noscript>
+    {% endfor %}
+  </div>
+    {% if section.blocks.size == 0 %}
+  	{% include 'no-blocks' %}
+	{% endif %}
+    <div class="hotel-btn">
+      {%- assign show_link_button = false -%}
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        {%- assign show_link_button = true -%}
+        {%- endif -%}
+        {%- if show_link_button -%}
+        <div class="slideshow__btn-wrapper{% if section.settings.slide_title != blank or section.settings.subheading != blank %} slideshow__btn-wrapper--push{% endif %}">
+          <a href="{{ section.settings.button_link }}" class="btn slideshow__btn">
+            {{ section.settings.button_label | escape }}
+          </a>
+          {% if section.settings.text1 != blank %}
+        	<div class="rte-setting text-center">{{ section.settings.text1 }}</div>
+      	  {% endif %}
+         </div>
+      
+         <div class="slideshow__btn-wrapper{% if section.settings.slide_title != blank or section.settings.subheading != blank %} slideshow__btn-wrapper--push{% endif %}">
+          <a href="{{ section.settings.button_link2 }}" class="btn slideshow__btn">
+            {{ section.settings.button_label2 | escape }}
+          </a>
+           {% if section.settings.text2 != blank %}
+        	<div class="rte-setting text-center">{{ section.settings.text2 }}</div>
+      	  {% endif %}
+         </div>
+      
+      	 <div class="slideshow__btn-wrapper{% if section.settings.slide_title != blank or section.settings.subheading != blank %} slideshow__btn-wrapper--push{% endif %}">
+          <a href="{{ section.settings.button_link3 }}" class="btn slideshow__btn">
+            {{ section.settings.button_label3 | escape }}
+          </a>
+           {% if section.settings.text3 != blank %}
+        	<div class="rte-setting text-center">{{ section.settings.text3 }}</div>
+      	  {% endif %}
+         </div>
+      
+      	 <div class="slideshow__btn-wrapper{% if section.settings.slide_title != blank or section.settings.subheading != blank %} slideshow__btn-wrapper--push{% endif %}">
+          <a href="{{ section.settings.button_link4 }}" class="btn slideshow__btn">
+            {{ section.settings.button_label4 | escape }}
+          </a>
+           {% if section.settings.text4 != blank %}
+        	<div class="rte-setting text-center">{{ section.settings.text4 }}</div>
+      	  {% endif %}
+         </div>
+       {%- endif -%}
+    </div>
+    
+    <div class="hotel-shop-btn">
+      <div class="slideshow__btn-wrapper{% if section.settings.slide_title != blank or section.settings.subheading != blank %} slideshow__btn-wrapper--push{% endif %}">
+        <a href="{{ section.settings.button_link5 }}" class="btn slideshow__btn">
+          {{ section.settings.button_label5 | escape }}
+        </a>
+
+      </div>
+      
+       <div class="slideshow__btn-wrapper{% if section.settings.slide_title != blank or section.settings.subheading != blank %} slideshow__btn-wrapper--push{% endif %}">
+        <a href="{{ section.settings.button_link6 }}" class="btn slideshow__btn">
+          {{ section.settings.button_label6 | escape }}
+        </a>
+
+      </div>
+      
+    </div>
+    </div>
+    
+</div>
+
+
+
+
+
+{% schema %}
+{
+  "name": {
+    "cs": "Galerie",
+    "da": "Galleri",
+    "de": "Galerie",
+    "en": "Gallery",
+    "es": "Galería",
+    "fi": "Galleria",
+    "fr": "Galerie",
+    "hi": "गैलरी",
+    "it": "Galleria",
+    "ja": "ギャラリー",
+    "ko": "갤러리",
+    "nb": "Galleri",
+    "nl": "Galerie",
+    "pl": "Galeria",
+    "pt-BR": "Galeria",
+    "pt-PT": "Galeria",
+    "sv": "Galleri",
+    "th": "แกลเลอรี",
+    "tr": "Galeri",
+    "vi": "Bộ sưu tập ảnh",
+    "zh-CN": "图库",
+    "zh-TW": "圖庫"
+  },
+  "class": "index-section index-section--flush",
+  "max_blocks": 4,
+  "settings": [
+  	{
+      "type": "checkbox",
+      "id": "full_width",
+      "label": {
+        "cs": "Zobrazení na šířku",
+        "da": "Bred visning",
+        "de": "Breitbild-Display",
+        "en": "Wide display",
+        "es": "Pantalla ancha",
+        "fi": "Laaja näyttö",
+        "fr": "Affichage large",
+        "hi": "चौड़ा डिस्प्ले",
+        "it": "Visualizzazione ampia",
+        "ja": "ワイドディスプレイ",
+        "ko": "너비 표시",
+        "nb": "Bred visning",
+        "nl": "Brede weergave",
+        "pl": "Szerokie wyświetlanie",
+        "pt-BR": "Exibição ampla",
+        "pt-PT": "Exibição ampla",
+        "sv": "Breddvisning",
+        "th": "การแสดงผลแบบกว้าง",
+        "tr": "Geniş görünüm",
+        "vi": "Hiển thị rộng",
+        "zh-CN": "宽显示屏",
+        "zh-TW": "寬螢幕"
+      }
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": {
+        "cs": "Nadpis",
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "hi": "शीर्षक",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pl": "Nagłówek",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "tr": "Başlık",
+        "vi": "Tiêu đề",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "cs": "Informujte o své značce",
+        "da": "Fortæl om dit brand",
+        "de": "Rede über deine Marke",
+        "en": "Talk about your brand",
+        "es": "Habla de tu marca",
+        "fi": "Kerro brändistäsi",
+        "fr": "Parlez de votre marque",
+        "hi": "अपने ब्रांड के बारे में बात करें",
+        "it": "Parla del tuo brand",
+        "ja": "あなたのブランドについて語る",
+        "ko": "브랜드에 대해 이야기하기",
+        "nb": "Snakk om merkevaren din",
+        "nl": "Vertel over je merk",
+        "pl": "Opowiedz o swojej marce",
+        "pt-BR": "Fale sobre a sua marca",
+        "pt-PT": "Fale sobre a sua marca",
+        "sv": "Prata om ditt varumärke",
+        "th": "พูดถึงแบรนด์ของคุณ",
+        "tr": "Markanızdan bahsedin",
+        "vi": "Chia sẻ về thương hiệu của bạn",
+        "zh-CN": "介绍您的品牌",
+        "zh-TW": "描述您的品牌"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": {
+        "cs": "Text",
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "tr": "Metin",
+        "vi": "Văn bản",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "cs": "<p>Informujte zákazníky prostřednictvím tohoto textu o své značce. Zároveň můžete popsat některý z produktů, oznámit důležité informace nebo přivítat zákazníky ve svém obchodě.</p>",
+        "da": "<p>Brug denne tekst til at dele oplysninger om dit brand med dine kunder. Beskriv et produkt, del meddelelser, eller byd kunder velkommen til din butik.</p>",
+        "de": "<p>Nutzen Sie diesen Text, um Infos über Ihre Marke mitzuteilen. Beschreiben Sie ein Produkt, kündigen Sie etwas an oder heißen Sie Kunden willkommen.</p>",
+        "en": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+        "es": "<p>Usa este texto para compartir información sobre tu marca con tus clientes. Describe un producto, comparte anuncios o recibe clientes en tu tienda.</p>",
+        "fi": "<p>Tämän tekstin avulla voit jakaa brändiäsi koskevia tietoja asiakkaille. Kuvaile tuotetta, jaa ilmoituksia tai toivota asiakkaat tervetulleiksi kauppaasi.</p>",
+        "fr": "<p>Utilisez ce texte pour partager des informations sur votre marque. Décrivez un produit, partagez des annonces, ou souhaitez la bienvenue à vos clients.</p>",
+        "hi": "<p>अपने ग्राहकों के साथ अपने ब्रांड के बारे में जानकारी शेयर करने के लिए इस टेक्स्ट का उपयोग करें. उत्पाद का वर्णन करें, घोषणाओं को शेयर करें या अपने स्टोर में ग्राहकों का स्वागत करें.</p>",
+        "it": "<p>Utilizza questo testo per condividere le informazioni sul tuo brand con i tuoi clienti. Descrivi un prodotto, condividi gli annunci o dai il benvenuto ai clienti nel tuo negozio.</p>",
+        "ja": "<p>このテキストを使用して、あなたのブランドに関する情報をお客様と共有します。商品を説明したり、告知の共有をしたり、あるいはあなたのストアのお客様を歓迎します。</p>",
+        "ko": "<p>이 텍스트를 사용하여 고객과 브랜드에 대한 정보를 공유하십시오. 제품 설명, 공지 사항 공유 또는 고객의 스토어 방문을 환영합니다.</p>",
+        "nb": "<p>Bruk denne teksten for å dele informasjon om merkevaren med kundene dine. Beskriv et produkt, del kunngjøringer eller ønsk kunder velkommen til butikken din.</p>",
+        "nl": "<p>Gebruik deze tekst om informatie over je merk te delen met je klanten. Beschrijf een product, deel aankondigingen of verwelkom klanten in je winkel.</p>",
+        "pl": "<p>Użyj tego tekstu, aby udostępnić klientom informacje o swojej marce. Opisz produkt, udostępnij ogłoszenia lub przywitaj klientów w swoim sklepie.</p>",
+        "pt-BR": "<p>Use este texto para compartilhar informações sobre sua marca com seus clientes. Descreva um produto, compartilhe novidades ou receba os clientes em sua loja.</p>",
+        "pt-PT": "<p>Utilize este texto para partilhar informações sobre a sua marca com seus clientes. Descreva um produto, partilhe comunicados ou receba clientes na sua loja.</p>",
+        "sv": "<p>Använd den här texten för att dela information om ditt varumärke med dina kunder. Beskriv en produkt, dela meddelanden eller välkomna kunder till din butik.</p>",
+        "th": "<p>ใช้ข้อความนี้ในการแชร์ข้อมูลเกี่ยวกับแบรนด์ของคุณกับลูกค้าของคุณ อธิบายคุณสมบัติของสินค้า แชร์ประกาศ หรือต้อนรับลูกค้าสู่ร้านค้าของคุณ</p>",
+        "tr": "<p>Müşterilerinizle markanız hakkında bilgi paylaşmak için bu metni kullanın. Ürün açıklaması girin, duyuru paylaşın veya mağazanıza gelen müşterileri karşılayın.</p>",
+        "vi": "<p>Sử dụng văn bản này để chia sẻ thông tin về thương hiệu của bạn với khách hàng. Mô tả sản phẩm, chia sẻ thông báo hoặc chào mừng khách hàng tới cửa hàng của bạn.</p>",
+        "zh-CN": "<p>使用此文本与您的客户分享有关您品牌的信息。描述产品、分享公告或欢迎客户访问您的商店。</p>",
+        "zh-TW": "<p>您可以用這段文字和顧客分享品牌資訊、描述產品、分享公告，或歡迎顧客光臨您的商店。</p>"
+      }
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": {
+        "cs": "Velikost",
+        "da": "Størrelse",
+        "de": "Größe",
+        "en": "Size",
+        "es": "Tamaño",
+        "fi": "Koko",
+        "fr": "Taille",
+        "hi": "आकार",
+        "it": "Dimensione",
+        "ja": "サイズ",
+        "ko": "사이즈",
+        "nb": "Størrelse",
+        "nl": "Grootte",
+        "pl": "Rozmiar",
+        "pt-BR": "Tamanho",
+        "pt-PT": "Tamanho",
+        "sv": "Storlek",
+        "th": "ขนาด",
+        "tr": "Boyut",
+        "vi": "Cỡ",
+        "zh-CN": "大小",
+        "zh-TW": "尺寸"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "cs": "Malá",
+            "da": "Lille",
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeño",
+            "fi": "Pieni",
+            "fr": "Petite",
+            "hi": "छोटा",
+            "it": "Piccolo",
+            "ja": "小",
+            "ko": "스몰",
+            "nb": "Liten",
+            "nl": "Klein",
+            "pl": "Mały",
+            "pt-BR": "Pequeno",
+            "pt-PT": "Pequeno",
+            "sv": "Liten",
+            "th": "เล็ก",
+            "tr": "Küçük",
+            "vi": "Nhỏ",
+            "zh-CN": "小",
+            "zh-TW": "小型"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "cs": "Střední",
+            "da": "Medium",
+            "de": "Mittel",
+            "en": "Medium",
+            "es": "Mediano",
+            "fi": "Keskisuuri",
+            "fr": "Moyenne",
+            "hi": "मध्यम",
+            "it": "Medio",
+            "ja": "中",
+            "ko": "보통",
+            "nb": "Middels",
+            "nl": "Gemiddeld",
+            "pl": "Średnie",
+            "pt-BR": "Médio",
+            "pt-PT": "Intermédio",
+            "sv": "Medium",
+            "th": "ปานกลาง",
+            "tr": "Orta",
+            "vi": "Trung bình",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "cs": "Velká",
+            "da": "Stor",
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fi": "Suuri",
+            "fr": "Grande",
+            "hi": "बड़ा",
+            "it": "Grande",
+            "ja": "大",
+            "ko": "라지",
+            "nb": "Stor",
+            "nl": "Groot",
+            "pl": "Duży",
+            "pt-BR": "Grande",
+            "pt-PT": "Grande",
+            "sv": "Stor",
+            "th": "ใหญ่",
+            "tr": "Büyük",
+            "vi": "Lớn",
+            "zh-CN": "大",
+            "zh-TW": "大型"
+          },
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": {
+        "cs": "Výška sekce",
+        "da": "Højde på afsnit",
+        "de": "Bereichs-Höhe",
+        "en": "Section height",
+        "es": "Altura de la sección",
+        "fi": "Osan korkeus",
+        "fr": "Hauteur de la section",
+        "hi": "सेक्शन की ऊंचाई",
+        "it": "Altezza sezione",
+        "ja": "セクションの高さ",
+        "ko": "섹션 높이",
+        "nb": "Høyde på del",
+        "nl": "Sectiehoogte",
+        "pl": "Wysokość sekcji",
+        "pt-BR": "Altura da seção",
+        "pt-PT": "Altura da secção",
+        "sv": "Sektionshöjd",
+        "th": "ความสูงของส่วน",
+        "tr": "Bölüm yüksekliği",
+        "vi": "Chiều cao mục",
+        "zh-CN": "分区高度",
+        "zh-TW": "區塊高度"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "cs": "Extra malá",
+            "da": "Ekstra lille",
+            "de": "Extra klein",
+            "en": "Extra Small",
+            "es": "Extra pequeña",
+            "fi": "Erikoispieni",
+            "fr": "Très petite",
+            "hi": "अतिरिक्त छोटा",
+            "it": "Molto piccola",
+            "ja": "極小",
+            "ko": "특소",
+            "nb": "Ekstra liten",
+            "nl": "Extra klein",
+            "pl": "Bardzo mała",
+            "pt-BR": "Muito pequeno",
+            "pt-PT": "Extra pequeno",
+            "sv": "Extra liten",
+            "th": "ขนาดเล็กพิเศษ",
+            "tr": "Çok Küçük",
+            "vi": "Cực nhỏ",
+            "zh-CN": "特小",
+            "zh-TW": "超小型"
+          },
+          "value": "x-small"
+        },
+        {
+          "label": {
+            "cs": "Malá",
+            "da": "Lille",
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeña",
+            "fi": "Pieni",
+            "fr": "Petite",
+            "hi": "छोटा",
+            "it": "Piccolo",
+            "ja": "小",
+            "ko": "스몰",
+            "nb": "Liten",
+            "nl": "Klein",
+            "pl": "Mała",
+            "pt-BR": "Pequeno",
+            "pt-PT": "Pequeno",
+            "sv": "Liten",
+            "th": "เล็ก",
+            "tr": "Küçük",
+            "vi": "Nhỏ",
+            "zh-CN": "小",
+            "zh-TW": "小型"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "cs": "Střední",
+            "da": "Medium",
+            "de": "Mittel",
+            "en": "Medium",
+            "es": "Mediana",
+            "fi": "Keskisuuri",
+            "fr": "Moyenne",
+            "hi": "मध्यम",
+            "it": "Medio",
+            "ja": "中",
+            "ko": "보통",
+            "nb": "Middels",
+            "nl": "Gemiddeld",
+            "pl": "Średnia",
+            "pt-BR": "Médio",
+            "pt-PT": "Médio",
+            "sv": "Medium",
+            "th": "ปานกลาง",
+            "tr": "Orta",
+            "vi": "Trung bình",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "cs": "Velká",
+            "da": "Stor",
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fi": "Suuri",
+            "fr": "Grande",
+            "hi": "बड़ा",
+            "it": "Grande",
+            "ja": "大",
+            "ko": "라지",
+            "nb": "Stor",
+            "nl": "Groot",
+            "pl": "Duża",
+            "pt-BR": "Grande",
+            "pt-PT": "Grande",
+            "sv": "Stor",
+            "th": "ใหญ่",
+            "tr": "Büyük",
+            "vi": "Lớn",
+            "zh-CN": "大",
+            "zh-TW": "大型"
+          },
+          "value": "large"
+        },
+        {
+          "label": {
+            "cs": "Extra velká",
+            "da": "Ekstra stor",
+            "de": "Extra groß",
+            "en": "Extra Large",
+            "es": "Extra grande",
+            "fi": "Erikoissuuri",
+            "fr": "Très grande",
+            "hi": "अतिरिक्त बड़ा",
+            "it": "Molto grande",
+            "ja": "特大",
+            "ko": "특대",
+            "nb": "Ekstra stort",
+            "nl": "Extra groot",
+            "pl": "Bardzo duża",
+            "pt-BR": "Muito grande",
+            "pt-PT": "Extra grande",
+            "sv": "Extra stor",
+            "th": "ขนาดใหญ่พิเศษ",
+            "tr": "Çok Büyük",
+            "vi": "Cực lớn",
+            "zh-CN": "特大",
+            "zh-TW": "超大型"
+          },
+          "value": "x-large"
+        }
+      ]
+    },
+  	{
+      "type": "text",
+      "id": "button_label",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Button-Etikett",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "hi": "बटन लेबल",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": {
+        "cs": "Tlačítkový odkaz",
+        "da": "Knaplink",
+        "de": "Button-Link",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "hi": "बटन लिंक",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Kobling for knapp",
+        "nl": "Knoplink",
+        "pl": "Link przycisku",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "tr": "Düğme bağlantısı",
+        "vi": "Liên kết trên nút",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
+    },
+  	{
+      "type": "text",
+      "id": "text1",
+  	  "label": {
+  		"en": "Text"
+  	  }
+  	},
+  	{
+      "type": "text",
+      "id": "button_label2",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Button-Etikett",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "hi": "बटन लेबल",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link2",
+      "label": {
+        "cs": "Tlačítkový odkaz",
+        "da": "Knaplink",
+        "de": "Button-Link",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "hi": "बटन लिंक",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Kobling for knapp",
+        "nl": "Knoplink",
+        "pl": "Link przycisku",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "tr": "Düğme bağlantısı",
+        "vi": "Liên kết trên nút",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
+    },
+  	{
+      "type": "text",
+      "id": "text2",
+  	  "label": {
+  		"en": "Text"
+  	  }
+  	},
+  	{
+      "type": "text",
+      "id": "button_label3",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Button-Etikett",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "hi": "बटन लेबल",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link3",
+      "label": {
+        "cs": "Tlačítkový odkaz",
+        "da": "Knaplink",
+        "de": "Button-Link",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "hi": "बटन लिंक",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Kobling for knapp",
+        "nl": "Knoplink",
+        "pl": "Link przycisku",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "tr": "Düğme bağlantısı",
+        "vi": "Liên kết trên nút",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
+    },
+  	{
+      "type": "text",
+      "id": "text3",
+  	  "label": {
+  		"en": "Text"
+  	  }
+  	},
+  	{
+      "type": "text",
+      "id": "button_label4",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Button-Etikett",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "hi": "बटन लेबल",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link4",
+      "label": {
+        "cs": "Tlačítkový odkaz",
+        "da": "Knaplink",
+        "de": "Button-Link",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "hi": "बटन लिंक",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Kobling for knapp",
+        "nl": "Knoplink",
+        "pl": "Link przycisku",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "tr": "Düğme bağlantısı",
+        "vi": "Liên kết trên nút",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
+    },
+  	{
+      "type": "text",
+      "id": "text4",
+  	  "label": {
+  		"en": "Text"
+  	  }
+  	},
+  	{
+      "type": "text",
+      "id": "button_label5",
+  	  "label": {
+  		"en": "Button label"
+  	  }
+  	},
+  	{
+      "type": "url",
+      "id": "button_link5",
+  	  "label": {
+  		"en": "Button link"
+  	  }
+  	},
+  	{
+      "type": "text",
+      "id": "button_label6",
+  	  "label": {
+  		"en": "Button label"
+  	  }
+  	},
+  	{
+      "type": "url",
+      "id": "button_link6",
+  	  "label": {
+  		"en": "Button link"
+  	  }
+  	}
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "cs": "Obrázek",
+            "da": "Billede",
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fi": "Kuva",
+            "fr": "Image",
+            "hi": "इमेज",
+            "it": "Immagine",
+            "ja": "画像",
+            "ko": "이미지",
+            "nb": "Bilde",
+            "nl": "Afbeelding",
+            "pl": "Obraz",
+            "pt-BR": "Imagem",
+            "pt-PT": "Imagem",
+            "sv": "Bild",
+            "th": "รูปภาพ",
+            "tr": "Görsel",
+            "vi": "Hình ảnh",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
+          }
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": {
+            "cs": "Zarovnání obrázku",
+            "da": "Justering af billede",
+            "de": "Fotoausrichtung",
+            "en": "Image alignment",
+            "es": "Alineación de imagen",
+            "fi": "Kuvan tasaus",
+            "fr": "Alignement de l'image",
+            "hi": "इमेज पंक्तिबद्ध करना",
+            "it": "Allineamento immagine",
+            "ja": "画像アラインメント",
+            "ko": "이미지 정렬",
+            "nb": "Bildejustering",
+            "nl": "Afbeelding uitlijnen",
+            "pl": "Wyrównanie obrazu",
+            "pt-BR": "Alinhamento da imagem",
+            "pt-PT": "Alinhamento da imagem",
+            "sv": "Bildjustering",
+            "th": "การจัดวางรูปภาพ",
+            "tr": "Görsel hizalaması",
+            "vi": "Căn chỉnh hình ảnh",
+            "zh-CN": "图片对齐方式",
+            "zh-TW": "圖片對齊"
+          },
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": {
+                "cs": "Nahoru",
+                "da": "Top",
+                "de": "Oben",
+                "en": "Top",
+                "es": "Superior",
+                "fi": "Ylös",
+                "fr": "Haut",
+                "hi": "सबसे ऊपर",
+                "it": "Alto",
+                "ja": "上",
+                "ko": "위쪽",
+                "nb": "Topp",
+                "nl": "Boven",
+                "pl": "Do góry",
+                "pt-BR": "Acima",
+                "pt-PT": "Acima",
+                "sv": "Högst upp",
+                "th": "ด้านบน",
+                "tr": "Üst",
+                "vi": "Bên trên",
+                "zh-CN": "顶部",
+                "zh-TW": "頂部"
+              }
+            },
+            {
+              "value": "center",
+              "label": {
+                "cs": "Na střed",
+                "da": "I midten",
+                "de": "Mitte",
+                "en": "Middle",
+                "es": "Centrada",
+                "fi": "Keskelle",
+                "fr": "Milieu",
+                "hi": "मध्य में",
+                "it": "Centrale",
+                "ja": "中央",
+                "ko": "중간",
+                "nb": "Midten",
+                "nl": "Midden",
+                "pl": "Do środka",
+                "pt-BR": "Meio",
+                "pt-PT": "Meio",
+                "sv": "Mitten",
+                "th": "ตรงกลาง",
+                "tr": "Orta",
+                "vi": "Ở giữa",
+                "zh-CN": "中间",
+                "zh-TW": "中央"
+              }
+            },
+            {
+              "value": "bottom",
+              "label": {
+                "cs": "Dolů",
+                "da": "Bund",
+                "de": "Unten",
+                "en": "Bottom",
+                "es": "Inferior",
+                "fi": "Alas",
+                "fr": "Bas",
+                "hi": "नीचे का",
+                "it": "Basso",
+                "ja": "下",
+                "ko": "아래쪽",
+                "nb": "Bunn",
+                "nl": "Onder",
+                "pl": "Do dołu",
+                "pt-BR": "Abaixo",
+                "pt-PT": "Abaixo",
+                "sv": "Längst ner",
+                "th": "ด้านล่าง",
+                "tr": "Alt",
+                "vi": "Bên dưới",
+                "zh-CN": "底部",
+                "zh-TW": "底部"
+              }
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": {
+            "cs": "Odkaz",
+            "da": "Link",
+            "de": "Link",
+            "en": "Link",
+            "es": "Enlace",
+            "fi": "Linkki",
+            "fr": "Lien",
+            "hi": "लिंक",
+            "it": "Link",
+            "ja": "リンク",
+            "ko": "링크",
+            "nb": "Kobling",
+            "nl": "Link",
+            "pl": "Link",
+            "pt-BR": "Link",
+            "pt-PT": "Ligação",
+            "sv": "Länk",
+            "th": "ลิงก์",
+            "tr": "Bağlantı",
+            "vi": "Liên kết",
+            "zh-CN": "链接",
+            "zh-TW": "連結"
+          },
+          "info": {
+            "cs": "Volitelné",
+            "da": "Valgfri",
+            "de": "Optional",
+            "en": "Optional",
+            "es": "Opcional",
+            "fi": "Valinnainen",
+            "fr": "Facultatif",
+            "hi": "वैकल्पिक",
+            "it": "Facoltativo",
+            "ja": "オプション",
+            "ko": "선택 사항",
+            "nb": "Valgfritt",
+            "nl": "Optioneel",
+            "pl": "Opcjonalnie",
+            "pt-BR": "Opcional",
+            "pt-PT": "Opcional",
+            "sv": "Valfritt",
+            "th": "ไม่จำเป็น",
+            "tr": "İsteğe bağlı",
+            "vi": "Không bắt buộc",
+            "zh-CN": "可选",
+            "zh-TW": "(選填)"
+          }
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": {
+            "cs": "Titulek",
+            "da": "Billedtekst",
+            "de": "Unterschrift",
+            "en": "Caption",
+            "es": "Leyenda",
+            "fi": "Kuvateksti",
+            "fr": "Légende",
+            "hi": "कैप्शन",
+            "it": "Didascalia",
+            "ja": "キャプション",
+            "ko": "캡션",
+            "nb": "Bildetekst",
+            "nl": "Bijschrift",
+            "pl": "Napisy",
+            "pt-BR": "Legenda",
+            "pt-PT": "Legenda",
+            "sv": "Rubrik",
+            "th": "คำบรรยาย",
+            "tr": "Alt yazı",
+            "vi": "Phụ đề",
+            "zh-CN": "字幕",
+            "zh-TW": "說明"
+          }
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "cs": "Galerie",
+        "da": "Galleri",
+        "de": "Galerie",
+        "en": "Gallery",
+        "es": "Galería",
+        "fi": "Galleria",
+        "fr": "Galerie",
+        "hi": "गैलरी",
+        "it": "Galleria",
+        "ja": "ギャラリー",
+        "ko": "갤러리",
+        "nb": "Galleri",
+        "nl": "Galerie",
+        "pl": "Galeria",
+        "pt-BR": "Galeria",
+        "pt-PT": "Galeria",
+        "sv": "Galleri",
+        "th": "แกลเลอรี",
+        "tr": "Galeri",
+        "vi": "Bộ sưu tập ảnh",
+        "zh-CN": "图库",
+        "zh-TW": "圖庫"
+      },
+      "category": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

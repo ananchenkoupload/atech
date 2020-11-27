@@ -1,0 +1,463 @@
+
+<style>
+    .nav-item {
+        display: inline;
+        margin: 0 50px 0 0;
+    }
+  	.category-collection-full-width {
+      	display: none;
+    }
+
+	.under-line a:hover {
+  		font-weight: normal;
+		text-decoration:underline;
+	}
+</style>
+
+<div class="page-width collect-nav">
+  <header class="aroma-oils-header">
+    <ul class="navbar-title-list"> 
+    {% for link in linklists[section.settings.nav_linklist].links limit:1 %}
+    	<li class="nav-item main-title">
+         	<h4 class="nav-perent-title">{{ link.title }}</h4>
+             <ul>
+                {% for childlink in link.links limit:1 %}
+                   <li class="nav-item sub-title">
+                      <h2 class="nav-title flip-title h3">{{ childlink.title }}</h2>
+                   </li>
+                {% endfor %}
+              </ul>
+          </li>
+    {% endfor %}
+    </ul>
+
+	<nav class="nav1">
+    <ul class="navbar-nav panel-menubar"> 
+				<li class="nav-item under-line">
+                    <a class="nav-link scroll-link" href="#">ALL</a>                  
+                </li>
+      	{% for block in section.blocks %}
+      {%- assign collection = collections[block.settings.collection] -%}
+                <li class="nav-item under-line">
+                    <a class="nav-link scroll-link" href="#{{ collection.title  |  replace: " ", "-" | downcase }}">{{ collection.title }}</a>                  
+                </li>
+        {% endfor %}
+    </ul>
+	</nav>
+  </header>
+ </div>
+
+<div class="custom-category-parent">
+{% for block in section.blocks limit: section.blocks.size %}
+{%- assign collection = collections[block.settings.collection] -%} 
+
+<div class="category-collection-full-width" id="{{ collection.title  |  replace: " ", "-" | downcase }}">
+<div class="page-width section-collection scroll-collection category-collect"  >
+
+
+  {% case section.settings.grid %}
+    {% when 2 %}
+      {%- assign max_height = 530 -%}
+      {%- assign grid_item_width = 'medium-up--one-half' -%}
+    {% when 3 %}
+      {%- assign max_height = 345 -%}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+    {% when 4 %}
+      {%- assign max_height = 250 -%}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+    {% when 5 %}
+      {%- assign max_height = 195 -%}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+  {% endcase %}
+  
+  {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+
+   
+  <div class="collection-product">
+	<div class="colect-descr">
+    	<h2 class="collect-title h6">{{ collection.title }}</h2>
+  		<p>{{ collection.description }}</p>
+	</div>
+          
+    
+    <ul class="collet-product">
+    {% for product in collection.products limit: product_limit %}
+
+      <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
+   			{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {% include 'product-card-grid', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+ 
+        <form action="/cart/add" method="post" id="product-form-{{ product.id }}">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <div class="custom-add-to-cart">
+            <button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add">Add to cart {% include 'product-variants' %}</button>
+          </div>
+        </form>
+      </li>
+    {% else %}
+ 
+      {% for i in (1..product_limit) %}
+        <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+          <div class="grid-view-item product-card ">
+            <a class="grid-view-item__link grid-view-item__image-container full-width-link product-view" href="#">
+              <span class="visually-hidden ">{{ 'homepage.onboarding.product_title' | t }}</span>
+            </a>
+            <div class="grid-view-item__image-wrapper">
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+              {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="h4 grid-view-item__title" aria-hidden="true">{{ 'homepage.onboarding.product_title' | t }}</div>
+            {% include 'product-price' %}
+          </div>
+        </li>
+      {% endfor %}
+    {% endfor %}
+  </ul>   
+  </div> 
+</div>
+</div>
+  
+{% endfor %} 
+
+{% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+{% endif %}
+  
+</div>
+
+<div class="read-more-collection">
+      <h4 class="read-more-title"><a href="#" id="read-more-link">Read more about Our fragrances</a></h4>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    $(".category-collection-full-width").slice(0, 3).show();
+ 		$(".category-collection-full-width").addClass("read-section");
+  		$(".category-collection-full-width:hidden").removeClass("read-section"); 
+  		$(".category-collection-full-width:nth-child(3)").addClass("read-section1");
+  		
+    $("#read-more-link").click(function(e){
+        e.preventDefault();
+        $(".category-collection-full-width:hidden").slice(0, 3).show();
+      	$(".category-collection-full-width").addClass("read-section");
+        if($(".category-collection-full-width:hidden").length == 0){ 
+            //alert("No more divs"); // alert if there are none left
+//           $("#read-more-link").hide();
+          $(".category-collection-full-width:nth-child(3)").removeClass("read-section1");
+        }
+    });
+  
+});
+  
+$(document).ready(function() {
+	var headerHeight = $('#shopify-section-header').outerHeight();
+	$('.scroll-link').click(function(e) {
+		var targetHref = $(this).attr('href');
+		$('html, body').animate({
+			scrollTop: $(targetHref).offset().top - headerHeight
+		}, 1000);
+		e.preventDefault();
+	});
+});
+  
+// click menubar hide/show 
+$(".nav-perent-title").hide();
+// $(window).resize(function(){
+  if ($(window).width() <= 767) { 
+      $(".nav-perent-title").show();
+      $(".panel-menubar").hide();
+        $(document).ready(function(){
+        	$(".flip-title").click(function(){
+        	  	$(".panel-menubar").slideToggle("slow");
+              $(this).closest(".flip-title").toggleClass('active');
+        	});
+        });
+   }     
+// });
+
+
+</script>
+
+{% schema %}
+{
+  "name": {
+    "cs": "Seznam kolekcí",
+    "da": "Kollektionsliste",
+    "de": "Kategorien-Liste",
+    "en": "Collection list",
+    "es": "Lista de colecciones",
+    "fi": "Kokoelmaluettelo",
+    "fr": "Liste des collections",
+    "hi": "कलेक्शन सूची",
+    "it": "Elenco delle collezioni",
+    "ja": "コレクションリスト",
+    "ko": "컬렉션 목록",
+    "nb": "Samlingsliste",
+    "nl": "Collectielijst",
+    "pl": "Lista kolekcji",
+    "pt-BR": "Lista de coleções",
+    "pt-PT": "Lista de coleções",
+    "sv": "Kollektionslista",
+    "th": "รายการคอลเลกชัน",
+    "tr": "Koleksiyon listesi",
+    "vi": "Danh sách bộ sưu tập",
+    "zh-CN": "产品系列列表",
+    "zh-TW": "商品系列清單"
+  },
+  "class": "index-section",
+  "max_blocks": 12,
+  "settings": [
+	{
+		"type": "link_list",
+      	"id": "nav_linklist",
+      	"label": "Nav Title"
+	},
+    {
+      "type": "range",
+      "id": "grid",
+      "label": {
+        "cs": "Počet produktů na řádek",
+        "da": "Produkter pr. række",
+        "de": "Produkte per Reihe",
+        "en": "Products per row",
+        "es": "Productos por fila",
+        "fi": "Tuotteita per rivi",
+        "fr": "Produits par rangée",
+        "hi": "प्रति पंक्ति उत्पाद",
+        "it": "Prodotti per riga",
+        "ja": "行あたりの商品数",
+        "ko": "열 별 제품",
+        "nb": "Produkter per rad",
+        "nl": "Producten per rij",
+        "pl": "Liczba produktów na wiersz",
+        "pt-BR": "Produtos por linha",
+        "pt-PT": "Produtos por linha",
+        "sv": "Produkter per rad",
+        "th": "สินค้าต่อแถว",
+        "tr": "Satır başına ürün",
+        "vi": "Số sản phẩm trên một hàng",
+        "zh-CN": "每行产品数",
+        "zh-TW": "每列產品數"
+      },
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "label": {
+        "cs": "Řádky",
+        "da": "Rækker",
+        "de": "Reihen",
+        "en": "Rows",
+        "es": "Filas",
+        "fi": "Rivit",
+        "fr": "Rangées",
+        "hi": "पंक्ति",
+        "it": "Righe",
+        "ja": "行",
+        "ko": "열",
+        "nb": "Rader",
+        "nl": "Rijen",
+        "pl": "Wiersze",
+        "pt-BR": "Linhas",
+        "pt-PT": "Linhas",
+        "sv": "Rader",
+        "th": "แถว",
+        "tr": "Satırlar",
+        "vi": "Hàng",
+        "zh-CN": "行数",
+        "zh-TW": "列"
+      },
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": {
+        "cs": "Zobrazit dodavatele produktů",
+        "da": "Vis produktleverandører",
+        "de": "Produkt-Lieferanten anzeigen",
+        "en": "Show product vendors",
+        "es": "Mostrar proveedores del producto",
+        "fi": "Näytä tuotteen myyjät",
+        "fr": "Afficher les vendeurs",
+        "hi": "उत्पाद विक्रेताओं को दिखाएं",
+        "it": "Mostra fornitori prodotto",
+        "ja": "商品の販売元を表示する",
+        "ko": "제품 공급 업체 표시",
+        "nb": "Vis produktleverandører",
+        "nl": "Productleveranciers weergeven",
+        "pl": "Pokaż dostawców produktu",
+        "pt-BR": "Exibir fornecedores do produto",
+        "pt-PT": "Mostrar fornecedores do produto",
+        "sv": "Visa produktleverantörer",
+        "th": "แสดงผู้ขายสินค้า",
+        "tr": "Ürün satıcılarını göster",
+        "vi": "Hiển thị nhà cung cấp sản phẩm",
+        "zh-CN": "显示产品厂商",
+        "zh-TW": "顯示產品廠商"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": {
+        "cs": "Zobrazit tlačítko Zobrazit vše",
+        "da": "Vis knappen \"Se flere\"",
+        "de": "'Alle anzeigen' Button anzeigen",
+        "en": "Show 'View all' button",
+        "es": "Mostrar el botón 'Ver todo'",
+        "fi": "Näytä \"Näytä kaikki\" -painike",
+        "fr": "Afficher le bouton “Tout voir”",
+        "hi": "'सभी देखें' बटन दिखाएं",
+        "it": "Mostra il pulsante \"Visualizza tutto\"",
+        "ja": "「すべて表示」ボタンを表示する",
+        "ko": "'모두 보기' 버튼 표시",
+        "nb": "Vis «Se alle»-knapp",
+        "nl": "Knop 'Alles weergeven' weergeven",
+        "pl": "Pokaż przycisk „Wyświetl wszystkie”",
+        "pt-BR": "Exibir botão 'Visualizar tudo'",
+        "pt-PT": "Mostrar botão 'Ver tudo'",
+        "sv": "Visa \"Visa alla\"-knappen",
+        "th": "แสดงปุ่ม 'ดูทั้งหมด'",
+        "tr": "\"Tümünü görüntüle\" düğmesini göster",
+        "vi": "Hiển thị nút \"Xem tất cả\"",
+        "zh-CN": "显示“查看全部”按钮",
+        "zh-TW": "顯示「檢視全部」按鈕"
+      },
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_collection",
+      "name": {
+        "cs": "Kolekce",
+        "da": "Kollektion",
+        "de": "Kategorie",
+        "en": "Collection",
+        "es": "Colección",
+        "fi": "Kokoelma",
+        "fr": "Collection",
+        "hi": "कलेक्शन",
+        "it": "Collezione",
+        "ja": "コレクション",
+        "ko": "컬렉션",
+        "nb": "Samling",
+        "nl": "Collectie",
+        "pl": "Kolekcja",
+        "pt-BR": "Coleção",
+        "pt-PT": "Coleção",
+        "sv": "Produktserie",
+        "th": "คอลเลกชัน",
+        "tr": "Koleksiyon",
+        "vi": "Bộ sưu tập",
+        "zh-CN": "收藏",
+        "zh-TW": "商品系列"
+      },
+      "settings": [
+        {
+          "label": {
+            "cs": "Kolekce",
+            "da": "Kollektion",
+            "de": "Kategorie",
+            "en": "Collection",
+            "es": "Colección",
+            "fi": "Kokoelma",
+            "fr": "Collection",
+            "hi": "कलेक्शन",
+            "it": "Collezione",
+            "ja": "コレクション",
+            "ko": "컬렉션",
+            "nb": "Samling",
+            "nl": "Collectie",
+            "pl": "Kolekcja",
+            "pt-BR": "Coleção",
+            "pt-PT": "Coleção",
+            "sv": "Produktserie",
+            "th": "คอลเลกชัน",
+            "tr": "Koleksiyon",
+            "vi": "Bộ sưu tập",
+            "zh-CN": "收藏",
+            "zh-TW": "商品系列"
+          },
+          "id": "collection",
+          "type": "collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "cs": "Seznam kolekcí",
+        "da": "Kollektionsliste",
+        "de": "Kategorien-Liste",
+        "en": "Collection list",
+        "es": "Lista de colecciones",
+        "fi": "Kokoelmaluettelo",
+        "fr": "Page de liste des collections",
+        "hi": "कलेक्शन सूची",
+        "it": "Elenco delle collezioni",
+        "ja": "コレクションリスト",
+        "ko": "컬렉션 목록",
+        "nb": "Samlingsliste",
+        "nl": "Collectielijst",
+        "pl": "Lista kolekcji",
+        "pt-BR": "Lista de coleções",
+        "pt-PT": "Lista de coleções",
+        "sv": "Kollektionslista",
+        "th": "รายการคอลเลกชัน",
+        "tr": "Koleksiyon listesi",
+        "vi": "Danh sách bộ sưu tập",
+        "zh-CN": "产品系列列表",
+        "zh-TW": "商品系列清單"
+      },
+      "category": {
+        "cs": "Kolekce",
+        "da": "Kollektion",
+        "de": "Kategorie",
+        "en": "Collection",
+        "es": "Colección",
+        "fi": "Kokoelma",
+        "fr": "Collection",
+        "hi": "कलेक्शन",
+        "it": "Collezione",
+        "ja": "コレクション",
+        "ko": "컬렉션",
+        "nb": "Samling",
+        "nl": "Collectie",
+        "pl": "Kolekcja",
+        "pt-BR": "Coleção",
+        "pt-PT": "Coleção",
+        "sv": "Produktserie",
+        "th": "คอลเลกชัน",
+        "tr": "Koleksiyon",
+        "vi": "Bộ sưu tập",
+        "zh-CN": "收藏",
+        "zh-TW": "商品系列"
+      },
+      "blocks": [
+        {
+          "type": "featured_collection"
+        },
+        {
+          "type": "featured_collection"
+        },
+        {
+          "type": "featured_collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

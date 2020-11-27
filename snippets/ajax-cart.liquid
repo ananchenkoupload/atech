@@ -1,0 +1,67 @@
+<!--ajax cart modal-->
+<div class="ajax-cart__modal js-ajax-cart-modal">
+
+    <div class="ajax-cart-modal">
+
+        <!--ajax cart modal close-->
+        <div class="ajax-cart-modal__close js-ajax-cart-modal-close">
+            x
+        </div>
+        <!--end ajax cart modal close-->
+
+        <!--ajax cart modal content-->
+        <div class="ajax-cart-modal__content js-ajax-cart-modal-content"></div>
+        <!--end ajax cart modal content-->
+
+    </div>
+
+</div>
+<!--end ajax cart modal-->
+
+<!--ajax cart drawer-->
+<div class="ajax-cart__drawer js-ajax-cart-drawer">
+
+    <div class="ajax-cart-drawer">
+
+        <!--ajax cart drawer close-->
+        <div class="drawer-header js-ajax-cart-drawer-close">
+          <h2 class="cart-header__title">{{ 'cart.general.title' | t }}</h2>
+          <!--<div class="continue-shopping-wrapper">
+            <span class="continue-text">{{ 'cart.general.continue_shopping' | t }}</span> <span class="ajax-cart-drawer__close js-ajax-cart-drawer-close"> <i class="close-icon"></i></span>
+          </div> -->
+      	</div>
+        <!--end ajax cart drawer close-->
+
+        <!--ajax cart drawer content-->
+        <div class="ajax-cart-drawer__content js-ajax-cart-drawer-content"></div>
+        <!--end ajax cart drawer content-->
+      
+      	<div class="note-wrapper">
+          <textarea name="note" placeholder="ORDER NOTES"></textarea>
+        </div>
+      
+      	<div class="agree_to_terms_wrapper">
+            <label class="checkbox-wrapper">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          	
+          	<span class="agreement_text">Agree to <a href="#">terms and conditions</a></span>
+        </div>
+
+        <!--ajax cart drawer buttons-->
+        <div class="ajax-cart-drawer__buttons disabled">
+            <a href="/checkout/" class="button button--black button--full-width js-button js-ajax-checkout-button">
+                <span>checkout</span>
+            </a>
+        </div>
+        <!--end ajax cart drawer buttons-->
+
+    </div>
+
+</div>
+<!--end ajax cart drawer-->
+
+<!--ajax cart overlay-->
+<div class="ajax-cart__overlay js-ajax-cart-overlay"></div>
+<!--end ajax cart overlay-->

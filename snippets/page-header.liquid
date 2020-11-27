@@ -1,0 +1,8 @@
+{% if settings.page_header_enabled %}
+	{% assign bg_image = settings.page_header_bg_image | img_url : '1024x' %}
+	<div class="page-header-wrapper" style="background-image: url({{ bg_image }})">
+      <div class="page-width">
+      	<h1 class="page-title">{{ page_title }}</h1>
+      </div>
+	</div>
+{% endif %}
