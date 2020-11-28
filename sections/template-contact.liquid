@@ -1,0 +1,205 @@
+<div id="contact" class="contact-box">
+ <div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+      <div class="contact-form form-vertical">
+        {%- assign formId = 'ContactForm' -%}
+        {% form 'contact', id: formId %}
+          {% include 'form-status', form: form, form_id: formId %}
+
+          <div class="grid grid--half-gutters">
+            <div class="grid__item medium-up--one-half">
+              <label for="{{ formId }}-name">{{ 'contact.form.name' | t }}</label>
+              <input required class="required" type="text" id="{{ formId }}-name" placeholder="{{ 'contact.form.name' | t }}" name="contact[{{ 'contact.form.name' | t }}]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </div>
+            <div class="grid__item medium-up--one-half">
+             <label for="{{ formId }}-name">{{ 'contact.form.nachname' | t }}</label>
+              <input required class="required" type="text" id="{{ formId }}-name" placeholder="{{ 'contact.form.nachname' | t }}" name="contact[{{ 'contact.form.nachname' | t }}]" value="{% if form[nachname] %}{{ form[nachname] }}{% elsif customer %}{{ customer.nachname }}{% endif %}">
+            </div>
+          </div>
+
+          <div class="grid grid--half-gutters">
+            
+            <div class="grid__item medium-up--one-half">
+              <label for="{{ formId }}-email">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="{{ formId }}-email"
+                name="contact[email]"
+                placeholder="{{ 'contact.form.email' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                required class="required"
+                {%- if form.errors contains 'email' -%}
+                  class="input--error"
+                  aria-invalid="true"
+                  aria-describedby="{{ formId }}-email-error"
+                {%- endif -%}
+                >
+              {%- if form.errors contains 'email' -%}
+                <span id="{{ formId}}-email-error" class="input-error-message">
+                  <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                  {% include 'icon-error' %}
+                  <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+                </span>
+              {%- endif -%}
+            </div>
+            <div class="grid__item medium-up--one-half">
+             <label for="{{ formId }}-phone">{{ 'contact.form.phone' | t }}</label>
+              <input type="tel" id="{{ formId }}-phone" placeholder="{{ 'contact.form.phone' | t }}" name="contact[{{ 'contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+            </div>
+          </div>
+           <div class="check-box">
+            <span>{{ 'contact.form.message2' | t }}</span>
+            <input  id="{{ formId }}-check1" value="{{ 'contact.form.check1' | t }}" name="contact[check1]" type="checkbox"  class="radio_check_input"><label class="radio_check_lebel" for="{{ formId }}-check1">{{ 'contact.form.check1' | t }}</label>
+            <input  id="{{ formId }}-check2" value="{{ 'contact.form.check2' | t }}" name="contact[check2]" type="checkbox"  class="radio_check_input"><label class="radio_check_lebel" for="{{ formId }}-check2">{{ 'contact.form.check2' | t }}</label>
+          </div>
+          
+
+          <label for="{{ formId }}-message">{{ 'contact.form.message' | t }}</label>
+          <textarea required class="required" rows="10" id="{{ formId }}-message" placeholder="{{ 'contact.form.message' | t }}"  name="contact[{{ 'contact.form.message' | t }}]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          <div class="check-box">
+            <span>{{ 'contact.form.message3' | t }}</span>
+            <input id="{{ formId }}-check3" value="{{ 'contact.form.message4' | t }}" name="contact[check3]" type="checkbox"  class="radio_check_input"><label class="radio_check_lebel" for="{{ formId }}-check3">{{ 'contact.form.message4' | t }}</label>
+          </div>
+          <input type="submit" class="btn" value="{{ 'contact.form.submit' | t }}">
+
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div> 
+</div>
+<div class="page-width">
+{% if page.content.size > 0 %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+{% endif %}
+</div>      
+{% schema %}
+{
+  "name": "Contact",
+  "class": "section section_template__contact",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact info"
+    },
+    {
+      "type": "checkbox",
+      "id": "background_section_toggle",
+      "label": "Show background color",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_head",
+      "label": "Image",
+      "info": "The image should be more than 1600px wide to resize and crop properly"
+    },
+    {
+      "type": "range",
+      "id": "padding_box_section",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Padding Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_box_bot_section",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "label": "Padding Bottom",
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "item_title",
+      "label": "Contact block title"
+    },
+    {
+      "type": "richtext",
+      "id": "item_desc",
+      "label": "Short Info",
+      "default": "<p>Have a question? Drop us a line in the contact form - we’d love to hear from you.</p>"
+    },
+
+    {
+      "type": "text",
+      "id": "facebook_title",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook Link"
+    },
+
+    {
+      "type": "text",
+      "id": "twitter_title",
+      "label": "Twitter"
+    },
+    {
+      "type": "url",
+      "id": "twitter_link",
+      "label": "Twitter Link"
+    },
+
+    {
+      "type": "text",
+      "id": "linkedin_title",
+      "label": "Linkedin"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_link",
+      "label": "Linkedin Link"
+    },
+
+    {
+      "type": "text",
+      "id": "email_title",
+      "label": "Email title"
+    },
+    
+    {
+      "type": "header",
+      "content": "Contact form"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": {
+        "cs": "Text tlačítka",
+        "da": "Knaptekst",
+        "de": "Button-Etikett",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pl": "Przycisk z etykietą",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "tr": "Düğme etiketi",
+        "vi": "Nhãn nút",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
+    }
+  ]
+}
+{% endschema %}

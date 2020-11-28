@@ -64,7 +64,7 @@
             </span>
           {%- endif -%}
           <div class="check-box">
-            <input id="{{ formId }}-check" value="yes" name="check" type="checkbox"  class="radio_check_input"><label class="radio_check_lebel" for="{{ formId }}-check">{{ 'layout.customer.subscribe' | t }}</label>
+            <input id="{{ formId }}-check" value="{{ 'layout.customer.subscribe' | t }}" name="contact[check]" type="checkbox"  class="radio_check_input"><label class="radio_check_lebel" for="{{ formId }}-check">{{ 'layout.customer.subscribe' | t }}</label>
           </div>
           <div class="text-center">
             <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn">

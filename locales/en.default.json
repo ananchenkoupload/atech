@@ -57,7 +57,7 @@
         "other": "{{ count }} results for “{{ terms }}”"
       },
       "title": "Search our site",
-      "placeholder": "Search",
+      "placeholder": "Search...",
       "submit": "search",
       "close": "Close search",
       "heading": {
@@ -224,10 +224,16 @@
   },
   "contact": {
     "form": {
-      "name": "Name",
+      "name": "First Name",
+      "nachname": "Last Name",
       "email": "Email",
       "phone": "Phone Number",
+      "check1": "Home",
+      "check2": "Business",
       "message": "Message",
+      "message2": "Please select what type of Inquiry this is *",
+      "message3": "Please tell us more about your scenting needs!",
+      "message4": "I consent to receiving the latest news and special offers from AromaTech.",   
       "submit": "Send",
       "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
       "error_heading": "Please adjust the following:"
