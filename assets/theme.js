@@ -21,9 +21,16 @@ $(document).ready(function () {
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: auto_rotate_bool,
-      speed: 1300,
-      adaptiveHeight: true
+      autoplay: true,
+      adaptiveHeight: true,
+      responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          speed: 1300,
+        }
+      },
+      ]
     });
 });
 

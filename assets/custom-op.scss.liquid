@@ -1,0 +1,281 @@
+footer.site-footer .site-footer__item {
+  @media (min-width: 993px) and (max-width: 1199px) { 
+  	padding: 0 10px;
+  }
+}
+footer.site-footer .site-footer__item:first-child {
+    @media (min-width: 993px) and (max-width: 1199px) { 
+	  max-width: 150px;
+	}
+}
+.newsletter-section .form-message--success {
+	outline: none;
+}
+.page-container div.shopify-challenge__container {
+	margin: 70px auto;
+}
+@media (min-width: 320px) and (max-width: 420px) { 
+	.shopify-section div.newsletter-section .contact-form .input-group {
+		display: block;
+	}
+	div.newsletter-section input.input-group__field {
+	    max-width: 100%;
+	    width: 100%;
+	    margin-bottom: 10px;
+	}
+}
+div.newsletter-section input.input-group__field { /* Chrome/Opera/Safari */
+  padding-top: 12px;
+  padding-bottom: 13px;
+}
+.h3 {
+	text-transform: uppercase;
+}
+.template-404 .main-content {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	.empty-page-content {
+		padding: 0px;
+	}
+	.desc {
+		font-size: 16px;
+		line-height: 24px;
+		color: #212121;
+		padding-top: 20px;
+		padding-bottom: 60px;
+		margin-bottom: 0px;
+	}
+	.info {
+		letter-spacing: 1px;
+		font-size: 14px;
+		line-height: 24px;
+		color: #212121;
+		a {
+			text-transform: none;
+			color: #BA9163;
+			text-decoration: none;
+			margin-left: 4px;
+			font-size: 14px;
+			line-height: 24px;
+			letter-spacing: 1px;
+			border-bottom: 1px solid transparent;
+			position: relative;
+			display: inline-block;
+			margin-right: 30px;
+			&:hover {
+				border-color: #BA9163;
+			}
+			.icon-arrow-right {
+				position: absolute;
+				left: 100%;
+				top: 1px;
+			}
+		}
+	}
+	.search-form {
+		max-width: 352px;
+		margin: 0 auto;
+		position: relative;
+		input {
+			padding: 13px 50px 13px 22px;
+			max-width: 370px;
+		    font-size: 16px;
+		    line-height: 20px;
+		    color: #212121;
+		  	margin: 0 auto 0;
+		  	height:50px;
+		  	min-height:50px;
+		    font-family: 'GT America';
+		    outline: none;
+		    border-radius:0px!important;
+		    border:1px solid #B6B6B6;
+		    background: #fff;
+		}
+		.search-form-submit {
+			position: absolute;
+			right: 8px;
+			top: 8px;
+			width: 30px;
+			height: 30px;
+			color: #7a7a7a;
+			background: none;
+			border:none;
+			padding: 0px;
+			outline: none;
+			&:hover {
+				color: #212121;
+			} 
+		}
+	}
+}
+.template-customers-login .main-content , .template-customers-register .main-content {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	#LoginHeading {
+		margin-bottom: 50px;
+		outline: none;
+	}
+	#customer_login, #RecoverPasswordForm, #RegisterForm {
+		max-width: 370px;
+		margin: 0 auto;
+		.form-message__title, #RecoverHeading {
+			outline: none;
+		}
+		#RecoverHeading {
+			margin-bottom: 20px;
+		}
+		#RecoverHeading + p {
+			margin-bottom: 50px;
+		}
+		.form-message--error li{
+			color: #d20000;
+			opacity: 0.5;
+		}
+		#RecoverEmail-email-error , #RegisterForm-email-error  ,#RegisterForm-password-error {
+			span {
+				color: #d20000;
+				opacity: 0.5;
+			}
+		}
+		label {
+			display: none;
+		}
+		input {
+			padding: 15px 22px;
+			max-width: 370px;
+		    font-size: 16px;
+		    line-height: 20px;
+		    color: #212121;
+		  	margin: 0 auto 15px;
+		  	height:50px;
+		  	min-height:50px;
+		    font-family: 'GT America';
+		    outline: none;
+		    border-radius:0px!important;
+		    border:1px solid #B6B6B6;
+		    background: #fff;
+		}
+		.check-box {
+			overflow: hidden;
+			margin-bottom: 15px;
+		}
+		.radio_check_input {
+			 position: absolute;
+			  z-index: -1;
+			  opacity: 0;
+		}
+		.radio_check_input+label {
+		  display: inline-flex;
+		  align-items: center;
+		  user-select: none;
+		}
+		.radio_check_input+label::before {
+		  content: '';
+		  display: inline-block;
+		  width: 15px;
+		  height: 15px;
+		  flex-shrink: 0;
+		  flex-grow: 0;
+		  border:1px solid #B6B6B6;
+		  border-radius: 0;
+		  margin-right: 10px;
+		  background-repeat: no-repeat;
+		  background-position: center center;
+		  background-size: 50% 50%;
+		  background: #fff;
+		}
+		.radio_check_input:checked+label::before {
+		  border-color: #0b76ef;
+		  background-color: #0b76ef;
+		  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+		}
+		.radio_check_lebel {
+			width: auto;
+			display: inline-block;
+			overflow: hidden;
+			text-transform: none;
+			color: #212121;
+			text-decoration: none;
+			margin-left: 4px;
+			font-size: 14px;
+			line-height: 24px;
+			letter-spacing: 1px;
+			padding-left: 0;
+			margin-left: 0px;
+			border-bottom: 1px solid transparent;
+			&:hover {
+				color: #606060;
+				border-color: #606060;
+			}
+		}
+		.btn {
+			color: #fff;
+			width: 100%;
+			display: block;
+			margin-bottom: 30px;
+			font-size: 16px;
+		    line-height: 20px;
+		    background: #212121;
+		    &:hover {
+		    	background: #606060;
+		    }
+		}
+		.btn + p {
+			letter-spacing: 1px;
+			font-size: 14px;
+			line-height: 24px;
+			color: #212121;
+			a {
+				text-transform: none;
+				color: #BA9163;
+				text-decoration: none;
+				margin-left: 4px;
+				font-size: 14px;
+				line-height: 24px;
+				letter-spacing: 1px;
+				border-bottom: 1px solid transparent;
+				display: inline-block;
+				&:hover {
+					border-color: #BA9163;
+				}
+			}
+		}
+		#HideRecoverPasswordLink {
+			text-transform: none;
+			color: #BA9163;
+			text-decoration: none;
+			margin-left: 4px;
+			font-size: 14px;
+			line-height: 24px;
+			letter-spacing: 1px;
+			border-bottom: 1px solid transparent;
+			&:hover {
+				border-color: #BA9163;
+			}
+		}	
+
+		#RecoverPassword {
+			display: inline-block;
+			margin-bottom: 24px;
+			margin-top: 4px;
+			text-transform: none;
+			text-decoration: none;
+			letter-spacing: 1px;
+			font-size: 14px;
+			line-height: 24px;
+			color: #212121;
+			border-bottom: 1px solid transparent;
+			&:hover {
+				color: #606060;
+				border-color: #606060;
+			}
+		}		
+	}
+}
+input::placeholder {
+	color: #212121;
+	opacity: 1;
+	font-size: 16px;
+	line-height: 20px;
+}
+		

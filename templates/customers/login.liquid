@@ -8,7 +8,7 @@
 
       <div id="CustomerLoginForm" class="form-vertical">
 
-        <h1 id="LoginHeading" class="text-center">{{ 'customer.login.title' | t }}</h1>
+        <h1 id="LoginHeading" class="text-center h3">{{ 'customer.login.title' | t }}</h1>
 
         {% form 'customer_login', novalidate: 'novalidate' %}
 
@@ -25,6 +25,7 @@
             name="customer[email]"
             id="CustomerEmail"
             autocomplete="email"
+            placeholder="{{ 'customer.login.email' | t }}"
             autocorrect="off"
             autocapitalize="off"
             {%- if form.errors contains 'form' -%}
@@ -38,6 +39,7 @@
             <input
               type="password"
               value=""
+              placeholder="{{ 'customer.login.password' | t }}"
               name="customer[password]"
               id="CustomerPassword"
               {%- if form.errors contains 'form' -%}
@@ -47,15 +49,16 @@
             >
           {% endif %}
 
-          <div class="text-center">
+          <div class="text-left">
             {% if form.password_needed %}
               <p><a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a></p>
             {% endif %}
-
+           </div>
+           <div class="text-center">
             <input type="submit" class="btn" value="{{ 'customer.login.sign_in' | t }}">
 
             <p>
-              {{ 'layout.customer.create_account' | t | customer_register_link }}
+              <span>{{ 'layout.customer.new_customer' | t }}</span>{{ 'layout.customer.create_account' | t | customer_register_link }}
             </p>
           </div>
 
@@ -65,7 +68,7 @@
       <div id="RecoverPasswordForm" class="hide">
 
         <div class="text-center">
-          <h2 id="RecoverHeading">{{ 'customer.recover_password.title' | t }}</h2>
+          <h2 class="h3" id="RecoverHeading">{{ 'customer.recover_password.title' | t }}</h2>
           <p>{{ 'customer.recover_password.subtext' | t }}</p>
         </div>
 
@@ -84,6 +87,7 @@
               type="email"
               value=""
               name="email"
+              placeholder="{{ 'customer.recover_password.email' | t }}"
               id="RecoverEmail"
               class="input-full{% if form.errors %} input--error{% endif %}"
               autocorrect="off"

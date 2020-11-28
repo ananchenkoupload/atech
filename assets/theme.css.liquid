@@ -697,6 +697,8 @@ textarea {
   /* Quarters */
   .medium-up--one-quarter {
     width: 25%; }
+  .medium-up--one-quarter.logo-align--left, .medium-up--one-quarter.site-header__icons {
+    width: 21%; }
   .medium-up--two-quarters {
     width: 50%; }
   .medium-up--three-quarters {
@@ -3801,6 +3803,11 @@ hr {
   border-radius: 50%;
   min-width: 1em;
   height: 1em; }
+
+  .site-header__cart-count._hide {
+    display: none;
+  }
+
   .site-header__cart-count span {
     font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: calc(11em / 16);
@@ -6930,7 +6937,6 @@ hr {
 }
 .product-template__container .product-single .product-single__media-group.medium-up--one-half {
     padding: 0 !important;
-    background: #f3f5f5;
 }
 .product-template__container .product-single .medium-up--one-half {
         overflow: hidden;
@@ -6985,8 +6991,8 @@ hr {
 .product__price .price-item--sale{
   color: #000000;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: 22px;
+  line-height: 28.6px;
 }
 .product__price .price-item{
   font-weight: normal;
@@ -7339,7 +7345,7 @@ div#selector-option-dropdown {
     background-repeat: no-repeat;
     background-position: center center;
     height: 100%;
-    padding: 80px 15px 430px;
+    padding: 80px 15px 280px;
 }
 .image-with-content-wrap {
     max-width: 550px;
@@ -7600,7 +7606,7 @@ div#selector-option-dropdown {
     
     .product-template__container .product-single .medium-up--one-half {    padding: 80px 40px 80px 80px;}
     .video-sec .video-wrapper {padding-bottom: 47.4% !important;}
-    .image-with-content{padding: 80px 15px 350px;}
+    .image-with-content{padding: 80px 15px 280px;}
     .list-accodian {
       justify-content: center;
     }
@@ -7686,6 +7692,7 @@ div#selector-option-dropdown {
     }
     .fragrance-review-wrap{
       display: flex !important;
+      align-items: baseline;
     }
     .fragrance-review-wrap .reviews{
           flex: 100px 0 0;
@@ -7707,7 +7714,7 @@ div#selector-option-dropdown {
     .product-template__container .product-single .medium-up--one-half {padding:20px 30px 20px 30px;}
     .product-single .thumbnails-slider__next{right: 26%;}
     .product-single .thumbnails-slider__prev {left: 26%;}
-    .product-template__container .product-single .product-single__title {padding: 5px 0 0px 0;}
+    .product-template__container .product-single .product-single__title {padding: 5px 0 0px 0; width: 70%;}
 }
 @media only screen and (max-width:480px) {
     //.productsingle-slider .slick-prev { left:29%;}
@@ -7741,7 +7748,7 @@ div#selector-option-dropdown {
     }
     .fragrance-relaxing{
         margin-bottom: 0px;
-        width: 100%;
+        width: 70%;
     }
     .list-accodian ul li h4{
         font-size: 16px;
@@ -8235,6 +8242,7 @@ div#shopify-section-about-us-technology .page-width.feature-row
 }
 body.page-about-us .blog-slider a.btn {
   margin-bottom: 0px;
+  margin-top: -22px;
 }
 
 div.blog-slider .grid .owl-stage-outer .grid__item .article__date, 
@@ -8374,6 +8382,7 @@ div.newsletter-section input.input-group__field {
 
 .template-product .fragrance-relaxing ul li a {
     text-transform: none;
+    letter-spacing: 1px;
 }
 
 .template-product .reviews {
@@ -8395,7 +8404,7 @@ div.newsletter-section input.input-group__field {
 
 .product-template__container .product-single .product-single__title {
     padding: 8px 0;
-    line-height: 50px;
+    line-height: 39px;
     font-size: 30px;
 }
 
@@ -8588,7 +8597,7 @@ div.newsletter-section input.input-group__field {
       	max-width: 100%;
   	}
     .product-template__container .product-single .medium-up--one-half {
-      	padding: 22px 0;
+      	padding: 22px 0 0;
   	}
     .list-accodian ul {
         padding: 20px 0 !important;
@@ -8610,7 +8619,13 @@ div.newsletter-section input.input-group__field {
         padding: 0;
     }
 }
-  
+
+@media only screen and (max-width:991px) {
+  .template-product .list-accodian ul {
+    padding: 16px 0 147px 0;
+  }
+}
+
 @media only screen and (max-width: 480px) {
     .product-single .product-form {
         display: block;
