@@ -1,0 +1,428 @@
+{% if section.blocks.size > 0 %}
+  <div class="blog-slider">
+    <div class="page-width2 ">
+      {% if section.settings.title != blank %}
+        <header class="section-header text-center">
+          <h2 class="h3">{{ section.settings.title | escape }}</h2>
+        </header>
+      {% endif %}
+
+        <ul class="grid grid--uniform grid--blog owl-carousel owl-theme loop">
+          {% for block in section.blocks %}
+            {% assign slider_article = articles[block.settings.article] %}
+              {% if slider_article.id != article.id %}
+              <li class="grid__item medium-up--one-third">
+                <article aria-labelledby="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                  <header>
+                    <a href="{{ slider_article.url }}" class="article__link">
+                      {% if slider_article.image %}
+                        {% capture img_id %}ArticleImage-{{ slider_article.image.id }}{% endcapture %}
+                        {% capture img_wrapper_id %}ArticleImageWrapper-{{ slider_article.image.id }}{% endcapture %}
+                        {%- assign img_url = slider_article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                        {% include 'image-style', image: slider_article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+                        <div id="{{ img_wrapper_id }}" class="article__grid-image-wrapper js">
+                          <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: slider_article.image.aspect_ratio | times: 100}}%;" data-image-loading-animation>
+                            <img id="{{ img_id }}"
+                                class="article__grid-image lazyload"
+                                data-src="{{ img_url }}"
+                                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                data-aspectratio="{{ slider_article.image.aspect_ratio }}"
+                                data-sizes="auto"
+                                alt="">
+                          </div>
+                        </div>
+                        <noscript>
+                          <div class="article__grid-image-wrapper">
+                            {{ slider_article | img_url: '345x345', scale: 2 | img_tag: slider_article.title, 'article__grid-image' }}
+                          </div>
+                        </noscript>
+                      {% endif %}
+
+                      <h3 class="article__title" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                        {{ slider_article.title }}
+                      </h3>
+                    </a>
+
+                    {% if section.settings.blog_show_author %}
+                      <span class="article__author">{{ slider_article.author }}</span>
+                    {% endif %}
+
+                    <div class="cust-date">
+                      <h3 class="article__title" id="FeaturedBlogTitle-{{ forloop.index0 }}-{{ section.id }}">
+                        {{ slider_article.metafields.tag.tag | strip_html | truncate: 15 }}
+                      </h3>
+                    {% if section.settings.blog_show_date %}
+                      <span class="article__date">
+                        {{ slider_article.published_at | time_tag: format: 'date' }}
+                      </span>
+                    {% endif %}
+                    </div>
+                  </header>
+
+                  <div class="article__grid-meta">
+                    <a href="{{ slider_article.url }}" class="h6 rte article__grid-excerpt">
+                        {{ slider_article.title | strip_html | truncate: 150 }}
+                    </a>
+
+                    {% if slider_article.tags.size > 0 %}
+                      <!-- <div class="article__tags rte">
+                        <ul class="list--inline" aria-label="{{ 'blogs.article.tags' | t }}">
+                          {% for tag in slider_article.tags %}
+                            <li>
+                              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article__grid-tag">{{ tag }}</a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      </div> -->
+                    {% endif %}
+
+                    <ul class="list--inline article__meta-buttons">
+                      <li>
+                        <a href="{{ slider_article.url }}" class="btn btn--tertiary btn--small" aria-label="{{ 'blogs.article.read_more_title' | t: title: slider_article.title }}">
+                          {{ 'blogs.article.read_more' | t }}
+                        </a>
+                      </li>
+
+                      {% if blog.comments_enabled? and slider_article.comments_count > 0 %}
+                        <li>
+                          <a href="{{ slider_article.url }}#comments" class="article__comment-count btn btn--tertiary btn--small">
+                            {{ 'blogs.comments.comments_with_count' | t: count: slider_article.comments_count }}
+                          </a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </article>
+              </li>
+              {% endif %}
+          {% endfor %}
+        </ul>
+
+      {% if section.settings.show_view_all %}
+        <hr class="hr--invisible" aria-hidden="true"></hr>
+        <div class="text-center">
+          <a href="{{ blog.url }}" class="btn" aria-label="{{ 'blogs.article.view_all_blogs' | t }}">
+            {% comment %} {{ 'blogs.article.view_all' | t }} {% endcomment %}
+            Discover More
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" />
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.loop').owlCarousel({
+          stagePadding: 88,
+          items:2,
+          center: true,
+          loop:true,
+          margin:0,
+          responsive:{
+              0:{
+                  items:1,
+                  center: true,
+                  stagePadding: 53
+              },
+              450:{
+                  items:1,
+                  stagePadding: 80
+              },
+              600:{
+                  items:3,
+                  center: true,
+                  stagePadding: 0
+              },
+              1050:{
+                  items:5,
+                  center: true,
+                  stagePadding: 0,
+                  margin: 14
+              }
+          }
+      });
+      $('.nonloop').owlCarousel({
+          center: true,
+          items:2,
+          loop:false,
+          margin:10,
+          responsive:{
+              600:{
+                  items:4
+              }
+          }
+      });
+    
+      var carousel = $(".loop");
+      checkClasses();
+  carousel.on('translated.owl.carousel', function(event) {
+  checkClasses();
+  });
+
+  function checkClasses(){
+  var total = $('.loop .owl-stage .owl-item.active').length;
+
+  $('.loop .owl-stage .owl-item').removeClass('firstActiveItem lastActiveItem');
+
+  $('.loop .owl-stage .owl-item.active').each(function(index){
+  if (index === 0) {
+  // this is the first one
+  $(this).addClass('firstActiveItem');
+  }
+  if (index === total - 1 && total>1) {
+  // this is the last one
+  $(this).addClass('lastActiveItem');
+  }
+  });
+  }
+      
+    });
+  </script>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": {
+    "cs": "Příspěvky na blogu",
+    "da": "Blogopslag",
+    "de": "Blogposts",
+    "en": "Blog posts slider",
+    "es": "Entradas del blog",
+    "fi": "Blogijulkaisut",
+    "fr": "Articles de blog",
+    "hi": "ब्लॉग पोस्ट",
+    "it": "Articoli del blog",
+    "ja": "ブログ記事",
+    "ko": "블로그 게시물",
+    "nb": "Blogginnlegg",
+    "nl": "Blogberichten",
+    "pl": "Posty na blogu",
+    "pt-BR": "Posts do blog",
+    "pt-PT": "Publicações no blogue",
+    "sv": "Blogginlägg",
+    "th": "โพสต์บล็อก",
+    "tr": "Blog gönderileri",
+    "vi": "Bài viết blog",
+    "zh-CN": "博客文章",
+    "zh-TW": "部落格文章"
+  },
+  "class": "blog-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "cs": "Nadpis",
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "hi": "शीर्षक",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pl": "Nagłówek",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "tr": "Başlık",
+        "vi": "Tiêu đề",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "cs": "Příspěvky na blogu",
+        "da": "Blogopslag",
+        "de": "Blogposts",
+        "en": "Blog posts",
+        "es": "Entradas del blog",
+        "fi": "Blogijulkaisut",
+        "fr": "Articles de blog",
+        "hi": "ब्लॉग पोस्ट",
+        "it": "Articoli del blog",
+        "ja": "ブログ記事",
+        "ko": "블로그 게시물",
+        "nb": "Blogginnlegg",
+        "nl": "Blogberichten",
+        "pl": "Posty na blogu",
+        "pt-BR": "Posts do blog",
+        "pt-PT": "Publicações no blogue",
+        "sv": "Blogginlägg",
+        "th": "โพสต์บล็อก",
+        "tr": "Blog gönderileri",
+        "vi": "Bài viết blog",
+        "zh-CN": "博客文章",
+        "zh-TW": "部落格文章"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": {
+        "cs": "Zobrazit autora",
+        "da": "Vis forfatter",
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fi": "Näytä tekijä",
+        "fr": "Afficher l'auteur",
+        "hi": "लेखक दिखाएं",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "ko": "작성자 표시",
+        "nb": "Vis forfatter",
+        "nl": "Auteur weergeven",
+        "pl": "Pokaż autora",
+        "pt-BR": "Exibir autor",
+        "pt-PT": "Mostrar autor",
+        "sv": "Visa författare",
+        "th": "แสดงผู้เขียน",
+        "tr": "Yazarı göster",
+        "vi": "Hiển thị tác giả",
+        "zh-CN": "显示作者",
+        "zh-TW": "顯示作者"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": {
+        "cs": "Zobrazit datum",
+        "da": "Vis dato",
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fi": "Näytä päivämäärä",
+        "fr": "Afficher la date",
+        "hi": "दिनांक दिखाएं",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "ko": "날짜 표시",
+        "nb": "Vis dato",
+        "nl": "Datum weergeven",
+        "pl": "Pokaż datę",
+        "pt-BR": "Exibir data",
+        "pt-PT": "Mostrar data",
+        "sv": "Visa datum",
+        "th": "แสดงวันที่",
+        "tr": "Tarihi göster",
+        "vi": "Hiển thị ngày",
+        "zh-CN": "显示日期",
+        "zh-TW": "顯示日期"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": {
+        "cs": "Zobrazit tlačítko Zobrazit vše",
+        "da": "Vis knappen \"Se flere\"",
+        "de": "'Alle anzeigen' Button anzeigen",
+        "en": "Show 'View all' button",
+        "es": "Mostrar el botón 'Ver todo'",
+        "fi": "Näytä \"Näytä kaikki\" -painike",
+        "fr": "Afficher le bouton “Voir tout”",
+        "hi": "'सभी देखें' बटन दिखाएं",
+        "it": "Mostra il pulsante \"Visualizza tutto\"",
+        "ja": "「すべて表示」ボタンを表示する",
+        "ko": "'모두 보기' 버튼 표시",
+        "nb": "Vis «Se alle»-knapp",
+        "nl": "Knop 'Alles weergeven' weergeven",
+        "pl": "Pokaż przycisk „Wyświetl wszystkie”",
+        "pt-BR": "Exibir botão \"Visualizar tudo\"",
+        "pt-PT": "Mostrar botão 'Ver tudo'",
+        "sv": "Visa \"Visa alla\"-knappen",
+        "th": "แสดงปุ่ม 'ดูทั้งหมด'",
+        "tr": "\"Tümünü görüntüle\" düğmesini göster",
+        "vi": "Hiển thị nút \"Xem tất cả\"",
+        "zh-CN": "显示“查看全部”按钮",
+        "zh-TW": "顯示「檢視全部」按鈕"
+      },
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blog_post",
+      "name": "blog post",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Blog post"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "cs": "Příspěvky na blogu",
+        "da": "Blogopslag",
+        "de": "Blogposts",
+        "en": "Featured blog posts slider",
+        "es": "Entradas del blog",
+        "fi": "Blogijulkaisut",
+        "fr": "Articles de blog",
+        "hi": "ब्लॉग पोस्ट",
+        "it": "Articoli del blog",
+        "ja": "ブログ記事",
+        "ko": "블로그 게시물",
+        "nb": "Blogginnlegg",
+        "nl": "Blogberichten",
+        "pl": "Posty na blogu",
+        "pt-BR": "Posts do blog",
+        "pt-PT": "Publicações no blogue",
+        "sv": "Blogginlägg",
+        "th": "โพสต์บล็อก",
+        "tr": "Blog gönderileri",
+        "vi": "Bài viết blog",
+        "zh-CN": "博客文章",
+        "zh-TW": "部落格文章"
+      },
+      "category": {
+        "cs": "Blog",
+        "da": "Blog",
+        "de": "Blog",
+        "en": "Blog",
+        "es": "Blog",
+        "fi": "Blogi",
+        "fr": "Blog",
+        "hi": "ब्लॉग",
+        "it": "Blog",
+        "ja": "ブログ",
+        "ko": "블로그",
+        "nb": "Blogg",
+        "nl": "Blog",
+        "pl": "Blog",
+        "pt-BR": "Blog",
+        "pt-PT": "Blogue",
+        "sv": "Blogg",
+        "th": "บล็อก",
+        "tr": "Blog",
+        "vi": "Blog",
+        "zh-CN": "博客",
+        "zh-TW": "部落格"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -14,6 +14,7 @@
 
 {% assign found_option = false %}
 {% assign is_color = false %}
+{% assign is_care = false %}
 {% assign option_index = 0 %}
 
 {% for option in product.options %}
@@ -32,6 +33,9 @@
     {% endif %}
     {% if downcased_option contains 'size' or downcased_option contains 'size' %}
       {% assign is_size = true %}
+    {% endif %}
+    {% if downcased_option contains 'year' or downcased_option contains 'year' %}
+      {% assign is_care = true %}
     {% endif %}
   {% endif %}
 {% endfor %}
@@ -54,13 +58,19 @@
       {% assign values = values | join: ',' %}
       {% assign values = values | append: ',' | append: value %} 
       {% assign values = values | split: ',' %}
-      <div data-value="{{ value | escape }}" class="swatch-element {% if is_color %}color {% endif %}{% if is_size %}size {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+      <div data-value="{{ value | escape }}" {% if product.metafields.variant.default == value %} data-variant-image="{{ variant.featured_media.id }}" {% endif %} class="swatch-element {% if product.metafields.variant.default == value %} trigger-click {% endif %} {% if is_color %}color {% endif %}{% if is_size %}size {% endif %} {% if is_care %}care {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
         {% if is_color %}
         <div class="tooltip">{{ value }}</div>
         {% endif %}
-        <input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
+        <input data-qty-v="{{variant.inventory_quantity|json}}" id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
         {% if is_color %}
-        <label for="swatch-{{ option_index }}-{{ value | handle }}" style="background-color: {{ value | split: ' ' | last | handle }};">
+        <label for="swatch-{{ option_index }}-{{ value | handle }}" 
+          {% assign colorHandle = value | handle %}
+          {% if colorHandle == 'rose-gold' %}
+            style="background-color: #b76e79;">
+          {% else %}
+            style="background-color: {{ value | split: ' ' | last | handle }};">
+          {% endif %}
         </label>
         {% else %}
         <label for="swatch-{{ option_index }}-{{ value | handle }}">

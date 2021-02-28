@@ -1,12 +1,10 @@
-{% paginate search.results by 10 %}
-
-<div class="page-width">
+<div class="page-width2 search-form-r">
   {% if search.performed == false %}
     <div class="text-center">
-      <h1 class="h2">{{ 'general.search.title' | t }}</h1>
+      <h1 class="h3">{{ 'general.search.title' | t }}</h1>
   {% else %}
     <div class="text-center">
-      <h1 class="h2">
+      <h1 class="h3">
         <span class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
         {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
       </h1>
@@ -37,7 +35,7 @@
                 />
 
                 <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
-
+                <input type="hidden" name="type" value="product" />
                 <button type="reset" class="search-form__clear-action" aria-label="{{ 'general.search.clear_search_term' | t }}" data-search-page-predictive-search-clear>
                   {% include 'icon-close' %}
                 </button>
@@ -55,56 +53,39 @@
   </div>
 </div>
 
+{% if search.results.size > 0 %}
 
-{% if search.performed %}
-  {% if search.results_count > 0 %}
-    <hr aria-hidden="true" />
-  {% endif %}
+  <div class="products-wrap">
+    <div class="page-width2">
 
-  <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
+      {% paginate search.results by 12 %}
 
-  <ul class="page-width list-view-items">
-    {% for item in search.results %}
-      <li class="list-view-item">
-        {% if item.object_type == 'product' %}
-          {% include 'product-card-list', product: item %}
-        {% else %}
-          <div class="product-card product-card--list">
-            <a href="{{ item.url }}" class="full-width-link">
-              <span class="visually-hidden">{{ item.title }}</span>
-            </a>
-            <div class="list-view-item__link">
-              <div class="list-view-item__image-column">
-                <div class="list-view-item__image-wrapper product-card__image-wrapper">
-                  {% unless item.image == null %}
-                    <img class="list-view-item__image" src="{{ item.image.src | img_url: '600x600' }}" alt="{{ item.image.alt | escape }}">
-                  {% endunless %}
-                </div>
-              </div>
+      {% if search.performed %}
+        
+        <ul class="collet-product">
+          {% for item in search.results %}
+            <li class="grid__item grid__item--collection-custom small--one-half medium-up--one-quarter">
+              {% if item.object_type == 'product' %}
+                {% include 'product-card-grid', max_height: 250, product: item, show_vendor: false %}
+                <form action="/cart/add" method="post" id="product-form- {{ item.id }}">
+                  <input type="hidden" name="id" value="{{ item.variants.first.id }}">
+                  <div class="custom-add-to-cart">
+                    <button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add" data-url="{{ item.url }}">Add to cart {% include 'product-variants-search' %}</button>
+                  </div>
+                </form>
+              {% else %}
+                  <!-- not a product goes here -->
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
 
-              <div class="list-view-item__title-column">
-                <div class="list-view-item__title" aria-hidden="true">
-                  <span class="product-card__title">{{ item.title }}</span>
-                </div>
-                <div>
-                  {% if item.published_at %}{{ item.published_at | date: format: "date" }} &#8212; {% endif %}
-                  {{ item.content | strip_html | truncate: 200 }}
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+        {%- if paginate.pages > 1 -%}
+          {% include 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {% endif %}
 
-  {%- if paginate.pages > 1 -%}
-    {% include 'pagination', paginate: paginate %}
-  {%- endif -%}
+      {% endpaginate %}
+    </div>
+  </div>
 {% endif %}
-
-{% if search.results_count < 2  %}
-  <div class="search--less-than-2-results"></div>
-{% endif %}
-
-{% endpaginate %}

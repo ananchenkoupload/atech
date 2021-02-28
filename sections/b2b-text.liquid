@@ -1,5 +1,5 @@
 
-<div class="page-width section-feature-column b2b-power">
+<div class="page-width2 section-feature-column b2b-power {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
   <div class="custom-width">
   {% if section.settings.title != blank %}
     <div class="section-header text-center">
@@ -29,6 +29,11 @@
         {%- assign column_width = grid_item_width -%}
       {% endif %}
       <div class="grid__item {{ column_width }} text-{{ section.settings.align_text }}" {{ block.shopify_attributes }}>
+        {% if block.settings.svg_image != blank %}
+          <div class="feature-row__image-wrapper">
+            {{ block.settings.svg_image }}
+          </div>
+        {% endif %}
         {% if block.settings.enable_image %}
           {% if block.settings.image != blank %}
             {% capture img_id %}TextColumnImage-{{ block.id }}{% endcapture %}
@@ -144,6 +149,40 @@
 
   "class": "index-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "paddings",
+      "label": {
+        "en": "Remove paddings?"
+      },
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": {
+            "en": "Keep defaults"
+          }
+        },
+        {
+          "value": "section--remove-top-padding",
+          "label": {
+            "en": "Remove top padding"
+          }
+        },
+        {
+          "value": "section--remove-bottom-padding",
+          "label": {
+            "en": "Remove bottom padding"
+          }
+        },
+        {
+          "value": "section--remove-all-paddings",
+          "label": {
+            "en": "Remove top and bottom paddings"
+          }
+        }
+      ]
+    },
     {
       "type": "text",
       "id": "title",
@@ -429,6 +468,11 @@
             "zh-CN": "图片",
             "zh-TW": "圖片"
           }
+        },
+        {
+          "type": "html",
+          "id": "svg_image",
+          "label": "SVG image"
         },
         {
           "type": "text",

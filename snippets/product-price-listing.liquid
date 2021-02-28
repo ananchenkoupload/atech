@@ -48,44 +48,47 @@
       - div.price__unit: Displayed when the first variant has a unit price
       - div.price__availability: Displayed when the product is sold out
   {%- endcomment -%}
-  <div class="price__regular">
-    <dt>
-      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
-    </dt>
-    <dd>
-      <span class="price-item price-item--regular">
-        {%- if product.price_varies -%}
-          {{ 'products.product.from_lowest_price_html' | t: lowest_price: money_price }}
-        {%- else -%}
-          {{ money_price }}
-        {%- endif -%}
-      </span>
-    </dd>
-  </div>
-  <div class="price__sale">
-    <dt>
-      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.sale_price' | t }}</span>
-    </dt>
-    <dd>
-      <span class="price-item price-item--sale">
-        {%- if product.price_varies -%}
-          {{ 'products.product.from_lowest_price_html' | t: lowest_price: money_price }}
-        {%- else -%}
-          {{ money_price }}
-        {%- endif -%}
-      </span>
-    </dd>
-    <div class="price__compare">
+  {%- unless compare_at_price > price -%}
+    <div class="price__regular">
       <dt>
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
       </dt>
       <dd>
-        <s class="price-item price-item--regular">
-          {{ compare_at_price | money }}
-        </s>
+        <span class="price-item price-item--regular">
+          {%- if product.price_varies -%}
+            {{ 'products.product.from_lowest_price_html' | t: lowest_price: money_price }}
+          {%- else -%}
+            {{ money_price }}
+          {%- endif -%}
+        </span>
       </dd>
     </div>
-  </div>
+  {% else %}
+    <div class="price__sale">
+      <dt>
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.sale_price' | t }}</span>
+      </dt>
+      <dd>
+        <span class="price-item price-item--sale">
+          {%- if product.price_varies -%}
+            {{ 'products.product.from_lowest_price_html' | t: lowest_price: money_price }}
+          {%- else -%}
+            {{ money_price }}
+          {%- endif -%}
+        </span>&nbsp;
+      </dd>
+      <div class="price__compare">
+        <dt>
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
+        </dt>
+        <dd>
+          <s class="price-item price-item--regular">
+            {{ compare_at_price | money }}
+          </s>
+        </dd>
+      </div>
+    </div>
+  {% endunless %}
   <div class="price__unit">
     <dt>
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.unit_price_label' | t }}</span>

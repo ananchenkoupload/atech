@@ -1,0 +1,302 @@
+<div class="scent-machine {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
+	<div class="page-width2 section-collection" id="scentmachines">
+
+	{% if section.settings.title != blank %}
+		<div class="section-header text-center">
+			<h2 class="h3 collection--title">{{ section.settings.title | escape }}</h2>
+		</div>
+	{% endif %}
+
+	{% capture products_str %}{{ section.settings.product_1 }},{{ section.settings.product_2 }}{% endcapture %}
+	{% assign products = products_str | split: ',' %}
+
+	{%- assign max_height = 530 -%}
+
+	<div data-items="2" class=" grid grid--uniform grid--view-items no-custom-slider ">
+		{% for i in products %}
+			{%- assign product = all_products[i] -%}
+			<div class="product-slide-wrapper grid__item medium-up--one-half grid__item--{{section.id}}">
+				<div class="product-top scent-machines rte">
+					<link rel="stylesheet"
+						href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+						integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+						crossorigin="anonymous">
+					<div class="product-top scent-machines link-div">
+						<h3 class="h6 product-top scent-machines top-link" href="{{ product.url }}">{{ product.title }}
+						</h3>
+					</div>
+					<div class="reviews">
+						{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '',
+						concierge_install: true, product: product %}
+
+					</div>
+				</div>
+
+				{% include 'product-card-grid', max_height: max_height, product: product, show_vendor:
+				section.settings.show_vendor %}
+
+				<div class="product-description rte" itemprop="description">
+					{% capture product_desc %}product_{{ forloop.index }}_desc{% endcapture %}
+					{{ section.settings[product_desc] }}
+				</div>
+
+				<form action="/cart/add" method="post" id="product-form- {{ product.id }}">
+					<input type="hidden" name="id" value="{{ product.variants.first.id }}">
+					<div class="custom-add-to-cart">
+						<button type="submit" name="add">Add to cart - {% include 'product-price' %}</button>
+					</div>
+				</form>
+			</div>
+		{% endfor %}
+	</div>
+
+	{% if section.settings.show_view_all %}
+		<div class="section-button-holder text-center">
+			<div class="links-grid">
+				<div>
+					<a href="{{ section.settings.view_all_url }}" class="btn2 btn2-link"
+						aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+						{{ section.settings.view_all_text | escape }}
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	</div>
+</div>
+
+{% schema %}
+{
+	"name": "Scent Machines",
+	"class": "index-section grey-bg",
+	"settings": [
+		{
+			"type": "select",
+			"id": "paddings",
+			"label": {
+				"en": "Remove paddings?"
+			},
+			"default": "default",
+			"options": [
+				{
+					"value": "default",
+					"label": {
+						"en": "Keep defaults"
+					}
+				},
+				{
+					"value": "section--remove-top-padding",
+					"label": {
+						"en": "Remove top padding"
+					}
+				},
+				{
+					"value": "section--remove-bottom-padding",
+					"label": {
+						"en": "Remove bottom padding"
+					}
+				},
+				{
+					"value": "section--remove-all-paddings",
+					"label": {
+						"en": "Remove top and bottom paddings"
+					}
+				}
+			]
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": {
+				"cs": "Nadpis",
+				"da": "Overskrift",
+				"de": "Titel",
+				"en": "Heading",
+				"es": "Título",
+				"fi": "Otsake",
+				"fr": "En-tête",
+				"hi": "शीर्षक",
+				"it": "Heading",
+				"ja": "見出し",
+				"ko": "제목",
+				"nb": "Overskrift",
+				"nl": "Kop",
+				"pl": "Nagłówek",
+				"pt-BR": "Título",
+				"pt-PT": "Título",
+				"sv": "Rubrik",
+				"th": "ส่วนหัว",
+				"tr": "Başlık",
+				"vi": "Tiêu đề",
+				"zh-CN": "标题",
+				"zh-TW": "標題"
+			},
+			"default": {
+				"cs": "Propagovaná kolekce",
+				"da": "Udvalgt kollektion",
+				"de": "Vorgestellte Kategorie",
+				"en": "Featured collection",
+				"es": "Colección destacada",
+				"fi": "Esittelyssä oleva kokoelma",
+				"fr": "Collection en vedette",
+				"hi": "फ़ीचर्ड कलेक्शन",
+				"it": "Collezione in evidenza",
+				"ja": "特集コレクション",
+				"ko": "추천 컬렉션",
+				"nb": "Fremhevet samling",
+				"nl": "Uitgelichte collectie",
+				"pl": "Polecana kolekcja",
+				"pt-BR": "Coleção em destaque",
+				"pt-PT": "Coleção em destaque",
+				"sv": "Utvald kollektion",
+				"th": "คอลเลกชันแนะนำ",
+				"tr": "Öne çıkan koleksiyon",
+				"vi": "Bộ sưu tập nổi bật",
+				"zh-CN": "特色产品系列",
+				"zh-TW": "精選商品系列"
+			}
+		},
+		{
+			"id": "product_1",
+			"type": "product",
+			"label": "Select product 1"
+		},
+		{
+			"id": "product_1_desc",
+			"type": "richtext",
+			"label": "Product 1 description"
+		},
+		{
+			"id": "product_2",
+			"type": "product",
+			"label": "Select product 2"
+		},
+		{
+			"id": "product_2_desc",
+			"type": "richtext",
+			"label": "Product 2 description"
+		},
+		{
+			"id": "view_all_text",
+			"type": "text",
+			"label": "Read more text"
+		},
+		{
+			"id": "view_all_url",
+			"type": "url",
+			"label": "Read more URL"
+		},
+		{
+			"type": "checkbox",
+			"id": "show_vendor",
+			"label": {
+				"cs": "Zobrazit dodavatele produktů",
+				"da": "Vis produktleverandører",
+				"de": "Produkt-Lieferanten anzeigen",
+				"en": "Show product vendors",
+				"es": "Mostrar proveedores del producto",
+				"fi": "Näytä tuotteen myyjät",
+				"fr": "Afficher les vendeurs",
+				"hi": "उत्पाद विक्रेताओं को दिखाएं",
+				"it": "Mostra fornitori prodotto",
+				"ja": "商品の販売元を表示する",
+				"ko": "제품 공급 업체 표시",
+				"nb": "Vis produktleverandører",
+				"nl": "Productleveranciers weergeven",
+				"pl": "Pokaż dostawców produktu",
+				"pt-BR": "Exibir fornecedores do produto",
+				"pt-PT": "Mostrar fornecedores do produto",
+				"sv": "Visa produktleverantörer",
+				"th": "แสดงผู้ขายสินค้า",
+				"tr": "Ürün satıcılarını göster",
+				"vi": "Hiển thị nhà cung cấp sản phẩm",
+				"zh-CN": "显示产品厂商",
+				"zh-TW": "顯示產品廠商"
+			},
+			"default": false
+		},
+		{
+			"type": "checkbox",
+			"id": "show_view_all",
+			"label": {
+				"cs": "Zobrazit tlačítko Zobrazit vše",
+				"da": "Vis knappen \"Se flere\"",
+				"de": "'Alle anzeigen' Button anzeigen",
+				"en": "Show 'View all' button",
+				"es": "Mostrar el botón 'Ver todo'",
+				"fi": "Näytä \"Näytä kaikki\" -painike",
+				"fr": "Afficher le bouton “Tout voir”",
+				"hi": "'सभी देखें' बटन दिखाएं",
+				"it": "Mostra il pulsante \"Visualizza tutto\"",
+				"ja": "「すべて表示」ボタンを表示する",
+				"ko": "'모두 보기' 버튼 표시",
+				"nb": "Vis «Se alle»-knapp",
+				"nl": "Knop 'Alles weergeven' weergeven",
+				"pl": "Pokaż przycisk „Wyświetl wszystkie”",
+				"pt-BR": "Exibir botão 'Visualizar tudo'",
+				"pt-PT": "Mostrar botão 'Ver tudo'",
+				"sv": "Visa \"Visa alla\"-knappen",
+				"th": "แสดงปุ่ม 'ดูทั้งหมด'",
+				"tr": "\"Tümünü görüntüle\" düğmesini göster",
+				"vi": "Hiển thị nút \"Xem tất cả\"",
+				"zh-CN": "显示“查看全部”按钮",
+				"zh-TW": "顯示「檢視全部」按鈕"
+			},
+			"default": false
+		}
+	],
+	"presets": [
+		{
+			"name": {
+				"cs": "Propagovaná kolekce",
+				"da": "Udvalgt kollektion",
+				"de": "Vorgestellte Kategorie",
+				"en": "Scent Machines",
+				"es": "Colección destacada",
+				"fi": "Esittelyssä oleva kokoelma",
+				"fr": "Collection en vedette",
+				"hi": "फ़ीचर्ड कलेक्शन",
+				"it": "Collezione in evidenza",
+				"ja": "特集コレクション",
+				"ko": "추천 컬렉션",
+				"nb": "Utvalgt samling",
+				"nl": "Uitgelichte collectie",
+				"pl": "Polecana kolekcja",
+				"pt-BR": "Coleção em destaque",
+				"pt-PT": "Coleção em destaque",
+				"sv": "Utvald kollektion",
+				"th": "คอลเลกชันแนะนำ",
+				"tr": "Öne çıkan koleksiyon",
+				"vi": "Bộ sưu tập nổi bật",
+				"zh-CN": "特色产品系列",
+				"zh-TW": "精選商品系列"
+			},
+			"category": {
+				"cs": "Kolekce",
+				"da": "Kollektion",
+				"de": "Kategorie",
+				"en": "Scent Machines",
+				"es": "Colección",
+				"fi": "Kokoelma",
+				"fr": "Collection",
+				"hi": "कलेक्शन",
+				"it": "Collezione",
+				"ja": "コレクション",
+				"ko": "컬렉션",
+				"nb": "Samling",
+				"nl": "Collectie",
+				"pl": "Kolekcja",
+				"pt-BR": "Coleção",
+				"pt-PT": "Coleção",
+				"sv": "Produktserie",
+				"th": "คอลเลกชัน",
+				"tr": "Koleksiyon",
+				"vi": "Bộ sưu tập",
+				"zh-CN": "收藏",
+				"zh-TW": "商品系列"
+			}
+		}
+	]
+}
+{% endschema %}          

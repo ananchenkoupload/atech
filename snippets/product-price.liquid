@@ -49,34 +49,37 @@
       - div.price__availability: Displayed when the product is sold out
   {%- endcomment -%}
   <div class="price__pricing-group">
-    <div class="price__regular">
-      <dt>
-        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
-      </dt>
-      <dd>
-        <span class="price-item price-item--regular" data-regular-price>
-          {{ money_price }}
-        </span>
-      </dd>
-    </div>
-    <div class="price__sale">
-      <dt>
-        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.sale_price' | t }}</span>
-      </dt>
-      <dd>
-        <span class="price-item price-item--sale" data-sale-price>
-          {{ money_price }}
-        </span>
-      </dd>
-      <dt>
-        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
-      </dt>
-      <dd>
-        <s class="price-item price-item--regular" data-regular-price>
-          {{ compare_at_price | money }}
-        </s>
-      </dd>
-    </div>
+    {% unless compare_at_price > price %}
+      <div class="price__regular">
+        <dt>
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
+        </dt>
+        <dd>
+          <span class="price-item price-item--regular" data-regular-price>
+            {{ money_price }}
+          </span>
+        </dd>
+      </div>
+    {% else %}
+      <div class="price__sale">
+        <dt>
+          <span class="visually-hidden visually-hidden--inline"> {{ 'products.product.sale_price' | t }}</span>
+        </dt>
+        <dd>
+          <span class="price-item price-item--sale" data-sale-price>
+            {{ money_price }}
+          </span>
+        </dd>
+        <dt>
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
+        </dt>
+        <dd>
+          &nbsp;<s class="price-item price-item--regular" data-regular-price>
+            {{ compare_at_price | money }}
+          </s>
+        </dd>
+      </div>
+    {% endunless %}
     <div class="price__badges">
       <span class="price__badge price__badge--sale" aria-hidden="true">
         <span>{{ 'products.product.on_sale' | t }}</span>

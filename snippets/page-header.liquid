@@ -1,8 +1,30 @@
 {% if settings.page_header_enabled %}
-	{% assign bg_image = settings.page_header_bg_image | img_url : '1024x' %}
-	<div class="page-header-wrapper" style="background-image: url({{ bg_image }})">
-      <div class="page-width">
+
+	<span class="asd" style="display: none;">{{page.metafields}} asd {{page.metafields.header.desktop}}</span>
+
+	{% if page.metafields.header.desktop != blank %}
+		{% assign bg_image_desktop = page.metafields.header.desktop %}
+	{% else %}
+		{% assign bg_image_desktop = settings.page_header_bg_image | img_url : '1024x' %}
+	{% endif %}
+
+	{% if page.metafields.header.mobile != blank %}
+		{% assign bg_image_mobile = page.metafields.header.mobile %}
+	{% else %}
+		{% assign bg_image_mobile = settings.page_header_bg_image | img_url : '1024x' %}
+	{% endif %}
+
+	<div class="page-header-wrapper page-template-header-bg" style="background-image: url({{ bg_image_desktop }})">
+      <div class="page-width2">
       	<h1 class="page-title">{{ page_title }}</h1>
       </div>
 	</div>
+
+  <style>
+    @media only screen and (max-width: 480px) {
+      .page-template-header-bg {
+        background-image: url({{ bg_image_mobile }}) !important;
+      }
+    }
+  </style>
 {% endif %}

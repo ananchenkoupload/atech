@@ -1,18 +1,18 @@
-<div class="page-width rich-text">
-  <div class="custom-width">
-  <div class="grid">
-    <div class="grid__item {% unless section.settings.full_width %} medium-up--two-thirds medium-up--push-one-sixth{% endunless %}">
-      {% if section.settings.section_title != blank %}
-        <div class="rich-text__heading--{{ section.settings.text_size }} text-center">
-          <h2 class="h3">{{ section.settings.section_title | escape }}</h2>
-        </div>
-      {% endif %}
-      {% if section.settings.text != blank %}
-        <div class="rich-text__text--{{ section.settings.text_size }} rte-setting text-center">{{ section.settings.text }}</div>
-      {% endif %}
-    </div>
-  </div>
-  </div>
+<div class="page-width2 rich-text bs {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
+  {% comment %} <div class="custom-width"> {% endcomment %}
+    {% comment %} <div class="grid"> {% endcomment %}
+      {% comment %} <div class="grid__item {% unless section.settings.full_width %} medium-up--two-thirds medium-up--push-one-sixth{% endunless %}"> {% endcomment %}
+        {% if section.settings.section_title != blank %}
+          <div class="rich-text__heading--{{ section.settings.text_size }} text-center">
+            <h2 class="h3">{{ section.settings.section_title | escape }}</h2>
+          </div>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="rich-text__text--{{ section.settings.text_size }} rte-setting text-center">{{ section.settings.text }}</div>
+        {% endif %}
+      {% comment %} </div> {% endcomment %}
+    {% comment %} </div> {% endcomment %}
+  {% comment %} </div> {% endcomment %}
 </div>
 
 
@@ -45,6 +45,40 @@
   },
   "class": "index-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "paddings",
+      "label": {
+        "en": "Remove paddings?"
+      },
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": {
+            "en": "Keep defaults"
+          }
+        },
+        {
+          "value": "section--remove-top-padding",
+          "label": {
+            "en": "Remove top padding"
+          }
+        },
+        {
+          "value": "section--remove-bottom-padding",
+          "label": {
+            "en": "Remove bottom padding"
+          }
+        },
+        {
+          "value": "section--remove-all-paddings",
+          "label": {
+            "en": "Remove top and bottom paddings"
+          }
+        }
+      ]
+    },
     {
       "type": "checkbox",
       "id": "full_width",

@@ -1,0 +1,244 @@
+{% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+        <div class="featured-article page-width2 page-width2--no-side-paddings featured-article__image--{{ block.settings.layout }} featured-article__background--{{block.settings.background}} {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
+        {% capture image_layout %}
+            <div class="featured-article__item featured-article__image-holder">
+                {% if block.settings.image != blank %}
+                    {% capture img_id %}FeatureRowImage-{{ block.id }}{% endcapture %}
+                    {% capture wrapper_id %}FeatureRowImageWrapper-{{ block.id }}{% endcapture %}
+                    {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    {% include 'image-style', image: block.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+                    <img 
+                        class="feature-article__image lazyload"
+                        data-src="{{ img_url }}"
+                        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                        data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                        data-sizes="auto"
+                        alt="{{ block.settings.image.alt | escape }}"
+                        style="object-position: {{ block.settings.alignment }};">
+                {% endif %}
+            </div>
+        {% endcapture %}
+
+        {{ image_layout }}
+        <div class="featured-article__item featured-article__text featured-article__text--{{ block.settings.textAlignement }}">
+            <div>
+            {% if block.settings.title != blank %}
+                <h3 class="h4">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+                {{ block.settings.text }}
+            {% endif %}
+            {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                {%- capture ariaLabel -%}
+                {{- block.settings.button_label -}}
+                {%- if block.settings.button_link.type == 'frontpage_link' -%}
+                    : {{ 'homepage.general.title' | t -}}
+                {%- elsif block.settings.button_link.type == 'catalog_link' -%}
+                    : {{ 'collections.catalog.title' | t -}}
+                {%- elsif block.settings.button_link.object.title -%}
+                    : {{ block.settings.button_link.object.title -}}
+                {%- endif -%}
+                {%- endcapture -%}
+                <div class="block-button-holder text-center">
+                <div class="links-grid">
+                    <div>
+                    <a href="{{ block.settings.button_link }}" class="btn2" aria-label="{{ ariaLabel }}">{{- block.settings.button_label | escape -}}</a>
+                    </div>
+                </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+{% schema %}
+{
+  "name": "Image with text blocks",
+  "class": "index-section featured-article-collection",
+  "settings": [
+    {
+        "type": "select",
+        "id": "paddings",
+        "label": {
+            "en": "Remove paddings?"
+        },
+        "default": "default",
+        "options": [
+            {
+                "value": "default",
+                "label": {
+                    "en": "Keep defaults"
+                }
+            },
+            {
+                "value": "section--remove-top-padding",
+                "label": {
+                    "en": "Remove top padding"
+                }
+            },
+            {
+                "value": "section--remove-bottom-padding",
+                "label": {
+                    "en": "Remove bottom padding"
+                }
+            },
+            {
+                "value": "section--remove-all-paddings",
+                "label": {
+                    "en": "Remove top and bottom paddings"
+                }
+            }
+        ]
+    }
+  ],
+  "blocks": [
+    {
+        "type": "image_text",
+        "name": "Image with text",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "background",
+                "label": "Background"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "select",
+                "id": "layout",
+                "label": "Image alignment",
+                "default": "left",
+                "options": [
+                    {
+                    "value": "left",
+                    "label": "Left"
+                    },
+                    {
+                    "value": "right",
+                    "label": "Right"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "alignment",
+                "label": {
+                    "en": "Image position"
+                },
+                "default": "center center",
+                "options": [
+                    {
+                        "label": {
+                            "en": "Left top"
+                        },
+                        "value": "left top"
+                    },
+                    {
+                        "label": {
+                            "en": "Center top"
+                        },
+                        "value": "center top"
+                    },
+                    {
+                        "label": {
+                            "en": "Right top"
+                        },
+                        "value": "right top"
+                    },
+                    {
+                        "label": {
+                            "en": "Left center"
+                        },
+                        "value": "left center"
+                    },
+                    {
+                        "label": {
+                            "en": "Center center"
+                        },
+                        "value": "center center"
+                    },
+                    {
+                        "label": {
+                            "en": "Right center"
+                        },
+                        "value": "right center"
+                    },
+                    {
+                        "label": {
+                            "en": "Left bottom"
+                        },
+                        "value": "left bottom"
+                    },
+                    {
+                        "label": {
+                            "en": "Center bottom"
+                        },
+                        "value": "center bottom"
+                    },
+                    {
+                        "label": {
+                            "en": "Right bottom"
+                        },
+                        "value": "right bottom"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "textAlignement",
+                "label": "Text alignment",
+                "default": "left",
+                "options": [
+                    {
+                    "value": "left",
+                    "label": "Left"
+                    },
+                    {
+                    "value": "center",
+                    "label": "Center"
+                    },
+                    {
+                    "value": "right",
+                    "label": "Right"
+                    }
+                ]
+            },
+            {
+                "type": "richtext",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "text",
+                "id": "button_label",
+                "label": "Button label"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button link"
+            }
+        ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text blocks",
+      "category": "Image with text"
+    }
+  ]
+}
+{% endschema %}

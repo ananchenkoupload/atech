@@ -1,0 +1,63 @@
+{%- assign collectionCalled = collection -%}
+
+{%- assign collectionOriginal = collections[collectionCalled] -%}
+
+{%- assign max_height = 261 -%}
+
+<div class="grid grid--uniform custom-slider custom-slider-{{collectionCalled}}" data-items="4">
+	{% for product in collectionOriginal.products %}
+	{% if product.available %}
+	<div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+		{% include 'product-card-grid2', max_height: max_height, product: product, show_vendor:
+		section.settings.show_vendor%}
+		<form>
+			<input type="hidden" name="id" value="{{ product.variants.first.id }}">
+			<div class="custom-add-to-cart">
+				<button name="add" class="btn2"><a href="{{ product.url}}" target="blank">Add to cart - {% include 'product-price' %}</a></button>
+			</div>
+		</form>
+	</div>
+	{% endif %}
+	{% endfor %}
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.custom-slider-{{collectionCalled}}').slick({
+			speed: 300,
+			infinite: true,
+			slidesToShow: 5,
+			slidesToScroll: 1,
+			prevArrow: '<button type="button" class="slick-prev"></button>',
+			nextArrow: '<button type="button" class="slick-next"></button>',
+			responsive: [
+				{
+					breakpoint: 1050,
+					settings: {
+						arrows: false,
+						slidesToShow: 3,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 767,
+					settings: {
+						arrows: false,
+						slidesToShow: 2,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						arrows: false,
+						centerMode: true,
+						slidesToShow: 1,
+						centerPadding: '40px',
+						slidesToScroll: 1
+					}
+				}
+			]
+		});
+	});
+</script>

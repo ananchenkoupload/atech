@@ -8,26 +8,51 @@
   {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ page_image | img_url: '1200x1200' }}">{%- endcapture -%}
 {% endif %}
 
-{% comment %} Template specific overides {% endcomment %}
+{% comment %} Template specific overides 
+{{ product.metafields.opengraph.image }}
+{% endcomment %}
+
 {% if request.page_type == 'product' %}
   {%- assign og_type = 'product' -%}
-  {% if product.media.size > 0 %}
-    {%- capture og_image_tags -%}{% for media in product.media limit:3 -%}<meta property="og:image" content="http:{{ media | img_url: '1200x1200' }}">{% endfor -%}{% endcapture -%}
-    {%- capture og_image_secure_url_tags -%}{% for media in product.media limit:3 -%}<meta property="og:image:secure_url" content="https:{{ media | img_url: '1200x1200' }}">{% endfor -%}{% endcapture -%}
+  {% if product.metafields.opengraph.image != blank %}
+      {%- capture og_image_tags -%}<meta property="og:image" content="{{ product.metafields.opengraph.image }}">{% endcapture -%}
+      {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="{{ product.metafields.opengraph.image }}">{% endcapture -%}
+  {% else %}
+    {% if product.media.size > 0 %}
+      {%- capture og_image_tags -%}{% for media in product.media limit:3 -%}<meta property="og:image" content="http:{{ media | img_url: '1200x1200' }}">{% endfor -%}{% endcapture -%}
+      {%- capture og_image_secure_url_tags -%}{% for media in product.media limit:3 -%}<meta property="og:image:secure_url" content="https:{{ media | img_url: '1200x1200' }}">{% endfor -%}{% endcapture -%}
+    {% endif %}
   {% endif %}
 
 {% elsif request.page_type == 'article' %}
   {%- assign og_type = 'article' -%}
-  {% if article.image %}
-    {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ article.image | img_url: '1200x1200' }}">{%- endcapture -%}
-    {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ article.image | img_url: '1200x1200' }}">{%- endcapture -%}
+  {% if article.metafields.opengraph.image != blank %}
+    {%- capture og_image_tags -%}<meta property="og:image" content="{{ article.metafields.opengraph.image }}">{%- endcapture -%}
+    {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="{{ article.metafields.opengraph.image }}">{%- endcapture -%}
+  {% else %}
+    {% if article.image %}
+      {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ article.image | img_url: '1200x1200' }}">{%- endcapture -%}
+      {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ article.image | img_url: '1200x1200' }}">{%- endcapture -%}
+    {% endif %}
   {% endif %}
+
+  {% elsif request.page_type == 'page' %}
+    {%- assign og_type = 'website' -%}
+    {% if page.metafields.opengraph.image != blank %}
+      {%- capture og_image_tags -%}<meta property="og:image" content="{{ page.metafields.opengraph.image }}">{%- endcapture -%}
+      {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="{{ page.metafields.opengraph.image }}">{%- endcapture -%}
+    {% endif %}
 
 {% elsif request.page_type == 'collection' %}
   {%- assign og_type = 'product.group' -%}
-  {% if collection.image %}
-    {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ collection.image | img_url: '1200x1200' }}">{%- endcapture -%}
-    {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ collection.image | img_url: '1200x1200' }}">{%- endcapture -%}
+  {% if collection.metafields.opengraph.image != blank %}
+      {%- capture og_image_tags -%}<meta property="og:image" content="{{ collection.metafields.opengraph.image }}">{% endcapture -%}
+      {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="{{ collection.metafields.opengraph.image }}">{% endcapture -%}
+  {% else %}
+    {% if collection.image %}
+      {%- capture og_image_tags -%}<meta property="og:image" content="http:{{ collection.image | img_url: '1200x1200' }}">{%- endcapture -%}
+      {%- capture og_image_secure_url_tags -%}<meta property="og:image:secure_url" content="https:{{ collection.image | img_url: '1200x1200' }}">{%- endcapture -%}
+    {% endif %}
   {% endif %}
 
 {% elsif request.page_type == 'password' %}

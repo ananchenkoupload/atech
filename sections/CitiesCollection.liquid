@@ -1,0 +1,347 @@
+<div id="PageCitiesCollection">
+  	<div class="container MainTop" style="position: relative;">
+
+  	</div>
+
+
+	<div id="SectionOne" {% if section.settings.first_image != blank %}style="background-image: url({{section.settings.first_image_bg | img_url: 'master'}});"{% else %} style="background: #BA9163;" {% endif %}>
+    	<div class="page-width2 m-fl">
+            <div class="text-part-sc">
+                {% if section.settings.main_heading %}<h1 class="h1 MainTitle">{{section.settings.main_heading}}</h1>{% endif %}
+                {% if section.settings.sub_main_heading %}<h4 class="h4 SubTitle">{{ section.settings.sub_main_heading }}</h4>{% endif %}
+                {% if section.settings.sub_main_text %}<span class="SubText">{{ section.settings.sub_main_text }}</span>{% endif %}
+                <div class="m-btns">
+                    {% if section.settings.backbuttontxt != blank and section.settings.backbuttonlink != blank %}
+                        <a href="{{section.settings.backbuttonlink}}" class="btn2-primary">{{section.settings.backbuttontxt}}</a>
+                    {% endif %}
+                    {% if section.settings.backbuttontxtmr != blank and section.settings.backbuttonlinkmr != blank %}
+                        <a href="{{section.settings.backbuttonlinkmr}}" class="btn2 rt">{{section.settings.backbuttontxtmr}}</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="img-part-sc">
+                {% if section.settings.first_image != blank %}
+                    <img src="{{section.settings.first_image | img_url: 'master'}}" class="lazyload" alt="{{section.settings.firstsectiontitle}}">  
+                {% endif %}
+            </div>
+      	</div>
+    </div>
+
+    {% comment %}
+    <div id="SectionTwo">
+    	<div class="text-tw">
+            <h3>{{section.settings.thirdsectiontitle}}</h3>
+            <span class="sc-tw-sub">{{section.settings.thirdsectiontitlesub}}</span>
+        </div>
+        <div class="SLiderInit swiper-container">
+            <div class="swiper-wrapper">
+                {% for block in section.blocks %}
+                    <div class="SlideContainer swiper-slide">
+                        <div class="BackwSlide SLIDECHANGE{{block.id}}" style="background-image: url({{block.settings.backImg | img_url: 'master'}}); background-size: cover; background-repeat: no-repeat;">
+                            <div class="page-width2">
+                                <h2 class="SlideTitle">{{block.settings.producttitle}}</h2>
+                                <div class="product-keys">{{block.settings.producttxtk}}</div>
+                                <div class="SlideImage">
+                                    <img src="{{block.settings.bootleImg | img_url: '600x'}}" class="lazyload" alt="{{block.settings.producttitle}}">  
+                                </div>
+                                <div class="ContentPro">
+                                    {{block.settings.producttxt | truncate: 672, ''}}
+                                </div>
+                                <div class="ButtonSlidePro">
+                                    <div class="container">
+                                        <a href="{{block.settings.productbuttonlink}}" class="btn2-primary">{{block.settings.productbuttontxt}}</a> 
+                                        <a href="{{block.settings.productbuttonlinkrt}}" class="btn2">{{block.settings.productbuttontxtrt}}</a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+          </div>
+          <div class="slider-buttons">
+            <span class="swiper-pr-button-prev">
+                <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.7279 0.999983L2 13.7279L14.7279 26.4558" stroke="white" stroke-width="2"/>
+                </svg>                    
+            </span>
+            <span class="swiper-pr-button-next">
+                <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.7279 0.999983L2 13.7279L14.7279 26.4558" stroke="white" stroke-width="2"/>
+                </svg> 
+            </span>
+          </div>
+    </div>
+    {% endcomment %}
+
+    <div id="SectionTwo" {% comment %}style="background-image: url({{section.blocks[0].settings.backImg | img_url: 'master'}})"{% endcomment %}>
+      {% for block in section.blocks %}
+        <img data-count="{{forloop.index}}" class="absoluteBgImage {% if forloop.index == 1%}active{% endif %}" src="{{block.settings.backImg | img_url: 'master'}}">
+      {% endfor %}
+
+        <div class="text-tw">
+            <h3>{{section.settings.thirdsectiontitle}}</h3>
+            <span class="sc-tw-sub">{{section.settings.thirdsectiontitlesub}}</span>
+        </div>
+        <div class="page-width2 top-title-keys">
+          {% for block in section.blocks limit: 1 %}
+            <h2 class="SlideTitle">{{block.settings.producttitle}}</h2>
+            <div class="product-keys">{{block.settings.producttxtk}}</div>
+          {% endfor %}
+        </div>
+        <div class="SLiderInit swiper-container">
+            <div class="swiper-wrapper">
+                {% for block in section.blocks %}
+                    <div class="SlideContainer swiper-slide">
+                        <div data-img-url="{{block.settings.backImg | img_url: 'master'}}" class="BackwSlide SLIDECHANGE{{block.id}}"
+                              data-count="{{forloop.index}}"
+                              data-title="{{block.settings.producttitle}}"
+                              data-keys="{{block.settings.producttxtk}}"
+                              data-content="{{block.settings.producttxt | truncate: 672, ''}}"
+                              data-btn-url="{{block.settings.productbuttonlink}}"
+                              data-btn-text="{{block.settings.productbuttontxt}}"
+                              data-btn-urlrt="{{block.settings.productbuttonlinkrt}}"
+                              data-btn-textrt="{{block.settings.productbuttontxtrt}}">
+
+                            <div class="page-width2">
+                                <div class="SlideImage">
+                                    <img src="{{block.settings.bootleImg | img_url: '600x'}}" class="lazyload" alt="{{block.settings.producttitle}}">  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+          </div>
+
+          <div class="page-width2 bottom-content">
+          {% for block in section.blocks limit: 1 %}
+            <div class="ContentPro">
+                {{block.settings.producttxt | truncate: 672, ''}}
+            </div>
+            <div class="ButtonSlidePro">
+                <div class="container">
+                    <a href="{{block.settings.productbuttonlink}}" class="btn2-primary">{{block.settings.productbuttontxt}}</a> 
+                    <a href="{{block.settings.productbuttonlinkrt}}" class="btn2">{{block.settings.productbuttontxtrt}}</a> 
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+
+          <div class="slider-buttons">
+            <span class="swiper-pr-button-prev">
+                <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.7279 0.999983L2 13.7279L14.7279 26.4558" stroke="white" stroke-width="2"/>
+                </svg>                    
+            </span>
+            <span class="swiper-pr-button-next">
+                <svg width="16" height="28" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.7279 0.999983L2 13.7279L14.7279 26.4558" stroke="white" stroke-width="2"/>
+                </svg> 
+            </span>
+          </div>
+    </div>
+
+
+  	<div id="SectionThree">
+    	<div class="container">
+      		<div class="sixteen columns">
+        		<div class="seven columns medium-down--one-whole">
+                	<div class="MainImages">
+                      	{% if section.settings.second_image != blank %}
+                    	<img src="{{section.settings.second_image | img_url: 'master'}}" class="lazyload" alt="{{section.settings.secondsectiontitle}}">  
+                      	{% endif %}
+                  	</div>
+              	</div>
+              	<div class="nine columns medium-down--one-whole">
+                    <h3>{{section.settings.secondsectiontitle}}</h3>  
+                    <div class="ShowMoreHide">
+                        {{section.settings.secondsectiontxt}}  
+                    </div>
+                    <div class="ButtonShowMore">
+                        {% if section.settings.secondbuttontxt != blank %}
+                            {% if section.settings.secondbuttontxt != blank and section.settings.secondbuttonlink != blank %}
+                                <a href="{{section.settings.secondbuttonlink}}" class="btn2">{{section.settings.secondbuttontxt}}</a>
+                            {% else %}
+                                <button class="button" id="SecondSecshow">{{ section.settings.secondbuttontxt }}</button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+              	</div>
+          	</div>
+      	</div>
+    </div>
+</div>
+
+{% for block in section.blocks %}
+	<style>
+        @media(max-width: 798px)
+        {
+        	.BackwSlide.SLIDECHANGE{{block.id}} 
+          	{
+              	background-image: url({{block.settings.mobmap | img_url: '1000x'}}) !important;
+            }
+        }
+	</style>
+{% endfor %}
+
+{% schema %}
+  {
+      "name": "Cities Collection",
+      "settings": [
+          {
+              "type": "text",
+              "id": "main_heading",
+              "label": "Main Heading"
+          },
+          {
+              "type": "text",
+              "id": "sub_main_heading",
+              "label": "Sub Main Heading"
+          },
+          {
+              "type": "text",
+              "id": "sub_main_text",
+              "label": "Sub Main text"
+          },
+          {
+              "type": "text",
+              "id": "backbuttontxt",
+              "label": "Button Text"
+          },
+          {
+              "type": "text",
+              "id": "backbuttontxtmr",
+              "label": "Button Text More"
+          },
+          {
+              "type": "url",
+              "id": "backbuttonlink",
+              "label": "Button Link"
+          },
+          {
+              "type": "url",
+              "id": "backbuttonlinkmr",
+              "label": "Button Link More"
+          },
+          {
+              "type": "image_picker",
+              "id": "first_image",
+              "label": "First Section Image"
+          },
+          {
+              "type": "image_picker",
+              "id": "first_image_bg",
+              "label": "First Section Image Background"
+          },
+          {
+              "type": "header",
+              "content": "Second section with products"
+          },
+          {
+              "type": "text",
+              "id": "thirdsectiontitle",
+              "label": "Third Section Title"
+          },
+           {
+              "type": "text",
+              "id": "thirdsectiontitlesub",
+              "label": "Third Section Sub Title"
+          },
+          {
+              "type": "header",
+              "content": "Third Section Image with Text"
+          },
+          {
+              "type": "image_picker",
+              "id": "second_image",
+              "label": "Third Section Image"
+          },
+          {
+              "type": "text",
+              "id": "secondsectiontitle",
+              "label": "Third Section Title"
+          },
+          {
+              "type": "textarea",
+              "id": "secondsectiontxt",
+              "label": "Third Section Text"
+          },
+          {
+              "type": "text",
+              "id": "secondbuttontxt",
+              "label": "Third Section Button Text"
+          },
+          {
+              "type": "url",
+              "id": "secondbuttonlink",
+              "label": "Third Section Button Link"
+          }
+      ],
+	  "blocks": [
+		  {
+              "type": "product_slide",
+              "name": "Product Slide",
+              "settings": [
+                  {
+                      "type": "image_picker",
+                      "id": "backImg",
+                      "label": "Background Image"
+                  },
+				  {
+                      "type": "image_picker",
+                      "id": "mobmap",
+                      "label": "Mobile Background Image"
+                  },
+                  {
+                      "type": "text",
+                      "id": "producttitle",
+                      "label": "Product Title"
+                  },
+                  {
+                      "type": "image_picker",
+                      "id": "bootleImg",
+                      "label": "Product Image"
+                  },
+                  {
+                      "type": "textarea",
+                      "id": "producttxt",
+                      "label": "Product Description",
+                      "info": "Max characters: 672"
+                  },
+                  {
+                      "type": "text",
+                      "id": "producttxtk",
+                      "label": "Product Key Notes"
+                  },
+                  {
+                      "type": "text",
+                      "id": "productbuttontxt",
+                      "label": "Product Button Text Shop"
+                  },
+                  {
+                      "type": "url",
+                      "id": "productbuttonlink",
+                      "label": "Product Button Link Shop"
+                  },
+                {
+                      "type": "text",
+                      "id": "productbuttontxtrt",
+                      "label": "Product Button Text Details"
+                  },
+                  {
+                      "type": "url",
+                      "id": "productbuttonlinkrt",
+                      "label": "Product Button Link Details"
+                  }
+              ]
+		  }
+	  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

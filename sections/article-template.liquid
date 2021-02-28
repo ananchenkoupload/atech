@@ -1,25 +1,35 @@
-<div class="section-header text-center">
-  <h1 class="article__title" id="title-0">{{ article.title }}</h1>
-  {% if section.settings.blog_show_author %}
-    <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
-  {% endif %}
-
-  {% if section.settings.blog_show_date %}
-    <span class="article__date">
-      {{ article.published_at | time_tag: format: 'date' }}
-    </span>
-  {% endif %}
+<div class="blog-title-wrapper">
+  <h2>{{ article.title }}</h2>
 </div>
+
+{% if article.image.src != blank %}
+  <div class="blog-image-wrapper">
+    <img src="{{ article.image.src | img_url : '972x' }}" alt="{{ article.image.alt }}">
+  </div>
+{% endif %}
+
+<div class="blog-meta-wrapper">
+  <div class="blog-date-wrapper">
+    <span class="blog-date"> {{ article.published_at | time_tag: format: 'date' }}</span> | {{ article.author }}
+  </div>
+  <div class="social-sharing-wrapper">
+      {% if section.settings.show_share_buttons %}
+        {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+      {% endif %}
+  </div>
+</div>
+
+<div class="blog-tags-wrapper">
+  {% for tag in article.tags %}
+    {{- tag | link_to_tag: tag -}}
+  {% endfor %}
+</div>
+
+<div class="separator"></div>
 
 <div class="rte">
   {{ article.content }}
 </div>
-
-{% if section.settings.show_share_buttons %}
-  {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
-{% endif %}
-
-
 
 {% schema %}
 {
@@ -48,6 +58,17 @@
     "zh-TW": "貼文"
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "page_header_enabled",
+      "label": "Enable page header",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "page_header_bg_image",
+      "label": "Select image (1600px)"
+    },
     {
       "type": "checkbox",
       "id": "blog_show_author",

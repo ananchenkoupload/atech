@@ -11,11 +11,21 @@
   {%- assign number_of_comments = article.comments_count -%}
 {%- endif -%}
 
-<article class="page-width" aria-labelledby="title-0">
-  <div class="grid">
-    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
-      {% section 'article-template' %}
-    </div>
+{% section 'blog-header' %}
+
+<article class="page-width2" aria-labelledby="title-0">
+  <div class="arrows-wrapper">
+    {% if blog.previous_article != blank %}
+      <a class="back" href="{{ blog.previous_article }}">{% include 'icon-left-blog' %} Back</a>
+    {% endif %}
+    
+    {% if blog.next_article != blank %}
+      <a class="next" href="{{ blog.next_article }}">Next {% include 'icon-right-blog' %}</a>
+    {% endif %}
+  </div>
+
+  <div class="article-wrapper">
+    {% section 'article-template' %}
   </div>
 </article>
 
@@ -133,12 +143,16 @@
   </div>
 {% endif %}
 
+{% section 'blog-slider-custom' %}
+
+<!-- 
 <div class="text-center return-link-wrapper page-width">
   <a href="{{ blog.url }}" class="btn btn--secondary btn--has-icon-before">
     {% include 'icon-arrow-left' %}
     {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
   </a>
 </div>
+-->
 
 <script type="application/ld+json">
 {

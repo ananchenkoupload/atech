@@ -1,4 +1,4 @@
-<div class="page-width rich-text">
+<div class="page-width2 rich-text ccc {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
   <div class="custom-width">
   <div class="grid">
     <div class="grid__item {% unless section.settings.full_width %} medium-up--two-thirds medium-up--push-one-sixth{% endunless %}">
@@ -45,6 +45,40 @@
   },
   "class": "index-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "paddings",
+      "label": {
+        "en": "Remove paddings?"
+      },
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": {
+            "en": "Keep defaults"
+          }
+        },
+        {
+          "value": "section--remove-top-padding",
+          "label": {
+            "en": "Remove top padding"
+          }
+        },
+        {
+          "value": "section--remove-bottom-padding",
+          "label": {
+            "en": "Remove bottom padding"
+          }
+        },
+        {
+          "value": "section--remove-all-paddings",
+          "label": {
+            "en": "Remove top and bottom paddings"
+          }
+        }
+      ]
+    },
     {
       "type": "checkbox",
       "id": "full_width",

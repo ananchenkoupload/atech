@@ -24,9 +24,9 @@
 
     {% if link.links != blank %}
       <li class="site-nav--has-dropdown{% if three_level_nav %} site-nav--has-centered-dropdown{% endif %}{% if link.active %} site-nav--active{% endif %}" data-has-dropdowns>
-        <button class="site-nav__link site-nav__link--main site-nav__link--button{% if link.child_active %} site-nav__link--active{% endif %}" type="button" aria-expanded="false" aria-controls="SiteNavLabel-{{ child_list_handle }}">
+        <a href="{{ link.url }}" class="site-nav__link site-nav__link--main site-nav__link--button{% if link.child_active %} site-nav__link--active{% endif %}" aria-controls="SiteNavLabel-{{ child_list_handle }}">
           <span class="site-nav__label">{{ link.title | escape }}</span>{% include 'icon-chevron-down' %}
-        </button>
+        </a>
 
         <div class="site-nav__dropdown{% if three_level_nav %} site-nav__dropdown--centered{% endif %} critical-hidden" id="SiteNavLabel-{{ child_list_handle }}">
           {% if three_level_nav %}
@@ -93,26 +93,31 @@
 </ul>
 </div>
 <script>
-  $(document).ready(function(){
-    $('.site-nav__link--button').click(function() {
 
+    $(document).ready(function(){
+        $('.site-nav--has-dropdown').hover(
+            function() {
+                $('nav.grid__item').addClass('desk-menu');
+            },
+            function() {
+                $('nav.grid__item').removeClass('desk-menu');
+            }
+        );
 
-      if ($('.site-nav--has-dropdown').hasClass('site-nav--active-dropdown')) {
-        
-        $('nav.grid__item').removeClass('desk-menu');
-      }
-      else{
-   		$('nav.grid__item').addClass('desk-menu');     
-      }
-
+        $('.site-nav__childlist-item').hover(
+            function() {
+                if($(this).find('.site-child-second').length > 0) {
+                    $('nav.grid__item').addClass('desk-menu2');
+                } else {
+                    $('nav.grid__item').addClass('desk-menu');
+                }
+            },
+            function() {
+                $('nav.grid__item').removeClass('desk-menu2');
+            }
+        );
     });
-    $(document).click(function() {
-      if (!$('.site-nav--has-dropdown').hasClass('site-nav--active-dropdown')) {
-		$('nav.grid__item').removeClass('desk-menu');
-        
-        }
-	 });
-  });
+
   
   $('#AccessibleNav').click(function(event){
     event.stopPropagation();

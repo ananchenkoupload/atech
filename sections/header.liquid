@@ -1,1031 +1,1152 @@
 {% if section.settings.message %}
-  <style>
-    {% if section.settings.logo != blank %}
-      .site-header__logo-image {
-        max-width: {{ section.settings.logo_max_width | escape }}px;
-      }
-    {% endif %}
+	<style>
+		{% if section.settings.logo != blank %}
+			.site-header__logo-image {
+				max-width: {{ section.settings.logo_max_width | escape }}px;
+			}
+		{% endif %}
 
-    {% if section.settings.align_logo == 'left' %}
-      .site-header__logo-image {
-        margin: 0;
-      }
-    {% endif %}
-  </style>
+		{% if section.settings.align_logo=='left'%}
+			.site-header__logo-image {
+				margin: 0;
+			}
+		{% endif %}
+	</style>
 {% endif %}
 
 {% include 'search-drawer' %}
 
-<div data-section-id="{{ section.id }}" data-section-type="header-section" data-header-section>
-  {% if section.settings.message %}
-    {% if section.settings.home_page_only == false or request.page_type == 'index' %}
-      <style>
-        .announcement-bar {
-          background-color: {{ section.settings.color_bg }};
-        }
-
-        .announcement-bar__link:hover {
-          {% assign brightness = section.settings.color_bg | color_brightness %}
-
-          {% if brightness <= 192 %}
-            {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
-            background-color: {{ section.settings.color_bg | color_lighten: lightenAmount }};
-          {% else %}
-            {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
-            background-color: {{ section.settings.color_bg | color_darken: darkenAmount }};
-          {% endif %}
-        }
-
-        .announcement-bar__message {
-          color: {{ section.settings.color_text }};
-        }
-      </style>
-
-      <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}">
-        {%- unless section.settings.message_link == blank -%}
-          <a href="{{ section.settings.message_link }}" class="announcement-bar__link">
-        {%- endunless -%}
-            <p class="announcement-bar__message">{{ section.settings.message_text | escape }}</p>
-        {%- unless section.settings.message_link == blank -%}
-          </a>
-        {%- endunless -%}
-      </div>
-
-    {% endif %}
-  {% endif %}
-
-  <header class="site-header{% if section.settings.align_logo == 'left' %} border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
-    <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
-      {% if section.settings.align_logo == 'center' %}
-        {%- assign logo_classes = 'medium-up--one-third medium-up--push-one-third logo-align--center' -%}
-      {% else %}
-        {%- assign logo_classes = 'medium-up--one-quarter logo-align--left' -%}
-      {% endif %}
-		
-      {% unless linklists[section.settings.main_linklist] == blank %}
-            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
-              {% include 'icon-hamburger' %}
-              {% include 'icon-close' %}
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-header-section id="header">
+	{% if section.settings.message %}
+		{% if section.settings.home_page_only == false or request.page_type == 'index' %}
+			<style>
+				.announcement-bar {
+					background-color: {{ section.settings.color_bg }};
+				}
+                            
+                .announcement-bar__container {
+					padding: 11px 0 12px;
+				}      
               
-            </button>
-          {% endunless %}
-      
-      <div class="grid__item {{ logo_classes }}">
-        {% comment %}
-          Use the uploaded logo from theme settings if enabled.
-          Site name gets precedence with H1 tag on homepage, div on other pages.
-        {% endcomment %}
-        {% if request.page_type == 'index' %}
-          <h1 class="h2 site-header__logo">
-        {% else %}
-          <div class="h2 site-header__logo">
-        {% endif %}
-          {% if section.settings.logo %}
-            
-            {%- assign img_url = "Aromatech-Header-logo.svg" | asset_url -%}
-            <a href="{{ routes.root_url }}" class="site-header__logo-image{% if section.settings.align_logo == 'center' %} site-header__logo-image--centered{% endif %}" data-image-loading-animation>
-              {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
-              <img class="lazyload js"
-                   src="{{ section.settings.logo | img_url: '300x300' }}"
-                   data-src="{{ img_url }}"
-                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                   data-aspectratio="{{ section.settings.logo.aspect_ratio }}"
-                   data-sizes="auto"
-                   alt="{{ logo_alt | escape }}"
-                   style="max-width: {{ section.settings.logo_max_width }}px">
-              <noscript>
-                {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
-                <img src="{{ section.settings.logo | img_url: image_size }}"
-                     srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-                     alt="{{ section.settings.logo.alt | default: shop.name }}"
-                     style="max-width: {{ section.settings.logo_max_width }}px;">
-              </noscript>
-            </a>
-          {% else %}
-            <a class="site-header__logo-link" href="{{ routes.root_url }}">{{ shop.name }}</a>
-          {% endif %}
-        {% if request.page_type == 'index' %}
-          </h1>
-        {% else %}
-          </div>
-        {% endif %}
-      </div>
-      <div class="header-cust-menu">
-		<span class="site-header__menu-toggle--open">
-           {% include 'icon-hamburger' %}
-          {% include 'icon-close' %}
-           
-         </span>
-      </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script>
-      $(document).ready(function(){
-          $('.site-header__menu-toggle--open').click(function() {
-            $('.grid__item.medium-up--one-half.small--hide').toggleClass("active");
-            $( this ).toggleClass( "actives" );
-            $(".site-nav__childlist-item a").addClass('parentcategory');
-          });
-      });
-      </script>
-      <script>
-       $(document).ready(function(){
-		$('.js-toggle-submenu').click(function() {
+                .announcement-bar__link {
+				    text-decoration-line: none;
+				}
+              	
+				.announcement-bar__link:hover {   
+                 
+                  {% comment %}
+                  {% assign brightness=section.settings.color_bg | color_brightness %}
+                  {% if brightness <=192 %}
+                  {% assign lightenAmount=255 | minus: brightness | divided_by: 255 | times: 16 %}
+                  background-color: {{ section.settings.color_bg | color_lighten: lightenAmount }};
+                  {% else %}
+                  {% assign darkenAmount=255 | divided_by: brightness | times: 8 %}
+                  background-color: {{ section.settings.color_bg | color_darken: darkenAmount }};
+                  {% endif %}
+                  {% endcomment %}
+				}
 
-           
-          if ($('.js-menu--is-open').hasClass('sub-nav--is-open')) {
-            $('.site-header__mobile-nav').addClass('actsub');
-        	}
-          else{
-          	$('.site-header__mobile-nav').removeClass('actsub');
-          }
-          
-          });
-       
-         
-       });
-      </script>
-      <script>
-        $(document).ready(function () {
-          $('.site-nav__label').on("click", function(e) {
-            if(!$(this).parent().parent().hasClass('active'))
-            {
-              $('.site-nav__childlist-item').removeClass('active');
-              $('.desk-menu').removeClass('desk-menu2');
-             // $(this).parent().parent().addClass('active');
-              if($(this).parent().parent().children('.site-child-second').length > 0){
-                  $(this).parent().parent().addClass('active');
-                $('.desk-menu').addClass('desk-menu2');
-              }
-              //$('.desk-menu').addClass('desk-menu2');
-            }
-            else
-            {
-              $('.site-nav__childlist-item').removeClass('active');
-              $('.desk-menu').removeClass('desk-menu2');
-            }
-          });
-          $(document).click(function() {
-     		 if (!$('.site-nav--has-dropdown').hasClass('site-nav--active-dropdown')) {
-				$('nav.grid__item').removeClass('desk-menu2');
-        		}
-	 		});
-          
-          
-        });
-      </script>
-      <script>
-      $(document).ready(function(){
-          $(window).scroll(function () {
-            if ($(this).scrollTop() > 10) {
-             $('.site-header').addClass("sticky");
-              //$('.announcement-bar').fadeOut();
-            } else {
-             
-             $('.site-header').removeClass("sticky");
+              	.announcement-bar__link:hover .announcement-bar__message {   
+                  color: var(--color-text-focus);
+                  text-decoration-line: underline;
+				}
               
-              //$('.site-header').addClass("sticky1");
-             // $(".site-header").css("display","block");
-              //$('.site-header').hasClass("sticky1").addcss("display","block");
-            }
-           });
-      });
-        
-       
-        
-      </script>
-      {% if section.settings.align_logo == 'left' %}
-        <nav class="grid__item medium-up--one-half small--hide" id="AccessibleNav" role="navigation">
-          {% include 'site-nav', linklist: section.settings.main_linklist %}
-        </nav>
-      {% endif %}
+				.announcement-bar__message {
+                  	display: inline;
+					color: {{ section.settings.color_text }};
+				}
+              
+                .announcement-bar__close-btn {
+                  position: absolute;
+                  top: 6px;
+                  right: 6px;
+                  background-color: transparent;
+                  border-color: transparent;
+                  color: #f6f6f6;
+                }
+              
+              	@media only screen and (max-width: 767px) {
+                    .announcement-bar__close-btn {
+                      top: 8px;
+                      right: 5px;
+                    }
+                }
+              
+			</style>
+			<div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}" style="display: none;">
+				<div class="announcement-bar__container">
+                  
+					{%- unless section.settings.message_link == blank -%}
+					<a href="{{ section.settings.message_link }}" class="announcement-bar__link">
+						{%- endunless -%}
+						<p class="announcement-bar__message">{{ section.settings.message_text | escape }}</p>
+						{%- unless section.settings.message_link == blank -%}
+					</a>
+					{%- endunless -%}
+                                        
+                    <button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
 
-      <div class="grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-quarter{% else %}medium-up--one-third medium-up--push-one-third{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
-        <div class="site-header__icons-wrapper">
+	<header class="site-header" role="banner">
+		<div class="page-width2 page-width2--fluid header-content site-header__mobile-nav">
+			<div>
+				<span class="btn2 btn2-link site-header__menu-toggle--opener">
+					{% include 'icon-hamburger-new' %}
+					{% include 'icon-close-new' %}
+				</span>
+				<script>
+					$(document).ready(function () {
+						$('.site-header__menu-toggle--opener').click(function () {
+							$('.grid__item.medium-up--one-half.small--hide').toggleClass("active");
+							$(this).toggleClass("active");
+							$(".site-nav__childlist-item a").addClass('parentcategory');
+						});
+					});
+				</script>
+				<span class="btn2 btn2-link site-header__menu-toggle--opener mobile js-mobile-nav-toggle mobile-nav--open">
+					{% include 'icon-hamburger-new' %}
+					{% include 'icon-close-new' %}
+				</span>
+			</div>
+			<div class="logo-holder {% if section.settings.enable_svg %} svg-logo {% endif %}">
+				{% comment %}
+					Use the uploaded logo from theme settings if enabled.
+					Site name gets precedence with H1 tag on homepage, div on other pages.
+				{% endcomment %}
+				{% if request.page_type == 'index' %}
+					<h1 class="h2 site-header__logo">
+				{% else %}
+					<div class="h2 site-header__logo">
+				{% endif %}
 
-          
-          
-          <button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top" data-predictive-search-open-drawer>
-            {% include 'icon-search' %}
-            <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
-          </button>
-          
-          {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-              <a href="{{ routes.account_url }}" class="site-header__icon site-header__account">
-                {% include 'icon-login' %}
-                <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
-              </a>
-            {% else %}
-              <a href="{{ routes.account_login_url }}" class="site-header__icon site-header__account">
-                {% include 'icon-login' %}
-                <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
-              </a>
-            {% endif %}
-          {% endif %}
+				{% if section.settings.logo %}
+					{% comment %}
+					{%- assign img_url = "Aromatech-Header-logo.svg" | asset_url -%}
+					{% endcomment %}
+					<a href="{{ routes.root_url }}"
+						class="site-header__logo-image{% if section.settings.align_logo == 'center' %} site-header__logo-image--centered{% endif %}"
+						data-image-loading-animation>
+						{% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
+						{% comment %}
+						SVG format must be loaded from Settings/Files
+						{% endcomment %}
+						{% if section.settings.enable_svg %}
+							{{ section.settings.html }}
+						{% else %}
+							<img class="lazyload js" src="{{ section.settings.logo | img_url: '592x592' | replace: '_592x592.png', '.svg' }}" data-src="{{ img_url }}"
+								data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+								data-aspectratio="{{ section.settings.logo.aspect_ratio }}" data-sizes="auto"
+								alt="{{ logo_alt | escape }}">
+							<noscript>
+								{% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+								<img src="{{ section.settings.logo | img_url: image_size }}"
+									srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+									alt="{{ section.settings.logo.alt | default: shop.name }}"
+									style="max-width: {{ section.settings.logo_max_width }}px;">
+							</noscript>
+						{% endif %}
+					</a>
+				{% else %}
+						
+					<a class="site-header__logo-link" href="{{ routes.root_url }}">
+						{% if section.settings.enable_svg %}
+							{{ section.settings.html }}
+						{% else %}
+							{{ shop.name }}
+						{% endif %}
+					</a>
+				{% endif %}
+				
 
-          <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart js-ajax-cart-drawer-trigger">
-            {% include 'icon-cart' %}
-            <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
-            <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} _hide{% endif %} critical-hidden">
-              <span class="js-ajax-cart-counter-header">{{ cart.item_count }}</span>
-              <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
-            </div>
-          </a>
-	
-          <div class="desktop-switcher">
-          	{% include 'multi-currency' %}
-          </div>
-          
-        </div>
+				{% if request.page_type == 'index' %}
+					</h1>
+				{% else %}
+					</div>
+				{% endif %}
+			</div>
+			<div>
+				<div class="site-header__icons-wrapper">
+					<div class="site-header__icons-item">
+						<button type="button" class="btn2 btn2-link site-header__icon site-header__search-toggle js-drawer-open-top"
+							data-predictive-search-open-drawer>
+							{% include 'icon-search-new' %}
+							<span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
+						</button>
+					</div>
+					<div class="site-header__icons-item">
+						{% if shop.customer_accounts_enabled %}
+							{% if customer %}
+								<a href="{{ routes.account_url }}" class="btn2 btn2-link site-header__icon site-header__account">
+									{% include 'icon-login-new' %}
+									<span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
+								</a>
+							{% else %}
+								<a href="{{ routes.account_login_url }}" class="btn2 btn2-link site-header__icon site-header__account">
+									{% include 'icon-login-new' %}
+									<span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
+								</a>
+							{% endif %}
+						{% endif %}
 
-      </div>
-    </div>
-    
-    {% include 'ajax-cart' %}
+					</div>
+					<div class="site-header__icons-item">
+						<a href="{{ routes.cart_url }}" class="btn2 btn2-link site-header__icon site-header__cart js-ajax-cart-drawer-trigger">
+							{% include 'icon-cart-new' %}
+							<span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+							<div id="CartCount"
+								class="site-header__cart-count{% if cart.item_count == 0 %} _hide{% endif %} critical-hidden">
+								<span class="js-ajax-cart-counter-header">{{ cart.item_count }}</span>
+								<span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count
+									}}</span>
+							</div>
+						</a>
+					</div>
+					<div class="site-header__icons-item currency-switcher">
+						{% include 'multi-currency' %}
+					</div
+				</div>
+			</div>
+		</div>
+		{% if section.settings.align_logo == 'left' %}
+			<nav class="grid__item medium-up--one-half small--hide" id="AccessibleNav" role="navigation">
+				{% include 'site-nav', linklist: section.settings.main_linklist %}
+			</nav>
+		{% endif %}
 
-    <nav class="mobile-nav-wrapper medium-up--hide critical-hidden" role="navigation">
-      <ul id="MobileNav" class="mobile-nav">
-        {% for link in linklists[section.settings.main_linklist].links %}
-          {%- assign outerLoopIndex = forloop.index -%}
-			
-          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
-            {% if link.links != blank %}
-              {% capture child_list_handle %}{{ link.handle }}-{{ outerLoopIndex }}{% endcapture %}
-              <button type="button" class="btn--link js-toggle-submenu mobile-nav__link{% if link.child_active %} mobile-nav__link--active{% endif %}" data-target="{{ child_list_handle }}" data-level="1" aria-expanded="false">
-                <span class="mobile-nav__label">{{ link.title | escape }}</span>
-                <div class="mobile-nav__icon">
-                  {% include 'icon-chevron-right' %}
-                </div>
-              </button>
-              <ul class="mobile-nav__dropdown" data-parent="{{ child_list_handle }}" data-level="2">
-                <li class="visually-hidden" tabindex="-1" data-menu-title="2">
-                  {{- link.title }} {{ 'layout.navigation.menu' | t -}}
-                </li>
-                <li class="mobile-nav__item border-bottom">
-                  <div class="mobile-nav__table">
-                    <div class="mobile-nav__table-cell mobile-nav__return">
-                      <button class="btn--link js-toggle-submenu mobile-nav__return-btn" type="button" aria-expanded="true" aria-label="{{ link.title }}">
-                        {% include 'icon-chevron-left' %}
-                      </button>
-                    </div>
-                    <span class="mobile-nav__sublist-link mobile-nav__sublist-header mobile-nav__sublist-header--main-nav-parent">
-                      <span class="mobile-nav__label">{{ link.title | escape }}</span>
-                    </span>
-                  </div>
-                </li>
+		<nav class="mobile-nav-wrapper medium-up--hide critical-hidden" role="navigation">
+			<ul id="MobileNav" class="mobile-nav">
+				{% for link in linklists[section.settings.main_linklist].links %}
+					{%- assign outerLoopIndex = forloop.index -%}
+					<li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+						{% if link.links != blank %}
+							{% capture child_list_handle %}{{ link.handle }}-{{ outerLoopIndex }}{% endcapture %}
+							<button type="button"
+								class="btn--link js-toggle-submenu mobile-nav__link{% if link.child_active %} mobile-nav__link--active{% endif %}"
+								data-target="{{ child_list_handle }}" data-level="1" aria-expanded="false">
+								<span class="mobile-nav__label">{{ link.title | escape }}</span>
+								<div class="mobile-nav__icon">
+									{% include 'icon-chevron-right' %}
+								</div>
+							</button>
+							<ul class="mobile-nav__dropdown" data-parent="{{ child_list_handle }}" data-level="2">
+								<li class="visually-hidden" tabindex="-1" data-menu-title="2">
+									{{- link.title }} {{ 'layout.navigation.menu' | t -}}
+								</li>
+								<li class="mobile-nav__item border-bottom">
+									<div class="mobile-nav__table">
+										<div class="mobile-nav__table-cell mobile-nav__return">
+											<button class="btn--link js-toggle-submenu mobile-nav__return-btn" type="button" aria-expanded="true"
+												aria-label="{{ link.title }}">
+												{% include 'icon-arrow-left-new' %}
+											</button>
+										</div>
+										<span
+											class="mobile-nav__sublist-link mobile-nav__sublist-header mobile-nav__sublist-header--main-nav-parent">
+											<span class="mobile-nav__label">{{ link.title | escape }}</span>
+										</span>
+									</div>
+								</li>
 
-                {% for childlink in link.links %}
-                  <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
-                    {% if childlink.links != blank %}
-                      {% capture grandchild_list_handle %}{{ childlink.handle }}-{{ outerLoopIndex }}-{{ forloop.index }}{% endcapture %}
-                      <button type="button" class="btn--link js-toggle-submenu mobile-nav__link mobile-nav__sublist-link" data-target="{{ grandchild_list_handle }}" aria-expanded="false">
-                        <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
-                        <div class="mobile-nav__icon">
-                          {% include 'icon-chevron-right' %}
-                        </div>
-                      </button>
-                      <ul class="mobile-nav__dropdown" data-parent="{{ grandchild_list_handle }}" data-level="3">
-                        <li class="visually-hidden" tabindex="-1" data-menu-title="3">
-                          {{- childlink.title }} {{ 'layout.navigation.menu' | t -}}
-                        </li>
-                        <li class="mobile-nav__item border-bottom">
-                          <div class="mobile-nav__table">
-                            <div class="mobile-nav__table-cell mobile-nav__return">
-                              <button type="button" class="btn--link js-toggle-submenu mobile-nav__return-btn" data-target="{{ child_list_handle }}" aria-expanded="true" aria-label="{{ childlink.title }}">
-                                {% include 'icon-chevron-left' %}
-                              </button>
-                            </div>
-                            <a href="{{ childlink.url }}"
-                              class="mobile-nav__sublist-link mobile-nav__sublist-header"
-                              {% if childlink.current %} aria-current="page"{% endif %}
-                            >
-                              <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
-                            </a>
-                          </div>
-                        </li>
-                        {% for grandchildlink in childlink.links %}
-                          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
-                            <a href="{{ grandchildlink.url }}"
-                              class="mobile-nav__sublist-link"
-                              {% if grandchildlink.current %} aria-current="page"{% endif %}
-                            >
-                              <span class="mobile-nav__label">{{ grandchildlink.title | escape }}</span>
-                            </a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% else %}
-                      <a href="{{ childlink.url }}"
-                        class="mobile-nav__sublist-link"
-                        {% if childlink.current %} aria-current="page"{% endif %}
-                      >
-                        <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
-                      </a>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <a href="{{ link.url }}"
-                class="mobile-nav__link{% if link.active %} mobile-nav__link--active{% endif %}"
-                {% if link.current %} aria-current="page"{% endif %}
-              >
-                <span class="mobile-nav__label">{{ link.title | escape }}</span>
-              </a>
-            {% endif %}
-          </li>
-        {% endfor %}
-        
-        <div class="mobile-switcher">
-          	{% include 'multi-currency' %}
-          </div>
-        
-      </ul>
-      
-      
-      
-      <div class="mob-links">
-        <div class="mob-login"><a href="/account/login">log in</a></div>
-          <div class="mob-search">
-            <div class="txt-search">
- 
-            </div>
-            
-            <form action="/search" method="get" class="search-bar" role="search">
-            {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
-            <button type="submit" class="search-bar__submit">
-           
-            <span class="search-nav-text">{{ 'general.search.submit' | t }}</span>
-            </button>
-            <input type="search" name="q" class="search-bar__input" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
-            </form>
-            
-        	<!--<form class="search" action="/search">
-            <input
-              type="text"
-              placeholder="Search"
-              name="q"
-              value="{{ search.terms | escape }}"
-            />
-            <input type="submit" value="Search" />
-          </form>-->
-          </div>
-        </div>
-    </nav>
-  </header>
-  
- <script>
-  $(document).ready(function(){
-    $(".search").hide();
-    $(".txt-search").click(function(){
-      $(".search").toggle();
-    });
-  });
-</script>
-  
- <script>
-   
-    $(document).ready(function(){
-         
-        $(".mobile-nav--open").click(function () {
-            $(".announcement-bar").css("display","none"); 
-          	$('body').addClass('lock-scroll');
-        });
+								{% for childlink in link.links %}
+								<li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+									{% if childlink.links != blank %}
+									{% capture grandchild_list_handle %}{{ childlink.handle }}-{{ outerLoopIndex }}-{{ forloop.index }}{%
+									endcapture %}
+									<button type="button" class="btn--link js-toggle-submenu mobile-nav__link mobile-nav__sublist-link"
+										data-target="{{ grandchild_list_handle }}" aria-expanded="false">
+										<span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+										<div class="mobile-nav__icon">
+											{% include 'icon-chevron-right' %}
+										</div>
+									</button>
+									<ul class="mobile-nav__dropdown" data-parent="{{ grandchild_list_handle }}" data-level="3">
+										<li class="visually-hidden" tabindex="-1" data-menu-title="3">
+											{{- childlink.title }} {{ 'layout.navigation.menu' | t -}}
+										</li>
+										<li class="mobile-nav__item border-bottom">
+											<div class="mobile-nav__table">
+												<div class="mobile-nav__table-cell mobile-nav__return">
+													<button type="button" class="btn--link js-toggle-submenu mobile-nav__return-btn"
+														data-target="{{ child_list_handle }}" aria-expanded="true" aria-label="{{ childlink.title }}">
+														{% include 'icon-arrow-left-new' %}
+													</button>
+												</div>
+												<a href="{{ childlink.url }}" class="mobile-nav__sublist-link mobile-nav__sublist-header" {% if
+													childlink.current %} aria-current="page" {% endif %}>
+													<span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+												</a>
+											</div>
+										</li>
+										{% for grandchildlink in childlink.links %}
+										<li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+											<a href="{{ grandchildlink.url }}" class="mobile-nav__sublist-link" {% if grandchildlink.current %}
+												aria-current="page" {% endif %}>
+												<span class="mobile-nav__label">{{ grandchildlink.title | escape }}</span>
+											</a>
+										</li>
+										{% endfor %}
+									</ul>
+									{% else %}
+									<a href="{{ childlink.url }}" class="mobile-nav__sublist-link" {% if childlink.current %}
+										aria-current="page" {% endif %}>
+										<span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+									</a>
+									{% endif %}
+								</li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<a href="{{ link.url }}" class="mobile-nav__link{% if link.active %} mobile-nav__link--active{% endif %}" {%
+								if link.current %} aria-current="page" {% endif %}>
+								<span class="mobile-nav__label">{{ link.title | escape }}</span>
+							</a>
+						{% endif %}
+					</li>
+				{% endfor %}
 
-        $(document).click(function () {
-          var topheader = $('.mobile-nav-wrapper').hasClass('js-menu--is-open');
-          if(topheader == false)
-          {
-          	$(".announcement-bar").css("display","block");
-            $('body').removeClass('lock-scroll');
+				<div class="mobile-switcher">
+					{% include 'multi-currency' %}
+				</div>
+
+			</ul>
+
+
+
+			<div class="mob-links">
+				<div class="mob-login"><a href="/account/login">log in</a></div>
+				<div class="mob-search">
+					<div class="txt-search">
+
+					</div>
+
+					<form action="/search" method="get" class="search-bar" role="search">
+						{% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+						<button type="submit" class="search-bar__submit">
+
+							<span class="search-nav-text">{{ 'general.search.submit' | t }}</span>
+						</button>
+						<input type="search" name="q" class="search-bar__input" value="{{ search.terms | escape }}"
+							placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+					</form>
+
+					<!--<form class="search" action="/search">
+						<input
+							type="text"
+							placeholder="Search"
+							name="q"
+							value="{{ search.terms | escape }}"
+						/>
+						<input type="submit" value="Search" />
+					</form>-->
+				</div>
+			</div>
+		</nav>
+	</header>
+	<script>
+		$(document).ready(function () {
+			$('.site-header__menu-toggle--open').click(function () {
+				$('.grid__item.medium-up--one-half.small--hide').toggleClass("active");
+				$(this).toggleClass("actives");
+				$(".site-nav__childlist-item a").addClass('parentcategory');
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('.js-toggle-submenu').click(function () {
+				if ($('.js-menu--is-open').hasClass('sub-nav--is-open')) {
+					$('.site-header__mobile-nav').addClass('actsub');
+				}
+				else {
+					$('.site-header__mobile-nav').removeClass('actsub');
+				}
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('.js-toggle-submenu').click(function () {
+				if ($('.js-menu--is-open').hasClass('sub-nav--is-open')) {
+					$('.site-header__mobile-nav').addClass('actsub');
+				}
+				else {
+					$('.site-header__mobile-nav').removeClass('actsub');
+				}
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('.site-nav__label').on("click", function (e) {
+				if (!$(this).parent().parent().hasClass('active')) {
+					$('.site-nav__childlist-item').removeClass('active');
+					$('.desk-menu').removeClass('desk-menu2');
+					// $(this).parent().parent().addClass('active');
+					if ($(this).parent().parent().children('.site-child-second').length > 0) {
+						$(this).parent().parent().addClass('active');
+						$('.desk-menu').addClass('desk-menu2');
+					}
+					//$('.desk-menu').addClass('desk-menu2');
+				}
+				else {
+					$('.site-nav__childlist-item').removeClass('active');
+					$('.desk-menu').removeClass('desk-menu2');
+				}
+			});
+			$(document).click(function () {
+				if (!$('.site-nav--has-dropdown').hasClass('site-nav--active-dropdown')) {
+					$('nav.grid__item').removeClass('desk-menu2');
+				}
+			});
+		});
+	</script>
+	<script>
+		let lastScrollTop = 0,
+			$header = $("#header"),
+			headerHeight = $header.outerHeight();
+
+		$(window).resize(function(event){
+			headerHeight = $header.outerHeight();
+		});
+
+		$(window).scroll(function(event){
+			let scroll = $(this).scrollTop();
+
+			if ((scroll > lastScrollTop) || (scroll < 10)) {
+				if (!$('body').hasClass('lock-scroll'))
+					$('.site-header').removeClass("sticky");
+			}
+			else
+				$('.site-header').addClass("sticky");
+
+			if (scroll > headerHeight)
+				$header.addClass('header-hidden');
+			else
+				$header.removeClass('header-hidden');
+
+			lastScrollTop = scroll;
+		});
+	</script>
+	<div class="ajax-cart-holder">
+		<div class="ajax-cart-frame">
+			{% include 'ajax-cart' %}
+		</div>
+	</div>
+	<script>
+		$(document).ready(function () {
+			$(".search").hide();
+			$(".txt-search").click(function () {
+				$(".search").toggle();
+			});
+		});
+	</script>      
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script>
+        function hideAnnouncementBar(){
+          $.cookie('is_announcement_bar_closed', 'true', { expires: 2, path:'/' })
+          $(".announcement-bar").css("display", "none");
+          $("body").removeClass("has-announcement-bar");
+        }
+
+        function checkCookieAnnouncementBar(){
+          let isAnnouncementBarClosed = $.cookie('is_announcement_bar_closed')
+          if(isAnnouncementBarClosed == 'true') {
+            hideAnnouncementBar();
           }
-          
-             
-        });
-      
-//       $("header.site-header .grid .site-header__menu.mobile-nav--close").click(function () {
-//           $(".announcement-bar").css("display","none")
-//           $(".announcement-bar").css("display","block")  
-//       });
-
-//       $("header.site-header .grid .site-header__menu.mobile-nav--open").click(function () {
-//           $(".announcement-bar").css("display","block")
-//           $(".announcement-bar").css("display","none")  
-//       });
-      
-      	$(".site-header__menu-toggle--open").click(function () {
-            $(".announcement-bar").addClass("bars"); 
-          	$('body').addClass('desk-lock-scroll');
-        });
-
-        $(document).click(function () {
-          var topheader = $('.site-header__menu-toggle--open').hasClass('actives');
-          if(topheader == false)
-          {
-          	$(".announcement-bar").removeClass("bars");
-            $('body').removeClass('desk-lock-scroll');
+          else {
+          	if ($(".announcement-bar").length) {
+				$(".announcement-bar").css("display", "block");
+				$("body").addClass("has-announcement-bar");
+			}
           }
-          
-             
-        });
-         
-    });
-  
-</script>
-  
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script>
-$(document).ready(function(){
-  if (navigator.userAgent.match(/msie/i) || navigator.userAgent.match(/trident/i) ){
-    $(".site-header__icon").click(function(){
-        $('body').addClass('js-drawer-open-top')
-    });
-    $("#PageContainer").click(function(){
-        $('body').removeClass('js-drawer-open-top')
-    });
-    $(".search-bar__close").click(function(){
-        $('body').removeClass('js-drawer-open-top')
-    });
-  }
-});
-</script>  
+        }
+      
+		$(document).ready(function () {       
+			$(".mobile-nav--open").click(function () {
+				$(".announcement-bar").css("display", "none");
+				$("body").removeClass("has-announcement-bar");
+				$('body').addClass('lock-scroll');
+			});
+			$(document).click(function () {
+				var topheader = $('.mobile-nav-wrapper').hasClass('js-menu--is-open');
+				if (topheader == false) {
+					if ($(".announcement-bar").length) {
+						$(".announcement-bar").css("display", "block");
+						$("body").addClass("has-announcement-bar");
+						$('body').removeClass('lock-scroll');
+						checkCookieAnnouncementBar();
+					}
+				}
+              
+			});
+			$(".site-header__menu-toggle--open").click(function () {
+				$(".announcement-bar").addClass("bars");
+				$('body').addClass('desk-lock-scroll');
+			});
+			$(document).click(function () {
+				var topheader = $('.site-header__menu-toggle--open').hasClass('actives');
+				if (topheader == false) {
+					$(".announcement-bar").removeClass("bars");
+					$('body').removeClass('desk-lock-scroll');
+				}
+			});
+                    
+    		checkCookieAnnouncementBar();
+		});
+	</script>
+	{% comment %}
+		<script>
+			$(document).ready(function () {
+				if (navigator.userAgent.match(/msie/i) || navigator.userAgent.match(/trident/i)) {
+					$(".site-header__icon").click(function () {
+						$('body').addClass('js-drawer-open-top')
+					});
+					$("#PageContainer").click(function () {
+						$('body').removeClass('js-drawer-open-top')
+					});
+					$(".search-bar__close").click(function () {
+						$('body').removeClass('js-drawer-open-top')
+					});
+				}
+			});
+		</script>
+	{% endcomment %}
+	<script>
+		// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+		let wh = window.innerHeight * 0.01,
+			hh = $('#header').outerHeight() - $(window).scrollTop();
+		// Then we set the value in the --vh custom property to the root of the document
+		document.documentElement.style.setProperty('--wh', `${wh}px`);
+        document.documentElement.style.setProperty('--hh', `${hh}px`);
 
-  {% if section.settings.align_logo == 'center' %}
-  <nav class="small--hide border-bottom" id="AccessibleNav" role="navigation">
-    {% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'site-nav--centered' %}
-  </nav>
-  {% endif %}
+		// We listen to the resize event
+		window.addEventListener('resize', () => {
+			// We execute the same script as before
+			wh = window.innerHeight * 0.01,
+			hh = $('#header').outerHeight() - $(window).scrollTop();
+			// Then we set the value in the --vh custom property to the root of the document
+			document.documentElement.style.setProperty('--wh', `${wh}px`);
+			document.documentElement.style.setProperty('--hh', `${hh}px`);
+		});
+
+		// We listen to the orientationchange event
+		window.addEventListener('orientationchange', () => {
+			setTimeout(function(){
+				// We execute the same script as before
+				wh = window.innerHeight * 0.01,
+				hh = $('#header').outerHeight() - $(window).scrollTop();
+				// Then we set the value in the --vh custom property to the root of the document
+				document.documentElement.style.setProperty('--wh', `${wh}px`);
+				document.documentElement.style.setProperty('--hh', `${hh}px`);
+
+				alert('wh:'+wh+';  ww:'+ww)
+			}, 500);
+		});
+
+
+		// We listen to the scroll event
+		window.addEventListener('scroll', () => {
+			hh = $('#header').outerHeight() - $(window).scrollTop();
+            document.documentElement.style.setProperty('--hh', `${hh}px`);
+		});
+	</script>
+
+	{% if section.settings.align_logo == 'center' %}
+		<nav class="small--hide border-bottom" id="AccessibleNav" role="navigation">
+			{% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'site-nav--centered' %}
+		</nav>
+	{% endif %}
 </div>
 
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "name": {{ shop.name | json }},
-  {% if section.settings.logo %}
-    {% assign image_size = section.settings.logo.width | append:'x' %}
-    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
-  {% endif %}
-  "sameAs": [
-    {{ settings.social_twitter_link | json }},
-    {{ settings.social_facebook_link | json }},
-    {{ settings.social_pinterest_link | json }},
-    {{ settings.social_instagram_link | json }},
-    {{ settings.social_tumblr_link | json }},
-    {{ settings.social_snapchat_link | json }},
-    {{ settings.social_youtube_link | json }},
-    {{ settings.social_vimeo_link | json }}
-  ],
-  "url": {{ shop.url | append: page.url | json }}
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name": {{ shop.name | json }},
+	{% if section.settings.logo %}
+		{% assign image_size = section.settings.logo.width | append:'x' %}
+		"logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+	{% endif %}
+	"sameAs": [
+		{{ settings.social_twitter_link | json }},
+		{{ settings.social_facebook_link | json }},
+		{{ settings.social_pinterest_link | json }},
+		{{ settings.social_instagram_link | json }},
+		{{ settings.social_tumblr_link | json }},
+		{{ settings.social_snapchat_link | json }},
+		{{ settings.social_youtube_link | json }},
+		{{ settings.social_vimeo_link | json }}
+	],
+	"url": {{ shop.url | append: page.url | json }}
 }
 </script>
 
 {% if request.page_type == 'index' %}
-  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-  <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": {{ shop.name | json }},
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {{ potential_action_target | json }},
-        "query-input": "required name=search_term_string"
-      },
-      "url": {{ shop.url | append: page.url | json }}
-    }
-  </script>
+{% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "WebSite",
+			"name": {{ shop.name | json }},
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": {{ potential_action_target | json }},
+				"query-input": "required name=search_term_string"
+			},
+			"url": {{ shop.url | append: page.url | json }}
+		}
+	</script>
 {% endif %}
 
 {% schema %}
 {
-  "name": {
-    "cs": "Záhlaví",
-    "da": "Overskrift",
-    "de": "Titel",
-    "en": "Header",
-    "es": "Encabezado",
-    "fi": "Ylätunniste",
-    "fr": "En-tête",
-    "hi": "हैडर",
-    "it": "Header",
-    "ja": "ヘッダー",
-    "ko": "헤더",
-    "nb": "Header",
-    "nl": "Koptekst",
-    "pl": "Nagłówek",
-    "pt-BR": "Cabeçalho",
-    "pt-PT": "Cabeçalho",
-    "sv": "Rubrik",
-    "th": "ส่วนหัว",
-    "tr": "Üstbilgi",
-    "vi": "Đầu trang",
-    "zh-CN": "标头",
-    "zh-TW": "標頭"
-  },
-  "settings": [
-    {
-      "type": "radio",
-      "id": "align_logo",
-      "label": {
-        "cs": "Zarovnání loga",
-        "da": "Logojustering",
-        "de": "Logo-Ausrichtung",
-        "en": "Logo alignment",
-        "es": "Alineación de logo",
-        "fi": "Logon tasaus",
-        "fr": "Alignement du logo",
-        "hi": "लोगो संरेखण",
-        "it": "Allineamento logo",
-        "ja": "ロゴアラインメント",
-        "ko": "로고 정렬",
-        "nb": "Logojustering",
-        "nl": "Logo-uitlijning",
-        "pl": "Wyrównanie logo",
-        "pt-BR": "Alinhamento do logotipo",
-        "pt-PT": "Alinhamento do logótipo",
-        "sv": "Logojustering",
-        "th": "การจัดวางโลโก้",
-        "tr": "Logo hizalaması",
-        "vi": "Căn chỉnh logo",
-        "zh-CN": "logo 对齐方式",
-        "zh-TW": "商標對齊"
-      },
-      "default": "left",
-      "options": [
-        {
-          "value": "left",
+	"name": {
+		"cs": "Záhlaví",
+		"da": "Overskrift",
+		"de": "Titel",
+		"en": "Header",
+		"es": "Encabezado",
+		"fi": "Ylätunniste",
+		"fr": "En-tête",
+		"hi": "हैडर",
+		"it": "Header",
+		"ja": "ヘッダー",
+		"ko": "헤더",
+		"nb": "Header",
+		"nl": "Koptekst",
+		"pl": "Nagłówek",
+		"pt-BR": "Cabeçalho",
+		"pt-PT": "Cabeçalho",
+		"sv": "Rubrik",
+		"th": "ส่วนหัว",
+		"tr": "Üstbilgi",
+		"vi": "Đầu trang",
+		"zh-CN": "标头",
+		"zh-TW": "標頭"
+	},
+	"settings": [
+		{
+			"type": "radio",
+			"id": "align_logo",
+			"label": {
+				"cs": "Zarovnání loga",
+				"da": "Logojustering",
+				"de": "Logo-Ausrichtung",
+				"en": "Logo alignment",
+				"es": "Alineación de logo",
+				"fi": "Logon tasaus",
+				"fr": "Alignement du logo",
+				"hi": "लोगो संरेखण",
+				"it": "Allineamento logo",
+				"ja": "ロゴアラインメント",
+				"ko": "로고 정렬",
+				"nb": "Logojustering",
+				"nl": "Logo-uitlijning",
+				"pl": "Wyrównanie logo",
+				"pt-BR": "Alinhamento do logotipo",
+				"pt-PT": "Alinhamento do logótipo",
+				"sv": "Logojustering",
+				"th": "การจัดวางโลโก้",
+				"tr": "Logo hizalaması",
+				"vi": "Căn chỉnh logo",
+				"zh-CN": "logo 对齐方式",
+				"zh-TW": "商標對齊"
+			},
+			"default": "left",
+			"options": [
+				{
+					"value": "left",
+					"label": {
+						"cs": "Doleva",
+						"da": "Venstre",
+						"de": "Links",
+						"en": "Left",
+						"es": "Izquierda",
+						"fi": "Vasen",
+						"fr": "Gauche",
+						"hi": "बाएँ",
+						"it": "Sinistra",
+						"ja": "左",
+						"ko": "왼쪽",
+						"nb": "Venstre",
+						"nl": "Links",
+						"pl": "Do lewej",
+						"pt-BR": "Esquerda",
+						"pt-PT": "Esquerda",
+						"sv": "Vänster",
+						"th": "ด้านซ้าย",
+						"tr": "Sol",
+						"vi": "Bên trái",
+						"zh-CN": "左侧",
+						"zh-TW": "左方"
+					}
+				},
+				{
+					"value": "center",
+					"label": {
+						"cs": "Na střed",
+						"da": "Centreret",
+						"de": "Mittig",
+						"en": "Centered",
+						"es": "Centrada",
+						"fi": "Keskitetty",
+						"fr": "Centré",
+						"hi": "केंद्र",
+						"it": "Centrato",
+						"ja": "中央揃え",
+						"ko": "센터 맞추기",
+						"nb": "Sentrert",
+						"nl": "Gecentreerd",
+						"pl": "Wyśrodkowane",
+						"pt-BR": "Centralizado",
+						"pt-PT": "Centrado",
+						"sv": "Centrera",
+						"th": "ตรงกลาง",
+						"tr": "Orta",
+						"vi": "Giữa",
+						"zh-CN": "居中",
+						"zh-TW": "置中"
+					}
+				}
+			]
+		},
+		{
+			"type": "image_picker",
+			"id": "logo",
+			"label": {
+				"cs": "Obrázek loga",
+				"da": "Logobillede",
+				"de": "Logo-Foto",
+				"en": "Logo image",
+				"es": "Logo",
+				"fi": "Logokuva",
+				"fr": "Image du logo",
+				"hi": "लोगो इमेज",
+				"it": "Immagine del logo",
+				"ja": "ロゴ画像",
+				"ko": "로고 이미지",
+				"nb": "Logobilde",
+				"nl": "Afbeelding van logo",
+				"pl": "Obraz logo",
+				"pt-BR": "Imagem do logotipo",
+				"pt-PT": "Imagem do logótipo",
+				"sv": "Logobild",
+				"th": "รูปภาพโลโก้",
+				"tr": "Logo görseli",
+				"vi": "Hình ảnh logo",
+				"zh-CN": "logo 图片",
+				"zh-TW": "標誌圖片"
+			}
+		},
+		{
+			"type": "range",
+			"id": "logo_max_width",
+			"label": {
+				"cs": "Šířka vlastního loga",
+				"da": "Tilpasset logobredde",
+				"de": "Logobreite",
+				"en": "Custom logo width",
+				"es": "Ancho del logo personalizado",
+				"fi": "Mukautetun logon leveys",
+				"fr": "Largeur personnalisée du logo",
+				"hi": "कस्टम लोगो की चौड़ाई",
+				"it": "Larghezza logo personalizzato",
+				"ja": "ロゴの幅をカスタマイズする",
+				"ko": "사용자 지정 로고 폭",
+				"nb": "Tilpasset logobredde",
+				"nl": "Aangepaste logo-breedte",
+				"pl": "Niestandardowa szerokość logo",
+				"pt-BR": "Largura do logotipo personalizado",
+				"pt-PT": "Largura de logótipo personalizada",
+				"sv": "Anpassad logotypsbredd",
+				"th": "ความกว้างของโลโก้แบบกำหนดเอง",
+				"tr": "Özel logo genişliği",
+				"vi": "Chiều rộng logo tùy chỉnh",
+				"zh-CN": "自定义 logo 宽度",
+				"zh-TW": "自訂商標寬度"
+			},
+			"min": 50,
+			"max": 300,
+			"step": 5,
+			"unit": "px",
+			"default": 100
+		},
+		{
+          "type": "checkbox",
+          "id": "enable_svg",
           "label": {
-            "cs": "Doleva",
-            "da": "Venstre",
-            "de": "Links",
-            "en": "Left",
-            "es": "Izquierda",
-            "fi": "Vasen",
-            "fr": "Gauche",
-            "hi": "बाएँ",
-            "it": "Sinistra",
-            "ja": "左",
-            "ko": "왼쪽",
-            "nb": "Venstre",
-            "nl": "Links",
-            "pl": "Do lewej",
-            "pt-BR": "Esquerda",
-            "pt-PT": "Esquerda",
-            "sv": "Vänster",
-            "th": "ด้านซ้าย",
-            "tr": "Sol",
-            "vi": "Bên trái",
-            "zh-CN": "左侧",
-            "zh-TW": "左方"
-          }
+            "en": "Show SVG Logo"
+          },
+          "default": true
         },
-        {
-          "value": "center",
-          "label": {
-            "cs": "Na střed",
-            "da": "Centreret",
-            "de": "Mittig",
-            "en": "Centered",
-            "es": "Centrada",
-            "fi": "Keskitetty",
-            "fr": "Centré",
-            "hi": "केंद्र",
-            "it": "Centrato",
-            "ja": "中央揃え",
-            "ko": "센터 맞추기",
-            "nb": "Sentrert",
-            "nl": "Gecentreerd",
-            "pl": "Wyśrodkowane",
-            "pt-BR": "Centralizado",
-            "pt-PT": "Centrado",
-            "sv": "Centrera",
-            "th": "ตรงกลาง",
-            "tr": "Orta",
-            "vi": "Giữa",
-            "zh-CN": "居中",
-            "zh-TW": "置中"
-          }
-        }
-      ]
-    },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": {
-        "cs": "Obrázek loga",
-        "da": "Logobillede",
-        "de": "Logo-Foto",
-        "en": "Logo image",
-        "es": "Logo",
-        "fi": "Logokuva",
-        "fr": "Image du logo",
-        "hi": "लोगो इमेज",
-        "it": "Immagine del logo",
-        "ja": "ロゴ画像",
-        "ko": "로고 이미지",
-        "nb": "Logobilde",
-        "nl": "Afbeelding van logo",
-        "pl": "Obraz logo",
-        "pt-BR": "Imagem do logotipo",
-        "pt-PT": "Imagem do logótipo",
-        "sv": "Logobild",
-        "th": "รูปภาพโลโก้",
-        "tr": "Logo görseli",
-        "vi": "Hình ảnh logo",
-        "zh-CN": "logo 图片",
-        "zh-TW": "標誌圖片"
-      }
-    },
-    {
-      "type": "range",
-      "id": "logo_max_width",
-      "label": {
-        "cs": "Šířka vlastního loga",
-        "da": "Tilpasset logobredde",
-        "de": "Logobreite",
-        "en": "Custom logo width",
-        "es": "Ancho del logo personalizado",
-        "fi": "Mukautetun logon leveys",
-        "fr": "Largeur personnalisée du logo",
-        "hi": "कस्टम लोगो की चौड़ाई",
-        "it": "Larghezza logo personalizzato",
-        "ja": "ロゴの幅をカスタマイズする",
-        "ko": "사용자 지정 로고 폭",
-        "nb": "Tilpasset logobredde",
-        "nl": "Aangepaste logo-breedte",
-        "pl": "Niestandardowa szerokość logo",
-        "pt-BR": "Largura do logotipo personalizado",
-        "pt-PT": "Largura de logótipo personalizada",
-        "sv": "Anpassad logotypsbredd",
-        "th": "ความกว้างของโลโก้แบบกำหนดเอง",
-        "tr": "Özel logo genişliği",
-        "vi": "Chiều rộng logo tùy chỉnh",
-        "zh-CN": "自定义 logo 宽度",
-        "zh-TW": "自訂商標寬度"
-      },
-      "min": 50,
-      "max": 250,
-      "step": 5,
-      "unit": "px",
-      "default": 100
-    },
-    {
-      "type": "link_list",
-      "id": "main_linklist",
-      "label": {
-        "cs": "Nabídka",
-        "da": "Menu",
-        "de": "Menü",
-        "en": "Menu",
-        "es": "Menú",
-        "fi": "Valikko",
-        "fr": "Menu",
-        "hi": "मेनू",
-        "it": "Menu",
-        "ja": "メニュー",
-        "ko": "메뉴",
-        "nb": "Meny",
-        "nl": "Menu",
-        "pl": "Menu",
-        "pt-BR": "Menu",
-        "pt-PT": "Menu",
-        "sv": "Meny",
-        "th": "เมนู",
-        "tr": "Menü",
-        "vi": "Menu",
-        "zh-CN": "菜单",
-        "zh-TW": "選單"
-      },
-      "default": "main-menu"
-    },
-    {
-      "type": "header",
-      "content": {
-        "cs": "Panel oznámení",
-        "da": "Meddelelseslinje",
-        "de": "Ankündigungsbereich",
-        "en": "Announcement bar",
-        "es": "Barra de anuncios",
-        "fi": "Ilmoituspalkki",
-        "fr": "Barre d'annonces",
-        "hi": "घोषणा बार",
-        "it": "Barra degli annunci",
-        "ja": "告知バー",
-        "ko": "공지 표시줄",
-        "nb": "Kunngjøringslinje",
-        "nl": "Aankondigingsbalk",
-        "pl": "Pasek ogłoszeń",
-        "pt-BR": "Barra de avisos",
-        "pt-PT": "Barra de comunicado",
-        "sv": "Meddelandefält",
-        "th": "แถบประกาศ",
-        "tr": "Duyuru çubuğu",
-        "vi": "Thanh thông báo",
-        "zh-CN": "公告栏",
-        "zh-TW": "公告列"
-      }
-    },
-    {
-      "type": "checkbox",
-      "id": "message",
-      "label": {
-        "cs": "Zobrazit oznámení",
-        "da": "Vis meddelelse",
-        "de": "Ankündigung anzeigen",
-        "en": "Show announcement",
-        "es": "Mostrar anuncio",
-        "fi": "Näytä ilmoitus",
-        "fr": "Afficher l'annonce",
-        "hi": "घोषणा दिखाएं",
-        "it": "Mostra annuncio",
-        "ja": "告知を表示する",
-        "ko": "공지 표시",
-        "nb": "Vis kunngjøring",
-        "nl": "Aankondiging weergeven",
-        "pl": "Pokaż ogłoszenie",
-        "pt-BR": "Exibir comunicado",
-        "pt-PT": "Mostrar comunicado",
-        "sv": "Visa tillkännagivande",
-        "th": "แสดงประกาศ",
-        "tr": "Duyuruyu göster",
-        "vi": "Hiển thị thông báo",
-        "zh-CN": "显示公告",
-        "zh-TW": "顯示公告"
-      },
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "home_page_only",
-      "label": {
-        "cs": "Jen domovská stránka",
-        "da": "Kun startside",
-        "de": "Nur Startseite",
-        "en": "Home page only",
-        "es": "Solo página de inicio",
-        "fi": "Vain etusivu",
-        "fr": "Page d'accueil uniquement",
-        "hi": "केवल होमपेज",
-        "it": "Solo home page",
-        "ja": "ホームページのみ",
-        "ko": "홈페이지만",
-        "nb": "Kun på startsiden",
-        "nl": "Alleen homepage",
-        "pl": "Tylko strona główna",
-        "pt-BR": "Apenas na página inicial",
-        "pt-PT": "Apenas a página inicial",
-        "sv": "Endast hemsida",
-        "th": "หน้าแรกเท่านั้น",
-        "tr": "Yalnızca ana sayfa",
-        "vi": "Chỉ trang chủ",
-        "zh-CN": "仅主页",
-        "zh-TW": "僅限首頁"
-      },
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "message_text",
-      "label": {
-        "cs": "Text",
-        "da": "Tekst",
-        "de": "Text",
-        "en": "Text",
-        "es": "Texto",
-        "fi": "Teksti",
-        "fr": "Texte",
-        "hi": "टेक्स्ट",
-        "it": "Testo",
-        "ja": "テキスト",
-        "ko": "텍스트",
-        "nb": "Tekst",
-        "nl": "Tekst",
-        "pl": "Tekst",
-        "pt-BR": "Texto",
-        "pt-PT": "Texto",
-        "sv": "Text",
-        "th": "ข้อความ",
-        "tr": "Metin",
-        "vi": "Văn bản",
-        "zh-CN": "文本",
-        "zh-TW": "文字"
-      },
-      "default": {
-        "cs": "Tady můžete zadat oznámení",
-        "da": "Meddel noget her",
-        "de": "Hier etwas ankündigen",
-        "en": "Announce something here",
-        "es": "Anuncia algo aquí",
-        "fi": "Ilmoita jotakin tässä",
-        "fr": "Annoncez quelque chose ici",
-        "hi": "यहां कुछ घोषित करें",
-        "it": "Annuncia qualcosa qui",
-        "ja": "ここで告知してください",
-        "ko": "여기에 공지하십시오",
-        "nb": "Kunngjør noe her",
-        "nl": "Kondig hier iets aan",
-        "pl": "Ogłoś coś tutaj",
-        "pt-BR": "Anuncie algo aqui",
-        "pt-PT": "Anunciar algo aqui",
-        "sv": "Meddela något här",
-        "th": "ประกาศข้อความที่นี่",
-        "tr": "Buraya bir duyuru ekleyin",
-        "vi": "Thông báo điều gì đó tại đây",
-        "zh-CN": "在此处进行公告",
-        "zh-TW": "在此公告資訊"
-      }
-    },
-    {
-      "type": "url",
-      "id": "message_link",
-      "label": {
-        "cs": "Odkaz",
-        "da": "Link",
-        "de": "Link",
-        "en": "Link",
-        "es": "Enlace",
-        "fi": "Linkki",
-        "fr": "Lien",
-        "hi": "लिंक",
-        "it": "Link",
-        "ja": "リンク",
-        "ko": "링크",
-        "nb": "Kobling",
-        "nl": "Link",
-        "pl": "Link",
-        "pt-BR": "Link",
-        "pt-PT": "Ligação",
-        "sv": "Länk",
-        "th": "ลิงก์",
-        "tr": "Bağlantı",
-        "vi": "Liên kết",
-        "zh-CN": "链接",
-        "zh-TW": "連結"
-      },
-      "info": {
-        "cs": "Volitelné",
-        "da": "Valgfri",
-        "de": "Optional",
-        "en": "Optional",
-        "es": "Opcional",
-        "fi": "Valinnainen",
-        "fr": "Facultatif",
-        "hi": "वैकल्पिक",
-        "it": "Facoltativo",
-        "ja": "オプション",
-        "ko": "선택 사항",
-        "nb": "Valgfritt",
-        "nl": "Optioneel",
-        "pl": "Opcjonalnie",
-        "pt-BR": "Opcional",
-        "pt-PT": "Opcional",
-        "sv": "Valfritt",
-        "th": "ไม่จำเป็น",
-        "tr": "İsteğe bağlı",
-        "vi": "Không bắt buộc",
-        "zh-CN": "可选",
-        "zh-TW": "(選填)"
-      }
-    },
-    {
-      "type": "color",
-      "id": "color_bg",
-      "label": {
-        "cs": "Panel",
-        "da": "Bjælke",
-        "de": "Zeile",
-        "en": "Bar",
-        "es": "Barra",
-        "fi": "Palkki",
-        "fr": "Barre",
-        "hi": "बार",
-        "it": "Barra",
-        "ja": "バー",
-        "ko": "바",
-        "nb": "Felt",
-        "nl": "Balk",
-        "pl": "Pasek",
-        "pt-BR": "Barra",
-        "pt-PT": "Barra",
-        "sv": "Fält",
-        "th": "แถบ",
-        "tr": "Çubuk",
-        "vi": "Thanh",
-        "zh-CN": "栏",
-        "zh-TW": "橫條"
-      },
-      "default": "#3a3a3a"
-    },
-    {
-      "type": "color",
-      "id": "color_text",
-      "label": {
-        "cs": "Text",
-        "da": "Tekst",
-        "de": "Text",
-        "en": "Text",
-        "es": "Texto",
-        "fi": "Teksti",
-        "fr": "Texte",
-        "hi": "टेक्स्ट",
-        "it": "Testo",
-        "ja": "テキスト",
-        "ko": "텍스트",
-        "nb": "Tekst",
-        "nl": "Tekst",
-        "pl": "Tekst",
-        "pt-BR": "Texto",
-        "pt-PT": "Texto",
-        "sv": "Text",
-        "th": "ข้อความ",
-        "tr": "Metin",
-        "vi": "Văn bản",
-        "zh-CN": "文本",
-        "zh-TW": "文字"
-      },
-      "default": "#ffffff"
-    },
+		{
+	      "type": "html",
+	      "id": "html",
+	      "label": "HTML for SVG of Logo",
+	      "default": "<p>Write your own custom HTML content.</p>"
+	    },
+		{
+			"type": "link_list",
+			"id": "main_linklist",
+			"label": {
+				"cs": "Nabídka",
+				"da": "Menu",
+				"de": "Menü",
+				"en": "Menu",
+				"es": "Menú",
+				"fi": "Valikko",
+				"fr": "Menu",
+				"hi": "मेनू",
+				"it": "Menu",
+				"ja": "メニュー",
+				"ko": "메뉴",
+				"nb": "Meny",
+				"nl": "Menu",
+				"pl": "Menu",
+				"pt-BR": "Menu",
+				"pt-PT": "Menu",
+				"sv": "Meny",
+				"th": "เมนู",
+				"tr": "Menü",
+				"vi": "Menu",
+				"zh-CN": "菜单",
+				"zh-TW": "選單"
+			},
+			"default": "main-menu"
+		},
+		{
+			"type": "header",
+			"content": {
+				"cs": "Panel oznámení",
+				"da": "Meddelelseslinje",
+				"de": "Ankündigungsbereich",
+				"en": "Announcement bar",
+				"es": "Barra de anuncios",
+				"fi": "Ilmoituspalkki",
+				"fr": "Barre d'annonces",
+				"hi": "घोषणा बार",
+				"it": "Barra degli annunci",
+				"ja": "告知バー",
+				"ko": "공지 표시줄",
+				"nb": "Kunngjøringslinje",
+				"nl": "Aankondigingsbalk",
+				"pl": "Pasek ogłoszeń",
+				"pt-BR": "Barra de avisos",
+				"pt-PT": "Barra de comunicado",
+				"sv": "Meddelandefält",
+				"th": "แถบประกาศ",
+				"tr": "Duyuru çubuğu",
+				"vi": "Thanh thông báo",
+				"zh-CN": "公告栏",
+				"zh-TW": "公告列"
+			}
+		},
+		{
+			"type": "checkbox",
+			"id": "message",
+			"label": {
+				"cs": "Zobrazit oznámení",
+				"da": "Vis meddelelse",
+				"de": "Ankündigung anzeigen",
+				"en": "Show announcement",
+				"es": "Mostrar anuncio",
+				"fi": "Näytä ilmoitus",
+				"fr": "Afficher l'annonce",
+				"hi": "घोषणा दिखाएं",
+				"it": "Mostra annuncio",
+				"ja": "告知を表示する",
+				"ko": "공지 표시",
+				"nb": "Vis kunngjøring",
+				"nl": "Aankondiging weergeven",
+				"pl": "Pokaż ogłoszenie",
+				"pt-BR": "Exibir comunicado",
+				"pt-PT": "Mostrar comunicado",
+				"sv": "Visa tillkännagivande",
+				"th": "แสดงประกาศ",
+				"tr": "Duyuruyu göster",
+				"vi": "Hiển thị thông báo",
+				"zh-CN": "显示公告",
+				"zh-TW": "顯示公告"
+			},
+			"default": false
+		},
+		{
+			"type": "checkbox",
+			"id": "home_page_only",
+			"label": {
+				"cs": "Jen domovská stránka",
+				"da": "Kun startside",
+				"de": "Nur Startseite",
+				"en": "Home page only",
+				"es": "Solo página de inicio",
+				"fi": "Vain etusivu",
+				"fr": "Page d'accueil uniquement",
+				"hi": "केवल होमपेज",
+				"it": "Solo home page",
+				"ja": "ホームページのみ",
+				"ko": "홈페이지만",
+				"nb": "Kun på startsiden",
+				"nl": "Alleen homepage",
+				"pl": "Tylko strona główna",
+				"pt-BR": "Apenas na página inicial",
+				"pt-PT": "Apenas a página inicial",
+				"sv": "Endast hemsida",
+				"th": "หน้าแรกเท่านั้น",
+				"tr": "Yalnızca ana sayfa",
+				"vi": "Chỉ trang chủ",
+				"zh-CN": "仅主页",
+				"zh-TW": "僅限首頁"
+			},
+			"default": true
+		},
+		{
+			"type": "text",
+			"id": "message_text",
+			"label": {
+				"cs": "Text",
+				"da": "Tekst",
+				"de": "Text",
+				"en": "Text",
+				"es": "Texto",
+				"fi": "Teksti",
+				"fr": "Texte",
+				"hi": "टेक्स्ट",
+				"it": "Testo",
+				"ja": "テキスト",
+				"ko": "텍스트",
+				"nb": "Tekst",
+				"nl": "Tekst",
+				"pl": "Tekst",
+				"pt-BR": "Texto",
+				"pt-PT": "Texto",
+				"sv": "Text",
+				"th": "ข้อความ",
+				"tr": "Metin",
+				"vi": "Văn bản",
+				"zh-CN": "文本",
+				"zh-TW": "文字"
+			},
+			"default": {
+				"cs": "Tady můžete zadat oznámení",
+				"da": "Meddel noget her",
+				"de": "Hier etwas ankündigen",
+				"en": "Announce something here",
+				"es": "Anuncia algo aquí",
+				"fi": "Ilmoita jotakin tässä",
+				"fr": "Annoncez quelque chose ici",
+				"hi": "यहां कुछ घोषित करें",
+				"it": "Annuncia qualcosa qui",
+				"ja": "ここで告知してください",
+				"ko": "여기에 공지하십시오",
+				"nb": "Kunngjør noe her",
+				"nl": "Kondig hier iets aan",
+				"pl": "Ogłoś coś tutaj",
+				"pt-BR": "Anuncie algo aqui",
+				"pt-PT": "Anunciar algo aqui",
+				"sv": "Meddela något här",
+				"th": "ประกาศข้อความที่นี่",
+				"tr": "Buraya bir duyuru ekleyin",
+				"vi": "Thông báo điều gì đó tại đây",
+				"zh-CN": "在此处进行公告",
+				"zh-TW": "在此公告資訊"
+			}
+		},
+		{
+			"type": "url",
+			"id": "message_link",
+			"label": {
+				"cs": "Odkaz",
+				"da": "Link",
+				"de": "Link",
+				"en": "Link",
+				"es": "Enlace",
+				"fi": "Linkki",
+				"fr": "Lien",
+				"hi": "लिंक",
+				"it": "Link",
+				"ja": "リンク",
+				"ko": "링크",
+				"nb": "Kobling",
+				"nl": "Link",
+				"pl": "Link",
+				"pt-BR": "Link",
+				"pt-PT": "Ligação",
+				"sv": "Länk",
+				"th": "ลิงก์",
+				"tr": "Bağlantı",
+				"vi": "Liên kết",
+				"zh-CN": "链接",
+				"zh-TW": "連結"
+			},
+			"info": {
+				"cs": "Volitelné",
+				"da": "Valgfri",
+				"de": "Optional",
+				"en": "Optional",
+				"es": "Opcional",
+				"fi": "Valinnainen",
+				"fr": "Facultatif",
+				"hi": "वैकल्पिक",
+				"it": "Facoltativo",
+				"ja": "オプション",
+				"ko": "선택 사항",
+				"nb": "Valgfritt",
+				"nl": "Optioneel",
+				"pl": "Opcjonalnie",
+				"pt-BR": "Opcional",
+				"pt-PT": "Opcional",
+				"sv": "Valfritt",
+				"th": "ไม่จำเป็น",
+				"tr": "İsteğe bağlı",
+				"vi": "Không bắt buộc",
+				"zh-CN": "可选",
+				"zh-TW": "(選填)"
+			}
+		},
+		{
+			"type": "color",
+			"id": "color_bg",
+			"label": {
+				"cs": "Panel",
+				"da": "Bjælke",
+				"de": "Zeile",
+				"en": "Bar",
+				"es": "Barra",
+				"fi": "Palkki",
+				"fr": "Barre",
+				"hi": "बार",
+				"it": "Barra",
+				"ja": "バー",
+				"ko": "바",
+				"nb": "Felt",
+				"nl": "Balk",
+				"pl": "Pasek",
+				"pt-BR": "Barra",
+				"pt-PT": "Barra",
+				"sv": "Fält",
+				"th": "แถบ",
+				"tr": "Çubuk",
+				"vi": "Thanh",
+				"zh-CN": "栏",
+				"zh-TW": "橫條"
+			},
+			"default": "#3a3a3a"
+		},
+		{
+			"type": "color",
+			"id": "color_text",
+			"label": {
+				"cs": "Text",
+				"da": "Tekst",
+				"de": "Text",
+				"en": "Text",
+				"es": "Texto",
+				"fi": "Teksti",
+				"fr": "Texte",
+				"hi": "टेक्स्ट",
+				"it": "Testo",
+				"ja": "テキスト",
+				"ko": "텍스트",
+				"nb": "Tekst",
+				"nl": "Tekst",
+				"pl": "Tekst",
+				"pt-BR": "Texto",
+				"pt-PT": "Texto",
+				"sv": "Text",
+				"th": "ข้อความ",
+				"tr": "Metin",
+				"vi": "Văn bản",
+				"zh-CN": "文本",
+				"zh-TW": "文字"
+			},
+			"default": "#ffffff"
+		},
 	{
-      "type": "header",
-      "content": {
-        "cs": "Výběr měny",
-        "da": "Valutavælger",
-        "de": "Währungsauswahl",
-        "en": "Currency Selector",
-        "es": "Selector de moneda",
-        "fi": "Valuutanvalitsin",
-        "fr": "Sélecteur de devise",
-        "hi": "मुद्रा चयनकर्ता",
-        "it": "Selettore di valuta",
-        "ja": "通貨セレクター",
-        "ko": "통화 선택기",
-        "nb": "Valutavelger",
-        "nl": "Valutakiezer",
-        "pl": "Selektor walut",
-        "pt-BR": "Seletor de moeda",
-        "pt-PT": "Seletor de Moeda",
-        "sv": "Valutaväljare",
-        "th": "เครื่องมือเลือกสกุลเงิน",
-        "tr": "Para Birimi Seçici",
-        "vi": "Hộp chọn đơn vị tiền tệ",
-        "zh-CN": "货币选择器",
-        "zh-TW": "幣別選擇器"
-      },
-      "info": {
-        "cs": "Pokud chcete přidat měnu, přejděte na [nastavení plateb.](/admin/settings/payments)",
-        "da": "Du kan tilføje en valuta ved at gå til dine [betalingsindstillinger.](/admin/settings/payments)",
-        "de": "Gehe zu deinen [Zahlungseinstellungen](/admin/settings/payments), um eine Währung hinzuzufügen.",
-        "en": "To add a currency, go to your [payment settings.](/admin/settings/payments)",
-        "es": "Para agregar una moneda, ve a tu [configuración de pago.](/admin/settings/payments)",
-        "fi": "Lisää valuutta siirtymällä [maksuasetuksiisi.](/admin/settings/payments)",
-        "fr": "Pour ajouter une devise, allez dans vos [paramètres de paiement.](/admin/settings/payments)",
-        "hi": "कोई मुद्रा जोड़ने के लिए, अपनी [payment settings.](/admin/settings/payments) में जाएं",
-        "it": "Per aggiungere una valuta, vai su [impostazioni pagamento.](/admin/settings/payments)",
-        "ja": "通貨を追加するには、[決済設定](/admin/settings/payments) に移動します。",
-        "ko": "통화를 추가하려면 [결제 설정](/admin/settings/payments)(으)로 이동하십시오.",
-        "nb": "For å legge til en valuta, går du til [betalingsinnstillingene.](/admin/settings/payments)",
-        "nl": "Ga naar je [betaalinstellingen.](/admin/settings/payments) om een valuta toe te voegen.",
-        "pl": "Aby dodać walutę, przejdź do swoich [ustawień płatności.](/admin/settings/payments)",
-        "pt-BR": "Para adicionar uma moeda, acesse as [configurações de pagamento.](/admin/settings/payments)",
-        "pt-PT": "Para adicionar uma moeda, aceda às suas [definições de pagamento.](/admin/settings/payments)",
-        "sv": "Gå till [payment settings ](/admin/settings/payments) för att lägga till en valuta.",
-        "th": "หากต้องการเพิ่มสกุลเงิน ให้ไปที่ [การตั้งค่าการชำระเงิน ](/admin/settings/payments)",
-        "tr": "Para birimi seçmek için [ödeme ayarlarınıza](/admin/settings/payments) gidin.",
-        "vi": "Để thêm đơn vị tiền tệ, đến phần [cài đặt thanh toán.](/admin/settings/payments)",
-        "zh-CN": "若要添加货币，请转到 [支付设置。](/admin/settings/payments)",
-        "zh-TW": "若要新增幣別，請前往 [付款設定。](/admin/settings/payments)"
-      }
-    },
-    {
-      "type": "checkbox",
-      "id": "show_currency_selector",
-      "label": {
-        "cs": "Zobrazit selektor měny",
-        "da": "Vis valutavælger",
-        "de": "Währungsauswahl anzeigen",
-        "en": "Show currency selector",
-        "es": "Mostrar el selector de moneda",
-        "fi": "Näytä valuutanvalitsin",
-        "fr": "Afficher le sélecteur de devise",
-        "hi": "मुद्रा चयनकर्ता दिखाएं",
-        "it": "Mostra selettore valuta",
-        "ja": "通貨セレクターを表示する",
-        "ko": "통화 선택기 표시",
-        "nb": "Vis valutavelger",
-        "nl": "Valutakiezer weergeven",
-        "pl": "Pokaż selektor walut",
-        "pt-BR": "Exibir seletor de moeda",
-        "pt-PT": "Mostrar seletor de moeda",
-        "sv": "Visa valutaväljare",
-        "th": "แสดงเครื่องมือเลือกสกุลเงิน",
-        "tr": "Para birimi seçici göster",
-        "vi": "Hiển thị hộp chọn đơn vị tiền tệ",
-        "zh-CN": "货币选择器显示",
-        "zh-TW": "顯示幣別選擇器"
-      },
-      "default": true
-    }
-  ]
+			"type": "header",
+			"content": {
+				"cs": "Výběr měny",
+				"da": "Valutavælger",
+				"de": "Währungsauswahl",
+				"en": "Currency Selector",
+				"es": "Selector de moneda",
+				"fi": "Valuutanvalitsin",
+				"fr": "Sélecteur de devise",
+				"hi": "मुद्रा चयनकर्ता",
+				"it": "Selettore di valuta",
+				"ja": "通貨セレクター",
+				"ko": "통화 선택기",
+				"nb": "Valutavelger",
+				"nl": "Valutakiezer",
+				"pl": "Selektor walut",
+				"pt-BR": "Seletor de moeda",
+				"pt-PT": "Seletor de Moeda",
+				"sv": "Valutaväljare",
+				"th": "เครื่องมือเลือกสกุลเงิน",
+				"tr": "Para Birimi Seçici",
+				"vi": "Hộp chọn đơn vị tiền tệ",
+				"zh-CN": "货币选择器",
+				"zh-TW": "幣別選擇器"
+			},
+			"info": {
+				"cs": "Pokud chcete přidat měnu, přejděte na [nastavení plateb.](/admin/settings/payments)",
+				"da": "Du kan tilføje en valuta ved at gå til dine [betalingsindstillinger.](/admin/settings/payments)",
+				"de": "Gehe zu deinen [Zahlungseinstellungen](/admin/settings/payments), um eine Währung hinzuzufügen.",
+				"en": "To add a currency, go to your [payment settings.](/admin/settings/payments)",
+				"es": "Para agregar una moneda, ve a tu [configuración de pago.](/admin/settings/payments)",
+				"fi": "Lisää valuutta siirtymällä [maksuasetuksiisi.](/admin/settings/payments)",
+				"fr": "Pour ajouter une devise, allez dans vos [paramètres de paiement.](/admin/settings/payments)",
+				"hi": "कोई मुद्रा जोड़ने के लिए, अपनी [payment settings.](/admin/settings/payments) में जाएं",
+				"it": "Per aggiungere una valuta, vai su [impostazioni pagamento.](/admin/settings/payments)",
+				"ja": "通貨を追加するには、[決済設定](/admin/settings/payments) に移動します。",
+				"ko": "통화를 추가하려면 [결제 설정](/admin/settings/payments)(으)로 이동하십시오.",
+				"nb": "For å legge til en valuta, går du til [betalingsinnstillingene.](/admin/settings/payments)",
+				"nl": "Ga naar je [betaalinstellingen.](/admin/settings/payments) om een valuta toe te voegen.",
+				"pl": "Aby dodać walutę, przejdź do swoich [ustawień płatności.](/admin/settings/payments)",
+				"pt-BR": "Para adicionar uma moeda, acesse as [configurações de pagamento.](/admin/settings/payments)",
+				"pt-PT": "Para adicionar uma moeda, aceda às suas [definições de pagamento.](/admin/settings/payments)",
+				"sv": "Gå till [payment settings ](/admin/settings/payments) för att lägga till en valuta.",
+				"th": "หากต้องการเพิ่มสกุลเงิน ให้ไปที่ [การตั้งค่าการชำระเงิน ](/admin/settings/payments)",
+				"tr": "Para birimi seçmek için [ödeme ayarlarınıza](/admin/settings/payments) gidin.",
+				"vi": "Để thêm đơn vị tiền tệ, đến phần [cài đặt thanh toán.](/admin/settings/payments)",
+				"zh-CN": "若要添加货币，请转到 [支付设置。](/admin/settings/payments)",
+				"zh-TW": "若要新增幣別，請前往 [付款設定。](/admin/settings/payments)"
+			}
+		},
+		{
+			"type": "checkbox",
+			"id": "show_currency_selector",
+			"label": {
+				"cs": "Zobrazit selektor měny",
+				"da": "Vis valutavælger",
+				"de": "Währungsauswahl anzeigen",
+				"en": "Show currency selector",
+				"es": "Mostrar el selector de moneda",
+				"fi": "Näytä valuutanvalitsin",
+				"fr": "Afficher le sélecteur de devise",
+				"hi": "मुद्रा चयनकर्ता दिखाएं",
+				"it": "Mostra selettore valuta",
+				"ja": "通貨セレクターを表示する",
+				"ko": "통화 선택기 표시",
+				"nb": "Vis valutavelger",
+				"nl": "Valutakiezer weergeven",
+				"pl": "Pokaż selektor walut",
+				"pt-BR": "Exibir seletor de moeda",
+				"pt-PT": "Mostrar seletor de moeda",
+				"sv": "Visa valutaväljare",
+				"th": "แสดงเครื่องมือเลือกสกุลเงิน",
+				"tr": "Para birimi seçici göster",
+				"vi": "Hiển thị hộp chọn đơn vị tiền tệ",
+				"zh-CN": "货币选择器显示",
+				"zh-TW": "顯示幣別選擇器"
+			},
+			"default": true
+		}
+	]
 }
 {% endschema %}

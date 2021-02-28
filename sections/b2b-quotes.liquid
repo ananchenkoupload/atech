@@ -1,213 +1,206 @@
-
-
 <style>
-  #shopify-section-b2b-quotes {
-  	background-color: {{ section.settings.color_back_bg }};
-  }
-  
+	#shopify-section-b2b-quotes {
+		background-color: {{ section.settings.color_back_bg }};
+	}
 </style>
 
-<div class="container page-width b2b-testimonials">
+<div class="container page-width2 b2b-testimonials {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
+  {% if section.settings.title != blank %}
+    <div class="quote-title">
+      <h2 class="h3">{{section.settings.title}}</h2>
+    </div>
+  {% endif %}
   {% assign n = 1 %}
-  
-  <div class="swiper-container js-quote-slider">
-    <div class="swiper-wrapper">
-       {% for block in section.blocks %}
-       	{% if block.settings.quote != blank %}
+	<div class="swiper-container js-quote-slider">
+		<div class="swiper-wrapper">
+			{% for block in section.blocks %}
+				{% if block.settings.quote != blank %}
+					<div class="mySlides swiper-slide" data-index="{% increment n %}">
+						<div id="slickSlide{{ block.id }}"
+							class="quotes-slide quotes-slide--{{ block.id }}{% if section.blocks.size == 1 %} quotes-slide--single{% endif %}"
+							aria-labelledby="slickDot{{ block.id }}" {{ block.shopify_attributes }}
+							data-slider-slide-index="{{ forloop.index0 }}" data-slider-item>
 
-          <div class="mySlides swiper-slide" data-index="{% increment n %}">
-        <!--     <div class="numbertext">1 / 6</div> -->
+							<blockquote class="quotes-slider__text text-center">
 
-            <div id="slickSlide{{ block.id }}"
-                      class="quotes-slide quotes-slide--{{ block.id }}{% if section.blocks.size == 1 %} quotes-slide--single{% endif %}"
-                      aria-labelledby="slickDot{{ block.id }}"
-                      {{ block.shopify_attributes }}
-                      data-slider-slide-index="{{ forloop.index0 }}"
-                      data-slider-item>
+								{% if block.settings.quote != blank %}
+								<span class="quote-icon">{% include 'icon-quote' %}</span>
+								<div class="rte-setting rte h2">{{ block.settings.quote }}</div>
+								{% endif %}
+								{% if block.settings.author != blank %}
+								<cite>{{ block.settings.author | escape }}</cite>
+								{% endif %}
+								{% if block.settings.caption_html != blank %}
+								<cite class="caption-testomonial">{{ block.settings.caption_html }}</cite>
+								{% endif %}
+							</blockquote>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
 
-                      <blockquote class="quotes-slider__text text-center">
+	<div class="testimonial-arrow">
+		<a class="prev"></a>
+		<a class="next"></a>
 
-                        {% if block.settings.quote != blank %}
-                            <span class="quote-icon">{% include 'icon-quote' %}</span>
-                          <div class="rte-setting rte h2">{{ block.settings.quote }}</div>
-                        {% endif %}
-                        {% if block.settings.author != blank %}
-                          <cite>{{ block.settings.author | escape }}</cite>
-                        {% endif %}
-                        {% if block.settings.caption != blank %}
-                          <cite class="caption-testomonial">{{ block.settings.caption | escape }}</cite>
-                        {% endif %}
-                      </blockquote>
+		<!--   <div class="caption-container">
+		<p id="caption"></p>
+	</div> -->
+
+		<div class="row logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %}">
+			{% assign b = 0 %}
+			{% for block in section.blocks %}
+			{% if block.settings.image != blank %}
+			<div class="column logo-bar__item{% if section.settings.title_enable %}  logo-bar__item--large{% endif %}">
+				{% if block.settings.link != blank %}
+				<a href="{{ block.settings.link }}" class="logo-bar__link">
+					{% endif %}
+					{% if block.settings.image != blank %}
+					<img class="demo cursor" src="{{ block.settings.image | img_url: '160x160', scale: 2}}"
+						data-index="{% increment b %}" style="width:100%">
+
+					{% else %}
+					{{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+					{% endif %}
+
+				</a>
 
 
-                  </div>
-          </div>
 
-      	{% endif %}
-      {% endfor %}	
-    </div>
-  </div>
+			</div>
 
-  
-<div class="testimonial-arrow">    
-  <a class="prev"></a>
-  <a class="next"></a>
+			{% endif %}
+			{% endfor %}
 
-<!--   <div class="caption-container">
-    <p id="caption"></p>
-  </div> -->
-
-  <div class="row logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %}">
-    {% assign b = 0 %}
-     {% for block in section.blocks %}
-     {% if block.settings.image != blank %}
-    <div class="column logo-bar__item{% if section.settings.title_enable %}  logo-bar__item--large{% endif %}">
-     	{% if block.settings.link != blank %}
-      	<a href="{{ block.settings.link }}" class="logo-bar__link">
-        {% endif %}
-        {% if block.settings.image != blank %}
-        <img class="demo cursor" src="{{ block.settings.image | img_url: '160x160', scale: 2}}" data-index="{% increment b %}" style="width:100%">
-          
-        {% else %}
-        {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
-        {% endif %}
-
-      </a>
-      
-                    
-                 
-    </div>
-    
-    {% endif %}
-    {% endfor %}
-     
-  </div>
- </div>
+		</div>
+	</div>
 </div>
 
 <script>
-  $(document).ready(function(){
-    $('.logo-bar__item:first-child img').addClass('active');
-    var mySwiper = new Swiper('.js-quote-slider', {
-      loop: true,
-      navigation: {
-        nextEl: '.testimonial-arrow .next',
-        prevEl: '.testimonial-arrow .prev',
-      },
-    });
-    $(document).on("click",".logo-bar__item img",function() {
-       let currentIndex = $(this).data('index');
-       mySwiper.slideTo( currentIndex );
-       $('.logo-bar__item img').removeClass('active');
-       $(this).addClass('active');
-    });
-    mySwiper.on('slideChange', function (e) {
-      let crINdex = mySwiper.realIndex;
-      $('.logo-bar__item img').removeClass('active');
-      $('.logo-bar__item img[data-index="'+ crINdex +'"]').addClass('active');
-    });
-// 	$("#newcustomclass0").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid0").show();
-//         $("#newslideid1").hide();
-//         $("#newslideid2").hide();
-//         $("#newslideid3").hide();
-//       	$("#newslideid4").hide();
-//       	$("#newslideid5").hide();
-//       	$("#newslideid6").hide();
-//       	$("#newslideid7").hide();
-// 	});
-//     $("#newcustomclass1").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid1").show();
-//       	$("#newslideid2").hide();
-//         $("#newslideid3").hide();
-//       	$("#newslideid4").hide();
-//       	$("#newslideid5").hide();
-//       	$("#newslideid6").hide();
-//       	$("#newslideid7").hide();
-//       	$("#newslideid0").hide();
-// 	});
-//     $("#newcustomclass2").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid2").show();
-//       	$("#newslideid1").hide();
-//         $("#newslideid3").hide();
-//       	$("#newslideid4").hide();
-//       	$("#newslideid5").hide();
-//       	$("#newslideid6").hide();
-//       	$("#newslideid7").hide();
-//       	$("#newslideid0").hide();
-// 	});
-//     $("#newcustomclass3").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid3").show();
-//       	$("#newslideid4").hide();
-//       	$("#newslideid5").hide();
-//       	$("#newslideid6").hide();
-//       	$("#newslideid7").hide();
-//       	$("#newslideid0").hide();
-//       	$("#newslideid1").hide();
-//       	$("#newslideid2").hide();
-// 	});
-    
-//     $("#newcustomclass4").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid4").show();
-//       	$("#newslideid5").hide();
-//       	$("#newslideid6").hide();
-//       	$("#newslideid7").hide();
-//       	$("#newslideid0").hide();
-//       	$("#newslideid1").hide();
-//       	$("#newslideid2").hide();
-//       	$("#newslideid3").hide();
-// 	});
-//     $("#newcustomclass5").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid5").show();
-//       	$("#newslideid6").hide();
-//       	$("#newslideid7").hide();
-//       	$("#newslideid0").hide();
-//       	$("#newslideid1").hide();
-//       	$("#newslideid2").hide();
-//       	$("#newslideid3").hide();
-//       	$("#newslideid4").hide();
-// 	});
-//     $("#newcustomclass6").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid6").show();
-//       	$("#newslideid7").hide();
-//       	$("#newslideid0").hide();
-//       	$("#newslideid1").hide();
-//       	$("#newslideid2").hide();
-//       	$("#newslideid3").hide();
-//       	$("#newslideid4").hide();
-//       	$("#newslideid5").hide();
-// 	});
-//     $("#newcustomclass7").click(function(){
-//         $(".demo.cursor").removeClass('active');
-// 	  	$(this).addClass('active');
-//       	$("#newslideid7").show();
-//       	$("#newslideid0").hide();
-//       	$("#newslideid1").hide();
-//       	$("#newslideid2").hide();
-//       	$("#newslideid3").hide();
-//       	$("#newslideid4").hide();
-//       	$("#newslideid5").hide();
-//       	$("#newslideid6").hide();
-// 	});
-  });
+	$(document).ready(function () {
+		$('.logo-bar__item:first-child img').addClass('active');
+		var mySwiper = new Swiper('.js-quote-slider', {
+			loop: true,
+			navigation: {
+				nextEl: '.testimonial-arrow .next',
+				prevEl: '.testimonial-arrow .prev',
+			},
+		});
+		$(document).on("click", ".logo-bar__item img", function () {
+			let currentIndex = $(this).data('index');
+			mySwiper.slideTo(currentIndex);
+			$('.logo-bar__item img').removeClass('active');
+			$(this).addClass('active');
+		});
+		mySwiper.on('slideChange', function (e) {
+			let crINdex = mySwiper.realIndex;
+			$('.logo-bar__item img').removeClass('active');
+			$('.logo-bar__item img[data-index="' + crINdex + '"]').addClass('active');
+		});
+		// 	$("#newcustomclass0").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid0").show();
+		//         $("#newslideid1").hide();
+		//         $("#newslideid2").hide();
+		//         $("#newslideid3").hide();
+		//       	$("#newslideid4").hide();
+		//       	$("#newslideid5").hide();
+		//       	$("#newslideid6").hide();
+		//       	$("#newslideid7").hide();
+		// 	});
+		//     $("#newcustomclass1").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid1").show();
+		//       	$("#newslideid2").hide();
+		//         $("#newslideid3").hide();
+		//       	$("#newslideid4").hide();
+		//       	$("#newslideid5").hide();
+		//       	$("#newslideid6").hide();
+		//       	$("#newslideid7").hide();
+		//       	$("#newslideid0").hide();
+		// 	});
+		//     $("#newcustomclass2").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid2").show();
+		//       	$("#newslideid1").hide();
+		//         $("#newslideid3").hide();
+		//       	$("#newslideid4").hide();
+		//       	$("#newslideid5").hide();
+		//       	$("#newslideid6").hide();
+		//       	$("#newslideid7").hide();
+		//       	$("#newslideid0").hide();
+		// 	});
+		//     $("#newcustomclass3").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid3").show();
+		//       	$("#newslideid4").hide();
+		//       	$("#newslideid5").hide();
+		//       	$("#newslideid6").hide();
+		//       	$("#newslideid7").hide();
+		//       	$("#newslideid0").hide();
+		//       	$("#newslideid1").hide();
+		//       	$("#newslideid2").hide();
+		// 	});
+
+		//     $("#newcustomclass4").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid4").show();
+		//       	$("#newslideid5").hide();
+		//       	$("#newslideid6").hide();
+		//       	$("#newslideid7").hide();
+		//       	$("#newslideid0").hide();
+		//       	$("#newslideid1").hide();
+		//       	$("#newslideid2").hide();
+		//       	$("#newslideid3").hide();
+		// 	});
+		//     $("#newcustomclass5").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid5").show();
+		//       	$("#newslideid6").hide();
+		//       	$("#newslideid7").hide();
+		//       	$("#newslideid0").hide();
+		//       	$("#newslideid1").hide();
+		//       	$("#newslideid2").hide();
+		//       	$("#newslideid3").hide();
+		//       	$("#newslideid4").hide();
+		// 	});
+		//     $("#newcustomclass6").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid6").show();
+		//       	$("#newslideid7").hide();
+		//       	$("#newslideid0").hide();
+		//       	$("#newslideid1").hide();
+		//       	$("#newslideid2").hide();
+		//       	$("#newslideid3").hide();
+		//       	$("#newslideid4").hide();
+		//       	$("#newslideid5").hide();
+		// 	});
+		//     $("#newcustomclass7").click(function(){
+		//         $(".demo.cursor").removeClass('active');
+		// 	  	$(this).addClass('active');
+		//       	$("#newslideid7").show();
+		//       	$("#newslideid0").hide();
+		//       	$("#newslideid1").hide();
+		//       	$("#newslideid2").hide();
+		//       	$("#newslideid3").hide();
+		//       	$("#newslideid4").hide();
+		//       	$("#newslideid5").hide();
+		//       	$("#newslideid6").hide();
+		// 	});
+	});
 </script>
 
 <script>
-var slideIndex = 1;
+	var slideIndex = 1;
 // showSlides(slideIndex);
 
 // // Next/previous controls
@@ -268,6 +261,40 @@ var slideIndex = 1;
   "class": "index-section",
   "max_blocks": 30,
   "settings": [
+    {
+      "type": "select",
+      "id": "paddings",
+      "label": {
+        "en": "Remove paddings?"
+      },
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": {
+            "en": "Keep defaults"
+          }
+        },
+        {
+          "value": "section--remove-top-padding",
+          "label": {
+            "en": "Remove top padding"
+          }
+        },
+        {
+          "value": "section--remove-bottom-padding",
+          "label": {
+            "en": "Remove bottom padding"
+          }
+        },
+        {
+          "value": "section--remove-all-paddings",
+          "label": {
+            "en": "Remove top and bottom paddings"
+          }
+        }
+      ]
+    },
     {
       "type": "text",
       "id": "title",
@@ -483,57 +510,10 @@ var slideIndex = 1;
           }
         },
 		{
-          "type": "text",
-          "id": "caption",
-          "label": {
-            "cs": "Autor",
-            "da": "Forfatter",
-            "de": "Autor",
-            "en": "Caption",
-            "es": "Autor",
-            "fi": "Kirjoittaja",
-            "fr": "Auteur",
-            "hi": "लेखक",
-            "it": "Autore",
-            "ja": "執筆者",
-            "ko": "작성자",
-            "nb": "Forfatter",
-            "nl": "Auteur",
-            "pl": "Autor",
-            "pt-BR": "Autoria",
-            "pt-PT": "Autoria",
-            "sv": "Upphovsman",
-            "th": "ผู้เขียน",
-            "tr": "Yazar",
-            "vi": "Tác giả",
-            "zh-CN": "作者",
-            "zh-TW": "作者"
-          },
-          "default": {
-            "cs": "Jméno autora",
-            "da": "Forfatterens navn",
-            "de": "Name des Autors",
-            "en": "caption's name",
-            "es": "Nombre del autor",
-            "fi": "Kirjoittajan nimi",
-            "fr": "Nom de l'auteur",
-            "hi": "लेखक का नाम",
-            "it": "Nome dell'autore",
-            "ja": "筆者の名前",
-            "ko": "작성자 이름",
-            "nb": "Forfatterens navn",
-            "nl": "Naam auteur",
-            "pl": "Nazwisko autora",
-            "pt-BR": "Nome do autor",
-            "pt-PT": "Nome do autor",
-            "sv": "Författarens namn",
-            "th": "ชื่อผู้เขียน",
-            "tr": "Yazar adı",
-            "vi": "Tên tác giả",
-            "zh-CN": "作者姓名",
-            "zh-TW": "作者名稱"
-          }
-        }
+			"type": "richtext",
+            "id": "caption_html",
+            "label": "Caption"
+		}
 			
       ]
     },

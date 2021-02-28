@@ -1,228 +1,287 @@
 .product-template__container {
-  position: relative;
-  z-index: 0;
-}
-body {
-    overflow-x: hidden;
-}
-.ajax-cart__modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 40;
-    max-width: 575px;
-    background: white;
-    border: 1px solid #e9e9e9;
-    padding: 50px 65px;
-    opacity: 0;
-    visibility: hidden;
-    will-change: opacity, visibility;
-}
-.ajax-cart__modal.is-open {
-    opacity: 1;
-    visibility: visible;
-}
-.ajax-cart__overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 30;
-    background-color: initial;
-    transition: all .3s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-.ajax-cart__overlay.is-open {
-    opacity: 1;
-    visibility: visible;
-}
-.ajax-cart__drawer {
-    position: fixed;
-    top: 108px;
-    right: -1000px;
-    z-index: 100;
-    width: 100%;
-    max-width: 549px;
-    height: calc(100vh - 100px);
-    background-color: #fff;
-    transition: all .3s ease-in-out;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  	padding: 0;
+	position: relative;
+	z-index: 0;
 }
 
-.sticky .ajax-cart__drawer {
-  height: calc(100vh - 74px);
+body {
+	overflow-x: hidden;
+}
+
+.ajax-cart__modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 40;
+	max-width: 575px;
+	background: white;
+	border: 1px solid #e9e9e9;
+	padding: 50px 65px;
+	opacity: 0;
+	visibility: hidden;
+	will-change: opacity, visibility;
+}
+
+.ajax-cart__modal.is-open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.ajax-cart__overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 30;
+	background-color: initial;
+	transition: all .3s ease-in-out;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.ajax-cart__overlay.is-open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.ajax-cart-holder {
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+}
+
+.sticky+.ajax-cart-holder {
+	margin-bottom: 2px;
+}
+
+.ajax-cart-frame {
+	margin: 0 auto;
+	max-width: 1920px;
+	/* overflow: hidden; */
+	position: relative;
+}
+
+.ajax-cart__drawer {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	bottom: 0;
+	/*height: calc(var(--wh, 1vh) * 100 - var(--hh, 1px) - -7px);*/
+	height: calc(var(--wh, 1vh) * 100 - var(--hh, 1px));
+	margin: 0 0 0 auto;
+	/* max-width: 397px; */
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	/* transform: translateX(100%); */
+	transition: height 0.3s linear, width 0.6s ease-in-out;
+	width: 0;
+}
+
+.header-hidden .ajax-cart-holder .ajax-cart__drawer {
+	height: calc(var(--wh, 1vh) * 100);
+}
+.sticky ~ .ajax-cart-holder .ajax-cart__drawer {
+	height: calc(var(--wh, 1vh) * 100 - 90px);
 }
 
 .ajax-cart__drawer.is-open {
-    transform: translateX(-1000px);
+	width: 397px;
 }
-.ajax-cart-modal {
-    position: relative;
-}
-.ajax-cart-modal__close {
-    position: absolute;
-    right: 30px;
-    top: 10px;
-    cursor: pointer;
-}
-.ajax-cart-modal__content {
-    padding: 20px;
-}
+
 .ajax-cart-drawer {
-    position: relative;
-    height: 100%;
+	background: #F5F5F5;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+	width: 397px;
 }
+
+.ajax-cart-drawer__frame {
+	padding: 17px 31px 31px;
+	/* overflow: auto; */
+}
+
+.ajax-cart__drawer.is-open {
+	transform: translateX(0);
+}
+
+.ajax-cart-modal {
+	position: relative;
+}
+
+.ajax-cart-modal__close {
+	position: absolute;
+	right: 30px;
+	top: 10px;
+	cursor: pointer;
+}
+
+.ajax-cart-modal__content {
+	padding: 20px;
+}
+
 .ajax-cart-drawer__close {
-    position: absolute;
-    cursor: pointer;
+	cursor: pointer;
+	width: 21px;
+	height: 21px;
+	border: 1px #000 solid;
+	display: inline-block;
+	border-radius: 50%;
+	position: relative;
 }
+
 .ajax-cart-drawer__content {
-    padding: 25px 25px 190px;
-    height: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
+	padding: 25px 25px 190px;
+	height: 100%;
+	/* overflow: hidden;
+		overflow-y: scroll; */
 }
+
 .ajax-cart-drawer__buttons {
-    position: relative;
-    z-index: 10;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 34px;
-    padding: 20px;
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: space-between;
-    padding: 0 !important;
-  	margin-top: 18px;
-    align-items: center;
+	position: relative;
+	z-index: 10;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 34px;
+	padding: 20px;
+	display: flex;
+	/* flex-direction: column; */
+	justify-content: space-between;
+	padding: 0 !important;
+	margin-top: 30px;
+	align-items: center;
 }
 
 .ajax-cart-item__single {
-    position: relative;
-    transition: all .3s ease-in-out;
-    padding: 15px 0;
-    border-bottom: 1px solid #f5f5f5;
+	position: relative;
+	transition: all .3s ease-in-out;
+	padding: 15px 0;
+	border-bottom: 1px solid #f5f5f5;
 }
+
 .ajax-cart-item__image {
-    width: 100%;
-    height: 100%;
-  	border-radius: 16px;
-    background-size: cover;
-    background-position: 50%;
-    background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	border-radius: 16px;
+	background-size: cover;
+	background-position: 50%;
+	background-repeat: no-repeat;
 }
+
 .ajax-cart-item__remove {
-    position: absolute;
-    right: 0;
-    top: 25px;
-    cursor: pointer;
-}
-.js-button{
-    background: #000;
-    color: #fff;
-    padding: 0;
-    text-align: center;
-    cursor: pointer;
-  	transition: all .2s linear;
+	position: absolute;
+	right: 0;
+	top: 25px;
+	cursor: pointer;
 }
 
-.ajax-cart-item__quantity{
-    position: absolute;
-    bottom: 23px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    left: 122px;
-}
-.ajax-cart-item__title{
-    vertical-align: top;
-}
-.ajax-cart-drawer__subtotal{
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    width: 100%;
-    align-items: flex-end;
-    transition: all .3s ease-in-out;
-    align-items: flex-end;
-    height: 44px;
-    padding: 0;
-  	font-family: "DM Sans";
+.js-button {
+	background: #000;
+	color: #fff;
+	padding: 0;
+	text-align: center;
+	cursor: pointer;
+	transition: all .2s linear;
 }
 
-.ajax-cart-drawer__grandtotal{
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    width: 100%;
-    transition: all .3s ease-in-out;
-    align-items: center;
-    height: 50px;
-    padding: 0 30px;
-    border-top: 1px solid #002d72;
+.ajax-cart-item__quantity {
+	position: absolute;
+	bottom: 23px;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	left: 122px;
 }
 
+.ajax-cart-item__title {
+	vertical-align: top;
+}
 
-.ajax-cart__drawer{
+.ajax-cart-drawer__subtotal {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	width: 100%;
+	align-items: flex-end;
+	transition: all .3s ease-in-out;
+	align-items: flex-end;
+	height: 44px;
+	padding: 0;
+	font-family: "DM Sans";
+}
+
+.ajax-cart-drawer__grandtotal {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	width: 100%;
+	transition: all .3s ease-in-out;
+	align-items: center;
+	height: 50px;
+	padding: 0 30px;
+	border-top: 1px solid #002d72;
+}
+
+.ajax-cart__drawer {
 	/* max-width: 325px !important; */
 	z-index: 223 !important;
 }
 
 .ajax-cart__drawer .drawer-header {
-    text-align: left;
-    padding: 0 24px;
-    border-bottom: none;
-    color: #000;
-    font-size: 16px;
-    letter-spacing: initial;
-    height: 88px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	text-align: left;
+	padding: 0 24px;
+	border-bottom: none;
+	color: #000;
+	font-size: 16px;
+	letter-spacing: initial;
+	height: 88px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-
-.js-ajax-cart-drawer-close{
-    cursor: pointer;
+.js-ajax-cart-drawer-close {
+	/*cursor: pointer;*/
 }
-.ajax-cart__drawer .ajax-cart-drawer__content{
+
+.ajax-cart__drawer .ajax-cart-drawer__content {
 	padding: 0;
 	position: relative;
-	height: auto;
+	/* height: auto;
 	overflow: hidden;
-	overflow-y: hidden;
-	
+	overflow-y: hidden; */
 }
-.ajax-cart__drawer .sub-total-contain{
+
+.ajax-cart__drawer .sub-total-contain {
 	position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* height: 55px; */
-    border-top: initial;
-    background: #EDEDED !important;
-    padding: 9px 26px 26px 26px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	/* height: 55px; */
+	border-top: initial;
+	background: #EDEDED !important;
+	padding: 9px 26px 26px 26px;
 }
-.ajax-cart__drawer .sub-total-contain span{
+
+.ajax-cart__drawer .sub-total-contain span {
 	font-size: 14px;
 	font-family: "GT America";
-  	color: #000;
-  	line-height: 24px;
-  	letter-spacing: 1.05px;
-  	font-weight: 600;
+	color: #000;
+	line-height: 24px;
+	letter-spacing: 1.05px;
+	font-weight: 500;
 }
-.ajax-cart__drawer .grand-total-contain{
+
+.ajax-cart__drawer .grand-total-contain {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -230,92 +289,102 @@ body {
 	height: 55px;
 	border-top: 1px solid #002d72 !important;
 	background: transparent !important;
-	
 }
-.ajax-cart__drawer .grand-total-contain span{
+
+.ajax-cart__drawer .grand-total-contain span {
 	font-size: 18px;
 	text-transform: uppercase;
 	letter-spacing: .1em;
 }
-.empty-cart{
-    padding: 20px;
-    text-align: center;
-    color: #000;
-    font-size: 22px;
-  	font-family: "GT America";
+
+.empty-cart {
+	padding: 20px;
+	text-align: center;
+	color: #000;
+	font-size: 22px;
+	font-family: "GT America";
 }
-.ajax-cart__drawer .grand-total-contain .ajax-cart-drawer__grandtotal-price{
+
+.ajax-cart__drawer .grand-total-contain .ajax-cart-drawer__grandtotal-price {
 	letter-spacing: 0;
 }
-.ajax-cart__drawer .ajax-cart-item__single{
+
+.ajax-cart__drawer .ajax-cart-item__single {
 	padding: 0;
 	border-bottom: initial;
 	display: flex;
-  	margin-bottom: 12px;
+	margin-bottom: 12px;
 }
-.ajax-cart__drawer .minicart-product-image{
+
+.ajax-cart__drawer .minicart-product-image {
 	margin-right: 42px;
 }
+
 .ajax-cart__drawer .ajax-cart-item__title {
-    font-size: 24px;
-    text-transform: none;
-    letter-spacing: initial;
-    line-height: 29px;
-    width: 230px;
-    height: auto;
-    display: flex;
-    align-items: flex-end;
-    font-weight: 400;
-  	font-family: "Reckless TRIAL";
+	font-size: 24px;
+	text-transform: none;
+	letter-spacing: initial;
+	line-height: 29px;
+	width: 230px;
+	height: auto;
+	display: flex;
+	align-items: flex-end;
+	font-weight: 400;
+	font-family: "Reckless TRIAL";
 }
 
-.ajax-cart__drawer .ajax-cart-item__title > a {
-  word-break: break-word; 
+.ajax-cart__drawer .ajax-cart-item__title>a {
+	word-break: break-word;
 }
 
-.ajax-cart__drawer .ajax-cart-item__title a{
-		color: #000;
-	}
-	.ajax-cart__drawer .ajax-cart-item__title a:hover{
-		text-decoration: none;
-		color: #000;
-	}
+.ajax-cart__drawer .ajax-cart-item__title a {
+	color: #000;
+}
+
+.ajax-cart__drawer .ajax-cart-item__title a:hover {
+	text-decoration: none;
+	color: #000;
+}
 
 .ajax-cart__drawer .ajax-cart-item__price {
 	position: inherit;
-    padding: 0;
-    font-size: 22px;
-    line-height: 36px;
-  	right: 0;
-  	color: #000;
+	padding: 0;
+	font-size: 22px;
+	line-height: 36px;
+	right: 0;
+	color: #000;
 }
-.ajax-cart__drawer .minicart-product-qty{
+
+.ajax-cart__drawer .minicart-product-qty {
 	display: flex;
-  	align-items: center;
-    height: 44px;
-  	position: absolute;
-    bottom: 0;
+	align-items: center;
+	height: 44px;
+	position: absolute;
+	bottom: 0;
 }
-.ajax-cart__drawer .ajax-cart-item__quantity{
+
+.ajax-cart__drawer .ajax-cart-item__quantity {
 	position: inherit;
-    line-height: 24px;
-    font-size: 14px;
-    margin-right: 0;
-    width: 100%;
-  	height: 100%;
-    left: initial;
-    bottom: initial;
-    justify-content: center;
-  	align-items: center;
-   	text-align: center;
-    letter-spacing: 1.05px;
-    color: #000000;
-  	font-family: 'GT America';
+	line-height: 24px;
+	font-size: 14px;
+	margin-right: 0;
+	width: 100%;
+	height: 100%;
+	left: initial;
+	bottom: initial;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	letter-spacing: 1.05px;
+	color: #000000;
+	font-family: 'GT America';
 }
-.ajax-cart__drawer .ajax-cart-item__quantity-label{
+
+.ajax-cart__drawer .ajax-cart-item__quantity-label {
 	margin-right: 10px;
 }
-.ajax-cart__drawer .edit-cart-product a{
+
+.ajax-cart__drawer .edit-cart-product a {
 	text-decoration: underline;
 	text-transform: lowercase;
 	letter-spacing: .05em;
@@ -323,473 +392,655 @@ body {
 	font-size: 10px;
 	line-height: 24px;
 }
+
 .ajax-cart__drawer .ajax-cart-item__remove {
-    position: relative;
-    top: initial;
-    right: initial;
-    font-size: 16px;
-    line-height: 26px;
-    background: initial;
-    width: auto;
-    height: 40px;
-    color: #000;
-    display: flex;
-    align-items: center;
-    text-decoration: underline;
-  	font-family: "GT America";
+	position: relative;
+	top: initial;
+	right: initial;
+	font-size: 16px;
+	line-height: 26px;
+	background: initial;
+	width: auto;
+	height: 40px;
+	color: #000;
+	display: flex;
+	align-items: center;
+	text-decoration: underline;
+	font-family: "GT America";
 }
-.ajax-cart__drawer .ajax-cart-drawer__buttons{
+
+.ajax-cart__drawer .ajax-cart-drawer__buttons {
 	padding: 0;
 	height: 68px;
-  	margin-bottom: 0;
-  	display: flex;
-  	justify-content: flex-start;
-    align-items: flex-start;
+	margin-bottom: 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
 }
 
 .ajax-cart__drawer .js-button {
 	background: #231F20;
-    border-radius: 45px;
-    width: 100%;
-    color: #fff;
-    height: 34px;
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: 14px;
-  	line-height: 24px;
-  	font-family: 'GT America';
-    vertical-align: middle;
-    display: flex;
-    align-items: center;
-  	text-align: center;
-    letter-spacing: 1.5px;
-  	justify-content: center;
-  	text-decoration: none;
-  	position: relative;
-  	z-index: 1;
+	border-radius: 45px;
+	width: 100%;
+	color: #fff;
+	height: 34px;
+	font-weight: 500;
+	text-transform: uppercase;
+	font-size: 14px;
+	line-height: 24px;
+	font-family: 'GT America';
+	vertical-align: middle;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: 1.5px;
+	justify-content: center;
+	text-decoration: none;
+	position: relative;
+	z-index: 1;
 }
 
 .ajax-cart-drawer__buttons.disabled:before {
-    content: '';
-    width: 100%;
-    position: absolute;
-    height: 100%;
-    z-index: 2;
+	content: '';
+	width: 100%;
+	position: absolute;
+	height: 100%;
+	z-index: 2;
 }
 
 .ajax-cart-drawer__buttons.disabled .js-button {
- 	opacity: 0.6;
+	opacity: 0.6;
 }
 
-
-.ajax-cart__drawer .js-button:hover,
-.ajax-cart__drawer .js-button:focus {
- 	color: #fff !important; 
+.ajax-cart__drawer .js-button:hover, .ajax-cart__drawer .js-button:focus {
+	color: #fff !important;
 }
 
 .note-wrapper textarea::placeholder {
-  color: #000;
-  opacity: 1;
+	color: #000;
+	opacity: 1;
 }
 
-.js-ajax-cart-overlay.is-open{
+.js-ajax-cart-overlay.is-open {
 	background: transparent;
-    z-index: 222;
-  	height: 100vh;
+	z-index: 222;
+	height: 100vh;
 }
 
-
-.ajax-cart-item__quantity-number{
+.ajax-cart-item__quantity-number {
 	background: none !important;
-    border: none !important;
+	border: none !important;
 }
+
 /*@media screen and (max-width: 767px){
 	.ajax-cart__drawer{
-        max-width: 768px !important;
-        right: -768px;
+				max-width: 768px !important;
+				right: -768px;
 	}
 }*/
 
-.ajax-cart-items{
-    overflow: auto;
-  	width: 100%;
-  	padding: 0;
+.ajax-cart-items {
+	overflow: auto;
+	width: 100%;
+	padding: 0;
 }
 
 h2.cart-header__title {
-    margin: 0;
-    font-size: 32px;
-    line-height: 38px;
-    font-weight: 400;
-  	font-family: "Reckless TRIAL";
+	margin: 0;
+	font-size: 32px;
+	line-height: 38px;
+	font-weight: 400;
+	font-family: "Reckless TRIAL";
 }
 
 .js-ajax-checkout-button:hover {
-  color: #000 !important; 
+	color: #000 !important;
 }
 
 .continue-shopping-wrapper {
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 400;
-    font-family: "DM Sans";
+	font-size: 16px;
+	line-height: 26px;
+	font-weight: 400;
+	font-family: "DM Sans";
 }
 
-.close-icon:before,
-.close-icon:after {
-  	position: absolute;
-    left: -7px;
-    top: 6px;
-    content: ' ';
-    height: 15px;
-    width: 1px;
-    background-color: #000;
-  	border-radius: 2px;
+.close-icon:before, .close-icon:after {
+	position: absolute;
+	right: 9px;
+	content: ' ';
+	height: 11px;
+	width: 1px;
+	background-color: #000;
+	border-radius: 2px;
 }
-
 
 /*@media only screen and (max-width: 1599px) {
  .close-icon:before, .close-icon:after {
-  	 width: 0.15em;
+		 width: 0.15em;
  }
 }
 */
+
 .close-icon:after {
-    transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 
 .close-icon:before {
-    transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 span.continue-text {
-    padding-right: 18px;
-  	color: #000;
+	padding-right: 18px;
+	color: #000;
 }
 
 input.ajax-cart-item__quantity-number.js-ajax-cart-quantity {
-    background: transparent;
-    border: initial;
-    width: 36px;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 14px;
-    line-height: 24px;
-    font-weight: 300;
-    font-family: "GT America";
-  	color: #000;
-  	letter-spacing: 1.05px;
+	background: transparent;
+	border: initial;
+	width: 36px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 14px;
+	line-height: 24px;
+	font-weight: 300;
+	font-family: "GT America";
+	color: #000;
+	letter-spacing: 1.05px;
+	opacity: 1 !important;
 }
 
 .ajax-cart-item__quantity-button {
 	display: flex;
-  	cursor: pointer;
+	cursor: pointer;
 }
 
 .product-price {
-    height: 44px;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  	color: #000;
+	height: 44px;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	color: #000;
 }
 
 .Shipping {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 44px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	height: 44px;
 }
 
 .cart_returns_text {
-    font-size: 24px;
-    line-height: 29px;
-    font-family: "Reckless TRIAL";
-  	color: #000;
+	font-size: 24px;
+	line-height: 29px;
+	font-family: "Reckless TRIAL";
+	color: #000;
 }
 
-.ajax-cart-drawer__buttons {
-    
-}
-
+.ajax-cart-drawer__buttons {}
 
 .note-wrapper {
-    margin-top: 69px;
-  	height: 71px;
+	margin-top: 40px;
+	height: 71px;
 }
 
-.note-wrapper > textarea {
-    resize: initial;
-    width: 100%;
-    height: 71px;
-    min-height: initial;
-    background: transparent;
-    border: 0.5px solid #000000;
-    font-size: 10px;
-    line-height: 24px;
-    letter-spacing: 0.833333px;
-    text-transform: uppercase;
-    color: #000000;
-    padding: 5px 9px;
+.note-wrapper>textarea {
+	resize: initial;
+	width: 100%;
+	height: 71px;
+	min-height: initial;
+	background: transparent;
+	border: 0.5px solid #000000;
+	font-size: 10px;
+	line-height: 24px;
+	letter-spacing: 0.833333px;
+	text-transform: uppercase;
+	color: #000000;
+	padding: 5px 9px;
 }
 
 .agree_to_terms_wrapper {
- margin-top: 9px; 
+	margin-top: 20px;
 }
 
 .checkbox-wrapper {
-  display: flex;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 0;
-  
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	display: flex;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 0;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .checkbox-wrapper input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
 }
 
 .checkmark {
-  position: absolute;
-  top: 1.5px;
-  left: 0;
-  height: 21px;
-  width: 21px;
-  background-color: transparent;
-  border: 0.5px solid #0C0C0C;
+	position: absolute;
+	top: 1.5px;
+	left: 0;
+	height: 21px;
+	width: 21px;
+	background-color: transparent;
+	border: 0.5px solid #0C0C0C;
 }
 
-.checkbox-wrapper input:checked ~ .checkmark {
-  background-color: transparent;
+.checkbox-wrapper input:checked~.checkmark {
+	background-color: transparent;
 }
 
 .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+	content: "";
+	position: absolute;
+	display: none;
 }
 
-.checkbox-wrapper input:checked ~ .checkmark:after {
-  display: block;
+.checkbox-wrapper input:checked~.checkmark:after {
+	display: block;
 }
 
 .checkbox-wrapper .checkmark:after {
-  left: 8px;
-  top: 4px;
-  width: 5px;
-  height: 10px;
-  border: solid #000;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+	/* left: 8px;
+	top: 4px;
+	width: 5px;
+	height: 10px;
+	border: solid #000;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg); */
+	background: #ba9163;
+	bottom: 3px;
+	content: '';
+	left: 3px;
+	position: absolute;
+	right: 3px;
+	top: 3px;
 }
 
 span.agreement_text {
-    margin-left: 33px;
-    font-size: 10px;
-    line-height: 24px;
-    height: 24px;
-    display: block;
-    letter-spacing: 0.833333px;
-    color: #000000;
+	margin-left: 33px;
+	font-size: 14px;
+	line-height: 24px;
+	height: 24px;
+	display: block;
+	letter-spacing: 0.833333px;
+	color: #000000;
 }
 
-.agreement_text > a {
-    font-size: 10px;
-    line-height: 24px;
-    color: #000;
-    letter-spacing: 0.833333px;
-    text-transform: initial;
+.agreement_text>a {
+	font-size: 14px;
+	line-height: 24px;
+	color: #ba9163;
+	letter-spacing: 0.833333px;
+	text-transform: initial;
+	text-decoration: none;
+}
+
+.agreement_text>a:hover {
+	border-bottom: 1px solid #977045;
+	color: #977045 !important;
 }
 
 header.site-header {
-  	transform: translateY(0px);
-  	z-index: 1;
+	transform: translateY(0px);
+	z-index: 1;
+}
+
+.ajax-cart-summary {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 21px;
+    font-family: 'GT America';
+    color: #000;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+}
+
+.ajax-to-cart {
+	text-decoration: none;
+    text-align: center;
+	display: block;
+	font-weight: 500;
+}
+
+.ajax-cart-summary ul {
+    border: 1px solid #101010;
+    border-left: 0;
+    border-right: 0;
+	margin: 10px 0 8px;
+	padding: 14px 0 20px;
+	text-transform: none;
+}
+
+.ajax-cart-summary ul li {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+    padding: 0 0 10px;
+}
+
+.ajax-cart-summary ul li:last-child {
+	padding: 0;
+} 
+
+.ajax-cart-summary .title {
+    margin-top: 20px;
+	display: block;
+	font-size: 14px;
+  	text-transform: uppercase;
+}
+
+.ajax-cart-summary.order-summary .title {
+	margin-top: 0;
+}
+
+.ajax-cart-summary.ajax-cart-enroute:before {
+	transition: all .1s ease-out;
+}
+
+.ajax-cart-summary.ajax-cart-enroute {
+	transition: all .1s ease-out;
+}
+
+.ajax-cart-summary.ajax-cart-enroute.m-stack {
+    opacity: 0.5;
+    position: relative;
+}
+
+.ajax-cart-summary.ajax-cart-enroute.m-stack:before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    height: 70%;
+    z-index: 2;
+    top: 30px;
+    left: 0;
+    cursor: not-allowed;
 }
 
 @media only screen and (min-width: 1px) {
- 	
-  	.ajax-cart__drawer {
-        max-width: 397px;
-      	top: 77px;
-      	background: #F5F5F5;
-      	padding: 17px 40px 31px 31px;
-      	overflow-y: auto;
-    }
-  
-  	.sticky .ajax-cart__drawer {
-     	top: 98px;
-    }
-  
-    .minicart-product-content {
+	.sticky .ajax-cart__drawer {
+		top: 98px;
+	}
+	.minicart-product-content {
 		width: 246px;
-    }
-  	
-  	.ajax-cart__drawer .drawer-header {
-     	padding: 0;
-      	height: 24px;
-    }
-  
-  	h2.cart-header__title {
-        font-size: 10px;
-        line-height: 24px;
-      	font-family: 'GT America';
-      	color: #000;
-      	letter-spacing: 0.833333px;
+	}
+	.ajax-cart__drawer .drawer-header {
+		padding: 0;
+		height: 24px;
+	}
+	h2.cart-header__title {
+		font-size: 14px;
+		font-weight: 100;
+		line-height: 24px;
+		font-family: 'GT America';
+		color: #000;
+		letter-spacing: 0.833333px;
 		text-transform: uppercase;
-    }
-  	
-  	.continue-shopping-wrapper {
-        font-size: 14px;
-        line-height: 18px;
-    }
-  
-  	.close-icon:before, .close-icon:after {
-      	top: 2px;
-    }
-  
-  	.ajax-cart-item__image {
-     	width: 100%;
-      	height: auto;
-    }
-  
-  	.ajax-cart__drawer .minicart-product-image {
-     	margin-right: 30px; 
-      	display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-  
-  	.ajax-cart__drawer .ajax-cart-item__title a {
-      	font-size: 10px;
-        line-height: 24px;
-      	letter-spacing: 0.833333px;
-        text-transform: uppercase;
-        color: #000000;
-      	font-family: 'GT America';
-      	font-weight: 600;
-    	text-decoration: initial;
-    }
-  
-  	.ajax-cart__drawer .ajax-cart-item__title {
-        height: 24px;
-      	width: 211px;
-      	align-items: center;
-    }
-  	
-  	.ajax-cart__drawer .ajax-cart-item__remove {
-        height: auto;
+	}
+	.continue-shopping-wrapper {
+		font-size: 14px;
+		line-height: 18px;
+	}
+	.close-icon:before, .close-icon:after {
+		top: 4px;
+	}
+	.ajax-cart-item__image {
+		width: 100%;
+		height: auto;
+		max-height: 100%;
+		width: auto;
+	}
+	.ajax-cart__drawer .minicart-product-image {
+		margin-right: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 85px;
+		width: 68px;
+	}
+	.ajax-cart__drawer .ajax-cart-item__title a {
+		font-size: 10px;
+		/* line-height: 24px; */
+		line-height: 18px;
+		letter-spacing: 0.833333px;
+		text-transform: uppercase;
+		color: #000000;
+		font-family: 'GT America';
+		font-weight: 500;
+		text-decoration: initial;
+		min-height: 36px;
+	}
+	.ajax-cart__drawer .ajax-cart-item__title {
+		/* height: 24px; */
+		width: 200px;
+		align-items: center;
+	}
+	.ajax-cart__drawer .ajax-cart-item__remove {
+		height: auto;
 		position: absolute;
-      	top: 0;
-      	right: 0;
-    }
-  
-  	.ajax-cart__drawer .minicart-product-qty {
-        align-items: center;
-        position: relative;
-      	margin-top: 9px;
-      	height: 36px;
-      	width: 98px;
-      	border: 0.5px solid #262626;
-    }
+		top: 0;
+		right: 0;
+	}
+	.ajax-cart__drawer .minicart-product-qty {
+		align-items: center;
+		position: relative;
+		margin-top: 9px;
+		height: 36px;
+		width: 98px;
+		border: 0.5px solid #262626;
+	}
+	.product-price {
+		height: 24px;
+		bottom: 32px;
+	}
+	.ajax-cart__drawer .ajax-cart-item__price {
+		font-size: 14px;
+		line-height: 24px;
+		text-align: right;
+		letter-spacing: 1.05px;
+		color: #000000;
+		font-family: 'GT America';
+	}
+	.ajax-cart__drawer .ajax-cart-item__single {
+		margin-top: 16px;
+		margin-bottom: 0;
+		border-bottom: 1px solid #101010;
+		padding-bottom: 32px;
+	}
+	.ajax-cart-drawer__subtotal {
+		height: 24px;
+	}
+	.Shipping {
+		height: 26px;
+		margin-bottom: 10px;
+	}
+	.cart_returns_text {
+		font-size: 22px;
+		line-height: 26px;
+		width: 128px;
+	}
+	.ajax-cart__drawer .js-button {
+		width: 100%;
+		height: 34px;
+	}
+	.ajax-cart-drawer__buttons {
+		padding-bottom: 0 !important;
+	}
+	.ajax-cart__drawer .ajax-cart-drawer__content {
+		height: auto;
+		margin-top: 4px;
+		border-top: 1px solid #101010;
+		/* max-height: 60%; */
+		/* overflow-y: auto; */
+		/* padding-right: 10px; */
+	}
+	.ajax-cart__drawer .sub-total-contain {
+		padding: 0;
+		position: relative;
+		background: transparent !important;
+		margin-top: 13px;
+	}
+}
 
-    .product-price {
-        height: 24px;
-      	bottom: 32px;
-    }
+@media only screen and (max-width: 767px) {
+	.ajax-cart__drawer{
+		height: calc(var(--wh, 1vh) * 100) !important;
+	}
+}
 
-    .ajax-cart__drawer .ajax-cart-item__price {
-        font-size: 14px;
-        line-height: 24px;
-      	text-align: right;
-        letter-spacing: 1.05px;
-        color: #000000;
-      	font-family: 'GT America';
-    }
-
-    .ajax-cart__drawer .ajax-cart-item__single{
-        margin-top: 16px;
-      	margin-bottom: 0;
-      	border-bottom: 1px solid #101010;
-      	padding-bottom: 32px;
-    }
-  
-  	.ajax-cart-drawer__subtotal {
-      height: 24px;
-    }
-
-    .Shipping {
-        height: 26px;
-        margin-bottom: 10px;
-    }
-
-    .cart_returns_text {
-        font-size: 22px;
-        line-height: 26px;
-      	width: 128px;
-    }
-
-    .ajax-cart__drawer .js-button {
-        width: 100%;
-        height: 34px;
-    }
-
-    .ajax-cart-drawer__buttons {
-        padding-bottom: 0 !important;
-    }
-  
-  	.ajax-cart__drawer .ajax-cart-drawer__content {
-      height: auto;
-      margin-top: 4px;
-      border-top: 1px solid #101010;
-  }
-  
-  .ajax-cart__drawer .sub-total-contain {
-      padding: 0;
-      position: relative;
-      background: transparent !important;
-      margin-top: 13px;
-  }
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+	.ajax-cart__drawer{
+		height: calc(var(--wh, 1vh) * 100) !important;
+	}
 }
 
 @media only screen and (max-width: 749px) {
-  	.ajax-cart__drawer {
-        top: 55px;
-    }
-  
-  	.sticky .ajax-cart__drawer {
-        top: 73px;
-    }
-  
-    .overflow_hidden {
-		overflow: hidden !important;
-    }
+	.ajax-cart__drawer {
+		/* top: 58px; */
+		top: inherit;
+		bottom: 0;
+	}
+}
+
+@media only screen and (min-width: 750px) and (max-width: 880px) {
+	.ajax-cart__drawer {
+		/* top: 64px; */
+	}
+	.sticky .ajax-cart__drawer {
+		top: 79px;
+	}
+}
+
+@media only screen and (min-width: 881px) and (max-width: 1024px) {
+	.ajax-cart__drawer {
+		/* top: 70px; */
+	}
+	.sticky .ajax-cart__drawer {
+		top: 87px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.ajax-cart-holder {
+		margin: 0;
+	}
+	.ajax-cart__drawer.is-open {
+		display: flex;
+		justify-content: center;
+		max-width: 100%;
+		width: 100%;
+		background: #F5F5F5;
+	}
+	.ajax-cart__drawer {
+		transition: all .2s ease-out;
+	}
+	.ajax-cart-frame {
+		width: 100%;
+	}
+	.ajax-cart-drawer__frame {
+		padding: 17px 30px 31px;
+	}
+	.ajax-cart-drawer {
+		width: 100%;
+	}
+	.ajax-cart__drawer .ajax-cart-item__title {
+		width: 180px;
+	}
+	.ajax-cart__drawer .ajax-cart-drawer__content {
+		padding-right: 0;
+	}
 }
 
 @media only screen and (max-width: 374px) {
-  .ajax-cart__drawer .ajax-cart-item__title,
-  .minicart-product-content {
-   	width: 180px; 
-  }
-  
-  .ajax-cart__drawer .minicart-product-image {
-   	margin-right: 15px; 
-  }
+	.ajax-cart__drawer .ajax-cart-item__title, .minicart-product-content {
+		width: 180px;
+	}
+	.ajax-cart__drawer .minicart-product-image {
+		margin-right: 15px;
+	}
+	.ajax-cart__drawer .ajax-cart-item__title a {
+		font-size: 10px;
+		line-height: 15px;
+		padding-right: 20px;
+	}
+	.note-wrapper {
+		margin-top: 5px;
+		height: 71px;
+	}
 }
 
-/* Comment */
+ .is-a-gift label .tooltiptext {
+      visibility: hidden;
+      width: 300px;
+      background-color: #F3F5F4;
+      color: #212121;
+      text-align: left;
+      padding: 14px;
+      border-radius: 5px;
+      position: absolute;
+      z-index: 1;
+      font-weight: 300;
+      bottom: 130%;
+      left: 93%;
+      margin-left: -150px;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.2px;
+  }
+
+  @media only screen and (max-width: 1459px) {
+      .is-a-gift label .tooltiptext {
+        left: 50%;
+      }
+  }
+
+  .is-a-gift label .tooltiptext::after {
+      content: " ";
+      position: absolute;
+      top: 100%;
+      left: 39px;
+      margin-left: 0;
+      border-width: 10px;
+      border-style: solid;
+      border-color: #F3F5F4 transparent transparent transparent;
+  }
+
+  .is-a-gift label:hover .tooltiptext {
+      visibility: visible;
+  }
+
+.ajax-cart-summary.ajax-cart-enroute {
+	padding-top: 28px;
+	text-transform: initial;
+}
+
+.ajax-cart-summary.ajax-cart-enroute .is-a-gift {
+	margin: 10px 0 8px;
+	padding: 14px 0 20px;
+}
+
+.ajax-cart-summary.ajax-cart-enroute .is-a-gift label .tooltiptext {
+	left: 50%;
+	border: 1px solid #212121;
+}
+
+.ajax-cart-summary.ajax-cart-enroute .is-a-gift label .tooltiptext:after {
+	border-color: #212121 transparent transparent transparent;
+}
