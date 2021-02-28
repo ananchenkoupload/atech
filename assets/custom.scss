@@ -883,7 +883,7 @@ header.site-header nav#AccessibleNav .site-nav li .site-nav__dropdown .site-nav_
 	padding: 0;
 	width: 100%;
 	height: calc(100vh - 58px);
-	overflow-y: scroll;
+	//overflow-y: scroll;
 	padding-top: 58px;
 }
 /*header.site-header nav#AccessibleNav .site-nav li .site-nav__dropdown .site-nav__childlist:first-child li, 
@@ -1010,7 +1010,7 @@ display: block;
 	width: 510px;
 }
 .shopify-section header.site-header nav#AccessibleNav.desk-menu2 {
-	width: 860px;
+	width: 880px;
 }
 // .announcement-bar .announcement-bar__message {
 	// text-align: center;
