@@ -99,17 +99,29 @@
 	</div>
 
 	{% if section.settings.show_view_all %}
+		<style>
+			.template-index #shopify-section-collection .section-button-holder .links-grid .btn2{
+				background-color: {{ section.settings.btn_bg_color }};
+				border-color: {{ section.settings.btn_color }};
+				color: {{ section.settings.btn_color }};
+			}
+			.template-index #shopify-section-collection .section-button-holder .links-grid .btn2:hover{
+				background-color: {{ section.settings.btn_bg_color_hover }};
+				border-color: {{ section.settings.btn_color_hover }};
+				color: {{ section.settings.btn_color_hover }}!important;
+			}
+		</style>
 		<!-- <hr class="hr--invisible" aria-hidden="true" /> -->
 		<div class="section-button-holder text-center">
 			<div class="links-grid">
 				<div>
-					<a href="{{ collection.url }}" class="btn2 btn2-link"
+					<a href="{{ collection.url }}" class="btn2"
 						aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
 						{% comment %} {{ 'collections.general.view_all' | t }} {% endcomment %}
 						{% if section.settings.title == "Scent Machines" %}
 						SHOP ALL SCENT MACHINES
 						{% else %}
-						shop all
+						shop now
 						{% endif %}
 					</a>
 				</div>
@@ -166,7 +178,7 @@
 	          {
 	            breakpoint: 480,
 	            settings: {
-	              arrows: false,
+	              arrows: true,
 	              centerMode: true,
 	              slidesToShow: 1,
 	              centerPadding: '40px',
@@ -515,31 +527,33 @@
 		{
 			"type": "checkbox",
 			"id": "show_view_all",
-			"label": {
-				"cs": "Zobrazit tlačítko Zobrazit vše",
-				"da": "Vis knappen \"Se flere\"",
-				"de": "'Alle anzeigen' Button anzeigen",
-				"en": "Show 'View all' button",
-				"es": "Mostrar el botón 'Ver todo'",
-				"fi": "Näytä \"Näytä kaikki\" -painike",
-				"fr": "Afficher le bouton “Tout voir”",
-				"hi": "'सभी देखें' बटन दिखाएं",
-				"it": "Mostra il pulsante \"Visualizza tutto\"",
-				"ja": "「すべて表示」ボタンを表示する",
-				"ko": "'모두 보기' 버튼 표시",
-				"nb": "Vis «Se alle»-knapp",
-				"nl": "Knop 'Alles weergeven' weergeven",
-				"pl": "Pokaż przycisk „Wyświetl wszystkie”",
-				"pt-BR": "Exibir botão 'Visualizar tudo'",
-				"pt-PT": "Mostrar botão 'Ver tudo'",
-				"sv": "Visa \"Visa alla\"-knappen",
-				"th": "แสดงปุ่ม 'ดูทั้งหมด'",
-				"tr": "\"Tümünü görüntüle\" düğmesini göster",
-				"vi": "Hiển thị nút \"Xem tất cả\"",
-				"zh-CN": "显示“查看全部”按钮",
-				"zh-TW": "顯示「檢視全部」按鈕"
-			},
+			"label": "Show button",
 			"default": false
+		},
+		{
+			"type": "text",
+			"id": "button_label",
+			"label": "Button label"
+		},
+		{
+			"type": "color",
+			"id": "btn_bg_color",
+			"label": "Button background color"
+		},
+		{
+			"type": "color",
+			"id": "btn_bg_color_hover",
+			"label": "Button background color on hover"
+		},
+		{
+			"type": "color",
+			"id": "btn_color",
+			"label": "Button text color"
+		},
+		{
+			"type": "color",
+			"id": "btn_color_hover",
+			"label": "Button text color hover"
 		}
 	],
 	"presets": [

@@ -51,10 +51,22 @@
 	</div>
 
 	{% if section.settings.show_view_all %}
+		<style>
+			.template-index .scent-machine .section-button-holder .links-grid .btn2{
+				background-color: {{ section.settings.btn_bg_color }};
+				border-color: {{ section.settings.btn_color }};
+				color: {{ section.settings.btn_color }};
+			}
+			.template-index .scent-machine .section-button-holder .links-grid .btn2:hover{
+				background-color: {{ section.settings.btn_bg_color_hover }};
+				border-color: {{ section.settings.btn_color_hover }};
+				color: {{ section.settings.btn_color_hover }}!important;
+			}
+		</style>
 		<div class="section-button-holder text-center">
 			<div class="links-grid">
 				<div>
-					<a href="{{ section.settings.view_all_url }}" class="btn2 btn2-link"
+					<a href="{{ section.settings.view_all_url }}" class="btn2"
 						aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
 						{{ section.settings.view_all_text | escape }}
 					</a>
@@ -181,6 +193,26 @@
 			"id": "view_all_text",
 			"type": "text",
 			"label": "Read more text"
+		},
+		{
+			"type": "color",
+			"id": "btn_bg_color",
+			"label": "Button background color"
+		},
+		{
+			"type": "color",
+			"id": "btn_bg_color_hover",
+			"label": "Button background color on hover"
+		},
+		{
+			"type": "color",
+			"id": "btn_color",
+			"label": "Button text color"
+		},
+		{
+			"type": "color",
+			"id": "btn_color_hover",
+			"label": "Button text color hover"
 		},
 		{
 			"id": "view_all_url",

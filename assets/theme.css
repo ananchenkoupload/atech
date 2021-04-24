@@ -1824,6 +1824,7 @@ ol {
   -webkit-overflow-scrolling: touch;
 }
 
+
 /*================ #Links and Buttons ================*/
 
 a:not([disabled]):hover, a:focus {
@@ -1855,11 +1856,14 @@ a[href^="tel"] {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  border: 1px solid #3a3a3a;
   border-radius: 2px;
   padding: 8px 15px;
-  background-color: var(--color-btn-primary);
-  color: var(--color-btn-primary-text);
+  /* background-color: var(--color-btn-primary); */
+  background-color: white;
+  /* color: var(--color-btn-primary-text); */
+  color: #3a3a3a;
   font-family: var(--font-stack-header);
   font-style: var(--font-style-header);
   font-weight: var(--font-weight-header);
@@ -2553,7 +2557,9 @@ input, textarea {
   border-bottom: 1px solid transparent;
   z-index: 2;
 }
-
+.site-nav--active > a .site-nav__label {
+  border-bottom-color: var(--color-text);
+}
 .site-nav__link:focus .site-nav__label, .site-nav__link:not([disabled]):hover .site-nav__label {
   border-bottom-color: var(--color-text);
 }
@@ -3211,6 +3217,13 @@ hr {
   }
 }
 
+
+#shopify-section-b2b-hotel.index-section--flush:last-child {
+  margin-bottom: 0!important;
+}
+
+
+
 .index-section--flush:last-child {
   margin-bottom: -35px;
 }
@@ -3479,6 +3492,9 @@ hr {
 .password-header {
   height: 85px;
   display: table-row;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .password-header__inner {
@@ -3518,9 +3534,9 @@ hr {
 }
 
 .password-main__inner {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 27.5px 55px;
+  /*display: table-cell;*/
+  /*vertical-align: middle;*/
+  /*padding: 27.5px 55px;*/
 }
 
 .password-message {
@@ -3704,7 +3720,7 @@ hr {
   padding-right: 5px;
   white-space: normal;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   min-height: 44px;
 }
 
@@ -3723,14 +3739,22 @@ hr {
   flex: 50%;
 }
 
-.shopify-payment-button .shopify-payment-button__button--unbranded:hover {
+/* .shopify-payment-button .shopify-payment-button__button--unbranded:hover {
   background-color: var(--color-btn-primary-focus) !important;
+} */
+
+.shopify-payment-button .shopify-payment-button__button--unbranded:hover {
+  background-color: #E1E1E1 !important;
+  color: #3a3a3a !important;
 }
+
 
 .shopify-payment-button .shopify-payment-button__button--branded {
   border-radius: 2px;
   overflow: hidden;
 }
+
+
 
 .shopify-payment-button .shopify-payment-button__more-options {
   margin: 16px 0 10px;
@@ -4623,9 +4647,6 @@ hr {
   display: block;
 }
 
-.additional-checkout-buttons {
-  margin-top: 1rem;
-}
 
 .additional-checkout-buttons input[type="image"] {
   padding: 0;
@@ -6185,7 +6206,7 @@ hr {
 .mobile-nav__link, .mobile-nav__sublist-link {
   display: block;
   width: 100%;
-  padding: 15px 30px;
+  padding: 10px 30px;
   font-size: 16px;
 }
 
@@ -6266,6 +6287,9 @@ hr {
   top: 0;
   right: -100%;
   display: none;
+  /*overflow: auto;*/
+  height: 100%;
+  padding-bottom: 96px;
 }
 
 .is-active+.mobile-nav__dropdown {
@@ -6273,9 +6297,13 @@ hr {
   opacity: 1;
 }
 
+.mobile-nav__dropdown[data-level="3"] {
+  height: 100%;
+}
 .mobile-nav__dropdown.is-closing {
   transition: all 0.45s cubic-bezier(0.29, 0.63, 0.44, 1);
   opacity: 0.99;
+  overflow-y: unset;
 }
 
 .mobile-nav__dropdown .mobile-nav__sublist-header {
@@ -9557,7 +9585,6 @@ div#selector-option-dropdown {
   min-height: 36px;
   padding: 0;
   position: relative;
-  right: -1px;
 }
 
 .product-single .price--on-sale .price__badge--sale {
@@ -9838,7 +9865,11 @@ div#selector-option-dropdown {
 }
 
 .swatch-color-wrap .color {
-  margin: 0px 8px 10px 0 !important;
+  margin: 0px 12px 10px 0 !important;
+}
+
+.swatch-color-wrap .color:nth-child(2) {
+  margin-left: 4px !important;
 }
 
 .product-single__description p {
@@ -9922,9 +9953,6 @@ div#selector-option-dropdown {
   .fragrance-relaxing {
     margin-bottom: 0px;
     width: 50%;
-  }
-  .list-accodian ul li h4 {
-    font-size: 16px;
   }
   .video-sec .video-wrapper {
     padding-bottom: 80.4% !important;

@@ -37,7 +37,7 @@ $font-weight-bold:		700;
   #Featured article
 ------------------------------------------------------------------------------------------------------------------------------------
 */
-.featured-article{
+.featured-article {
 	display: flex;
 	// display: none; //
     flex-direction: row;
@@ -87,6 +87,17 @@ $font-weight-bold:		700;
 		.featured-article__text{
 			@media screen and (max-width: 767px) {
 				padding-bottom: 0;
+			}
+		}
+	}
+}
+
+#shopify-section-b2b-apple-store {
+	@media screen and (max-width: 767px) {
+		margin-bottom: -50px;
+		.featured-article:not([class*="featured-article__background--true"]) {
+			.featured-article__text {
+				padding-bottom: 50px;
 			}
 		}
 	}
@@ -156,7 +167,7 @@ $font-weight-bold:		700;
 		color: inherit;
 		&:hover:not(.btn2-link) {
 			background: #fff;
-			border-color: #fff;
+			border-color: #BA9163;
 			color: #BA9163 !important;
 		}
 	}
@@ -564,6 +575,7 @@ div.newsletter-section{
 		// @media screen and (max-width: 400px) {
 		// 	padding: 0 9px;
 		// }
+		z-index: 1;
 	}
 }
 
@@ -584,5 +596,11 @@ div.newsletter-section{
 		/*margin-right: -10px;
 		margin-left: -10px;*/
 		width: auto;
+	}
+}
+
+#shopify-section-about-us-technology .featured-article, #shopify-section-about-us-story .featured-article {
+	@media screen and (max-width: 767px) {
+		margin-bottom: 0;
 	}
 }

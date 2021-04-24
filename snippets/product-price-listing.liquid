@@ -23,7 +23,7 @@
 
   assign money_price = price | money
 -%}
-
+{% assign defaultProductVariant = product.metafields.variant.default %}
 <dl class="price price--listing
   {%- if available == false %} price--sold-out {% endif -%}
   {%- if compare_at_price > price %} price--on-sale {% endif -%}
@@ -48,6 +48,17 @@
       - div.price__unit: Displayed when the first variant has a unit price
       - div.price__availability: Displayed when the product is sold out
   {%- endcomment -%}
+
+  {% comment %} 
+    Check if product has metafield with 
+    default variant and show price
+  {% endcomment %}
+  {% for variant in product.variants %}
+    {% if variant.title == defaultProductVariant %}
+      {% assign defaultVariantPrice = variant.price | money  %}
+    {% endif %}
+  {% endfor %}
+
   {%- unless compare_at_price > price -%}
     <div class="price__regular">
       <dt>
@@ -55,11 +66,21 @@
       </dt>
       <dd>
         <span class="price-item price-item--regular">
-          {%- if product.price_varies -%}
-            {{ 'products.product.from_lowest_price_html' | t: lowest_price: money_price }}
-          {%- else -%}
-            {{ money_price }}
-          {%- endif -%}
+          {% if collectionPage %}
+            {% comment %} Price from metafields {% endcomment %}
+            {% if defaultVariantPrice != blank %}
+              {{defaultVariantPrice}}
+            {%- else -%}
+              {{ money_price }}
+            {% endif %}
+          {% else %}
+            {%- if product.price_varies -%}
+              <!-- {{ 'products.product.from_lowest_price_html' | t: lowest_price: money_price }} -->
+              {{ product.price | money }}
+            {%- else -%}
+              {{ money_price }}
+            {%- endif -%}
+          {% endif %}
         </span>
       </dd>
     </div>

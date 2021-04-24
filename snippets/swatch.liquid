@@ -58,19 +58,15 @@
       {% assign values = values | join: ',' %}
       {% assign values = values | append: ',' | append: value %} 
       {% assign values = values | split: ',' %}
-      <div data-value="{{ value | escape }}" {% if product.metafields.variant.default == value %} data-variant-image="{{ variant.featured_media.id }}" {% endif %} class="swatch-element {% if product.metafields.variant.default == value %} trigger-click {% endif %} {% if is_color %}color {% endif %}{% if is_size %}size {% endif %} {% if is_care %}care {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+      <div data-image="{{ variant.image.src }}" data-value="{{ value | escape }}" {% if product.metafields.variant.default == value %} data-variant-image="{{ variant.featured_media.id }}" {% endif %} class="swatch-element {% if product.metafields.variant.default == value %} trigger-click {% endif %} {% if is_color %}color {% endif %}{% if is_size %}size {% endif %} {% if is_care %}care {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
         {% if is_color %}
         <div class="tooltip">{{ value }}</div>
         {% endif %}
         <input data-qty-v="{{variant.inventory_quantity|json}}" id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
         {% if is_color %}
-        <label for="swatch-{{ option_index }}-{{ value | handle }}" 
-          {% assign colorHandle = value | handle %}
-          {% if colorHandle == 'rose-gold' %}
-            style="background-color: #b76e79;">
-          {% else %}
-            style="background-color: {{ value | split: ' ' | last | handle }};">
-          {% endif %}
+        {% assign colorHandle = value | handle %}
+        <label class="{% if colorHandle == 'white' %}wh-color{% endif %}" for="swatch-{{ option_index }}-{{ value | handle }}" 
+          style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
         </label>
         {% else %}
         <label for="swatch-{{ option_index }}-{{ value | handle }}">
@@ -138,7 +134,7 @@
 /* Styling selected swatch */
 /* Slightly raised */
 .swatch input:checked + label {
-  border:#000 2px solid;
+  /* border:#000 2px solid; */
   } 
 .swatch .swatch-element {
   float:left;

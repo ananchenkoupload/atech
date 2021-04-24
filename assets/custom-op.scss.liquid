@@ -1117,7 +1117,7 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 	div.product-single {
 		align-items: start;
 		.fragrance-relaxing {
-			width: 59%;
+			width: 57%;
 			{% comment %}max-width: 55%;{% endcomment %}
 			@media (min-width: 768px) and (max-width: 876px) {
 				{% comment %}max-width: 40%;{% endcomment %}
@@ -1137,7 +1137,7 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 			display: block;
 			margin-bottom: 0px;
 			@media (min-width: 768px) and (max-width: 791px) {
-				width: 289px;
+				width: 100%;
 			}
 			@media (min-width: 320px) and (max-width: 480px) {
 				width: 420px;
@@ -1207,13 +1207,32 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 		}
 		button.product-form__cart-submit {
 			float: none;
+			margin-left: 0;
+			margin-right: 0;
+			min-width: 147px;
+			width: 100%;
+			margin-bottom: 15px;
+			max-width: 308px;
+			@media (min-width: 768px) and (max-width: 981px) {
+				max-width: 308px;
+			}
+			@media (min-width: 320px) and (max-width: 480px) {
+				max-width: 100% !important;
+				margin-left: 0;
+				float: none;
+				width: 100% !important;
+			}
+		}
+		.shopify-payment-button {
+			float: none;
 			margin-left: 160px;
 			margin-right: 0;
 			min-width: 147px;
 			width: auto !important;
 			margin-bottom: 15px;
 			@media (min-width: 768px) and (max-width: 981px) {
-				margin-left: auto;
+				max-width: 308px;
+				margin-left: 0;
 			}
 			@media (min-width: 320px) and (max-width: 480px) {
 				max-width: 50% !important;
@@ -1223,15 +1242,15 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 				margin-bottom: 20px;
 			}
 		}
-		.shopify-payment-button {
-		}
 		div.shopify-payment-button .shopify-payment-button__button--unbranded {
 			width: 100% !important;
-			max-width: 308px;
+			max-width: 149px;
 			position: relative;
 			bottom: 0;
 			@media (min-width: 768px) and (max-width: 981px) {
-				max-width: 100%;
+				width: 149px!important;
+				/* display: none; */
+				margin-left: 159px;
 			}
 			@media (min-width: 320px) and (max-width: 480px) {
 				max-width: 459px;
@@ -1297,6 +1316,73 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 	#shopify-section-template-scenting{
 		&.shopify-section {
 			padding: 0;
+		}
+	}
+}
+/* fix */
+.nav-menu .nav-menu__list ul li a {
+	font-size: 14px;
+}
+@media only screen and (min-width: 1300px) {
+	.nav-menu {
+	    max-width: 525px;
+	}
+}
+.nav-menu__active {
+	.tab-menu__close {
+		
+	}
+	.nav-menu {
+	    @media (min-width: 1200px) and (max-width: 1299px) { 
+	    	max-width: 480px;
+	    }
+	}
+	@media only screen and (min-width: 1200px) { 
+		
+		.tab-menu .tab-menu__2th {
+			width: 590px;
+		}
+		.tab-menu .tab-menu__3th.active {
+		    left: 590px;
+		}
+	}
+}
+@media (min-width: 768px) and (max-width: 875px) {
+	.nav-menu .nav-menu__list ul li a {
+		font-size: 12px;
+	}
+	.svg-logo svg {
+		width: 80%;
+	}
+}
+@media (min-width: 749px) and (max-width: 767px) {
+	.nav-menu {
+	    display: none!important;
+	}
+}
+@media only screen and (max-width: 767px) {
+	#MobileNav > li:last-of-type {
+		margin-top: 0;
+	}
+}
+.accodian-rt-video-with-preview {
+	svg {
+		fill:gray;
+		max-width: 50px;
+		max-height: 50px;
+	}
+}
+.template-index .index-section .rich-text__text--large  {
+	@media only screen and (min-width: 950px) { 
+		max-width: 900px;
+		margin: 0 auto;
+	}
+}
+
+.currency-switch-list {
+	&.active {
+		.currency-switch-link {
+			font-weight: 600;
 		}
 	}
 }

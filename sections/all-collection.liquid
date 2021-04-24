@@ -35,14 +35,19 @@
 					<li class="nav-item under-line">
 						<a class="nav-link scroll-link" href="#">ALL</a>
 					</li>
+
 					{% for block in section.blocks %}
-					{% if collection.all_tags contains block.settings.title %}
-					<li class="nav-item under-line">
-						<a class="nav-link scroll-link" href="#{{ block.settings.title | handleize }}">{{ block.settings.title
-							}}</a>
-					</li>
-					{% endif %}
+						{% if collection.all_tags contains block.settings.title %}
+							<li class="nav-item under-line">
+								{% if block.settings.title == 'Shop All' %}
+									<a class="nav-link scroll-link" href="#{{ block.settings.title | handleize }}"><h1>{{ block.settings.title }}</h1></a>
+								{% else %}
+									<a class="nav-link scroll-link" href="#{{ block.settings.title | handleize }}"><h2>{{ block.settings.title }}</h2></a>
+								{% endif %}
+							</li>
+						{% endif %}
 					{% endfor %}
+
 				</ul>
 			</nav>
 		</header>
@@ -72,53 +77,60 @@
 					{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
 					{% endcase %}
 
-					<ul class="collet-product">
-						{% for product in collection.products %}
-						{% if product.tags contains block.settings.title %}
-						<li
-							class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
-							{% include 'product-card-grid', max_height: max_height, product: product, show_vendor:
-							section.settings.show_vendor %}
-							<form action="/cart/add" method="post" id="product-form- {{ product.id }}">
-								<input type="hidden" name="id" value="{{ product.variants.first.id }}">
-								<div class="custom-add-to-cart">
-									<button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add"
-										data-url="{{ product.url }}">Add to cart {% include 'product-variants' %}</button>
-								</div>
-							</form>
-						</li>
-						{% endif %}
-						{% else %}
-						{% comment %}
-						Add default products to help with onboarding for collections/all only.
+					<ul class="tt collet-product">
+						{% assign products_sort = collection.products | sort: 'title' %}
+						{% for product in products_sort %}
+							{% if product.tags contains block.settings.title %}
+									<li class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
+										
+										{% include 'product-card-grid', 
+											max_height: max_height, 
+											product: product, 
+											show_vendor: section.settings.show_vendor,
+											collectionPage: true 
+										%}
 
-						The onboarding styles and products are only loaded if the
-						store has no products.
-						{% endcomment %}
-						{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-						{% if product.tags contains block.settings.title %}
-						<li class="grid__item">
-							<div class="grid grid--uniform">
-								{% for i in (1..limit) %}
-								<div class="grid__item {{ grid_item_width }}">
-									<div class="grid-view-item">
-										<a href="#" class="grid-view-item__link">
-											<div class="grid-view-item__image">
-												{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-												{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+										<form action="/cart/add" method="post" id="product-form- {{ product.id }}">
+											<input type="hidden" name="id" value="{{ product.variants.first.id }}">
+											<div class="custom-add-to-cart">
+												<button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add"
+													data-url="{{ product.url }}">Add to cart {% include 'product-variants' %}</button>
 											</div>
-											<div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-											{% include 'product-price' %}
-										</a>
-									</div>
-								</div>
-								{% endfor %}
-							</div>
-						</li>
-						{% endif %}
-						{% else %}
-						{%- assign is_empty_collection = true -%}
-						{% endif %}
+										</form>
+
+									</li>
+								{% endif %}
+							{% else %}
+							{% comment %}
+							Add default products to help with onboarding for collections/all only.
+
+							The onboarding styles and products are only loaded if the
+							store has no products.
+							{% endcomment %}
+							{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+								{% if product.tags contains block.settings.title %}
+									<li class="grid__item">
+										<div class="grid grid--uniform">
+											{% for i in (1..limit) %}
+												<div class="grid__item {{ grid_item_width }}">
+													<div class="grid-view-item">
+														<a href="#" class="grid-view-item__link">
+															<div class="grid-view-item__image">
+																{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+																{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+															</div>
+															<div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+															{% include 'product-price' %}
+														</a>
+													</div>
+												</div>
+											{% endfor %}
+										</div>
+									</li>
+								{% endif %}
+							{% else %}
+								{%- assign is_empty_collection = true -%}
+							{% endif %}
 						{% endfor %}
 					</ul>
 					{% else %}
@@ -221,8 +233,8 @@
 	$(".nav-perent-title").hide();
 	// $(window).resize(function(){
 	if ($(window).width() <= 767) {
-		$(".nav-perent-title").show();
-		$(".panel-menubar").hide();
+		// $(".nav-perent-title").addClass('active');
+		$(".panel-menubar").show();
 		$(document).ready(function () {
 			$(".flip-title").click(function () {
 				$(".panel-menubar").slideToggle("slow");

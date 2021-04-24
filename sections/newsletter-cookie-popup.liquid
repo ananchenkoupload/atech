@@ -267,6 +267,7 @@ font-family: 'GT America' !important;
   }
 </style>
 
+{% if section.settings.show_popup %}
 <script>
 jQuery(document).ready(function () {
     function openFancybox() {
@@ -289,6 +290,7 @@ jQuery(document).ready(function () {
     });
 });
 </script>
+{% endif %}
 
 {% schema %}
 {
@@ -298,6 +300,11 @@ jQuery(document).ready(function () {
   },
   "class": "klaviyo-newsletter",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Show newsletter popup"
+    },
     {
       "type": "text",
       "id": "newsletter_title",

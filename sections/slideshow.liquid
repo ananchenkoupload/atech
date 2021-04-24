@@ -26,6 +26,8 @@
 	var auto_rotate_speed_bool = (/true/i).test(auto_rotate_speed);
 </script>
 
+	{% assign font_size_heading = '50' %}
+
 <div data-section-id="{{ section.id }}" class="slideshow-swipe {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
 	{%- if section.blocks.size > 0 -%}
 		<div id="SlideshowWrapper-{{ section.id }}" class="slideshow-wrapper" >
@@ -34,6 +36,8 @@
 				
 				<div class="slideshow-frame">
 					{%- for block in section.blocks -%}
+
+						{%- assign font_size_heading = block.settings.font_size_heading -%}
 						{%- assign block_image = block.settings.image -%}
 						<div id="slickSlide-{{ block.id }}" class="{{ block.settings.custom_class }} slideshow__slide--{{ block.id }}{% if forloop.first %} slick-current slick-active{% endif %}" style="background-color: {{ block.settings.color_back_bg }};">
 							
@@ -67,12 +71,12 @@
 									<div class="page-width2">
 										{% unless block.settings.slide_title == blank and block.settings.subheading == blank %}
 											{%- unless block.settings.slide_title == blank -%}
-												<h1 class="h1 mega-title slideshow__title{% if section.settings.text_size == 'large' %} mega-title--large{% endif %}" style="color: {{ block.settings.text_color }};">
+												<h1 class="h1 mega-title slideshow__title" style="color: {{ block.settings.text_color }};">
 													{{- block.settings.slide_title -}}
 												</h1>
 											{%- endunless -%}
 											{%- unless block.settings.subheading == blank -%}
-												<span class="h4 mega-subtitle slideshow__subtitle{% if section.settings.text_size == 'large' %} mega-subtitle--large{% endif %}" style="color: {{ block.settings.text_color }};">
+												<span class="h4 mega-subtitle slideshow__subtitle" style="color: {{ block.settings.text_color }};">
 													{{ block.settings.subheading }}
 												</span>
 											{%- endunless -%}
@@ -232,7 +236,13 @@
 		</div>
 	{% endif %}
 </div>
-
+<style>
+	@media (min-width: 1180px) {
+		.slideshow .mega-title {
+			font-size: {{ font_size_heading }}px!important;
+		}
+	}
+</style>
 {% comment %}
 <style>
 	.slideshow__text-content.slideshow__text-content--mobile {
@@ -727,91 +737,6 @@
 			"type": "color",
 			"id": "btn_color_hover_mob",
 			"label": "Mobile Button text color hover"
-		},
-		{
-			"type": "select",
-			"id": "text_size",
-			"label": {
-				"cs": "Velikost textu",
-				"da": "Tekststørrelse",
-				"de": "Textgröße",
-				"en": "Text size",
-				"es": "Tamaño del texto",
-				"fi": "Tekstin koko",
-				"fr": "Taille du texte",
-				"hi": "टेक्स्ट आकार",
-				"it": "Dimensione testo",
-				"ja": "文字サイズ",
-				"ko": "텍스트 사이즈",
-				"nb": "Tekststørrelse",
-				"nl": "Tekengrootte",
-				"pl": "Rozmiar czcionki",
-				"pt-BR": "Tamanho do texto",
-				"pt-PT": "Tamanho do texto",
-				"sv": "Textstorlek",
-				"th": "ขนาดตัวอักษร",
-				"tr": "Metin boyutu",
-				"vi": "Cỡ văn bản",
-				"zh-CN": "文本大小",
-				"zh-TW": "文字尺寸"
-			},
-			"default": "medium",
-			"options": [
-				{
-					"label": {
-						"cs": "Střední",
-						"da": "Medium",
-						"de": "Mittel",
-						"en": "Medium",
-						"es": "Mediano",
-						"fi": "Keskisuuri",
-						"fr": "Moyenne",
-						"hi": "मध्यम",
-						"it": "Medio",
-						"ja": "中",
-						"ko": "보통",
-						"nb": "Middels",
-						"nl": "Gemiddeld",
-						"pl": "Średnia",
-						"pt-BR": "Médio",
-						"pt-PT": "Intermédio",
-						"sv": "Medium",
-						"th": "ปานกลาง",
-						"tr": "Orta",
-						"vi": "Trung bình",
-						"zh-CN": "中等",
-						"zh-TW": "中等"
-					},
-					"value": "medium"
-				},
-				{
-					"label": {
-						"cs": "Velká",
-						"da": "Stor",
-						"de": "Groß",
-						"en": "Large",
-						"es": "Grande",
-						"fi": "Suuri",
-						"fr": "Grande",
-						"hi": "बड़ा",
-						"it": "Grande",
-						"ja": "大",
-						"ko": "라지",
-						"nb": "Stor",
-						"nl": "Groot",
-						"pl": "Duża",
-						"pt-BR": "Grande",
-						"pt-PT": "Grande",
-						"sv": "Stor",
-						"th": "ใหญ่",
-						"tr": "Büyük",
-						"vi": "Lớn",
-						"zh-CN": "大",
-						"zh-TW": "大型"
-					},
-					"value": "large"
-				}
-			]
 		},
 		{
 			"type": "select",
@@ -1600,6 +1525,16 @@
 			"id":"mobile_text_color",
 			"label":"Mobile Text color",
 			"default":"#fff"
+		},
+		{
+			"type": "range",
+			"id": "font_size_heading",
+			"min": 3,
+			"max": 80,
+			"step": 1,
+			"unit": "px",
+			"label": "Font size",
+			"default": 50
 		},
 		{	
 			"type": "text",

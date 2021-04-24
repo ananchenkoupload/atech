@@ -62,6 +62,7 @@
 						</div>
 					</div>
 					<div class="form-group">
+						{%- comment -%}
 						<div class="form-item checkbox-row inline">
 							<strong class="title">{{ 'contact.form.message2' | t }}</strong>
 							<label class="aroma-checkbox-label"
@@ -83,6 +84,7 @@
 								<span class="fake-checkbox"></span>{{'contact.form.check2' | t }}
 							</label>
 						</div>
+						{%- endcomment -%}
 					</div>
 					<div class="form-group">
 						<div class="form-item">
@@ -97,7 +99,9 @@
 					</div>
 					<div class="form-group">
 						<div class="form-item checkbox-row">
+							{%- comment -%}
 							<strong class="title">{{ 'contact.form.message3' | t }}</strong>
+							{%- endcomment -%}
 							<label class="aroma-checkbox-label"
 									for="{{ formId }}-check3">
 								<input id="{{ formId }}-check3"

@@ -1,4 +1,4 @@
-<div class="page-width2 rich-text b2b-form {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
+<div id="b2b-form" class="page-width2 rich-text b2b-form {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
 	{% if section.settings.section_title != blank %}
 		<div class="rich-text__heading--{{ section.settings.text_size }} text-center">
 			<h2 class="h3">{{ section.settings.section_title | escape }}</h2>
@@ -77,6 +77,7 @@
 							<option value="Nightclubs & Bars">Nightclubs & Bars</option>
 							<option value="Restaurants">Restaurants</option>
 							<option value="Car Dealerships">Car Dealerships</option>
+							<option value="Other">Other</option>
 						</select>
 					</div>
 					<div class="form-item">

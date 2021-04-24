@@ -39,10 +39,10 @@
                     <div class="SlideContainer swiper-slide">
                         <div class="BackwSlide SLIDECHANGE{{block.id}}" style="background-image: url({{block.settings.backImg | img_url: 'master'}}); background-size: cover; background-repeat: no-repeat;">
                             <div class="page-width2">
-                                <h2 class="SlideTitle">{{block.settings.producttitle}}</h2>
+                                <h2 class="SlideTitle">{{block.settings.title}}</h2>
                                 <div class="product-keys">{{block.settings.producttxtk}}</div>
                                 <div class="SlideImage">
-                                    <img src="{{block.settings.bootleImg | img_url: '600x'}}" class="lazyload" alt="{{block.settings.producttitle}}">  
+                                    <img src="{{block.settings.bootleImg | img_url: '600x'}}" class="lazyload" alt="{{block.settings.title}}">  
                                 </div>
                                 <div class="ContentPro">
                                     {{block.settings.producttxt | truncate: 672, ''}}
@@ -85,7 +85,7 @@
         </div>
         <div class="page-width2 top-title-keys">
           {% for block in section.blocks limit: 1 %}
-            <h2 class="SlideTitle">{{block.settings.producttitle}}</h2>
+            <h2 class="SlideTitle">{{block.settings.title}}</h2>
             <div class="product-keys">{{block.settings.producttxtk}}</div>
           {% endfor %}
         </div>
@@ -95,7 +95,7 @@
                     <div class="SlideContainer swiper-slide">
                         <div data-img-url="{{block.settings.backImg | img_url: 'master'}}" class="BackwSlide SLIDECHANGE{{block.id}}"
                               data-count="{{forloop.index}}"
-                              data-title="{{block.settings.producttitle}}"
+                              data-title="{{block.settings.title}}"
                               data-keys="{{block.settings.producttxtk}}"
                               data-content="{{block.settings.producttxt | truncate: 672, ''}}"
                               data-btn-url="{{block.settings.productbuttonlink}}"
@@ -105,7 +105,7 @@
 
                             <div class="page-width2">
                                 <div class="SlideImage">
-                                    <img src="{{block.settings.bootleImg | img_url: '600x'}}" class="lazyload" alt="{{block.settings.producttitle}}">  
+                                    <img src="{{block.settings.bootleImg | img_url: '600x'}}" class="lazyload" alt="{{block.settings.title}}">  
                                 </div>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
 	  "blocks": [
 		  {
               "type": "product_slide",
-              "name": "Product Slide",
+              "name": "Product Title",
               "settings": [
                   {
                       "type": "image_picker",
@@ -295,7 +295,7 @@
                   },
                   {
                       "type": "text",
-                      "id": "producttitle",
+                      "id": "title",
                       "label": "Product Title"
                   },
                   {

@@ -31,7 +31,28 @@
                 .announcement-bar__link {
 				    text-decoration-line: none;
 				}
-              	
+
+				.announcement-bar__container a {
+					color: {{ section.settings.color_text }};
+					text-decoration: none;
+				}
+				@media (max-width: 767px) {
+					.announcement-bar__container p a:last-child {
+						display: block;
+					}
+
+					.announcement-bar__container a {
+						font-size: 10px;
+						line-height: 12px;
+					}
+				}
+				.announcement-bar__container a:hover {
+					color: #BA9163;
+				}
+				.announcement-bar__container p {
+					margin-bottom: 0;
+					color: {{ section.settings.color_text }};
+				}
 				.announcement-bar__link:hover {   
                  
                   {% comment %}
@@ -75,18 +96,14 @@
 			</style>
 			<div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}" style="display: none;">
 				<div class="announcement-bar__container">
-                  
-					{%- unless section.settings.message_link == blank -%}
-					<a href="{{ section.settings.message_link }}" class="announcement-bar__link">
-						{%- endunless -%}
-						<p class="announcement-bar__message">{{ section.settings.message_text | escape }}</p>
-						{%- unless section.settings.message_link == blank -%}
-					</a>
-					{%- endunless -%}
-                                        
-                    <button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
+
+					<div class="announcement-bar__link">
+						<div class="announcement-bar__message">{{ section.settings.message_text }}</div>
+					</div>
+
+					<button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
 				</div>
 			</div>
 		{% endif %}
@@ -171,6 +188,9 @@
 			</div>
 			<div>
 				<div class="site-header__icons-wrapper">
+					<div class="site-header__icons-item currency-switcher">
+						{% include 'multi-currency' %}
+					</div>
 					<div class="site-header__icons-item">
 						<button type="button" class="btn2 btn2-link site-header__icon site-header__search-toggle js-drawer-open-top"
 							data-predictive-search-open-drawer>
@@ -206,19 +226,19 @@
 							</div>
 						</a>
 					</div>
-					<div class="site-header__icons-item currency-switcher">
-						{% include 'multi-currency' %}
-					</div
 				</div>
 			</div>
 		</div>
 		{% if section.settings.align_logo == 'left' %}
-			<nav class="grid__item medium-up--one-half small--hide" id="AccessibleNav" role="navigation">
-				{% include 'site-nav', linklist: section.settings.main_linklist %}
-			</nav>
+
+				<nav class="grid__item medium-up--one-half small--hide" id="AccessibleNav" role="navigation">
+					{% include 'site-nav', linklist: section.settings.main_linklist %}
+				</nav>
+			{% include 'site-nav-new', linklist: section.settings.main_linklist %}
+
 		{% endif %}
 
-		<nav class="mobile-nav-wrapper medium-up--hide critical-hidden" role="navigation">
+		<nav class="mobile-nav-wrapper critical-hidden" role="navigation">
 			<ul id="MobileNav" class="mobile-nav">
 				{% for link in linklists[section.settings.main_linklist].links %}
 					{%- assign outerLoopIndex = forloop.index -%}
@@ -347,6 +367,7 @@
 			</div>
 		</nav>
 	</header>
+	<div class="nav-menu__overlay"></div>
 	<script>
 		$(document).ready(function () {
 			$('.site-header__menu-toggle--open').click(function () {
@@ -468,10 +489,10 @@
         }
       
 		$(document).ready(function () {       
-			$(".mobile-nav--open").click(function () {
+			$(".js-mobile-nav-toggle").click(function () {
 				$(".announcement-bar").css("display", "none");
 				$("body").removeClass("has-announcement-bar");
-				$('body').addClass('lock-scroll');
+				$('body').toggleClass('lock-scroll');
 			});
 			$(document).click(function () {
 				var topheader = $('.mobile-nav-wrapper').hasClass('js-menu--is-open');
@@ -906,7 +927,7 @@
 			"default": true
 		},
 		{
-			"type": "text",
+			"type": "richtext",
 			"id": "message_text",
 			"label": {
 				"cs": "Text",
@@ -931,82 +952,6 @@
 				"vi": "Văn bản",
 				"zh-CN": "文本",
 				"zh-TW": "文字"
-			},
-			"default": {
-				"cs": "Tady můžete zadat oznámení",
-				"da": "Meddel noget her",
-				"de": "Hier etwas ankündigen",
-				"en": "Announce something here",
-				"es": "Anuncia algo aquí",
-				"fi": "Ilmoita jotakin tässä",
-				"fr": "Annoncez quelque chose ici",
-				"hi": "यहां कुछ घोषित करें",
-				"it": "Annuncia qualcosa qui",
-				"ja": "ここで告知してください",
-				"ko": "여기에 공지하십시오",
-				"nb": "Kunngjør noe her",
-				"nl": "Kondig hier iets aan",
-				"pl": "Ogłoś coś tutaj",
-				"pt-BR": "Anuncie algo aqui",
-				"pt-PT": "Anunciar algo aqui",
-				"sv": "Meddela något här",
-				"th": "ประกาศข้อความที่นี่",
-				"tr": "Buraya bir duyuru ekleyin",
-				"vi": "Thông báo điều gì đó tại đây",
-				"zh-CN": "在此处进行公告",
-				"zh-TW": "在此公告資訊"
-			}
-		},
-		{
-			"type": "url",
-			"id": "message_link",
-			"label": {
-				"cs": "Odkaz",
-				"da": "Link",
-				"de": "Link",
-				"en": "Link",
-				"es": "Enlace",
-				"fi": "Linkki",
-				"fr": "Lien",
-				"hi": "लिंक",
-				"it": "Link",
-				"ja": "リンク",
-				"ko": "링크",
-				"nb": "Kobling",
-				"nl": "Link",
-				"pl": "Link",
-				"pt-BR": "Link",
-				"pt-PT": "Ligação",
-				"sv": "Länk",
-				"th": "ลิงก์",
-				"tr": "Bağlantı",
-				"vi": "Liên kết",
-				"zh-CN": "链接",
-				"zh-TW": "連結"
-			},
-			"info": {
-				"cs": "Volitelné",
-				"da": "Valgfri",
-				"de": "Optional",
-				"en": "Optional",
-				"es": "Opcional",
-				"fi": "Valinnainen",
-				"fr": "Facultatif",
-				"hi": "वैकल्पिक",
-				"it": "Facoltativo",
-				"ja": "オプション",
-				"ko": "선택 사항",
-				"nb": "Valgfritt",
-				"nl": "Optioneel",
-				"pl": "Opcjonalnie",
-				"pt-BR": "Opcional",
-				"pt-PT": "Opcional",
-				"sv": "Valfritt",
-				"th": "ไม่จำเป็น",
-				"tr": "İsteğe bağlı",
-				"vi": "Không bắt buộc",
-				"zh-CN": "可选",
-				"zh-TW": "(選填)"
 			}
 		},
 		{

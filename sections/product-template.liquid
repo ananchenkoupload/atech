@@ -78,12 +78,9 @@
 	{%- assign enable_image_zoom = false -%}
 	{% endcase %}
 	<div class="product-top-section">
-		<div
-			class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.media_size }}-media{% endif %}">
+		<div class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.media_size }}-media{% endif %}">
 
-			<div
-				class="grid__item product-single__media-group {{ product_media_width }}{% if section.settings.media_size == 'full' %} product-single__media-group--full{% endif %}"
-				data-product-single-media-group>
+			<div class="grid__item product-single__media-group {{ product_media_width }}{% if section.settings.media_size == 'full' %} product-single__media-group--full{% endif %}" data-product-single-media-group>
 
 				{% include 'product-badges' %}
 
@@ -208,12 +205,14 @@
 				</div>
 				{% endif %}
 				<!-- Gallery Image -->
-
+				<div class="asd" style="display: none;">
+					{% for media in product.media %}
+					 	||||||{{media|json}}||||||
+					{% endfor %}
+				</div>
 			</div>
 
-
-
-			<div class="grid__item {{ product_description_width }} ">
+			<div class="grid__item product-single__description-group {{ product_description_width }} ">
 				<div class="product-description">
 					<div class="product-single__meta">
 						<div class="fragrance-review-wrap">
@@ -307,6 +306,10 @@
 								<div class="product-form__item product-form__item--submit
 											{%- if section.settings.enable_payment_button %} product-form__item--payment-button {%- endif -%}
 											{%- if product.has_only_default_variant %} product-form__item--no-variants {%- endif -%}">
+
+									{% if section.settings.enable_payment_button %}
+										{{ form | payment_button }}
+									{% endif %}
 									<button type="submit" id="add-to-cart" name="add" {% unless current_variant.available %}
 										aria-disabled="true" {% endunless %}
 										aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
@@ -323,131 +326,198 @@
 											{% include 'icon-spinner' %}
 										</span>
 									</button>
-									{% if section.settings.enable_payment_button %}
-									{{ form | payment_button }}
-									{% endif %}
 								</div>
 							</div>
 						</div>
 						{% endform %}
 					</div>
+					<div class="product-description-below-desktop">
+						{%- comment -%}
+						Live region for announcing updated price and availability to screen readers
+						{%- endcomment -%}
+						<p class="visually-hidden" data-product-status aria-live="polite" role="status"></p>
 
+						{%- comment -%}
+						Live region for announcing that the product form has been submitted and the
+						product is in the process being added to the cart
+						{%- endcomment -%}
+						<p class="visually-hidden" data-loader-status aria-live="assertive" role="alert" aria-hidden="true">{{
+							'products.product.loader_label' | t }}</p>
+
+						{%- comment -%}
+						{% if product.metafields.Extended.extended_handle != blank %}
+
+						<div class="m-ext-single {{ sold_out_class }}">
+
+							{% assign convertingString = product.metafields.Extended.extended_handle | parse_json %}
+
+							{% assign someProduct = all_products[convertingString] %}
+
+							{% include 'product-ext-wr-single', Product: someProduct %}
+
+						</div>
+
+						{% endif %}
+						{%- endcomment -%}
+
+						<div class="product-single__description rte">
+							{{ product.description }}
+						</div>
+
+						{% if section.settings.show_share_buttons %}
+						{% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image:
+						product.featured_media %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+			<div class="product-description-below-mobile">
 					{%- comment -%}
-					Live region for announcing updated price and availability to screen readers
-					{%- endcomment -%}
+                    Live region for announcing updated price and availability to screen readers
+                    {%- endcomment -%}
 					<p class="visually-hidden" data-product-status aria-live="polite" role="status"></p>
 
 					{%- comment -%}
-					Live region for announcing that the product form has been submitted and the
-					product is in the process being added to the cart
-					{%- endcomment -%}
+                    Live region for announcing that the product form has been submitted and the
+                    product is in the process being added to the cart
+                    {%- endcomment -%}
 					<p class="visually-hidden" data-loader-status aria-live="assertive" role="alert" aria-hidden="true">{{
 						'products.product.loader_label' | t }}</p>
 
-					{% if product.metafields.Extended.extended_handle != blank %}
+					{%- comment -%}
+                    {% if product.metafields.Extended.extended_handle != blank %}
 
-					<div class="m-ext-single {{ sold_out_class }}">
+                    <div class="m-ext-single {{ sold_out_class }}">
 
-						{% assign convertingString = product.metafields.Extended.extended_handle | parse_json %}
+                        {% assign convertingString = product.metafields.Extended.extended_handle | parse_json %}
 
-						{% assign someProduct = all_products[convertingString] %}
+                        {% assign someProduct = all_products[convertingString] %}
 
-						{% include 'product-ext-wr-single', Product: someProduct %}
+                        {% include 'product-ext-wr-single', Product: someProduct %}
 
-					</div>
+                    </div>
 
-					{% endif %}
+                    {% endif %}
+                    {%- endcomment -%}
 
 					<div class="product-single__description rte">
 						{{ product.description }}
 					</div>
 
 					{% if section.settings.show_share_buttons %}
-					{% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image:
-					product.featured_media %}
+						{% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image:
+						product.featured_media %}
 					{% endif %}
-				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
 {% if product.metafields.ProductOptions.Accordion_Title.size > 0 %}
-<!--accodian width image section start here-->
-<div class="accodian-with-image page-width2">
+	<!--accodian width image section start here-->
+	<div class="accodian-with-image page-width2">
 
-	{% if product.metafields.ProductOptions.Accordion_Type == 'Simple' %}
-	<div class="list-accodian accodian-content m-opened">
-		<ul class="accodian-with-list accodian-sec">
-			{% for benefits in product.metafields.ProductOptions.Accordion_Title %}
-			<li>
-				<h2 class="h5">{{product.metafields.ProductOptions.Accordion_Title[forloop.index0]}}</h2>
-				<p>{{product.metafields.ProductOptions.Description[forloop.index0]}}</p>
-			</li>
-			{% endfor %}
-			{% if product.metafields.ProductOptions.ReadMoreLink != blank %}
-			<li>
-				<div class="content">
-					<div class="acc">
-						<div class="acc__card">
-							<div class="read_more_link js-more-content-show">
-								<h2 class="h5">{{product.metafields.Read_More_Content.Read_More_Content}} {% include 'accordion-plus' %}</h2>
+		{% if product.metafields.ProductOptions.Accordion_Type == 'Simple' %}
+		<div class="list-accodian accodian-content m-opened">
+			<ul class="accodian-with-list accodian-sec">
+				{% for benefits in product.metafields.ProductOptions.Accordion_Title %}
+				<li>
+					<h2 class="h5">{{product.metafields.ProductOptions.Accordion_Title[forloop.index0]}}</h2>
+					<p>{{product.metafields.ProductOptions.Description[forloop.index0]}}</p>
+				</li>
+				{% endfor %}
+				{% if product.metafields.ProductOptions.ReadMoreLink != blank %}
+				<li>
+					<div class="content">
+						<div class="acc">
+							<div class="acc__card">
+								<div class="read_more_link js-more-content-show">
+									<h2 class="h5">{{product.metafields.Read_More_Content.Read_More_Content}} {% include 'accordion-plus' %}</h2>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-			{% endif %}
-		</ul>
-	</div>
-	{% else %}
-	<div class="list-accodian accodian-content">
-		<ul class="accodian-sec">
-			{% for benefits in product.metafields.ProductOptions.Accordion_Title %}
-			<li>
-				<div class="content">
-					<div class="acc">
-						<div class="acc__card">
-							<div class="acc__title">
-								<h2 class="h5">{{product.metafields.ProductOptions.Accordion_Title[forloop.index0]}}</h2>
-							</div>
-							<div class="acc__panel">
-								{{product.metafields.ProductOptions.Description[forloop.index0]}}
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			{% endfor %}
-			{% if product.metafields.ProductOptions.ReadMoreLink != blank %}
-			<li>
-				<div class="content">
-					<div class="acc">
-						<div class="acc__card">
-							<div class="read_more_link js-more-content-show">
-								<h5>{{product.metafields.Read_More_Content.Read_More_Content}} {% include 'accordion-plus' %}</h5>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			{% endif %}
-		</ul>
-	</div>
-	{% endif %}
-	<div class="accodian-rt-img">
-		{% if product.metafields.ProductOptions.Accordion_Type != blank %}
-		<img src="{{product.metafields.ProductOptions.Accordion_Right_Image}}" />
+				</li>
+				{% endif %}
+			</ul>
+		</div>
 		{% else %}
-		<img src="{{ 'content-with-img.jpg' | asset_url }}" />
+		<div class="list-accodian accodian-content">
+			<ul class="accodian-sec">
+				{% for benefits in product.metafields.ProductOptions.Accordion_Title %}
+				<li>
+					<div class="content">
+						<div class="acc">
+							<div class="acc__card">
+								<div class="acc__title">
+									<h2 class="h5">{{product.metafields.ProductOptions.Accordion_Title[forloop.index0]}}</h2>
+								</div>
+								<div class="acc__panel">
+									{{product.metafields.ProductOptions.Description[forloop.index0]}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+				{% if product.metafields.ProductOptions.ReadMoreLink != blank %}
+				<li>
+					<div class="content">
+						<div class="acc">
+							<div class="acc__card">
+								<div class="read_more_link js-more-content-show">
+									<h5>{{product.metafields.Read_More_Content.Read_More_Content}} {% include 'accordion-plus' %}</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
 		{% endif %}
+		<div class="accodian-rt-img">
+			{% if product.metafields.ProductOptions.Accordion_Type != blank %}
+				{% if product.metafields.ProductOptions.Accordion_Right_Image != blank %}
+					<img src="{{product.metafields.ProductOptions.Accordion_Right_Image}}" />
+				{% elsif product.metafields.ProductOptions.Accordion_Right_Video != blank %}
+
+					{% if product.metafields.ProductOptions.Accordion_Right_Video_Preview != blank %}
+						<div class="accodian-rt-video" style="padding:52.73% 0 0 0;position:relative;">
+							<div class="accodian-rt-video-with-preview">
+								<img src="{{product.metafields.ProductOptions.Accordion_Right_Video_Preview}}" />
+								<div>
+									<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" fill="rgb(66,182,248)" xml:space="preserve"><path d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M357.771,264.969 l-149.333,96c-1.75,1.135-3.771,1.698-5.771,1.698c-1.75,0-3.521-0.438-5.104-1.302C194.125,359.49,192,355.906,192,352V160 c0-3.906,2.125-7.49,5.563-9.365c3.375-1.854,7.604-1.74,10.875,0.396l149.333,96c3.042,1.958,4.896,5.344,4.896,8.969 S360.813,263.01,357.771,264.969z"/></svg>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<div class="accodian-rt-video" style="padding:52.73% 0 0 0;position:relative;">
+							<iframe src="https://player.vimeo.com/video/{{product.metafields.ProductOptions.Accordion_Right_Video | remove: 'https://vimeo.com/'}}?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+						</div>
+					{% endif %}
+
+					<script src="https://player.vimeo.com/api/player.js"></script>
+				{% else %}
+				{% endif %}
+			{% else %}
+				<img src="{{ 'content-with-img.jpg' | asset_url }}" />
+			{% endif %}
+		</div>
+
 	</div>
-</div>
-<!--accodian width image section end here-->
+	<!--accodian width image section end here-->
+{% endif %}
+
+{% if product.metafields.product_tabs.reviews != blank %}
+	<div class="accodian-with-image page-width2">
+		{% include 'product-tabs' %}
+	</div>
 {% endif %}
 
 {% if product.metafields.specs.details != blank or product.metafields.specs.use != blank %}
-<!--accodian width image section start here-->
+	<!--accodian width image section start here-->
 	<div class="product-specs page-width2 mb-50">
 		<div class="product-specs-inner-wrapper">
 			<div class="product-details">
@@ -515,13 +585,20 @@
 {% endif %}
 
 
+<div class="product-review-box">
+	<div class="page-width2">
+		<span class="js-mob-reviews"></span>
+		{% include 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %}
+	</div>
+</div>
+
 {% if product.metafields.ProductOptions.Video_url != blank %}
 <!--video section start here-->
 <div class="video-sec">
 	<div class="video-wrapper">
 		<div class="player-src" data-video="{{ product.metafields.ProductOptions.Video_url }}">
 			<iframe id="player"
-				src="https://player.vimeo.com/video/{{ product.metafields.ProductOptions.Video_url }}?&autoplay=1&muted=1"
+				src="https://player.vimeo.com/video/{{ product.metafields.ProductOptions.Video_url | remove: 'https://vimeo.com/' }}?&autoplay=1&muted=1"
 				width="720" height="405" frameborder="0" frameborder="0" webkitallowfullscreen mozallowfullscreen
 				allowfullscreen allow="autoplay; fullscreen"></iframe>
 		</div>
@@ -626,19 +703,18 @@ blank %}
  
 
 
-<div class="product-review-box">
-	<div class="page-width2">
-		<span class="js-mob-reviews"></span>
-		{% include 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true %}
-	</div>
-</div>
 
+<script>
+ $('.accodian-rt-video-with-preview').on('click', function () {
+ 	$(this).html(` <iframe src="https://player.vimeo.com/video/{{product.metafields.ProductOptions.Accordion_Right_Video | remove: 'https://vimeo.com/'}}?title=0&byline=0&portrait=0&autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`)
+ });
 
+</script>
 
 {% unless product == empty %}
 <script type="application/json" id="ProductJson-{{ section.id }}">
-		{{ product | json }}
-	</script>
+{{ product | json }}
+</script>
 <script type="application/json" id="ModelJson-{{ section.id }}">
 		{{ product.media | where: 'media_type', 'model' | json }}
 	</script>
@@ -647,7 +723,11 @@ blank %}
 	.swatch-color-wrap label {
 		height: 26px !important;
 		width: 26px !important;
-		border: 1px solid #000;
+		border: none;
+	}
+
+	.swatch-color-wrap label.wh-color {
+		border: 1px solid #c7c0c0;
 	}
 
 	.image-with-content {
@@ -658,6 +738,35 @@ blank %}
 		.image-with-content {
 			background-image:url('{{ product.metafields.ProductOptions.Content_media_mobile_bg }}')
 		}
+	}
+	.accodian-rt-video-with-preview {
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.accodian-rt-video-with-preview img {
+		width:100%;
+		height:100%;
+		object-fit: cover;
+	}
+
+	.accodian-rt-video-with-preview:hover img, .accodian-rt-video-with-preview:hover img + div {
+		opacity: 0.9;
+	}
+
+	.accodian-rt-video-with-preview > div {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 2;
+		width: 50px;
+		height: 50px;
+		transform: translate(-50%, -50%);
 	}
 </style>
 

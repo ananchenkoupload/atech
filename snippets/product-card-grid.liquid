@@ -44,7 +44,9 @@ Usage:
 	</h6>
 	<div class="product-card2__footer">
 		<!-- <strong class="title">From</strong> -->
-		<span class="list-price">{% include 'product-price-listing', product: product, show_vendor: show_vendor %}</span>
+		<span class="list-price">
+			{% include 'product-price-listing', product: product, show_vendor: show_vendor, collectionPage: collectionPage %}
+		</span>
 	</div>
 </div>
 

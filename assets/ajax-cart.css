@@ -1011,16 +1011,23 @@ header.site-header {
       }
   }
 
-  .is-a-gift label .tooltiptext::after {
-      content: " ";
-      position: absolute;
-      top: 100%;
-      left: 39px;
-      margin-left: 0;
-      border-width: 10px;
-      border-style: solid;
-      border-color: #F3F5F4 transparent transparent transparent;
-  }
+@media only screen and (min-width: 1921px) {
+	.ajax-cart-frame {
+		margin-left: auto;
+		margin-right: 0;
+	}
+}
+
+.is-a-gift label .tooltiptext::after {
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 39px;
+	margin-left: 0;
+	border-width: 10px;
+	border-style: solid;
+	border-color: #F3F5F4 transparent transparent transparent;
+}
 
   .is-a-gift label:hover .tooltiptext {
       visibility: visible;

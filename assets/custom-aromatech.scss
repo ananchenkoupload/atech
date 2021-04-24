@@ -60,10 +60,22 @@ $top-padding: 50px;
 
 .section--remove-top-padding {
 	padding-top: 0 !important;
+	@media screen and (max-width: 767px) {
+		padding-top: 0 !important;
+	}
+}
+
+.b2b-testimonials.section--remove-bottom-padding {
+	@media screen and (max-width: 767px) {
+		padding-top: 50px !important;
+	}
 }
 
 .section--remove-bottom-padding {
 	padding-bottom: 0 !important;
+	@media screen and (max-width: 767px) {
+		padding-bottom: 0 !important;
+	}
 }
 
 .section--remove-all-paddings {
@@ -230,11 +242,21 @@ $top-padding: 50px;
 	}
 }
 
-/* 
-------------------------------------------------------------------------------------------------------------------------------------
-  #Buttons END
-------------------------------------------------------------------------------------------------------------------------------------
-*/
+.template-index {
+	.scent-machine {
+		.btn2 {
+			&:hover {
+				background: #fff;
+			}
+		}
+	}
+}
+
+	/*
+    ------------------------------------------------------------------------------------------------------------------------------------
+      #Buttons END
+    ------------------------------------------------------------------------------------------------------------------------------------
+    */
 
 /* 
 ------------------------------------------------------------------------------------------------------------------------------------
@@ -825,12 +847,12 @@ body,
 				margin-top: 50px;
 			}
 		}
-		.product-review-box,
 		.accodian-with-image{
 			padding-top: 0;
 		}
 		.product-review-box{
 			padding-bottom: 15px;
+			padding-top: 0;
 		}
 		.withoutinfo:not(.image-with-content),
 		.product-tab-slider,

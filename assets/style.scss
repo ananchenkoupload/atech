@@ -58,7 +58,7 @@ body.page-about-us {
 }
 
 .slideshow--large {
-  height: 720px;
+  height: 620px;
   @media screen and (max-width: 992px) {
     height: 500px;
   }
@@ -81,6 +81,17 @@ body.page-about-us {
   transition: background-color 200ms ease, opacity 200ms ease;
   will-change: background-color, opacity;
   opacity: 0;
+
+  &.popup-close {
+    opacity: 0;
+
+    // &:hover {
+    //   background: transparent;
+    // }
+  }
+}
+.close-btn.panel-header-icon {
+  opacity: 0 !important;
 }
 .close-smile:hover,
 .close-smile:focus {
@@ -92,8 +103,8 @@ body.page-about-us {
 }
 .close-smile svg {
   fill: #fff;
-  height: 15px;
-  width: 15px;
+  height: 21px;
+  width: 21px;
   transition: transform 200ms ease;
   will-change: transform;
 }
@@ -104,7 +115,7 @@ body.page-about-us {
 }
 
 .smile-launcher-open .close-smile {
-  display: none;
+  // display: none;
 }
 
 .smile-launcher-frame-container.smile-launcher-mobile {
@@ -160,7 +171,7 @@ body.page-about-us {
   margin-bottom: 10px;
   margin-left: 0;
 
-  max-width: 41%;
+  max-width: 43%;
 }
 .template-product .fragrance-review-wrap {
   //display: block;
@@ -170,9 +181,9 @@ body.page-about-us {
 }
 
 @media screen and (max-width: 768px) {
-  .template-product .reviews {
+  /* .template-product .reviews {
     margin-top: 0;
-  }
+  } */
   .template-product .mobile-title-wrapper {
     /* display: block; */
   }
@@ -307,4 +318,7 @@ body.page-about-us {
   .product-specs-table {
     padding: 0;
   }
+}
+.spicegems_cr_modal.fade.in {
+  background: #ffffffb5;
 }
