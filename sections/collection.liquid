@@ -116,12 +116,12 @@
 			<div class="links-grid">
 				<div>
 					<a href="{{ collection.url }}" class="btn2"
-						aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+					   aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
 						{% comment %} {{ 'collections.general.view_all' | t }} {% endcomment %}
 						{% if section.settings.title == "Scent Machines" %}
-						SHOP ALL SCENT MACHINES
+							SHOP ALL SCENT MACHINES
 						{% else %}
-						shop now
+							{{ section.settings.button_label }}
 						{% endif %}
 					</a>
 				</div>

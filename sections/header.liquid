@@ -92,7 +92,7 @@
                       right: 5px;
                     }
                 }
-              
+
 			</style>
 			<div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}" style="display: none;">
 				<div class="announcement-bar__container">
@@ -100,10 +100,10 @@
 					<div class="announcement-bar__link">
 						<div class="announcement-bar__message">{{ section.settings.message_text }}</div>
 					</div>
-
-					<button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
+                                        
+                    <button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
 				</div>
 			</div>
 		{% endif %}
@@ -488,7 +488,7 @@
           }
         }
       
-		$(document).ready(function () {       
+		$(document).ready(function () {
 			$(".js-mobile-nav-toggle").click(function () {
 				$(".announcement-bar").css("display", "none");
 				$("body").removeClass("has-announcement-bar");

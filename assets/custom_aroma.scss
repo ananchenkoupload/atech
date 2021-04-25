@@ -1408,6 +1408,7 @@ header .nav-item a.aroma-list-category {
 
 	h1, h2 {
 		text-transform: uppercase;
+		// text-decoration: none;
 		font-size: 14px;
 		font-weight: 100;
 		line-height: 21px;
@@ -2154,7 +2155,7 @@ footer .page-width.connect-footer {
 		&:after {
 			transform: rotate(135deg);
 			transition: 0.3s ease;
-		} 
+		}
 		&:before {
 			transform: rotate(45deg);
 			transition: 0.3s ease;
@@ -3295,7 +3296,8 @@ header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
 @media (max-width: 400px) {
 	header.site-header .mobile-nav-wrapper ul li .mobile-nav__link,
 	header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
-		//padding-left: 20px;
+		//padding-top: 10px;
+		//padding-bottom: 10px;
 	}
 	// h2.nav-title.flip-title:after {
 	// 	right: 20px;
@@ -3438,20 +3440,16 @@ header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
 		line-height: unset;
 		text-decoration-line: unset;
 	}
-	header.site-header .mobile-nav-wrapper .mobile-nav {
+	header.site-header .mobile-nav-wrapper:not(.sub-nav--is-open) .mobile-nav {
 		padding-top: 113px;
-		//display: flex;
-		//flex-wrap: wrap;
-		//flex-direction: column;
 		padding-bottom: 96px;
 	}
-
-	header.site-header .mobile-nav-wrapper:not(.sub-nav--is-open) .mobile-nav {
-		//overflow: auto;
+	header.site-header .mobile-nav-wrapper .mobile-nav {
+		display: flex;
+		flex-direction: column;
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav {
 		margin-top: 0;
-		//overflow: initial;
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav__table {
 		margin-bottom: 113px;

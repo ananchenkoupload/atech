@@ -26,8 +26,7 @@
   {% endcase %}
 
   {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
-  
-  
+
   <ul>
     {% for product in collection.products limit: product_limit %}
       <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
