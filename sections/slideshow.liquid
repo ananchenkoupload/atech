@@ -26,21 +26,20 @@
 	var auto_rotate_speed_bool = (/true/i).test(auto_rotate_speed);
 </script>
 
-	{% assign font_size_heading = '50' %}
+{% assign font_size_heading = '50' %}
 
 <div data-section-id="{{ section.id }}" class="slideshow-swipe {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
 	{%- if section.blocks.size > 0 -%}
 		<div id="SlideshowWrapper-{{ section.id }}" class="slideshow-wrapper" >
 			<div class="slideshow slideshow--{{ section.settings.slideshow_height }}" {% if section.settings.slideshow_height == 'adapt' %}data-min-aspect-ratio="{{ min_aspect_ratio }}"
 					 style="height: {{- wrapper_height -}}vw"{% endif %}>
-				
+
 				<div class="slideshow-frame">
 					{%- for block in section.blocks -%}
-
 						{%- assign font_size_heading = block.settings.font_size_heading -%}
 						{%- assign block_image = block.settings.image -%}
 						<div id="slickSlide-{{ block.id }}" class="{{ block.settings.custom_class }} slideshow__slide--{{ block.id }}{% if forloop.first %} slick-current slick-active{% endif %}" style="background-color: {{ block.settings.color_back_bg }};">
-							
+
 
 							{% if block_image == blank %}
 								<div class="slideshow__image js">
@@ -111,7 +110,7 @@
 															{{ block.settings.button_label | escape }}
 														</a>
 													</div>
-													
+
 													{%- assign show_link2_button = false -%}
 													{%- if block.settings.button_label2 != blank and block.settings.button_link2 != blank -%}
 													{%- assign show_link2_button = true -%}
@@ -278,7 +277,7 @@
 		var $dotsContainer = $('.slideshow .slick-dots-container .page-width2');
 
 		slickChecker()
-		
+
 		$(window).on("resize", function (e) {
 			slickChecker()
 		});
@@ -312,7 +311,7 @@
 				});
 			}
 		}
-		
+
 	});
 </script>
 
@@ -712,7 +711,7 @@
 			},
 			"default": "#f6f6f6"
 		},
-		{	
+		{
 			"type": "color",
 			"id":"mobile_text_color_mob",
 			"label":"Mobile Text color",
@@ -1514,13 +1513,13 @@
 			},
 			"default": "#f6f6f6"
 		},
-		{	
+		{
 			"type": "color",
 			"id":"text_color",
 			"label":"Text color",
 			"default":"#fff"
 		},
-		{	
+		{
 			"type": "color",
 			"id":"mobile_text_color",
 			"label":"Mobile Text color",
@@ -1536,12 +1535,12 @@
 			"label": "Font size",
 			"default": 50
 		},
-		{	
+		{
 			"type": "text",
 			"id":"custom_class",
 			"label":"Custom Class"
 		},
-		{	
+		{
 			"type": "text",
 			"id":"content_width",
 			"label":"Content Section Width",

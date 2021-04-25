@@ -12,7 +12,7 @@
 				{% for q in collection.metafields.faq.question %}
 					{% if collection.metafields.faq.question[forloop.index0] != blank and collection.metafields.faq.answer[forloop.index0] != blank %}
 						<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="collection-faq-wrapper">
-							<h2 itemprop="name" class="accordion">{{ collection.metafields.faq.question[forloop.index0] }}</h2>
+							<h3 itemprop="name" class="accordion">{{ collection.metafields.faq.question[forloop.index0] }}</h3>
 							<div class="panel" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
 								<div itemprop="text"> 
 									{{ collection.metafields.faq.answer[forloop.index0] }}

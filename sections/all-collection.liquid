@@ -35,7 +35,6 @@
 					<li class="nav-item under-line">
 						<a class="nav-link scroll-link" href="#">ALL</a>
 					</li>
-
 					{% for block in section.blocks %}
 						{% if collection.all_tags contains block.settings.title %}
 							<li class="nav-item under-line">
@@ -47,7 +46,6 @@
 							</li>
 						{% endif %}
 					{% endfor %}
-
 				</ul>
 			</nav>
 		</header>
@@ -233,7 +231,7 @@
 	$(".nav-perent-title").hide();
 	// $(window).resize(function(){
 	if ($(window).width() <= 767) {
-		// $(".nav-perent-title").addClass('active');
+		// $(".nav-perent-title").show().addClass('active');
 		$(".panel-menubar").show();
 		$(document).ready(function () {
 			$(".flip-title").click(function () {
