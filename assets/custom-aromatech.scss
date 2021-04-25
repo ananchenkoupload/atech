@@ -71,12 +71,12 @@ $top-padding: 50px;
 	}
 }
 
-// .section--remove-bottom-padding {
-// 	padding-bottom: 0 !important;
-// 	@media screen and (max-width: 767px) {
-// 		padding-bottom: 0 !important;
-// 	}
-// }
+.section--remove-bottom-padding {
+	padding-bottom: 0 !important;
+	@media screen and (max-width: 767px) {
+		padding-bottom: 0 !important;
+	}
+}
 
 .section--remove-all-paddings {
 	padding-top: 0 !important;
