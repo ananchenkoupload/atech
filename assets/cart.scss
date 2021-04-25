@@ -547,6 +547,11 @@ form.cart {
 .cart__buttons-container{
 	margin: 0;
 	max-width: none;
+
+	@media screen and (max-width: 767px) {
+		margin-bottom: -95px;
+	}
+
 	.cart__submit-controls{
 		flex-direction: column;
 		justify-content: flex-start;
@@ -557,6 +562,12 @@ form.cart {
 			letter-spacing: 1.5px;
 			margin: 0 0 8px;
 			padding: 9px 0 7px;
+			width: 100%;
+			color: #fff;
+
+			&:hover {
+				background: #977045;
+			}
 			@media screen and (max-width: 767px) {
 				min-height: 34px;
 				padding: 8px 0;
@@ -574,7 +585,7 @@ form.cart {
 			font-weight: normal;
 			.icon{
 				height: auto;
-				margin: -2px 10px 0 0;
+				margin: -6px 10px 0 0;
 				width: 11px;
 			}
 		}

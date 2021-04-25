@@ -262,5 +262,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.js"></script>
   {% include 'smile-initializer' %}
+  {% include 'subscription-theme-footer' %}
+
+  <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=534c3c05-c28e-47ea-8c39-9ceff0712f80"></script>
+
+  <script>
+    document.sezzleConfig =
+            {
+              targetXPath: '.product__price',
+              renderToPath: '.',
+              forcedShow: false,
+              alignment: 'left',
+              merchantID: '534c3c05-c28e-47ea-8c39-9ceff0712f80',
+              theme: 'light',
+              widthType: 'thick',
+              widgetType: 'product-page',
+              fontSize : 14,
+              fontWeight : 400,
+              maxWidth: 500,
+              minPrice: 0,
+              maxPrice: 100000,
+            }
+  </script>
+  {% include 'wisepops-generated' %}
 </body>
 </html>
