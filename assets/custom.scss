@@ -2141,9 +2141,11 @@ background-color: rgba(0, 0, 0, 0.8);
 	color: #000;
 	/*   	-webkit-appearance: menulist-button; */
 }
-.b2b-form .contact-form select:invalid {
-	color: gray;
+.b2b-form .contact-form select:invalid,
+.b2b-form .contact-form select option {
+	color:#212121;
 }
+
 .page-container .shopify-challenge__container {
 	margin: 50px auto;
 }
@@ -3527,7 +3529,7 @@ a.jdgm-paginate__page.jdgm-paginate__next-page {
 		padding: 175px 0 175px 0 !important;
 	}
 	.template-blog .page-header-wrapper, .template-article .page-header-wrapper, .page-header-wrapper {
-		height: 350px;
+		height: 350px !important;
 	}
 	.sezzle-button-text.sezzle-left.szl-light {
 		font-size: 12px !important;
@@ -6369,7 +6371,8 @@ a.black_button {
 		}
 
 		@media (max-width: 480px) {
-			background-position: center center;
+			background-position: bottom;
+			height: 330px;
 		}
 	}
 }
