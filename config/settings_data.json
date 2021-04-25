@@ -45,6 +45,8 @@
     "enroute_product_2": "aroma-care-for-air-stream-duo",
     "threshold_3": "700",
     "enroute_product_3": "aroma-care-for-aromapro",
+    "threshold_4": "1000",
+    "enroute_product_4": "aromacube",
     "checkout_header_image": "",
     "checkout_logo_image": "",
     "checkout_logo_position": "left",
@@ -70,8 +72,8 @@
           "html": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" id=\"Слой_1\" style=\"\" viewbox=\"0 0 246 28\" x=\"0px\" y=\"0px\" version=\"1.1\" xmlns:xml=\"http:\/\/www.w3.org\/XML\/1998\/namespace\" xml:space=\"preserve\">\n<style type=\"text\/css\">\n\t.st0{fill:#202020;}\n<\/style>\n<g>\n\t<path class=\"st0\" d=\"M 67.4 0 c -9.2 0 -15.1 5.5 -15.1 14.1 C 52.3 22.4 58.2 28 67 28 c 8.9 0 15.1 -5.9 15.1 -14.4 C 82.1 5.5 76.2 0 67.4 0 Z M 75.5 6.6 c 1.5 2.6 1.6 6.1 1.6 7.2 c 0 7.3 -3.8 11.9 -10 11.9 c -5.9 0 -9.8 -4.6 -9.8 -11.7 c 0 -8.7 5.1 -11.7 9.9 -11.7 C 69.9 2.3 73.6 3.4 75.5 6.6\"><\/path>\n\t<path class=\"st0\" d=\"M 246 0.4 h -5 l 0 1 c 0.2 4.7 0.2 5.5 0.2 10.1 c -2.2 0.1 -3.9 0.1 -6.8 0.1 c -2.4 0 -4.9 -0.1 -7.3 -0.1 c -0.1 -4.1 0.2 -9.3 0.3 -10.7 l 0 -0.4 h -5 l 0 1.2 c 0.3 7.7 0.3 8.7 0.3 11.5 c 0 4.9 -0.1 7 -0.5 13.7 l 0 0.4 h 4.9 v -0.3 c -0.1 -2.7 -0.1 -3.7 -0.1 -7.1 v -5.4 c 2.6 -0.1 3.5 -0.1 7 -0.1 c 3.7 0 4.7 0 7 0.1 v 5.4 c 0 0.9 -0.1 4.8 -0.3 7 v 0.4 h 4.8 v -0.4 c -0.2 -3.6 -0.2 -4.9 -0.2 -7.9 c 0 -4.5 0 -11.3 0.4 -18.3 L 246 0.4 Z\"><\/path>\n\t<path class=\"st0\" d=\"M 136.5 0.6 l -0.1 -0.2 h -2.5 l -0.1 0.2 c -2.1 5.2 -6 14.2 -11.6 26.2 l -0.2 0.5 h 4 l 0.1 -0.2 c 0.9 -3.3 2 -6.4 3.4 -9.5 l 0 -0.1 h 9.3 l 0.1 0.2 c 1.4 3 2.6 6.2 3.6 9.4 l 0.1 0.2 h 5.4 l -0.2 -0.5 C 147.7 26.6 139.5 8.8 136.5 0.6 L 136.5 0.6 Z M 137.7 14.9 h -7.2 l 3.5 -8.3 L 137.7 14.9 Z\"><\/path>\n\t<path class=\"st0\" d=\"M 117.9 26 c -0.9 -5.8 -2.1 -16.1 -3.1 -25.3 l 0 -0.3 h -2 l -0.1 0.2 c -0.6 1.3 -0.8 1.7 -1.7 3.4 c -1.9 3.6 -2.7 5.2 -6.7 12.4 l -2.2 4 c -2.6 -4.4 -9.4 -17.1 -10.7 -19.9 l -0.1 -0.2 h -2 l 0 0.3 c -0.9 8.2 -3.4 23.7 -3.9 26.2 l -0.1 0.4 h 4 v -0.3 c 0 -3.4 0.6 -12.3 1.4 -18.1 c 2.4 4.1 5.1 9.4 7.8 14.6 c 0.7 1.3 1.1 2.2 1.7 3.7 l 0.1 0.2 h 1.6 l 0.1 -0.3 c 0.5 -1.4 1.2 -2.8 1.9 -4.2 c 2.3 -4.6 4.8 -9.4 7.4 -14.1 c 0.4 3.4 1.5 14.6 1.6 18.4 v 0.3 h 5.2 l -0.1 -0.4 C 118 26.6 118 26.3 117.9 26\"><\/path>\n\t<path class=\"st0\" d=\"M 48.4 24.3 c -2.5 -3.2 -6.5 -8.3 -7.9 -10.2 c 2.5 -0.5 7.3 -1.7 7.3 -7.1 c 0 -2.2 -0.7 -3.7 -2.1 -4.8 c -1.4 -1.1 -3 -1.8 -7.6 -1.8 h -8 l 0 1.2 c 0.1 3.9 0.2 7.6 0.2 10.9 c 0 5.7 -0.1 10.1 -0.3 14.4 v 0.3 h 4.9 v -0.3 c -0.3 -5.4 -0.3 -9.1 -0.3 -11.8 v -0.5 h 0.5 c 3.3 3.9 6.4 8.1 9.1 12.5 l 0.1 0.2 h 6.2 l -0.4 -0.5 C 50.1 26.4 49.3 25.5 48.4 24.3 L 48.4 24.3 Z M 34.8 2.8 c 0.7 -0.1 1.4 -0.1 2.1 -0.1 c 4.3 0 6.3 1.5 6.3 4.7 c 0 4.5 -3.8 5.2 -6.7 5.3 c -0.6 0 -1.1 0 -1.7 0 c 0 -0.4 0 -0.8 0 -1.4 c 0 -1.1 0 -2.5 0 -3.5 C 34.8 6.1 34.8 4.5 34.8 2.8\"><\/path>\n\t<path class=\"st0\" d=\"M 14.4 0.6 l -0.1 -0.2 h -2.5 l -0.1 0.2 c -2.1 5.2 -6 14.2 -11.6 26.2 L 0 27.2 h 4 L 4 27 c 0.9 -3.3 2 -6.4 3.4 -9.5 l 0 -0.1 h 9.3 l 0.1 0.2 c 1.4 3 2.6 6.2 3.6 9.4 l 0.1 0.2 h 5.4 l -0.2 -0.5 C 25.6 26.6 17.5 8.8 14.4 0.6 L 14.4 0.6 Z M 15.7 14.9 H 8.5 L 12 6.5 L 15.7 14.9 Z\"><\/path>\n\t<path class=\"st0\" d=\"M 147 3.7 l 0.4 -0.1 c 1.6 -0.3 4.1 -0.5 8 -0.5 c 0 3.3 0.1 6.3 0.1 9 c 0 5.8 -0.1 11 -0.4 14.7 l 0 0.4 h 5.1 l 0 -0.4 c -0.3 -4.5 -0.3 -9.2 -0.3 -13.2 c 0 -1 0 -2 0 -2.9 c 0 -2.5 0 -5.2 0.1 -7.6 c 4.3 0 6.5 0.3 7.6 0.5 l 0.4 0.1 V 0.4 h -20.9 L 147 3.7 Z\"><\/path>\n\t<path class=\"st0\" d=\"M 178 24.6 c 0 -1.2 -0.1 -3.6 -0.1 -5.5 c 0 -1.6 0 -3.3 0.1 -4.7 c 0.9 0 1.9 -0.1 2.8 -0.1 c 1.6 0 3.2 0.1 4.8 0.4 l 0.4 0 v -3.2 l -0.4 0 c -2.5 0.3 -5.1 0.3 -7.6 0.3 c 0 -1.8 0 -2.3 0 -4.6 c 0 -2.1 0 -2.8 0.1 -4.1 c 1.4 -0.1 2.1 -0.1 3.4 -0.1 c 3.1 0 4.5 0.2 5.8 0.4 l 0.4 0.1 V 0.4 h -14.2 l 0 0.4 c 0.3 4.6 0.3 10.9 0.3 12.7 c 0 8.4 -0.2 10.9 -0.4 13.5 l 0 0.4 h 14.7 v -3.1 l -0.4 0 C 184.3 24.5 181.2 24.6 178 24.6 Z\"><\/path>\n\t<path class=\"st0\" d=\"M 207.6 25.4 c -5 0 -10.1 -3.6 -10.1 -11.6 c 0 -7.1 3.7 -11.5 9.7 -11.5 c 4 0 7.1 2.1 8 4 l 0.1 0.2 h 0.7 V 1.7 l -0.2 -0.1 c -2.7 -1.1 -5.5 -1.6 -8.4 -1.6 c -11 0 -15 7.1 -15 13.8 c 0 8.5 5.6 14 14.4 14 c 3.4 0 6.7 -0.8 9.7 -2.5 l 0.2 -0.1 v -4.5 l -0.6 0.7 c -1 1.2 -2.3 2.2 -3.8 2.9 C 210.8 25.1 209.2 25.4 207.6 25.4\"><\/path>\n<\/g>\n<\/svg>",
           "main_linklist": "main-menu",
           "message": true,
-          "home_page_only": false,
-          "message_text": "REWARDS PROGRAM PROMOTION",
+          "home_page_only": true,
+          "message_text": "<p><a href=\"\/collections\/spring-bundles\" title=\"SPRING BUNDLES\">SPRING BUNDLES<\/a> | <a href=\"\/pages\/shipping-returns\" title=\"Shipping &amp; Returns\">FREE SHIPPING USA<\/a> | <a href=\"\/pages\/shipping-returns\" title=\"Shipping &amp; Returns\">30-Day Return Policy<\/a><\/p>",
           "color_bg": "#3a3a3a",
           "color_text": "#ffffff",
           "show_currency_selector": true
@@ -147,7 +149,12 @@
           "collection": "essential-oils-and-aroma-oils",
           "grid": 15,
           "show_vendor": false,
-          "show_view_all": true
+          "show_view_all": true,
+          "button_label": "",
+          "btn_bg_color": "",
+          "btn_bg_color_hover": "",
+          "btn_color": "",
+          "btn_color_hover": "#ea0606"
         }
       },
       "quotes": {
@@ -273,16 +280,6 @@
           "lang_linklist": "languages",
           "show_locale_selector": true,
           "show_currency_selector": false
-        }
-      },
-      "1601990168718": {
-        "type": "rich-text",
-        "settings": {
-          "paddings": "default",
-          "full_width": false,
-          "section_title": "AROMATECH. NEBULIZING SCENT DIFFUSERS. PURE ESSENTIAL & AROMA OIL. SCENTING FOR HOME & BUSINESS.",
-          "text": "<p><strong>SOPHISTICATED, LUXURIOUS, TRANSFORMATIVE<\/strong><\/p><p>WE CREATE ELEGANT SCENT MACHINES AND COMPLEX AROMA OILS TO TRANSFORM YOUR INTERACTION WITH THE SURROUNDING ENVIRONMENT.<br\/><\/p><p>OUR DIFFUSERS USE A NEBULIZING TECHNOLOGY, ALLOWING FOR ESSENTIAL &amp; AROMA OIL TO BE DIFFUSED WITHOUT THE USE OF HEAT OR WATER.<\/p>",
-          "text_size": "medium"
         }
       },
       "page-banner-image": {
@@ -582,93 +579,47 @@
       "1602656997621": {
         "type": "slideshow",
         "blocks": {
-          "1602656997621-0": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/Valentines_Sale_Banner_Mobile_-_2_1500x_15c98dab-75c6-481b-9bac-1444ef7959af.jpg",
-              "mobile_image": "shopify:\/\/shop_images\/Valentines_Sale_Banner_Mobile_-_2_1500x_15c98dab-75c6-481b-9bac-1444ef7959af.jpg",
-              "alignment": "left bottom",
-              "color_back_bg": "#937557",
-              "text_color": "#ffffff",
-              "mobile_text_color": "#ffffff",
-              "custom_class": "first",
-              "content_width": "100%",
-              "slide_title": "Romantic Scents for Valentine's Gifting",
-              "subheading": "Enjoy a gift from us to you: free 120ml scent with the purchase of an AroMini*",
-              "button_label": "SHOP VALENTINE's GIFTS",
-              "button_link": "https:\/\/ca.aromatechscent.com\/collections\/valentines-day",
-              "button_label2": "",
-              "btn_bg_color": "rgba(0,0,0,0)",
-              "btn_bg_color_hover": "#e1e1e1",
-              "btn_color": "#ffffff",
-              "btn_color_hover": "#212121"
-            }
-          },
           "1602656997621-1": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/Aromatech-Luxurious-experiences.png",
-              "mobile_image": "shopify:\/\/shop_images\/Aromatech-Luxurious-experiences-mobile.png",
+              "image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-Desktop-2.jpg",
+              "mobile_image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-Mobile-2_e9c1e403-4508-4de5-95a8-075a91086fd2.jpg",
               "alignment": "center center",
               "color_back_bg": "#ba9163",
               "text_color": "#212121",
               "mobile_text_color": "#212121",
+              "font_size_heading": 80,
               "custom_class": "second",
               "content_width": "590px",
               "slide_title": "Luxurious experiences. <br>Created through fragrance.<br> Driven by technology.<br> Made for living.",
               "subheading": "",
-              "button_label": "test button",
-              "button_label2": "test button",
-              "btn_bg_color": "rgba(0,0,0,0)",
+              "button_label": "SHOP NOW",
+              "button_link": "shopify:\/\/collections\/aroma-oils",
+              "button_label2": "",
+              "btn_bg_color": "#ffffff",
               "btn_bg_color_hover": "rgba(0,0,0,0)",
-              "btn_color": "rgba(0,0,0,0)",
-              "btn_color_hover": "rgba(0,0,0,0)"
-            }
-          },
-          "1602657522830": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/Aromatech-for-business.png",
-              "mobile_image": "shopify:\/\/shop_images\/AromaTech-for-Business-mobile.png",
-              "alignment": "center center",
-              "color_back_bg": "#ba9163",
-              "text_color": "#212121",
-              "mobile_text_color": "#ffffff",
-              "custom_class": "third",
-              "content_width": "600px",
-              "slide_title": "AromaTech<sup class=\"slider-sup\">TM<\/sup> for Business",
-              "subheading": "Our fine-crafted fragrances help retail, luxury, and hospitality companies create meaningful, emotional connections with their customers.",
-              "button_label": "Contact our team",
-              "button_link": "shopify:\/\/pages\/contact",
-              "button_label2": "SHOP OUR DIFFUSERS",
-              "button_link2": "shopify:\/\/collections\/scent-diffusers",
-              "btn_bg_color": "rgba(0,0,0,0)",
-              "btn_bg_color_hover": "#e1e1e1",
               "btn_color": "#212121",
-              "btn_color_hover": "#212121"
+              "btn_color_hover": "#000000"
             }
           }
         },
         "block_order": [
-          "1602656997621-0",
-          "1602656997621-1",
-          "1602657522830"
+          "1602656997621-1"
         ],
         "settings": {
           "paddings": "section--remove-all-paddings",
           "slideshow_height": "large",
-          "mobile_image_banner": "shopify:\/\/shop_images\/Hannah-Strobek-Julie-Beider-by-Daniel-Stjerne-for-Kinfolk-Magazine-1_Copy.png",
+          "mobile_image_banner": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-Mobile-2_e9c1e403-4508-4de5-95a8-075a91086fd2.jpg",
           "mobile_image_tittle": "Bring your memories home.",
           "mobile_image_tittle_sub": "Discover the power of your senses with our essential-oil home fragrances.",
-          "button_label2_mob": "SHOP ALL FRAGRANCES",
-          "button_link2_mob": "shopify:\/\/products\/holiday-spice",
+          "button_label2_mob": "SHOP NOW",
+          "button_link2_mob": "shopify:\/\/collections\/aroma-oils",
           "color_back_bg_mob": "#937557",
           "mobile_text_color_mob": "#ffffff",
           "btn_bg_color_mob": "",
           "btn_bg_color_hover_mob": "",
           "btn_color_mob": "#ffffff",
           "btn_color_hover_mob": "",
-          "text_size": "medium",
           "text_alignment": "left center",
           "show_overlay": false,
           "autorotate": true,
@@ -1166,64 +1117,22 @@
       "slideshow": {
         "type": "slideshow",
         "blocks": {
-          "1345012f-e70d-4af2-9ac1-67f1087bdab7": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/Aromatech-Aesop-Products-Warmer-Climate-February2017.png",
-              "mobile_image": "shopify:\/\/shop_images\/Aromatech-Bring-your-memories-mobile.png",
-              "alignment": "center bottom",
-              "color_back_bg": "#937557",
-              "text_color": "#ffffff",
-              "mobile_text_color": "#ffffff",
-              "custom_class": "first",
-              "content_width": "100%",
-              "slide_title": "Bring your memories home.",
-              "subheading": "Discover the power of your senses with our essential-oil home fragrances.",
-              "button_label": "shop all fragrances",
-              "button_link": "shopify:\/\/collections",
-              "button_label2": "",
-              "btn_bg_color": "",
-              "btn_bg_color_hover": "#e1e1e1",
-              "btn_color": "#ffffff",
-              "btn_color_hover": "#231f20"
-            }
-          },
-          "a1fd3183-6ff8-45da-9f54-b72fddd677fe": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/Aromatech-Hero-About-Us.png",
-              "mobile_image": "shopify:\/\/shop_images\/Aromatech-Luxurious-experiences-mobile.png",
-              "alignment": "center center",
-              "color_back_bg": "#ba9163",
-              "text_color": "#000000",
-              "mobile_text_color": "#000000",
-              "custom_class": "second",
-              "content_width": "590px",
-              "slide_title": "Luxurious experiences. <br>Created through fragrance.<br> Driven by technology.<br> Made for living.",
-              "subheading": "",
-              "button_label": "test button",
-              "button_label2": "test button",
-              "btn_bg_color": "",
-              "btn_bg_color_hover": "",
-              "btn_color": "",
-              "btn_color_hover": ""
-            }
-          },
           "e947fa07-316c-4c12-95e1-aae3087eeaca": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/Aromatech-for-business.png",
-              "mobile_image": "shopify:\/\/shop_images\/AromaTech-for-Business-mobile.png",
+              "image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-ABOUT_US-Desktop.jpg",
+              "mobile_image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-ABOUT-US-Mobile.jpg",
               "alignment": "center center",
               "color_back_bg": "#ba9163",
               "text_color": "#000000",
               "mobile_text_color": "#ffffff",
+              "font_size_heading": 50,
               "custom_class": "third",
               "content_width": "600px",
               "slide_title": "AromaTech<sup class=\"slider-sup\">TM<\/sup> for Business",
               "subheading": "Our fine-crafted fragrances help retail, luxury, and hospitality companies create meaningful, emotional connections with their customers.",
               "button_label": "Contact our team",
-              "button_link": "shopify:\/\/pages\/contact",
+              "button_link": "#b2b-form",
               "button_label2": "SHOP OUR DIFFUSERS",
               "button_link2": "shopify:\/\/collections\/scent-diffusers",
               "btn_bg_color": "",
@@ -1234,23 +1143,22 @@
           }
         },
         "block_order": [
-          "1345012f-e70d-4af2-9ac1-67f1087bdab7",
-          "a1fd3183-6ff8-45da-9f54-b72fddd677fe",
           "e947fa07-316c-4c12-95e1-aae3087eeaca"
         ],
         "settings": {
           "paddings": "section--remove-all-paddings",
           "slideshow_height": "large",
-          "mobile_image_tittle": "",
-          "mobile_image_tittle_sub": "",
-          "button_label2_mob": "",
-          "color_back_bg_mob": "#f6f6f6",
+          "mobile_image_banner": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-ABOUT-US-Mobile.jpg",
+          "mobile_image_tittle": "AromaTech<sup class=\"slider-sup\">TM<\/sup> for Business",
+          "mobile_image_tittle_sub": "Our fine-crafted fragrances help retail, luxury, and hospitality companies create meaningful, emotional connections with their customers.",
+          "button_label2_mob": "Contact our team",
+          "button_link2_mob": "https:\/\/aromatechdev.myshopify.com\/#b2b-form",
+          "color_back_bg_mob": "#ba9163",
           "mobile_text_color_mob": "#ffffff",
           "btn_bg_color_mob": "",
           "btn_bg_color_hover_mob": "",
-          "btn_color_mob": "",
+          "btn_color_mob": "#ffffff",
           "btn_color_hover_mob": "",
-          "text_size": "medium",
           "text_alignment": "left center",
           "show_overlay": false,
           "autorotate": true,
@@ -1260,28 +1168,63 @@
       "collection-custom": {
         "type": "collection-custom",
         "blocks": {
+          "7b002afd-5e53-4896-bbd7-95c06167adce": {
+            "type": "featured_collection",
+            "settings": {
+              "collection": "scent-diffusers"
+            }
+          },
+          "2d353601-9e05-4aaf-a87b-4cabbfb9dad5": {
+            "type": "featured_collection",
+            "settings": {
+              "collection": "scenting-accessories"
+            }
+          },
+          "3d000310-eba1-45fe-8eb3-e3c7a54f6047": {
+            "type": "featured_collection",
+            "settings": {
+              "collection": "essential-oils-and-aroma-oils"
+            }
+          },
           "f2fdbf49-a783-4e57-b7ba-51a768fa45fb": {
             "type": "featured_collection",
             "settings": {
               "collection": "cities-collection"
             }
           },
-          "7b002afd-5e53-4896-bbd7-95c06167adce": {
+          "060bfad1-4e68-47af-9c60-ae7b6ab69467": {
             "type": "featured_collection",
             "settings": {
-              "collection": "frontpage"
+              "collection": "hair-body-mist"
+            }
+          },
+          "80f9466a-7d4a-4f0d-8115-0c2cca139397": {
+            "type": "featured_collection",
+            "settings": {
+              "collection": "room-sprays"
+            }
+          },
+          "edf3fdde-e175-46dd-ac64-7ea46c83283d": {
+            "type": "featured_collection",
+            "settings": {
+              "collection": "scent-sample-packs"
             }
           }
         },
         "block_order": [
+          "7b002afd-5e53-4896-bbd7-95c06167adce",
+          "2d353601-9e05-4aaf-a87b-4cabbfb9dad5",
+          "3d000310-eba1-45fe-8eb3-e3c7a54f6047",
           "f2fdbf49-a783-4e57-b7ba-51a768fa45fb",
-          "7b002afd-5e53-4896-bbd7-95c06167adce"
+          "060bfad1-4e68-47af-9c60-ae7b6ab69467",
+          "80f9466a-7d4a-4f0d-8115-0c2cca139397",
+          "edf3fdde-e175-46dd-ac64-7ea46c83283d"
         ],
         "settings": {
           "nav_linklist": "main-menu",
           "collections_list_title": "Product Collections TEST",
           "grid": 4,
-          "rows": 2,
+          "rows": 5,
           "show_vendor": false,
           "show_view_all": false
         }
@@ -1362,6 +1305,41 @@
               "title": "Seasonal",
               "tag_desc": "Nostalgic and evocative, these comforting scents and fragrances inspire an atmosphere of rejuvenation, refuge, and well-being."
             }
+          },
+          "50230375-9aa6-4a32-8f0e-3340269efa56": {
+            "type": "tag_desc",
+            "settings": {
+              "title": "Shop All",
+              "tag_desc": "CONTENT NEEDS TO BE ADDED"
+            }
+          },
+          "50dd16ae-db65-4a28-a8cc-89fa41610d1c": {
+            "type": "tag_desc",
+            "settings": {
+              "title": "Small Spaces",
+              "tag_desc": "CONTENT NEED TO BE ADDED"
+            }
+          },
+          "51791f49-9ac0-4013-acb6-3f8ecc9195d8": {
+            "type": "tag_desc",
+            "settings": {
+              "title": "Medium Spaces",
+              "tag_desc": "CONTENT NEED TO BE ADDED"
+            }
+          },
+          "ca424949-c9f7-4bdb-9851-d4eaace57052": {
+            "type": "tag_desc",
+            "settings": {
+              "title": "Large Spaces",
+              "tag_desc": "CONTENT NEED TO BE ADDED"
+            }
+          },
+          "64ad2119-2199-4d73-ab19-3331622a17e1": {
+            "type": "tag_desc",
+            "settings": {
+              "title": "Cars",
+              "tag_desc": "CONTENT NEED TO BE ADDED"
+            }
           }
         },
         "block_order": [
@@ -1369,7 +1347,12 @@
           "51c08cc3-9953-43ee-bf75-fc72b4960175",
           "9b1b05ea-56d4-44d5-b7d7-b6d48ec34629",
           "13da5efa-4279-4d5b-bc90-08c05eb6e0b1",
-          "7e989fa3-3aa3-4353-b702-81007430daca"
+          "7e989fa3-3aa3-4353-b702-81007430daca",
+          "50230375-9aa6-4a32-8f0e-3340269efa56",
+          "50dd16ae-db65-4a28-a8cc-89fa41610d1c",
+          "51791f49-9ac0-4013-acb6-3f8ecc9195d8",
+          "ca424949-c9f7-4bdb-9851-d4eaace57052",
+          "64ad2119-2199-4d73-ab19-3331622a17e1"
         ],
         "settings": {
           "layout": "grid",
@@ -1385,7 +1368,7 @@
         "type": "blog-header",
         "settings": {
           "page_header_enabled": true,
-          "page_header_bg_image": "shopify:\/\/shop_images\/AromaTech-blog-header-image.png"
+          "page_header_bg_image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-BLOG-Desktop.jpg"
         }
       },
       "article-template": {
@@ -1462,7 +1445,7 @@
       "blog-template": {
         "type": "blog-template",
         "settings": {
-          "featured_article": "aromagazine\/are-scent-diffusers-safe-for-cats-and-dogs-3-risks-and-solutions"
+          "featured_article": "scenting\/are-scent-diffusers-safe-for-cats-and-dogs-3-risks-and-solutions"
         }
       },
       "featured-blog": {
@@ -1520,12 +1503,13 @@
           "blog_show_date": true,
           "show_view_all": true,
           "view_all_text": "Discover More",
-          "view_all_url": "shopify:\/\/blogs\/aromagazine"
+          "view_all_url": "shopify:\/\/blogs\/scenting"
         }
       },
       "newsletter-cookie-popup": {
         "type": "newsletter-cookie-popup",
         "settings": {
+          "show_popup": false,
           "newsletter_title": "Sign up to receive the latest news and special offers.",
           "newsletter_subheading": "<p>Unsubscribe anytime.<\/p>",
           "newsletter_back_bg": "#937557",
@@ -1933,13 +1917,13 @@
           "5ef6b5d7-9c1c-4c5c-957a-d5bf52750bbb": {
             "type": "blog_post",
             "settings": {
-              "article": "aromagazine\/next-article"
+              "article": "scenting\/insider-s-guide-48-hours-in-tokyo-copy-3"
             }
           },
           "a2b508a3-09b7-4d25-a464-3fff76fd51f2": {
             "type": "blog_post",
             "settings": {
-              "article": "aromagazine\/are-scent-diffusers-safe-for-cats-and-dogs-3-risks-and-solutions"
+              "article": "scenting\/next-article"
             }
           },
           "77b9286b-1c24-4dff-bce8-25352d3e0670": {
@@ -1963,13 +1947,13 @@
           "8a4ca02b-abaf-4529-b110-d72ae19d36ee": {
             "type": "blog_post",
             "settings": {
-              "article": "aromagazine\/are-scent-diffusers-safe-for-cats-and-dogs-3-risks-and-solutions"
+              "article": "scenting\/smokey-and-sensual-the-intoxicating-story-of-santal"
             }
           },
           "60f2b885-4257-4e5e-b6e2-76d70d575be1": {
             "type": "blog_post",
             "settings": {
-              "article": "aromagazine\/next-article"
+              "article": "scenting\/10-questions-with-ryan-lussier-our-in-house-perfumer"
             }
           }
         },
@@ -1989,7 +1973,7 @@
           "blog_show_date": true,
           "show_view_all": true,
           "view_all_text": "Discover More",
-          "view_all_url": "shopify:\/\/blogs\/aromagazine"
+          "view_all_url": "shopify:\/\/blogs\/scenting"
         }
       },
       "template-scenting": {
@@ -2001,104 +1985,104 @@
       "CitiesCollection": {
         "type": "CitiesCollection",
         "blocks": {
-          "723a147b-764d-41fa-9d1d-1753a16a5de6": {
+          "7cec136e-6894-4fc7-b845-a47550f6d6f3": {
             "type": "product_slide",
             "settings": {
-              "backImg": "shopify:\/\/shop_images\/Cities-Collection-background.png",
-              "mobmap": "shopify:\/\/shop_images\/Cities-Collection-background.png",
-              "producttitle": "VANCOUVER",
-              "bootleImg": "shopify:\/\/shop_images\/Cities-Collection-Vancouver.png",
-              "producttxt": "Exploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the path toward the sound of crashing waves along a jagged shoreline. My soul revitalized \nExploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the\n                                \n                                    Exploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the path toward the sound of crashing waves along a jagged shoreline. My soul revitalized \nExploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the",
-              "producttxtk": "Juniper • Pine • Cedar • Ocean Water • Sea Salt",
-              "productbuttontxt": "shop now",
-              "productbuttonlink": "shopify:\/\/products\/lavender",
-              "productbuttontxtrt": "DETAILS",
-              "productbuttonlinkrt": "shopify:\/\/products\/airstream-duo-refurbished"
-            }
-          },
-          "b610e749-7364-41e7-8360-a21bc7fc6104": {
-            "type": "product_slide",
-            "settings": {
-              "backImg": "shopify:\/\/shop_images\/new-york-map.jpg",
-              "mobmap": "shopify:\/\/shop_images\/new-york-map.jpg",
-              "producttitle": "New York",
-              "bootleImg": "shopify:\/\/shop_images\/londra_e9a2b5f5-3002-4000-aeab-c2194575e55d.png",
-              "producttxt": "In a cafe on the corner of 7th and West 35th, I waited for my coffee and read the business section in the Times. It was a brisk and refreshing morning. The sunlight began to shine through busy streets as the smell of fresh brewed coffee and espresso wafted across the shop. I reached for my to-go cup and freshly baked chocolate croissant to begin my day. The aroma of roasted caramelized nuts from a street vendor prolonged in the morning air as I watched the locals briskly walk towards the gleaming towers of downtown. Chocolatey notes of cream and cocoa drifted from my coffee as I stirred in a treat of Bailey’s and faded into the daily hustle of NYC.",
-              "producttxtk": "Coffee • Chocolate • Bailey's • Almond • Sandalwood",
-              "productbuttontxt": "Shop now",
-              "productbuttonlink": "shopify:\/\/products\/new-york",
-              "productbuttontxtrt": "More Details",
-              "productbuttonlinkrt": "shopify:\/\/products\/new-york"
+              "backImg": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-Dubai-Desktop.jpg",
+              "mobmap": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-Dubai-Desktop.jpg",
+              "title": "DUBAI",
+              "bootleImg": "shopify:\/\/shop_images\/1199997860658041.c3cADl6eiszEfre3wfoY_height640.png",
+              "producttxt": "Escaping the scorching desert heat, I found myself wandering down the glimmering hallways of the world's grandest shopping center. I was immediately refreshed by the cool indoor atmosphere and paused to take a deep breath. The aroma of Bakhoor incense lingered in the air as I admired the magnificent building surrounding me. A state of the art, extravagant and exotic city; preserving distinctive traditions while welcoming the new. The fragrance of jammy red roses wafted over me as I passed by elegant Arabic women dressed in black abayas. Their husbands contrasting in white dishdashas. The scent of their dark wood smoking oudhs drifted into the atmosphere. Admiration for their luxurious lifestyle instilled in my mind as I continued exploring the city.",
+              "producttxtk": "Rose  • Oudh • Patchouli • Incense • Musk",
+              "productbuttontxt": "Shop Now",
+              "productbuttonlink": "shopify:\/\/products\/dubai",
+              "productbuttontxtrt": "Details",
+              "productbuttonlinkrt": "shopify:\/\/products\/dubai"
             }
           },
           "c39db407-1e05-4185-be28-897cda49c8a5": {
             "type": "product_slide",
             "settings": {
-              "backImg": "shopify:\/\/shop_images\/london-map_a973e4f7-2050-4226-a05d-3fe0b0993a72.jpg",
-              "mobmap": "shopify:\/\/shop_images\/london-map_a973e4f7-2050-4226-a05d-3fe0b0993a72.jpg",
-              "producttitle": "London",
+              "backImg": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-London-Desktop_333.jpg",
+              "mobmap": "shopify:\/\/shop_images\/AromaTech-Cities_Collection-Maps-London-Mobile.jpg",
+              "title": "LONDON",
               "bootleImg": "shopify:\/\/shop_images\/londra_e9a2b5f5-3002-4000-aeab-c2194575e55d.png",
               "producttxt": "The radiating heat of the fireplace warmed my body as I rested on a vintage wingback leather chair. I watched the dry wood slowly transform to warm ambers as the fire danced and glistened; crackling and popping with every move. I brought the glass of brandy closer to my nose to smell the intoxicating aromas. My body nourished from a delicious supper, the air was still intimate of plum and fruit aroma. I felt a sense of serenity as the quiet evening continued in the British country home. The vanilla-laced smoke of a fine cigar slowly burned as I took pleasure from my comforts.",
               "producttxtk": "Plum Brandy • Leather • Tobacco • Cedar • Vanilla • Tolu Balsam",
-              "productbuttontxt": "Shop",
+              "productbuttontxt": "Shop Now",
               "productbuttonlink": "shopify:\/\/products\/airstream-duo-refurbished",
-              "productbuttontxtrt": "Read",
+              "productbuttontxtrt": "Details",
               "productbuttonlinkrt": "shopify:\/\/blogs\/news"
             }
           },
           "80c31030-ea94-4112-a4c3-f530d626f423": {
             "type": "product_slide",
             "settings": {
-              "backImg": "shopify:\/\/shop_images\/moscow-map.jpg",
-              "mobmap": "shopify:\/\/shop_images\/moscow-map.jpg",
-              "producttitle": "MOSCOW",
-              "bootleImg": "shopify:\/\/shop_images\/londra_e9a2b5f5-3002-4000-aeab-c2194575e55d.png",
+              "backImg": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-Moscow-Desktop.jpg",
+              "mobmap": "shopify:\/\/shop_images\/AromaTech-Cities_Collection-Maps-Moscow-Mobile.jpg",
+              "title": "MOSCOW",
+              "bootleImg": "shopify:\/\/shop_images\/1199997860658045.XLHbke3c7e4xWYXJKH90_height640.png",
               "producttxt": "Fixated on the pulsing bass vibrating the concrete beneath my feet. My focus interrupted by the gleaming headlights of luxury cars pulling up to the scene. Friends and colleagues full of laughter and excitement approached the valet, handing off the keys and disappearing into the night club. As they entered the aroma of Russian leather and warm amber wafted into the streets. I was greeted by a beautiful hostess who prompted me towards the entrance with a smile. The contrast of antique building exterior transitioned into a luxurious interior full of individual extravagances and wealth. The passionate and lustful scent of champagne corks popping filled the room. The comforting aroma of black tea brewing in the distance drifted across the air. A night to remember, lavishment and lust.",
               "producttxtk": "Champagne • Russian Black Tea • Incense • Birch Leather • Amber",
-              "productbuttontxt": "SHOP NOW",
+              "productbuttontxt": "Shop Now",
               "productbuttonlink": "shopify:\/\/products\/moscow",
-              "productbuttontxtrt": "DETAILS",
+              "productbuttontxtrt": "Details",
               "productbuttonlinkrt": "shopify:\/\/products\/moscow"
             }
           },
-          "7cec136e-6894-4fc7-b845-a47550f6d6f3": {
+          "b610e749-7364-41e7-8360-a21bc7fc6104": {
             "type": "product_slide",
             "settings": {
-              "backImg": "shopify:\/\/shop_images\/dubai-map.jpg",
-              "mobmap": "shopify:\/\/shop_images\/dubai-map.jpg",
-              "producttitle": "DUBAI",
-              "bootleImg": "shopify:\/\/shop_images\/londra_e9a2b5f5-3002-4000-aeab-c2194575e55d.png",
-              "producttxt": "Escaping the scorching desert heat, I found myself wandering down the glimmering hallways of the world's grandest shopping center. I was immediately refreshed by the cool indoor atmosphere and paused to take a deep breath. The aroma of Bakhoor incense lingered in the air as I admired the magnificent building surrounding me. A state of the art, extravagant and exotic city; preserving distinctive traditions while welcoming the new. The fragrance of jammy red roses wafted over me as I passed by elegant Arabic women dressed in black abayas. Their husbands contrasting in white dishdashas. The scent of their dark wood smoking oudhs drifted into the atmosphere. Admiration for their luxurious lifestyle instilled in my mind as I continued exploring the city.",
-              "producttxtk": "Rose  • Oudh • Patchouli • Incense • Musk",
-              "productbuttontxt": "SHOP NOW",
-              "productbuttonlink": "shopify:\/\/products\/dubai",
-              "productbuttontxtrt": "details",
-              "productbuttonlinkrt": "shopify:\/\/products\/dubai"
+              "backImg": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-New_York-Desktop.jpg",
+              "mobmap": "shopify:\/\/shop_images\/AromaTech-Cities_Collection-Maps-New_York-Mobile.jpg",
+              "title": "NEW YORK",
+              "bootleImg": "shopify:\/\/shop_images\/1199997860658047.f3tvtByC4UsPoviuIHzE_height640.png",
+              "producttxt": "In a cafe on the corner of 7th and West 35th, I waited for my coffee and read the business section in the Times. It was a brisk and refreshing morning. The sunlight began to shine through busy streets as the smell of fresh brewed coffee and espresso wafted across the shop. I reached for my to-go cup and freshly baked chocolate croissant to begin my day. The aroma of roasted caramelized nuts from a street vendor prolonged in the morning air as I watched the locals briskly walk towards the gleaming towers of downtown. Chocolatey notes of cream and cocoa drifted from my coffee as I stirred in a treat of Bailey’s and faded into the daily hustle of NYC.",
+              "producttxtk": "Coffee • Chocolate • Bailey's • Almond • Sandalwood",
+              "productbuttontxt": "Shop Now",
+              "productbuttonlink": "shopify:\/\/products\/new-york",
+              "productbuttontxtrt": "Details",
+              "productbuttonlinkrt": "shopify:\/\/products\/new-york"
             }
           },
           "dad09a22-13a8-467b-af2c-42b3fd84cd72": {
             "type": "product_slide",
             "settings": {
-              "backImg": "shopify:\/\/shop_images\/tokyo-map.jpg",
-              "mobmap": "shopify:\/\/shop_images\/tokyo-map.jpg",
-              "producttitle": "TOKYO",
-              "bootleImg": "shopify:\/\/shop_images\/londra_e9a2b5f5-3002-4000-aeab-c2194575e55d.png",
+              "backImg": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-Tokyo-Desktop.jpg",
+              "mobmap": "shopify:\/\/shop_images\/AromaTech-Cities_Collection-Maps-Tokyo-Mobile.jpg",
+              "title": "TOKYO",
+              "bootleImg": "shopify:\/\/shop_images\/1199997860658043.JvP4zIl7LBp1pAn5p8u8_height640.png",
               "producttxt": "A large crowd of people rushed past me up the stairs, I followed them out of the underground train station and found myself breathing the crisp Spring air. A beautiful contrast, I was lost in translation between the vibrant city and the calming oriental gardens surrounding me. A culture that is so minimal, yet elegantly bursting with life. I was in a meditative state. The breeze carried the scent of sakura cherry blossoms and citrus notes. It stirred through the leaves of the Hinoki Trees and down the glistening streets. In the distance, I observed Sadouka women taking practice in a traditional tea ceremony. The aroma of fine matcha powder whisked with steaming hot water, filling me with tranquility and relaxation.",
               "producttxtk": "Yuzu • Wasabi • Cherry Blossom • Hinoki Wood • Green Tea",
-              "productbuttontxt": "SHOP NOW",
+              "productbuttontxt": "Shop Now",
               "productbuttonlink": "shopify:\/\/products\/tokyo",
-              "productbuttontxtrt": "details",
+              "productbuttontxtrt": "Details",
               "productbuttonlinkrt": "shopify:\/\/products\/tokyo"
+            }
+          },
+          "723a147b-764d-41fa-9d1d-1753a16a5de6": {
+            "type": "product_slide",
+            "settings": {
+              "backImg": "shopify:\/\/shop_images\/AromaTech-Maps_Backgrounds-1920x1132-Vancouver-Desktop.jpg",
+              "mobmap": "shopify:\/\/shop_images\/AromaTech-Cities_Collection-Maps-Vancouver-Mobile.jpg",
+              "title": "VANCOUVER",
+              "bootleImg": "shopify:\/\/shop_images\/Cities-Collection-Vancouver.png",
+              "producttxt": "Exploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the path toward the sound of crashing waves along a jagged shoreline. My soul revitalized \nExploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the\n                                \n                                    Exploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the path toward the sound of crashing waves along a jagged shoreline. My soul revitalized \nExploring a lush peninsula full of thriving greenery and cool fresh air; the breathing forest swayed next to the modernly designed city. Bold trees and elegant skyscrapers stretched to the sky in unison. The rain slowly fell as the atmosphere became foggy and refreshing. I continued down the",
+              "producttxtk": "Juniper • Pine • Cedar • Ocean Water • Sea Salt",
+              "productbuttontxt": "Shop Now",
+              "productbuttonlink": "shopify:\/\/products\/lavender",
+              "productbuttontxtrt": "Details",
+              "productbuttonlinkrt": "shopify:\/\/products\/airstream-duo-refurbished"
             }
           }
         },
         "block_order": [
-          "723a147b-764d-41fa-9d1d-1753a16a5de6",
-          "b610e749-7364-41e7-8360-a21bc7fc6104",
+          "7cec136e-6894-4fc7-b845-a47550f6d6f3",
           "c39db407-1e05-4185-be28-897cda49c8a5",
           "80c31030-ea94-4112-a4c3-f530d626f423",
-          "7cec136e-6894-4fc7-b845-a47550f6d6f3",
-          "dad09a22-13a8-467b-af2c-42b3fd84cd72"
+          "b610e749-7364-41e7-8360-a21bc7fc6104",
+          "dad09a22-13a8-467b-af2c-42b3fd84cd72",
+          "723a147b-764d-41fa-9d1d-1753a16a5de6"
         ],
         "settings": {
           "main_heading": "Creating The Cities Collection",
@@ -2112,7 +2096,7 @@
           "first_image_bg": "shopify:\/\/shop_images\/Aromatech-Cities-Collection-background.png",
           "thirdsectiontitle": "DISCOVER THE CITIES",
           "thirdsectiontitlesub": "We are thrilled to share with you this luxurious collection of fragrances. Experience the world with us.",
-          "second_image": "shopify:\/\/shop_images\/Cities-Collection-photo.png",
+          "second_image": "shopify:\/\/shop_images\/AromaTech-Website-Image-Ryan_1ebc85fd-06a9-4826-979b-803d1e51634b.jpg",
           "secondsectiontitle": "The Nose Behind It All: Meet Ryan",
           "secondsectiontxt": "When I was a young boy I remember my Grandfather getting ready early every morning for work. Shaving foam, Brylcreem, and splash on cologne in the form of Dior Eau Sauvage. Smelling those grooming items almost over 30 years later will bring me right back to standing outside the bathroom doorway watching him with love and wonder while he completed his daily routine. This was my earliest memory of falling in love with fragrances.",
           "secondbuttontxt": "READ MORE",
@@ -2209,7 +2193,7 @@
           "alignment": "center center",
           "textAlignement": "left",
           "title": "<p>Scent your business<\/p>",
-          "text": "<p>We create signature scents to strengthen your brand identity and an atmosphere your clients will always remember.<\/p>\n\n<p>We assist our clients in creating unique and memorable environments, increase browsing time and creating a more pleasant interaction. Stand out and develop loyal customers.<\/p>",
+          "text": "<p>We create signature scents to strengthen your brand identity and an atmosphere your clients will always remember. We assist our clients in creating unique and memorable environments, increase browsing time and creating a more pleasant interaction. Stand out and develop loyal customers.<\/p>",
           "button_label": "SHOP FOR BUSINESS",
           "button_link": "https:\/\/aromatechscent.com\/pages\/why-aromatech"
         }
@@ -2223,7 +2207,11 @@
           "product_1_desc": "<p>Covers up to 1,000 sq. ft<br\/>Fragrance distribution control<br\/>Bluetooth compatible<\/p>",
           "product_2": "aromapro",
           "product_2_desc": "<p>Covers up to 4,000 sq. ft<br\/>HVAC compatible<br\/>Wall mountable<\/p>",
-          "view_all_text": "SHOP ALL SCENT MACHINES",
+          "view_all_text": "SHOP NOW",
+          "btn_bg_color": "rgba(0,0,0,0)",
+          "btn_bg_color_hover": "#ffffff",
+          "btn_color": "#000000",
+          "btn_color_hover": "#ea0606",
           "view_all_url": "shopify:\/\/collections\/popular-scent-diffusers",
           "show_vendor": true,
           "show_view_all": true
@@ -2300,22 +2288,168 @@
       "scent-machines": {
         "type": "scent-machines",
         "settings": {
-          "paddings": "default",
+          "paddings": "section--remove-bottom-padding",
           "title": "Scent Machines",
           "product_1": "arominibluetooth",
           "product_1_desc": "<p>Covers up to 1,000 sq. ft<br\/>Fragrance distribution control<br\/>Bluetooth compatible<\/p>",
           "product_2": "aromapro",
           "product_2_desc": "<p>Covers up to 4,000 sq. ft<br\/>HVAC compatible<br\/>Wall mountable<\/p>",
           "view_all_text": "SHOP ALL SCENT MACHINES",
+          "btn_bg_color": "",
+          "btn_bg_color_hover": "",
+          "btn_color": "",
+          "btn_color_hover": "rgba(0,0,0,0)",
           "view_all_url": "shopify:\/\/collections\/popular-scent-diffusers",
           "show_vendor": false,
           "show_view_all": true
+        }
+      },
+      "161669906211f11110": {
+        "type": "about-our-products",
+        "settings": {
+          "text_left": "AROMATECH.<br>\nNEBULIZING SCENT DIFFUSERS.<br>\nPURE ESSENTIAL & AROMA OIL.<br>\nSCENTING FOR HOME & BUSINESS.",
+          "text_left_size": 20,
+          "text_left_weight": "100",
+          "title_right": "<p><strong>SOPHISTICATED, LUXURIOUS, TRANSFORMATIVE<\/strong><\/p>",
+          "title_right_size": 16,
+          "text_right": "WE CREATE ELEGANT SCENT MACHINES AND COMPLEX AROMA OILS TO TRANSFORM YOUR INTERACTION WITH THE SURROUNDING ENVIRONMENT.\n<br><br>\nOUR DIFFUSERS USE A NEBULIZING TECHNOLOGY, ALLOWING FOR ESSENTIAL & AROMA OIL TO BE DIFFUSED WITHOUT THE USE OF HEAT OR WATER.",
+          "text_right_size": 16,
+          "bg_right": "#efddd3",
+          "paddings": "default"
+        }
+      },
+      "password-content-new": {
+        "type": "password-content-new",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/password-image.png",
+          "image_mobile": "shopify:\/\/shop_images\/mobile-maintenance.jpg"
+        }
+      },
+      "about-us-slideshow": {
+        "type": "about-us-slideshow",
+        "blocks": {
+          "a1b3bf97-b401-41c0-9938-5a297729ca1e": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-ABOUT_US-Desktop_7440f9d1-7120-4fb4-8678-52cfcdfb228a.jpg",
+              "mobile_image": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-ABOUT-US-Mobile.jpg",
+              "alignment": "center center",
+              "color_back_bg": "#ba9163",
+              "text_color": "#000000",
+              "mobile_text_color": "#ffffff",
+              "font_size_heading": 80,
+              "custom_class": "third",
+              "content_width": "600px",
+              "slide_title": "AromaTech<sup class=\"slider-sup\">TM<\/sup> for Business",
+              "subheading": "Our fine-crafted fragrances help retail, luxury, and hospitality companies create meaningful, emotional connections with their customers.",
+              "button_label": "Contact our team",
+              "button_link": "#b2b-form",
+              "button_label2": "SHOP OUR DIFFUSERS",
+              "button_link2": "shopify:\/\/collections\/scent-diffusers",
+              "btn_bg_color": "",
+              "btn_bg_color_hover": "#e1e1e1",
+              "btn_color": "#212121",
+              "btn_color_hover": "#231f20"
+            }
+          }
+        },
+        "block_order": [
+          "a1b3bf97-b401-41c0-9938-5a297729ca1e"
+        ],
+        "settings": {
+          "paddings": "section--remove-all-paddings",
+          "slideshow_height": "large",
+          "mobile_image_banner": "shopify:\/\/shop_images\/AromaTech-Website-Banner-Apr1-ABOUT-US-Mobile.jpg",
+          "mobile_image_tittle": "AromaTech<sup class=\"slider-sup\">TM<\/sup> for Business",
+          "mobile_image_tittle_sub": "Our fine-crafted fragrances help retail, luxury, and hospitality companies create meaningful, emotional connections with their customers.",
+          "button_label2_mob": "Contact our team",
+          "button_link2_mob": "https:\/\/aromatechdev.myshopify.com\/#b2b-form",
+          "color_back_bg_mob": "#ba9163",
+          "mobile_text_color_mob": "#ffffff",
+          "btn_bg_color_mob": "",
+          "btn_bg_color_hover_mob": "",
+          "btn_color_mob": "#ffffff",
+          "btn_color_hover_mob": "",
+          "text_alignment": "left center",
+          "show_overlay": false,
+          "autorotate": true,
+          "autorotate_speed": 5
+        }
+      },
+      "collection-scent-diffusers": {
+        "type": "collection-scent-diffusers",
+        "blocks": {
+          "2433c762-9715-4fc7-978c-8805040721c2": {
+            "type": "link",
+            "settings": {
+              "heading": "Bestseller",
+              "link": "shopify:\/\/collections\/scent-diffusers",
+              "description": "CONTENT NEEDS TO BE ADDED"
+            }
+          },
+          "b29d5ba2-0e57-4fda-a7f8-79159044aa95": {
+            "type": "link",
+            "settings": {
+              "heading": "Shop all",
+              "link": "shopify:\/\/collections\/scent-diffusers",
+              "description": "CONTENT NEEDS TO BE ADDED"
+            }
+          },
+          "64ef529e-0299-4abb-9e7c-9438c9751f4e": {
+            "type": "link",
+            "settings": {
+              "heading": "SMALL SPACES",
+              "link": "shopify:\/\/collections\/small-space-scent-diffusers",
+              "description": "CONTENT NEEDS TO BE ADDED"
+            }
+          },
+          "c84ecb9e-b209-4a3f-89c2-a1878e4499cd": {
+            "type": "link",
+            "settings": {
+              "heading": "MEDIUM SPACES",
+              "link": "shopify:\/\/collections\/medium-space-scent-diffusers",
+              "description": "CONTENT NEEDS TO BE ADDED"
+            }
+          },
+          "777c0061-45d4-45a4-b16e-fc94feea3ccd": {
+            "type": "link",
+            "settings": {
+              "heading": "LARGE SPACES",
+              "link": "shopify:\/\/collections\/extra-large-space-scent-diffusers",
+              "description": "CONTENT NEEDS TO BE ADDED"
+            }
+          },
+          "d6957587-25d6-4ebc-a2a0-066340ec167a": {
+            "type": "link",
+            "settings": {
+              "heading": "CARS",
+              "link": "shopify:\/\/collections\/scent-diffusers-for-your-car",
+              "description": "CONTENT NEEDS TO BE ADDED"
+            }
+          }
+        },
+        "block_order": [
+          "2433c762-9715-4fc7-978c-8805040721c2",
+          "b29d5ba2-0e57-4fda-a7f8-79159044aa95",
+          "64ef529e-0299-4abb-9e7c-9438c9751f4e",
+          "c84ecb9e-b209-4a3f-89c2-a1878e4499cd",
+          "777c0061-45d4-45a4-b16e-fc94feea3ccd",
+          "d6957587-25d6-4ebc-a2a0-066340ec167a"
+        ],
+        "settings": {
+          "layout": "grid",
+          "grid": 4,
+          "rows": 2,
+          "show_collection_image": true,
+          "show_vendor": false,
+          "sort_enable": true,
+          "tags_enable": true
         }
       }
     },
     "content_for_index": [
       "1602656997621",
-      "1601990168718",
+      "161669906211f11110",
       "feature-columns",
       "161229936973c7acd6",
       "collection",

@@ -2140,9 +2140,11 @@ background-color: rgba(0, 0, 0, 0.8);
 	color: #000;
 	/*   	-webkit-appearance: menulist-button; */
 }
-.b2b-form .contact-form select:invalid {
-	color: gray;
+.b2b-form .contact-form select:invalid,
+.b2b-form .contact-form select option {
+	color:#212121;
 }
+
 .page-container .shopify-challenge__container {
 	margin: 50px auto;
 }
@@ -3526,7 +3528,7 @@ a.jdgm-paginate__page.jdgm-paginate__next-page {
 		padding: 175px 0 175px 0 !important;
 	}
 	.template-blog .page-header-wrapper, .template-article .page-header-wrapper, .page-header-wrapper {
-		height: 350px;
+		height: 350px !important;
 	}
 	.sezzle-button-text.sezzle-left.szl-light {
 		font-size: 12px !important;
@@ -6224,6 +6226,278 @@ a.black_button {
 			}
 		}
 	}
+}
+
+.product-slide-wrapper {
+	.product-description {
+		@media (max-width: 767px) {
+			padding: 0;
+		}
+	}
+}
+
+#slickSlide-1602656997621-1 .btn2 {
+	background-color: rgba(0,0,0,0)!important;
+	border-color: #000!important;
+	color: #000!important;
+}
+#slickSlide-1602656997621-1 .btn2:hover {
+	background-color: #ffffff!important;
+	border-color: #000000!important;
+	color: #000000!important;
+}
+
+.page-shipping-returns {
+	.page-header-wrapper {
+		@media (min-width: 1951px) {
+			background-size: auto 100%;
+			background-position: center center;
+			position: relative;
+
+			&::before, &::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: -1;
+				background-image: inherit;
+				background-size: cover;
+				background-repeat: inherit;
+				background-position: 100% 50%;
+			}
+			&::before {
+				right: 60%;
+				background-size: 10000% 100%;
+				background-position: center left;
+				transform: scaleX(-1);
+			}
+			&::after {
+				left: 60%;
+				background-size: 10000% 100%;
+				background-position: center right;
+				transform: scaleX(-1);
+			}
+		}
+
+		@media (max-width: 1950px) {
+			background-position-y: -45px;
+		}
+
+		@media (max-width: 1780px) {
+			background-position-y: -20px;
+		}
+
+		@media (max-width: 1700px) {
+			background-position-y: 0;
+		}
+
+		@media (max-width: 1455px) {
+			background-position: top 0 right -50px;
+		}
+
+		@media (max-width: 1150px) {
+			background-position: top 0 right -120px;
+		}
+
+		@media (max-width: 700px) {
+			background-position: top 0 right -160px;
+		}
+
+		@media (max-width: 480px) {
+			background-position: bottom center;
+		}
+	}
+}
+
+.page-privacy-policy {
+	.page-header-wrapper {
+		@media (min-width: 1966px) {
+			background-size: auto 100%;
+			background-position: center center;
+			position: relative;
+
+			&::before, &::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: -1;
+				background-image: inherit;
+				background-size: cover;
+				background-repeat: inherit;
+				background-position: 100% 50%;
+			}
+			&::before {
+				right: 60%;
+				background-size: 10000% 100%;
+				background-position: center left;
+				transform: scaleX(-1);
+			}
+			&::after {
+				left: 60%;
+				background-size: 10000% 100%;
+				background-position: center right;
+				transform: scaleX(-1);
+			}
+		}
+
+		@media (max-width: 1965px) {
+			background-position-y: -47px;
+			background-size: 100% 118%;
+		}
+
+		@media (max-width: 1870px) {
+			background-position-y: -40px;
+			background-size: cover;
+		}
+
+		@media (max-width: 1730px) {
+			background-position-y: center;
+		}
+
+		@media (max-width: 1510px) {
+			background-position: center right -30px;
+		}
+
+		@media (max-width: 765px) {
+			background-position: center right -100px;
+		}
+
+		@media (max-width: 480px) {
+			background-position: bottom;
+			height: 330px;
+		}
+	}
+}
+
+.page-scenting-app-privacy-policy {
+	.page-header-wrapper {
+		@media (min-width: 1966px) {
+			background-size: auto 100%;
+			background-position: center center;
+			position: relative;
+
+			&::before, &::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: -1;
+				background-image: inherit;
+				background-size: cover;
+				background-repeat: inherit;
+				background-position: 100% 50%;
+			}
+			&::before {
+				right: 60%;
+				background-size: 10000% 100%;
+				background-position: center left;
+				transform: scaleX(-1);
+			}
+			&::after {
+				left: 60%;
+				background-size: 10000% 100%;
+				background-position: center right;
+				transform: scaleX(-1);
+			}
+		}
+
+		@media (max-width: 1965px) {
+			background-position-y: -47px;
+			background-size: 100% 118%;
+		}
+
+		@media (max-width: 1870px) {
+			background-position-y: -40px;
+			background-size: cover;
+		}
+
+		@media (max-width: 1730px) {
+			background-position-y: center;
+		}
+
+		@media (max-width: 1510px) {
+			background-position: center right -30px;
+		}
+
+		@media (max-width: 765px) {
+			background-position: center right -100px;
+		}
+
+		@media (max-width: 480px) {
+			background-position: center center;
+		}
+	}
+
+}
+
+.page-terms-and-conditions {
+	.page-header-wrapper {
+		@media (min-width: 1966px) {
+			background-size: auto 100%;
+			background-position: center center;
+			position: relative;
+
+			&::before, &::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: -1;
+				background-image: inherit;
+				background-size: cover;
+				background-repeat: inherit;
+				background-position: 100% 50%;
+			}
+			&::before {
+				right: 60%;
+				background-size: 10000% 100%;
+				background-position: center left;
+				transform: scaleX(-1);
+			}
+			&::after {
+				left: 60%;
+				background-size: 10000% 100%;
+				background-position: center right;
+				transform: scaleX(-1);
+			}
+		}
+
+		@media (max-width: 1965px) {
+			background-position-y: -47px;
+			background-size: 100% 118%;
+		}
+
+		@media (max-width: 1870px) {
+			background-position-y: -40px;
+			background-size: cover;
+		}
+
+		@media (max-width: 1730px) {
+			background-position-y: center;
+		}
+
+		@media (max-width: 1510px) {
+			background-position: center right -30px;
+		}
+
+		@media (max-width: 765px) {
+			background-position: center right -100px;
+		}
+
+		@media (max-width: 480px) {
+			background-position: center center;
+		}
+	}
+
 }
 .page-b2b-landing {
 	.slideshow__image {
