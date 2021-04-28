@@ -67,10 +67,10 @@
 					{%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
 
 					<div class="collection-product">
-						<div class="colect-descr">
+						<!-- <div class="colect-descr">
 							<h2 class="collect-title h6">{{ collection.title }}</h2>
 							<div class="font-body-small">{{ collection.description }}</div>
-						</div>
+						</div> -->
 						<ul class="collet-product here">
 							{% for product in collection.products limit: product_limit %}
 								<li

@@ -5028,10 +5028,10 @@ div[data-alert="status"] {
 div[data-alert="status"].alert {
 	max-height: 60px;
 }
-
+.product-card2__review {margin-top:5px;}
 @media only screen and (max-width: 480px) {
 	.product-card2__review {
-		margin-bottom: 9px;
+		margin-top: 9px;
 	}
 }
 

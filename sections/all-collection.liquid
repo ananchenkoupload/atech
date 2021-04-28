@@ -55,15 +55,15 @@
 
 	<div class="custom-category-parent">
 
-		{% for block in section.blocks %}
+		{% for block in section.blocks %} 
 		{% if collection.all_tags contains block.settings.title %}
 		<div class="category-collection-full-width read-section" id="{{ block.settings.title | handleize }}">
 			<div class="page-width2 section-collection scroll-collection category-collect">
 				<div class="collection-product">
-					<div class="colect-descr">
+					<!-- <div class="colect-descr">
 						<h2 class="collect-title h6">{{ block.settings.title }}</h2>
 						<p class="font-body-small">{{ block.settings.tag_desc | escape }}</p>
-					</div>
+					</div> -->
 
 					{% if section.settings.layout == 'grid' %}
 					{% case section.settings.grid %}
