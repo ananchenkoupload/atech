@@ -39,15 +39,33 @@
 			</div>
 		{% endfor %}
 	</div>
-    <div class="section-button-holder text-center">
-        <div class="links-grid">
-          <div>
-            <a href="{{ section.settings.button_link }}" class="btn2" aria-label="{{ ariaLabel }}">{{- section.settings.button_name | escape -}}</a>
-          </div>
-        </div>
-      </div>
+	<div class="section-button-holder text-center">
+		<div class="links-grid">
+			<div>
+				<a href="{{ section.settings.button_link }}" class="btn2" aria-label="{{ ariaLabel }}">{{- section.settings.button_name | escape -}}</a>
+			</div>
+		</div>
+	</div>
 </div>
 
+<style>
+	@media screen and (max-width:767px){
+		.slideshow-wrapper .slick-next.slick-arrow, .slideshow-wrapper .slick-prev.slick-arrow, .custom-slider .slick-next.slick-arrow, .custom-slider .slick-prev.slick-arrow {
+			display:inline-block !important;
+		}
+
+		.template-customers-account .main-content .shopify-section > div:not([class*="page-header-wrapper"]) {
+			padding-bottom: 0;
+		}
+		.template-customers-account .section-collection {
+			padding-bottom: 50px !important;
+		}
+	}
+	
+	.section-header.text-center a{
+		text-decoration: none;
+	}
+</style>
 
 {% if section.settings.title == "Scent Machines" %}
 	</div>
@@ -86,11 +104,11 @@
 	          {
 	            breakpoint: 480,
 	            settings: {
-	              arrows: false,
-	              centerMode: true,
+	              arrows: true,
+	              centerMode: false,
 	              slidesToShow: 1,
-	              centerPadding: '40px',
-	              slidesToScroll: 1
+	              // centerPadding: '50px',
+	              slidesToScroll: 1 
 	            }
 	          }
 	        ]
@@ -204,8 +222,3 @@
 	]
 }
 {% endschema %}          
-<style>
-    .section-header.text-center a{
-        text-decoration: none;
-    }
-</style>
