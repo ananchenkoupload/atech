@@ -782,7 +782,6 @@ header.site-header.sticky {
 }
 header {
 	&.site-header {
-
 		&.sticky {
 			margin: 0 auto;
 			animation: smoothScroll 0.95s forwards;
@@ -5313,7 +5312,6 @@ div[data-alert="status"].alert {
 		top: 71px;
 		transition: none;
 		transform: none !important;
-
 	}
 	header.site-header .actsub .mobile-nav-wrapper {
 		height: calc(var(--wh, 1vh) * 100) !important;
@@ -5322,15 +5320,9 @@ div[data-alert="status"].alert {
 	header.site-header .mobile-nav-wrapper ul li .mobile-nav__link {
 		outline: none;
 	}
-
-	//header.site-header .mobile-nav-wrapper .mobile-nav:not(.is-closing) {
-	//	-webkit-overflow-scrolling: touch;
-	//	overflow: auto;
-	//}
-	//
-	//header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav {
-	//	overflow: initial;
-	//}
+	header.site-header .mobile-nav-wrapper:not(.sub-nav--is-open) .mobile-nav {
+		overflow-y: auto;
+	}
 
 	header.site-header .mobile-nav-wrapper .mobile-nav {
 		height: 100% !important;
@@ -5338,7 +5330,7 @@ div[data-alert="status"].alert {
 
 	header.site-header .mobile-switcher {
 		padding: 25px 0;
-		margin: auto 0 0;
+		margin: auto 0 200px;
 	}
 	header.site-header .multi-currency form {
 		margin: 0 auto;
@@ -5777,7 +5769,7 @@ a.black_button {
 
 				.rc_label {
 					position: relative;
-
+					font-weight: 400;
 
 					&::before {
 						width: 21px;
@@ -5803,10 +5795,14 @@ a.black_button {
 						opacity: 0;
 					}
 
+					> span {
+						font-weight: 600;
+					}
+
 					&.rc_label__onetime {
 						display: block !important;
 						width: 100%;
-						line-height: 1.33em !important;
+						line-height: 16px !important;
 						margin-bottom: 0;
 						padding: 5px 28px 5px 30px;
 						margin-top: -20px;
@@ -6156,6 +6152,7 @@ a.black_button {
 
 #satcb_bar {
 	display: none!important;
+	top: 0!important;
 }
 
 .section-about-our-product {
@@ -6539,94 +6536,26 @@ a.black_button {
 	}
 
 }
-
-.page-ccpa-compliance {
-	.page-header-wrapper {
-		@media (min-width: 1966px) {
-			background-size: auto 100%;
-			background-position: center center;
-			position: relative;
-
-			&::before, &::after {
-				content: "";
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				z-index: -1;
-				background-image: inherit;
-				background-size: cover;
-				background-repeat: inherit;
-				background-position: 100% 50%;
-			}
-			&::before {
-				right: 60%;
-				background-size: 10000% 100%;
-				background-position: center left;
-				transform: scaleX(-1);
-			}
-			&::after {
-				left: 60%;
-				background-size: 10000% 100%;
-				background-position: center right;
-				transform: scaleX(-1);
-			}
-		}
-
-		@media (max-width: 1965px) {
-			background-position-y: -47px;
-			background-size: 100% 118%;
-		}
-
-		@media (max-width: 1870px) {
-			background-position-y: -40px;
-			background-size: cover;
-		}
-
-		@media (max-width: 1730px) {
-			background-position-y: center;
-		}
-
-		@media (max-width: 1510px) {
-			background-position: center right -30px;
-		}
-
-		@media (max-width: 765px) {
-			background-position: center right -130px;
-			background-size: auto 100%;
-		}
-
-		@media (max-width: 480px) {
-			background-position: center center;
-		}
-	}
-
-}
-
-.template-index {
-	#slickSlide-1602656997621-1 .slideshow__image {
-
-		@media (min-width: 1966px) {
-			background-position: center bottom -100px!important;
-		}
-
-
-		@media (min-width: 1700px) {
-			background-position: center bottom -150px!important;
-		}
-
-		@media (min-width: 2100px) {
-			background-position: center bottom -150px!important;
+.product-slide-wrapper {
+	.product-description {
+		@media (max-width: 767px) {
+			padding: 0;
 		}
 	}
 }
 
-.scrollable-wrapper {
-	table {
-		width: auto!important;
-	}
+
+#slickSlide-1602656997621-1 .btn2 {
+	background-color: rgba(0,0,0,0)!important;
+	border-color: #000!important;
+	color: #000!important;
 }
+#slickSlide-1602656997621-1 .btn2:hover {
+	background-color: #ffffff!important;
+	border-color: #000000!important;
+	color: #000000!important;
+}
+
 
 .page-title {
 	padding-top: 30px;
@@ -6638,6 +6567,7 @@ a.black_button {
 	}
 }
 
+
 #shopify-section-collection .custom-slider {
 	.slick-arrow {
 		z-index: 1;
@@ -6648,14 +6578,14 @@ a.black_button {
 		&.slick-prev {
 			@media (max-width: 767px) {
 				display: inline-block!important;
-				left: 0px;
+				left: 0;
 			}
 		}
 
 		&.slick-next {
 			@media (max-width: 767px) {
 				display: inline-block!important;
-				right: 0px;
+				right: 0;
 			}
 		}
 	}

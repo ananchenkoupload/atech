@@ -24,8 +24,7 @@
   {% endcase %}
 
   {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
-  
-  	
+
 
   <ul>
     {% for product in collection.products limit: product_limit %}
@@ -213,7 +212,7 @@
       "min": 2,
       "max": 5,
       "step": 1,
-      "default": 3
+      "default": 5
     },
     {
       "type": "range",
