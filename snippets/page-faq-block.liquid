@@ -1,0 +1,53 @@
+{% if question.size > 0 %}
+	<div class="page-width2" style="padding-top: 50px;">
+	    <div class="product-faq-title-wrapper">
+	    	{% if faqTitle != blank %}
+          <h2 class="h3 text-center">{{ faqTitle | escape }}</h2>
+        {% endif %}
+        {% if faqDescription != blank %}
+          <div class="description text-center">{{ faqDescription }}</div>
+        {% endif %}
+		</div>
+
+		<div class="section-collection-faq faq-wrapper">
+			<div class="faq-cat-wrapper" itemscope itemtype="https://schema.org/FAQPage">
+				{% if faqSubTitle != blank %}
+					<h2 class="h4">{{ faqSubTitle | escape }}</h2>
+				{% endif %}
+				{% for q in question %}
+					{% if question[forloop.index0] != blank and answer[forloop.index0] != blank %}
+						<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="collection-faq-wrapper">
+							<h3 itemprop="name" class="accordion">{{ question[forloop.index0] }}</h3>
+							<div class="panel" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+								<div itemprop="text"> 
+									<p>
+										{{ answer[forloop.index0] | strip_html }}
+									</p>
+								</div> 
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+<script>
+	/* Accordion */
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	    acc[i].addEventListener("click", function() {
+	        this.classList.toggle("active");
+	        var panel = this.nextElementSibling;
+	        if (panel.style.maxHeight) {
+	            panel.style.maxHeight = null;
+	        } else {
+	            panel.style.maxHeight = panel.scrollHeight + "px";
+	        } 
+	    });
+	}
+	/* END Accordion */
+</script>

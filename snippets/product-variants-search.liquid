@@ -1,0 +1,21 @@
+<span class="item-variants">
+{% unless sold_out %}      
+  {% unless item.has_only_default_variant %}
+    {% for option in item.options_with_values %}
+      {% assign downcased_option = option.name | downcase %}
+        {% if downcased_option contains 'size' %}
+          {% assign is_size = true %}
+          {% for value in option.values %}
+            {% assign variant_avialable = true %}
+            {% if item.options.size == 1 %}
+              {% unless item.variants[forloop.index0].available  %}
+                {% assign variant_avialable = false %}
+              {% endunless %}
+            {% endif %}
+            <span class="size-values {% unless variant_avialable %}soldout{% endunless %} text-center">{{ value | escape }}</span>
+          {% endfor %}      
+        {% endif %}
+    {% endfor %}
+  {% endunless %}      
+{% endunless %} 
+</span>

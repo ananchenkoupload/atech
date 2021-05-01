@@ -1,0 +1,299 @@
+{% if section.settings.enroute_product != blank %}
+
+  {% assign enroute_product = all_products[settings.enroute_product] %}
+  {% assign id = enroute_product.variants.first.id %}
+  {% assign price = enroute_product.price | money %}
+
+  {% assign id1 = enroute_product.variants.first.id %}
+  {% assign price2 = enroute_product.price | money %}
+
+
+  {% assign threshold_2 = settings.threshold_2 | plus: 0 %}
+  {% assign enroute_product_2 = all_products[settings.enroute_product_2] %}
+  {% assign enroute_product_2_price = enroute_product_2.price | money %}
+  {% assign enroute_product_2_id = enroute_product_2.variants.first.id %}
+
+  {% assign threshold_3 = settings.threshold_3 | plus: 0 %}
+  {% assign enroute_product_3 = all_products[settings.enroute_product_3] %}
+  {% assign enroute_product_3_price = enroute_product_3.price | money %}
+  {% assign enroute_product_3_id = enroute_product_3.variants.first.id %}
+
+  {% assign threshold_4 = settings.threshold_4 | plus: 0 %}
+  {% assign enroute_product_4 = all_products[settings.enroute_product_4] %}
+  {% assign enroute_product_4_price = enroute_product_4.price | money %}
+  {% assign enroute_product_4_id = enroute_product_4.variants.first.id %}
+
+  {% assign total_price = cart.total_price | divided_by: 100 %}
+
+  {% if total_price >= threshold_2 and total_price < threshold_3 %}
+    {% assign enroute_product = enroute_product_2 %}
+    {% assign price = enroute_product_2_price %}
+    {% assign id = enroute_product_2_id %}
+  {% elsif total_price >= threshold_3 and total_price < threshold_4 %}
+    {% assign enroute_product = enroute_product_3 %}
+    {% assign price = enroute_product_3_price %}
+    {% assign id = enroute_product_3_id %}
+  {% elsif total_price >= threshold_4 %}
+    {% assign enroute_product = enroute_product_4 %}
+    {% assign price = enroute_product_4_price %}
+    {% assign id = enroute_product_4_id %}
+  {% endif %}
+
+
+  <div id="is-a-gift" style="clear: left;" class="is-a-gift not clearfix enr">
+    <p>
+      <label class="label-checkbox nt" for="enroute">
+        <input id="enroute" type="checkbox" name="attributes[enroute]" data-enroute value="yes" {% if cart.attributes.enroutes %} checked="checked"{% endif %} style="float: none" />
+        <span class="fake-checkbox"></span>
+        Add AROMATECH Full Coverage Shipping Insurance for <span class="enroute-price">{{ price }}</span>
+        <span class="tooltiptext">Optional full shipping coverage starting at a low fee that effortlessly resolve any shipment issues. Lost, damaged, or stolen items are easily taken care of by contacting our Customer Service.</span>
+      </label>
+    </p>
+  </div>
+
+  <style>
+    #updates_{{ id }} { display: none; }
+
+    .cart #is-a-gift label .tooltiptext {
+      visibility: hidden;
+      width: 300px;
+      background-color: #F3F5F4;
+      color: #212121;
+      text-align: left;
+      padding: 14px;
+      border-radius: 5px;
+      position: absolute;
+      z-index: 1;
+      font-weight: 300;
+      bottom: 130%;
+      left: 93%;
+      margin-left: -150px;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.2px;
+    }
+
+    @media only screen and (max-width: 1459px) {
+      .cart #is-a-gift label .tooltiptext {
+        left: 50%;
+      }
+    }
+
+    .cart #is-a-gift label .tooltiptext::after {
+      content: " ";
+      position: absolute;
+      top: 100%;
+      left: 39px;
+      margin-left: 0;
+      border-width: 10px;
+      border-style: solid;
+      border-color: #F3F5F4 transparent transparent transparent;
+    }
+
+    .cart #is-a-gift label:hover .tooltiptext {
+      visibility: visible;
+    }
+  </style>
+
+  <script>
+
+    Shopify.Cart = Shopify.Cart || {};
+    Shopify.Cart.GiftWrap = {};
+
+
+    var product = {{id}};
+
+    var priceIt = '{{price}}';
+
+    var flagOn = true;
+
+    var flagIn = true;
+
+    function recalcEnrouteTRn(flagChangeO,flagChangeI) {
+
+      if (flagChangeO !== undefined) {
+        flagOn = true;
+      }
+
+      if (flagChangeI !== undefined) {
+        flagIn = true;
+      }
+
+      setTimeout(function(){
+        jQuery.getJSON('/cart.js', function(cart) {
+          var total_price = cart.total_price / 100;
+          var threshold_2 = {{ threshold_2 }};
+
+          if (total_price < {{threshold_2}}) {
+            product = {{id1}};
+            priceIt = '{{price2}}';
+          } else if (total_price > {{threshold_2}} && total_price < {{threshold_3}}) {
+            product = {{enroute_product_2_id}};
+            priceIt = '{{enroute_product_2_price}}';
+
+            if (flagOn == true) {
+              console.log('changing tw')
+              if ($('div#is-a-gift .nt').hasClass('m-active')) {
+                $('div#is-a-gift .nt').removeClass('m-active');
+                console.log('rmv 1')
+              }
+              flagOn = false;
+            }
+
+          } else if (total_price > {{threshold_3}} && total_price < {{threshold_4}}) {
+            product = {{enroute_product_3_id}};
+            priceIt = '{{enroute_product_3_price}}';
+
+            if (flagIn == true) {
+              console.log('changing tw')
+              if ($('div#is-a-gift .nt').hasClass('m-active')) {
+                $('div#is-a-gift .nt').removeClass('m-active');
+                console.log('rmv 1')
+              }
+              flagIn = false;
+            }
+
+          } else if (total_price > {{threshold_4}}) {
+            product = {{enroute_product_4_id}};
+            priceIt = '{{enroute_product_4_price}}';
+
+            if (flagIn == true) {
+              console.log('changing tw')
+              if ($('div#is-a-gift .nt').hasClass('m-active')) {
+                $('div#is-a-gift .nt').removeClass('m-active');
+                console.log('rmv 1')
+              }
+              flagIn = false;
+            }
+          } else {
+            product = {{id}};
+            priceIt = '{{price}}';
+          }
+
+          $('#is-a-gift label').html('<input id="enroute" type="checkbox" name="attributes[enroute]" value="yes" style="float: none" /><span class="fake-checkbox"></span>Add AROMATECH Full Coverage Shipping Insurance for <span class="enroute-price">' + priceIt + '</span><span class="tooltiptext">Optional full shipping coverage starting at a low fee that effortlessly resolve any shipment issues. Lost, damaged, or stolen items are easily taken care of by contacting our Customer Service.</span>');
+
+          $('.cart-subtotal-ajax').text(formatter.format(cart.total_price/100));
+
+        });
+      }, 150);
+
+    }
+    $(document).ready(function() {
+
+      $('.qty-adjust').click(function() {
+
+        recalcEnrouteTRn()
+
+      });
+
+      Shopify.Cart.GiftWrap.remove = function() {
+
+        let nubmerCr = parseInt(product);
+
+        let rmIte = $('.cart__row[data-id="'+nubmerCr+'"]');
+
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/change.js',
+          data: { quantity: 0, id: nubmerCr },
+          dataType: 'json',
+          success: function() {
+            rmIte.fadeOut();
+            rmIte.remove()
+            $('.cart-table .cart__row').each(function (){
+              let currentIndex = $(this).index(),
+                      indx =  Number(currentIndex + 1);
+              $(this).attr('data-cart-item-index', indx)
+            });
+          }
+        });
+      }
+
+      function updateCartCount() {
+        setTimeout(function(){
+          $.ajax({
+            type: 'GET',
+            url: '/cart.js',
+            dataType: 'json',
+            success: function(cart) {
+              console.log(cart)
+              $('.js-ajax-cart-counter-header').text(cart.item_count)
+            },
+          });
+        }, 250);
+      }
+
+      Shopify.Cart.GiftWrap.set = function() {
+
+        var headers = new Headers({ 'Content-Type': 'application/json' });
+
+        var indexCr = $('.cart tbody .cart__row').length;
+
+        let nubmerCr = parseInt(product);
+
+        $.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: {
+            quantity: 1,
+            id: nubmerCr,
+            properties: { 'enroute': true }
+          },
+          dataType: 'json',
+          success: function (locProduct) {
+
+            var cart__meta = '<td class="cart__meta small--text-left"><div class="cart__product-information"><div class="cart__image-wrapper"><img class="cart__image" src="'+ locProduct.image +'" alt="'+ locProduct.title +'" data-cart-item-image="" style="cursor: pointer;"></div><div class="tr-info"><div class="list-view-item__title"><a href="'+ locProduct.url +'" class="cart__product-title" data-cart-item-title="">'+ locProduct.title +'</a></div><div class="product-details"></div><div class="cart__qty"><span class="qty-adjust js-qty__adjust--minus dec">−</span><input id="updates_large_'+ locProduct.key +'" class="cart__qty-input" type="number" value="" min="0" pattern="[0-9]*" data-quantity-input="" data-quantity-item="" data-quantity-input-desktop="" max="5" name="updates[]"><span class="qty-adjust js-qty__adjust--plus inc">+</span></div></div></div></td>'
+
+            var cart__quantityTd = '<td class="cart__quantity-td small--hide"><div class="cart__qty"><span class="qty-adjust js-qty__adjust--minus dec">−</span><label for="updates_large_'+ locProduct.key +'" class="cart__qty-label"  data-quantity-label-desktop="">Quantity</label><input id="updates_large_'+ locProduct.key +'" class="cart__qty-input" type="number" value="1" min="0" max="5" pattern="[0-9]*" data-quantity-input="" data-quantity-item="1" data-quantity-input-desktop="" name="updates[]"><span class="qty-adjust js-qty__adjust--plus inc">+</span></div><div class="cart__qty-error-message-wrapper cart__qty-error-message-wrapper--desktop hide" role="alert" data-cart-quantity-error-message-wrapper=""><span class="visually-hidden">Error </span><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M7 0a7 7 0 0 1 7 7 7 7 0 1 1-7-7z"></path><path class="icon-error__symbol" d="M6.328 8.396l-.252-5.4h1.836l-.24 5.4H6.328zM6.04 10.16c0-.528.432-.972.96-.972s.972.444.972.972c0 .516-.444.96-.972.96a.97.97 0 0 1-.96-.96z"></path></g></svg><span class="cart__qty-error-message" data-cart-quantity-error-message=""></span></div></td>';
+
+
+            var cart__finalPrice = '<td class="cart__final-price small--hide" data-cart-item-line-price=""><dl class="hide" data-cart-item-discounted-price-group=""><dt><span class="visually-hidden">Regular total</span></dt><dd><s data-cart-item-original-price="">' + formatter.format(locProduct.line_price/100) + '</s></dd><dt><span class="visually-hidden">Discounted total</span></dt><dd><span class="order-discount" data-cart-item-final-price="">' + formatter.format(locProduct.line_price/100) + '</span></dd></dl><div data-cart-item-regular-price-group=""><span class="cart-item-regular-price" data-cart-item-regular-price="">' + formatter.format(locProduct.line_price/100) + '</span></div></td> ';
+
+            var cart__itemRemove = '<td><p class="cart__remove"><a href="/cart/change?line=1&amp;quantity=0" class="text-link text-link--accent" aria-label="Remove Green Tea &amp; Lemongrass 1 - Blue" data-cart-remove=""><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 40 40"><path d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z" class="layer"></path></svg></a></p></td> ';
+
+            var lineItem =  '<tr class="cart__row" data-cart-item-index="'+ Number(indexCr + 1) +'" data-item-available-quantity="'+ locProduct.quantity +'" data-cart-item-key="'+ locProduct.key +'" data-cart-item-url="'+ locProduct.url +'" data-cart-item-quantity="1" data-enroute="true" data-id="'+ locProduct.id +'">' + cart__meta + cart__quantityTd + cart__finalPrice + cart__itemRemove +'</tr>';
+
+            $(lineItem).insertBefore(  $('.cart-table tbody .cart__row:first-child') );
+
+            $('.cart-table .cart__row').each(function (){
+              let currentIndex = $(this).index(),
+                      indx =  Number(currentIndex + 1);
+              $(this).attr('data-cart-item-index', indx)
+            });
+
+          }
+        });
+
+      }
+
+      $.fn.hasAttr = function(name) {
+        return this.attr(name) !== undefined;
+      };
+
+      $('.cart-table .cart__row').each(function (){
+        let crItm = $(this)
+        if (crItm.hasAttr('data-enroute') == true){
+          $('div#is-a-gift .nt').addClass('m-active');
+          $('div#is-a-gift #enroute').prop('checked', true);
+        }
+      });
+
+
+      $(document).on("change","div#is-a-gift #enroute",function(event) {
+        if ($('div#is-a-gift .nt').hasClass('m-active')) {
+          Shopify.Cart.GiftWrap.remove();
+          $('div#is-a-gift .nt').removeClass('m-active');
+        } else {
+          Shopify.Cart.GiftWrap.set();
+          $(' div#is-a-gift .nt').addClass('m-active');
+        }
+
+        recalcEnrouteTRn()
+        updateCartCount()
+      });
+
+    })
+
+  </script>
+
+{% endif %}

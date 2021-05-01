@@ -1,0 +1,47 @@
+{% assign description = page.metafields.page_description.description %}
+
+{% assign detailTitle = page.metafields.details.title %}
+{% assign howToUseTitle = page.metafields.how-to-use.title %}
+{% assign detailText = page.metafields.details.text %}
+{% assign howToUseText = page.metafields.how-to-use.text %}
+
+{% assign faqTitle = page.metafields.faq.title %}
+{% assign faqSubTitle = page.metafields.faq.subtitle %}
+{% assign faqDescription = page.metafields.faq.description %}
+
+{% assign question = page.metafields.page_faq.title %}
+{% assign answer = page.metafields.page_faq.description %}
+
+{% assign testimonialTitle = page.metafields.our_clients.title %}
+{% assign testimonialImage = page.metafields.our_clients.image %}
+{% assign testimonialLink = page.metafields.our_clients.link %}
+
+
+{% include 'page-header' %}
+
+{% if description != blank %}
+  <div class="page-width2 page-wrapper aromatech-page-description">
+    {{description}}
+  </div>
+{% endif %}
+
+{% include 'two-columns-with-text', 
+  detailTitle:detailTitle, 
+  howToUseTitle:howToUseTitle,
+  detailText:detailText,
+  howToUseText:howToUseText
+%}
+
+{% include 'page-faq-block',
+  faqTitle:faqTitle,
+  faqSubTitle:faqSubTitle,
+  faqDescription:faqDescription,
+  question:question,
+  answer:answer
+%}
+
+{% include 'page-testimonial-with-logo',
+  testimonialTitle:testimonialTitle,
+  testimonialImage:testimonialImage,
+  testimonialLink:testimonialLink
+%}

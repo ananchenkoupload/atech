@@ -1,0 +1,47 @@
+{% if collection.metafields.faq.question.size > 0 %}
+	<div class="page-width2">
+		{% if collection.metafields.faq.title != blank and collection.metafields.faq.description != blank %}
+		    <div class="collection-faq-title-wrapper">
+		        <h2 class="h3 text-center">{{ collection.metafields.faq.title | escape }}</h2>
+		        <div class="description text-center">{{ collection.metafields.faq.description }}</div>
+			</div>
+		{% endif %}
+
+		<div class="section-collection-faq faq-wrapper">
+			<div class="faq-cat-wrapper" itemscope itemtype="https://schema.org/FAQPage">
+				{% for q in collection.metafields.faq.question %}
+					{% if collection.metafields.faq.question[forloop.index0] != blank and collection.metafields.faq.answer[forloop.index0] != blank %}
+						<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="collection-faq-wrapper">
+							<h2 itemprop="name" class="accordion">{{ collection.metafields.faq.question[forloop.index0] }}</h2>
+							<div class="panel" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+								<div itemprop="text"> 
+									{{ collection.metafields.faq.answer[forloop.index0] }}
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		/* Accordion */
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+		
+		for (i = 0; i < acc.length; i++) {
+			acc[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var panel = this.nextElementSibling;
+				if (panel.style.maxHeight) {
+					panel.style.maxHeight = null;
+			} else {
+					panel.style.maxHeight = panel.scrollHeight+100 + "px"; 
+				} 
+			});
+		}
+		/* END Accordion */
+	</script>
+
+{% endif %}

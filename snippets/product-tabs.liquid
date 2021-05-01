@@ -1,0 +1,109 @@
+{% assign titles = product.metafields.product_tabs.title %}
+{% assign descriptions = product.metafields.product_tabs.description %}
+{% assign btn_title = product.metafields.product_tabs.btn_title %}
+{% assign btn_link = product.metafields.product_tabs.btn_link %}
+{% assign review = product.metafields.product_tabs.reviews %}
+
+<div class="product-tabs desktop">
+  <ul class="tabs">
+    {% assign counter = 0 %}
+    {% for title in titles limit: 4 %}
+      {% assign counter = counter | plus: 1 %}
+      <li><a href="#tab-{{counter}}" class="tab-link h6">{{title}}</a></li>
+    {% endfor %}
+    {% comment %}<li><a href="#reviews" class="review-link h6">{{review}}</a></li>{% endcomment %}
+  </ul>
+
+  {% assign counter = 0 %}
+  {% for description in descriptions limit: 4 %}
+    {% assign counter = counter | plus: 1 %}
+    <div id="tab-{{counter}}" class="tab-content">
+      {{ description }}
+      {% if btn_link[forloop.index0] != blank %}
+        <p class="pdf-link">
+          <a href="{{ btn_link[forloop.index0] }}">{% include 'pdf-icon' %} {{ btn_title[forloop.index0] }}</a>
+        </p>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<div class="product-tabs mobile">
+  <div class="list-accodian accodian-content">
+    <ul class="accodian-sec">
+      {% for title in titles limit: 4 %}
+        <li>
+          <div class="content">
+            <div class="acc">
+              <div class="acc__card">
+                <div class="acc__title">
+                  <h2 class="h5">{{title}}</h2>
+                </div>
+                <div class="acc__panel">
+                  {{descriptions[forloop.index0]}}
+                  {% if btn_link[forloop.index0] != blank %}
+                    <p class="pdf-link">
+                      <a href="{{ btn_link[forloop.index0] }}">{% include 'pdf-icon' %} {{ btn_title[forloop.index0] }}</a>
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+
+      {% comment %}
+      <li class="review-link">
+        <div class="content">
+          <div class="acc">
+            <div class="acc__card">
+              <div class="acc__title">
+                <h2 class="h5">{{review}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      {% endcomment %}
+
+    </ul>
+  </div>
+</div> 
+
+<script>
+	$(document).ready(function() {
+    $(document).on('click', 'li.review-link', function(e){
+      e.preventDefault()
+      $("html, body").animate({ scrollTop: $('.product-review-box').offset().top }, 1000);
+    });
+
+    $('ul.tabs').each(function(){
+      $(this).closest('.product-tabs').addClass('loaded')
+      var active, content, links = $(this).find('a');
+      active = links.first().addClass('active');
+      content = $(active.attr('href'));
+      links.not(':first').each(function () {
+        $($(this).attr('href')).hide();
+      });
+
+      $(this).find('a.tab-link').click(function(e){
+        active.removeClass('active');
+        content.hide();
+        active = $(this);
+        content = $($(this).attr('href'));
+        active.addClass('active');
+        content.show();
+        return false;
+      });
+
+      $(this).find('a.review-link').click(function(e){
+        // active.removeClass('active');
+        // content.hide();
+        // active = $(this);
+        // active.addClass('active');
+        $("html, body").animate({ scrollTop: $('.product-review-box').offset().top }, 1000);
+      });
+    });
+  });
+</script>

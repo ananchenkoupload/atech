@@ -1,0 +1,266 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,follow" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+
+
+
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+
+  {%- assign header_font = settings.type_header_font -%}
+  {%- assign base_font = settings.type_base_font -%}
+  {%- assign base_font_bolder = base_font | font_modify: 'weight', 'bolder' -%}
+  {%- assign base_font_bold = base_font | font_modify: 'weight', 'bold' -%}
+  {%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
+  {%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
+
+ 
+  <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
+  <link rel="preload" as="font" href="{{ header_font | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="{{ base_font_bold | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'owl.min.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'slick.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'lazysizes.js' | asset_url }}" as="script">
+  
+  {{ 'ajax-cart.css' | asset_url | stylesheet_tag }}
+
+  {%- if canonical_url != blank  -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+  {%- endif -%}
+
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+  
+    <link rel="shortcut icon" type="image/x-icon" href="//cdn.shopify.com/s/files/1/1629/7465/files/Aromatech_Favicon_New_32x32.png?v=1562996945">
+
+  {%- capture seo_title -%}
+    {%- if request.page_type == 'search' and search.performed == true -%}
+      {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+    {%- else -%}
+      {{ page_title }}
+    {%- endif -%}
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% include 'social-meta-tags' %}
+  {% include 'css-variables' %}
+
+  <style>
+    {% include 'preload.css' %}
+  </style>
+
+  <script>
+    window.performance.mark('debut:theme_stylesheet_loaded.start');
+
+    function onLoadStylesheet() {
+      performance.mark('debut:theme_stylesheet_loaded.end');
+      performance.measure('debut:theme_stylesheet_loaded', 'debut:theme_stylesheet_loaded.start', 'debut:theme_stylesheet_loaded.end');
+
+      var url = "{{ 'theme.css' | asset_url }}";
+      var link = document.querySelector('link[href="' + url + '"]');
+      link.loaded = true;
+      link.dispatchEvent(new Event('load'));
+    }
+  </script>
+
+  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" type="text/css" media="print" onload="this.media='all';onLoadStylesheet()">
+  {{ 'custom-aromatech.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom_aroma.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-op.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-az.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'blog.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'product.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'account.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'faq.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'search.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'style.scss.css' | asset_url | stylesheet_tag }}
+
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  
+  <script src="{{ 'swiper.min.js' | asset_url }}" ></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  
+  <script src="https://unpkg.com/scrollreveal"></script>
+  
+  
+  <style>
+    {{ header_font | font_face: font_display: 'swap' }}
+    {{ base_font | font_face: font_display: 'swap' }}
+    {{ base_font_bold | font_face: font_display: 'swap' }}
+    {{ base_font_bolder | font_face: font_display: 'swap' }}
+    {{ base_font_italic | font_face: font_display: 'swap' }}
+    {{ base_font_bold_italic | font_face: font_display: 'swap' }}
+  </style>
+
+  <script>
+    var theme = {
+      breakpoints: {
+        medium: 750,
+        large: 990,
+        widescreen: 1400
+      },
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        regularPrice: {{ 'products.product.regular_price' | t | json }},
+        salePrice: {{ 'products.product.sale_price' | t | json }},
+        sale: {{ 'products.product.on_sale' | t | json }},
+        fromLowestPrice: {{ 'products.product.from_lowest_price_html' | t: lowest_price: '[price]' | json }},
+        vendor: {{'products.product.vendor' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }},
+        searchFor: {{ 'general.search.search_for' | t | json }},
+        addressError: {{ 'sections.map.address_error' | t | json }},
+        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+        authError: {{ 'sections.map.auth_error_html' | t | json }},
+        newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
+        external: {{ 'general.accessibility.link_messages.external' | t | json }},
+        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
+        removeLabel: {{ 'cart.label.remove' | t: product: '[product]' | json }},
+        update: {{ 'cart.label.update' | t | json }},
+        quantity: {{ 'cart.label.quantity' | t | json }},
+        discountedTotal: {{ 'cart.label.discounted_total' | t | json }},
+        regularTotal: {{ 'cart.label.regular_total' | t | json }},
+        priceColumn: {{ 'cart.label.price_column' | t | json }},
+        quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
+        cartError: {{ 'cart.general.cart_error' | t | json }},
+        removedItemMessage: {{ 'cart.general.removed_item_html' | t: quantity: '[quantity]', link: '[link]' | json }},
+        unitPrice: {{ 'products.product.unit_price_label' | t | json }},
+        unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+        oneCartCount: {{ 'cart.popup.cart_count' | t: count: 1 | json }},
+        otherCartCount: {{ 'cart.popup.cart_count' | t: count: '[count]' | json }},
+        quantityLabel: {{ 'cart.popup.quantity_label' | t: quantity_count: '[count]' | json }},
+        products: {{ 'general.search.products' | t | json }},
+        loading: {{ 'general.search.loading' | t | json }},
+        number_of_results: {{ 'general.search.number_of_results' | t: result_number: '[result_number]', results_count: '[results_count]' | json }},
+        number_of_results_found: {{ 'general.search.number_of_results_found' | t: results_count: '[results_count]' | json }},
+        one_result_found: {{ 'general.search.one_result_found' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }},
+      settings: {
+        predictiveSearchEnabled: {{ settings.predictive_search_enabled | json }},
+        predictiveSearchShowPrice: {{ settings.predictive_search_show_price | json }},
+        predictiveSearchShowVendor: {{ settings.predictive_search_show_vendor | json }}
+      },
+      stylesheet: "{{ 'theme.css' | asset_url }}"
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+
+  {%- if request.page_type contains 'customers/' -%}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'slick.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
+  <script src="{{ 'browser_detect.js' | asset_url }}" defer="defer"></script>
+
+  <script type="text/javascript">
+    if (window.MSInputMethodContext && document.documentMode) {
+      var scripts = document.getElementsByTagName('script')[0];
+      var polyfill = document.createElement("script");
+      polyfill.defer = true;
+      polyfill.src = "{{ 'ie11CustomProperties.min.js' | asset_url }}";
+
+      scripts.parentNode.insertBefore(polyfill, scripts);
+    }
+  </script>
+
+  {{ content_for_header }}
+  {% include 'judgeme_core' %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  {% if template == "product" %} 
+    {% include 'schema-dt' %}
+  {%- endif -%}
+  
+</head>
+
+<body class="template-{{ request.page_type | handle }} {% if template contains 'page' %}page-{{ page.handle }}{% endif %}">
+
+  <div id="wrapper">
+
+    <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {%- if settings.enable_ajax -%}
+      {% include 'cart-popup' %}
+    {%- endif -%}
+
+    {% section 'header' %}
+
+    <div class="page-container drawer-page-content" id="PageContainer">
+
+      <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+        {{ content_for_layout }}
+      </main>
+      <div class="footer-holder">
+        {% section 'newsletter' %}
+        {% section 'footer' %}
+        {% section 'newsletter-cookie-popup' %}
+  
+        <div id="slideshow-info" class="visually-hidden" aria-hidden="true">
+          {{- 'sections.slideshow.navigation_instructions' | t -}}
+        </div>
+      </div>
+
+
+    </div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
+    </ul>
+
+    {{ 'ajax-cart.js' | asset_url | script_tag }}
+    {%- if template == "cart" -%}
+      {{ 'cart.scss.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
+    {%- if template == "page.cities_collection" -%}
+      {{ 'city-collection.scss.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+
+    {{ 'footer.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'custom-aromatech-new.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'product-card2.scss.css' | asset_url | stylesheet_tag }}
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XwqeJm"></script>
+
+    {% include 'terms-popup' %}
+  </div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.js"></script>
+  {% include 'smile-initializer' %}
+</body>
+</html>

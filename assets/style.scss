@@ -1,0 +1,325 @@
+//.template-page.no-announcement-bar .page-container {
+//body:not(.template-index) .page-container {
+//  //padding-top: 38px;
+//  padding-top: 38px;
+//}
+//body:not(.template-index).has-announcement-bar .page-container {
+//  padding-top: 85px;
+//}
+
+body .page-container {
+  //padding-top: 38px;
+  padding-top: 38px;
+  @media (max-width: 768px) {
+    padding-top: 20px;
+  }
+}
+body.has-announcement-bar .page-container {
+  padding-top: 85px;
+  @media (max-width: 768px) {
+    padding-top: 70px;
+  }
+}
+
+body.template-index,
+body.template-blog,
+body.page-b2b-landing,
+body.template-article,
+body.template-page,
+body.page-about-us {
+  .page-container {
+    padding-top: 0;
+  }
+}
+body.template-index,
+body.template-blog,
+body.page-b2b-landing,
+body.template-article,
+body.template-page,
+body.page-about-us {
+
+  &.has-announcement-bar {
+    .page-container {
+      padding-top: 38px;
+    }
+  }
+}
+
+.page-container {
+  //transition: none !important;
+}
+
+.slideshow .slick-slide {
+  //top: 0 !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.slideshow--large {
+  height: 575px;
+
+  @media screen and (max-width: 992px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 767px) {
+    height: auto;
+  }
+}
+
+.close-smile {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 60px;
+  width: 60px;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(#ba9163, .8);
+  transition: background-color 200ms ease, opacity 200ms ease;
+  will-change: background-color, opacity;
+  opacity: 0;
+
+  &.popup-close {
+    opacity: 0;
+
+    // &:hover {
+    //   background: transparent;
+    // }
+  }
+}
+.close-btn.panel-header-icon {
+  opacity: 0 !important;
+}
+.close-smile:hover,
+.close-smile:focus {
+  background-color: #ba9163;
+}
+.close-smile:hover svg,
+.close-smile:focus svg {
+  transform: scale(1.2);
+}
+.close-smile svg {
+  fill: #fff;
+  height: 21px;
+  width: 21px;
+  transition: transform 200ms ease;
+  will-change: transform;
+}
+
+.smile-launcher-frame-container:hover .close-smile,
+.smile-launcher-frame-container:focus .close-smile {
+  opacity: 1;
+}
+
+.smile-launcher-open .close-smile {
+  // display: none;
+}
+
+.smile-launcher-frame-container.smile-launcher-mobile {
+  overflow: visible;
+}
+.smile-launcher-frame-container.smile-launcher-mobile .close-smile {
+  height: 20px;
+  width: 20px;
+  top: -5px;
+  right: -5px;
+  opacity: 1;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+.smile-launcher-frame-container.smile-launcher-mobile .close-smile svg {
+  fill: #525252;
+  height: 10px;
+  width: 10px;
+}
+
+.product-single__media-group {
+  position: relative;
+}
+.product-single__media-group .product-badge {
+  z-index: 1;
+  top: 1px;
+  right: 1px;
+  width: 100px;
+  height: 100px;
+  @media (max-width: 768px) {
+    right: 2px;
+  }
+}
+.product-single__media-group .new-label {
+  padding-left: 52px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+@media only screen and (max-width: 374px) {
+  .announcement-bar__container {
+    padding: 0 !important;
+  }
+  .announcement-bar__close-btn {
+    top: 5px !important;
+  }
+}
+
+.template-product .reviews {
+  display: block;
+  position: static;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 0;
+
+  max-width: 43%;
+}
+.template-product .fragrance-review-wrap {
+  //display: block;
+}
+.template-product .product-single__title {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  /* .template-product .reviews {
+    margin-top: 0;
+  } */
+  .template-product .mobile-title-wrapper {
+    /* display: block; */
+  }
+  .template-product .mobile-title-wrapper .reviews {
+    text-align: left;
+    /* padding-top: 5px; */
+  }
+  .template-product .reviews .jdgm-prev-badge__text {
+    margin-left: 10px;
+  }
+}
+
+#shopify-section-b2b-quotes .testimonial-arrow .next,
+#shopify-section-b2b-quotes .testimonial-arrow .prev {
+  display: none;
+}
+
+.b2b-testimonials .demo {
+  opacity: 1;
+}
+//.b2b-testimonials .active {
+//
+//}
+
+.logo-bar__item {
+  pointer-events: none;
+}
+#shopify-section-b2b-quotes {
+  // pointer-events: none;
+}
+
+.product-specs-svg {
+  width: 100%;
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+.product-specs-table {
+  margin-top: 50px;
+  margin-bottom: 25px;
+  padding: 0 90px;
+  table {
+    border-collapse: collapse;
+    border: 0;
+    thead, tbody {
+      border: 0;
+    }
+    tr {
+      th {
+        font-family: "GT America", sans-serif;
+        font-size: 15px;
+        padding: 2px 5px;
+        text-align: center;
+        border: 0;
+        &:nth-child(odd) {
+          background-color: #949599;
+        }
+        &:nth-child(even) {
+          background-color: #bbbdc1;
+        }
+      }
+      td {
+        font-family: "GT America", sans-serif;
+        padding: 2px 5px;
+        text-align: center;
+        border: 0;
+      }
+      &:nth-child(odd) {
+
+      }
+      &:nth-child(even) {
+        td {
+          &:nth-child(odd) {
+            background-color: #949599;
+          }
+          &:nth-child(even) {
+            background-color: #bbbdc1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.faq-cat-wrapper {
+  table {
+    border-collapse: collapse;
+    border: 0;
+    thead, tbody {
+      border: 0;
+    }
+    tr {
+      th {
+        font-family: "GT America", sans-serif;
+        font-size: 15px;
+        padding: 2px 5px;
+        text-align: center;
+        border: 0;
+        &:nth-child(odd) {
+          background-color: #949599;
+        }
+        &:nth-child(even) {
+          background-color: #bbbdc1;
+        }
+      }
+      td {
+        font-family: "GT America", sans-serif;
+        padding: 2px 5px;
+        text-align: center;
+        border: 0;
+      }
+      &:nth-child(odd) {
+
+      }
+      &:nth-child(even) {
+        td {
+          &:nth-child(odd) {
+            background-color: #949599;
+          }
+          &:nth-child(even) {
+            background-color: #bbbdc1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .product-specs-table {
+    padding: 0;
+  }
+}
+.spicegems_cr_modal.fade.in {
+  background: #ffffffb5;
+}
