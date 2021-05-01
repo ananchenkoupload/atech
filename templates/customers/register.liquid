@@ -1,0 +1,66 @@
+<div class="shopify-section">
+	<div class="page-width2">
+		<div class="grid">
+			<div class="grid__item medium-up--one-half medium-up--push-one-quarter">
+
+				<div class="form-vertical">
+
+					<h1 class="text-center h4">{{ 'customer.register.title' | t }}</h1>
+
+					{%- assign formId = 'RegisterForm' -%}
+					{% form 'create_customer', id: formId, novalidate: 'novalidate' %}
+					{% include 'form-status', form: form, form_id: formId %}
+
+					<label for="{{ formId }}-FirstName">{{ 'customer.register.first_name' | t }}</label>
+					<input type="text" name="customer[first_name]" id="{{ formId }}-FirstName" {% if form.first_name
+						%}value="{{ form.first_name }}" {% endif %} autocomplete="given-name"
+						placeholder="{{ 'customer.register.first_name' | t }}*" required>
+					<label for="{{ formId }}-LastName">{{ 'customer.register.last_name' | t }}</label>
+					<input required type="text" name="customer[last_name]" id="{{ formId }}-LastName" {% if form.last_name
+						%}value="{{ form.last_name }}" {% endif %} autocomplete="family-name"
+						placeholder="{{ 'customer.register.last_name' | t }}*">
+
+					<label for="{{ formId }}-email">{{ 'customer.register.email' | t }}</label>
+					<input type="email" name="customer[email]" placeholder="{{ 'customer.register.email' | t }}*"
+						id="{{ formId }}-email" class="{% if form.errors contains 'email' %} input--error{% endif %}" {% if
+						form.email %} value="{{ form.email }}" {% endif %} autocorrect="off" autocapitalize="off"
+						autocomplete="email" aria-required="true" {%- if form.errors contains 'email' -%} class="input--error"
+						aria-invalid="true" aria-describedby="{{ formId }}-email-error" {%- endif -%} required>
+					{%- if form.errors contains 'email' -%}
+					<span id="{{ formId }}-email-error" class="input-error-message">
+						<span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+						<span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+					</span>
+					{%- endif -%}
+
+					<label for="{{ formId }}-password">{{ 'customer.register.password' | t }}</label>
+					<input type="password" name="customer[password]" placeholder="{{ 'customer.register.password' | t }}*"
+						id="{{ formId }}-password" class="{% if form.errors contains 'password' %} input--error{% endif %}"
+						aria-required="true" {%- if form.errors contains 'password' -%} class="input--error" aria-invalid="true"
+						aria-describedby="{{ formId }}-password-error" {%- endif -%} required>
+
+					{%- if form.errors contains 'password' -%}
+					<span id="{{ formId}}-password-error" class="input-error-message">
+						<span>{{ form.errors.translated_fields['password'] | capitalize }} {{ form.errors.messages['password']
+							}}.</span>
+					</span>
+					{%- endif -%}
+					<div class="check-box">
+						<label class="aroma-checkbox-label" for="{{ formId }}-check"><input id="{{ formId }}-check"
+								value="{{ 'layout.customer.subscribe' | t }}" name="contact[check]" type="checkbox"
+								class="aroma-checkbox">
+							<span class="fake-checkbox"></span>{{ 'layout.customer.subscribe' | t }}</label>
+					</div>
+					<div class="text-center">
+						<input type="submit" value="{{ 'customer.register.submit2' | t }}" class="btn2 btn2-secondary squared">
+						<p>
+							<span>{{ 'layout.customer.new_customer' | t }}</span> {{ 'customer.login.title2' | t | customer_login_link }}
+						</p>
+					</div>
+
+					{% endform %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

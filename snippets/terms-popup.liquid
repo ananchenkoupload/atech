@@ -1,0 +1,231 @@
+<div id="terms-popup-wrapper" style="display:none;">
+  <div class="modalContent">
+    {% if settings.terms_page != blank %}
+    {% assign terms_page = pages[settings.terms_page] %}
+
+    <h3 class="terms-popup-title">{{ terms_page.title }}</h3>
+
+    <div class="terms-content-wrapper rte">
+      {{ terms_page.content }}
+    </div>
+    {% endif %}
+  </div>
+  <!-- <a href="javascript:;" class="close-btn" onclick="jQuery.fancybox.close();" style="text-decoration:none;"><span>&times;</span></a> -->
+  <a href="javascript:;" class="terms-close-btn" onclick="jQuery.fancybox.close();" style="text-decoration:none;"><svg
+      width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12.41 11L20.7 2.71C20.8638 2.5187 20.9494 2.27262 20.9397 2.02095C20.93 1.76927 20.8257 1.53053 20.6476 1.35244C20.4695 1.17434 20.2307 1.07001 19.9791 1.06029C19.7274 1.05057 19.4813 1.13618 19.29 1.3L11 9.59L2.71 1.29C2.5217 1.1017 2.26631 0.995911 2 0.995911C1.7337 0.995911 1.47831 1.1017 1.29 1.29C1.1017 1.47831 0.995912 1.7337 0.995912 2C0.995912 2.2663 1.1017 2.5217 1.29 2.71L9.59 11L1.29 19.29C1.18532 19.3797 1.1003 19.49 1.04028 19.614C0.980255 19.7381 0.946525 19.8732 0.941205 20.0109C0.935886 20.1487 0.959091 20.286 1.00937 20.4143C1.05964 20.5427 1.1359 20.6592 1.23335 20.7567C1.33081 20.8541 1.44736 20.9304 1.57568 20.9806C1.70401 21.0309 1.84134 21.0541 1.97906 21.0488C2.11678 21.0435 2.25191 21.0098 2.37597 20.9497C2.50004 20.8897 2.61036 20.8047 2.7 20.7L11 12.41L19.29 20.7C19.4813 20.8638 19.7274 20.9494 19.9791 20.9397C20.2307 20.93 20.4695 20.8257 20.6476 20.6476C20.8257 20.4695 20.93 20.2307 20.9397 19.9791C20.9494 19.7274 20.8638 19.4813 20.7 19.29L12.41 11Z"
+        fill="black" />
+    </svg></a>
+
+
+</div>
+
+<style>
+  html.fancybox-lock .fancybox-overlay {
+    overflow: auto !important;
+  }
+
+  html.fancybox-lock {
+    overflow: auto !important;
+  }
+
+  html.fancybox-margin {
+    margin-right: 0;
+  }
+
+
+  #terms-popup-wrapper {
+    padding: 20px 19px 20px 41px;
+    background: #fff;
+    position: fixed;
+    max-width: 1170px;
+    height: 65vh;
+    top: 187px;
+    display: block;
+    overflow: hidden;
+  }
+
+  .terms-close-btn {
+    position: absolute;
+    right: 18px;
+    top: 23px;
+  }
+
+  #terms-popup-wrapper .modalContent {
+    height: 100%;
+    width: 100%;
+  }
+
+  #terms-popup-wrapper .terms-content-wrapper {
+    overflow-x: auto;
+    height: 85%;
+    width: 100%;
+    padding-top: 39px;
+    padding-right: 29px;
+  }
+
+  #terms-popup-wrapper .terms-popup-title {
+    font-size: 50px;
+    letter-spacing: -1px;
+    line-height: 65px;
+    font-weight: 500;
+    color: #212121;
+    text-transform: initial;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+  }
+
+  #terms-popup-wrapper .terms-content-wrapper.rte h2 {
+    margin-bottom: 23px;
+  }
+
+  #terms-popup-wrapper .terms-content-wrapper.rte h6 {
+    margin: 0 0 23px;
+  }
+
+  #terms-popup-wrapper .terms-content-wrapper.rte a {
+    border-bottom: 0 !important;
+    transition: all .2s linear;
+    letter-spacing: 0;
+    color: #BA9163;
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration: none;
+    text-transform: none;
+  }
+
+  #terms-popup-wrapper .terms-content-wrapper.rte a:hover {
+    color: #977045;
+    text-decoration: underline;
+  }
+
+  #terms-popup-wrapper .terms-content-wrapper.rte p {
+    color: #212121;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 23px;
+    letter-spacing: initial;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    #terms-popup-wrapper {
+      left: 23px;
+      right: 23px;
+    }
+  }
+
+  @media only screen and (max-width: 749px) {
+    #terms-popup-wrapper {
+      padding: 20px 28px 20px 41px;
+      height: 65vh;
+      /*top: 156px;*/
+      top: 20%;
+    }
+
+    .terms-close-btn {
+      right: 27px;
+    }
+
+    #terms-popup-wrapper .terms-popup-title {
+      font-size: 36px;
+      line-height: 47px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper {
+      padding-top: 17px;
+    }
+  }
+
+  @media only screen and (max-height: 414px) {
+    #terms-popup-wrapper {
+      padding: 20px 28px 20px 41px;
+      height: 65vh;
+      /*top: 156px;*/
+      top: 20%;
+    }
+
+    .terms-close-btn {
+      right: 27px;
+    }
+
+    #terms-popup-wrapper .terms-popup-title {
+      font-size: 36px;
+      line-height: 47px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper {
+      padding-top: 17px;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    #terms-popup-wrapper .terms-popup-title {
+      font-size: 26px;
+      line-height: 38px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper {
+      height: 90%;
+    }
+
+    #terms-popup-wrapper {
+      padding: 20px 28px 20px 30px;
+      top: 20%;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper.rte h2 {
+      font-size: 22px;
+      margin-bottom: 17px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper.rte h6,
+    #terms-popup-wrapper .terms-content-wrapper.rte p {
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    #terms-popup-wrapper {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+
+    #terms-popup-wrapper .terms-popup-title {
+      font-size: 24px;
+      line-height: 36px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper.rte h2 {
+      font-size: 20px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper.rte h6,
+    #terms-popup-wrapper .terms-content-wrapper.rte p {
+      font-size: 14px;
+    }
+  }
+
+  @media only screen and (max-width: 345px) {
+    #terms-popup-wrapper .terms-popup-title {
+      font-size: 21px;
+      line-height: 33px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper.rte h2 {
+      font-size: 18px;
+    }
+
+    #terms-popup-wrapper .terms-content-wrapper.rte h6,
+    #terms-popup-wrapper .terms-content-wrapper.rte p {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  jQuery(document).ready(function () {
+    jQuery(".terms-popup-trigger").fancybox({ modal: true, maxWidth: 400, overlay: { closeClick: true } });
+  });
+</script>

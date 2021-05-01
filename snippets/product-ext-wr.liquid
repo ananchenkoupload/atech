@@ -1,0 +1,177 @@
+{% if Product.available %}
+
+  {% assign variant = Product.selected_or_first_available_variant %}
+
+  <div class="m-common-wrap">
+    <div class="m-common-inner">
+      <span class="m-close js-ext-close"></span>
+      <div class="m-common-first">
+        <div class="top-sec">
+          <div class="m-flex">
+            {{ Product.featured_image | img_url: '300x300' | img_tag: product.featured_image.alt }}
+            <div class="m-inner-text">
+              <h6> {{product.metafields.Extended_Title.extended_title}}</h6>
+              <p></p> {{product.metafields.Extended_description.Extended_description}}
+            </div>
+          </div>
+          <div class="m-prod-description">
+            {{ Product.description  }}
+          </div>
+        </div>
+        <div class="clearfix product_form init smart-payment-button--{{ show_payment_button }} {% if Product.variants.size > 1 or product.options.size > 1 %}product_form_options{% endif %} product_form--{{ settings.product_form_style }}"
+            id="product-form-{{ Product.id }}"
+            data-money-format="{{ shop.money_format }}"
+            data-shop-currency="{{ shop.currency }}"
+            data-select-id="product-select-{{ Product.id }}{{ product-form }}{{ section.id }}{{ block.id }}"
+            data-enable-state="{% if template contains 'product' %}true{% else %}false{% endif %}"
+            data-product="{{ Product | json | escape }}"
+            {% if settings.limit_quantity or settings.display_inventory_left %}
+              data-variant-inventory='[{%- for v in Product.variants -%}{"id":{{v.id}},"inventory_quantity":{{v.inventory_quantity}},"inventory_management":"{{v.inventory_management}}","inventory_policy":"{{v.inventory_policy}}"}{% if forloop.last == false %},{% endif %}{%- endfor -%}]'
+            {% endif %}
+            data-product-id="{{ Product.id }}"
+            >
+        <form method="post" action="/cart/add" data-productid="{{Product.id}}" id="product_form_{{ Product.id }}" accept-charset="UTF-8" class="shopify-product-form" enctype="multipart/form-data">
+        {% if Product.tags contains 'custom field' %}
+          <div class="customfield">
+            <p class="line-item-property__field">
+              <label for="want-to-have-different-scents-in-your-pack-please-advise-in-the-below-text-field">Want to have different scents in your pack? Please advise in the below text field.</label>
+              <textarea id="want-to-have-different-scents-in-your-pack-please-advise-in-the-below-text-field" name="properties[_Want to have different scents in your pack? Please advise in the below text field.]"></textarea>
+        </p>
+          </div>
+        {% endif %}
+        {% if Product.options.size > 1 %}
+          <div class="select">
+            <select id="product-select-{{ Product.id }}{{ product-form }}{{ section.id }}{{ block.id }}" data-productid="{{Product.id}}" name="id" class="multi_select">
+              {% for v in Product.variants %}
+                <option {% if v == variant %}selected="selected"{% endif %} value="{{ v.id }}" data-sku="{{ v.sku }}">{{ v.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        {% elsif Product.options.size == 1 and Product.variants.size > 1 or Product.options.size == 1 and Product.options[0] != "Title" %}
+          <div class="select">
+            <label>{{ Product.options[0] }}</label>
+            <select id="product-select-{{ Product.id }}{{ product-form }}{{ section.id }}{{ block.id }}" data-productid="{{Product.id}}" name="id">
+              {% for v in Product.variants %}
+                <option {% if v == variant %}selected="selected"{% endif %} value="{{ v.id }}" data-sku="{{ v.sku }}">{{ v.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <input type="hidden" name="id" data-productid="{{Product.id}}" value="{{ variant.id }}" />
+        {% endif %}
+    
+        {% if Product.variants.size > 1 %}
+          <div class="swatch_options">
+            {% for option in Product.options %}
+              {% comment %}
+                Set the extension of your color files below. Use 'png', 'jpeg', 'jpg' or 'gif'.
+              {% endcomment %}
+    
+              {% assign file_extension = 'png' %}
+    
+              {% assign swatch = product-swatch %}
+              {% assign found_option = false %}
+              {% assign is_color = false %}
+              {% assign option_index = 0 %}
+    
+              {% for option in Product.options %}
+                {% if option == swatch %}
+                  {% assign found_option = true %}
+                  {% assign option_index = forloop.index0 %}
+                  {% assign downcased_option = swatch | downcase %}
+                  {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+                    {% assign is_color = true %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+    
+              <div class="swatch clearfix" data-option-index="{{ option_index }}">
+                <div class="option_title">{{ swatch }}</div>
+                {% assign values = '' %}
+                {% for variant in Product.variants %}
+                  {% assign value = variant.options[option_index] %}
+                  {% unless values contains value %}
+                    {% assign values = values | join: ',' %}
+                    {% assign values = values | append: ',' | append: value %}
+                    {% assign values = values | split: ',' %}
+    
+                    <input id="swatch-{{ option_index }}-{{ value | handle }}-{{ Product.id }}{% if section.id %}-{{ section.id }}{% endif %}" type="radio" class="{% if variant.available %}js-ext{% endif %}" data-vr="{{variant.id}}" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} {% endif %} />
+                    <div data-value="{{ value | escape }}" class="swatch-element {% if is_color %}color {% endif %}{{ value | handle }}-swatch {% if variant.available %}available{% else %}soldout{% endif %}">
+                      {% if is_color %}
+                        <div class="tooltip">{{ value }}</div>
+                      {% endif %}
+                      {% if is_color %}
+                        <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ Product.id }}{% if section.id %}-{{ section.id }}{% endif %}" style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
+                          <span class="crossed-out"></span>
+                        </label>
+                      {% else %}
+                        <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ Product.id }}{% if section.id %}-{{ section.id }}{% endif %}">
+                          {{ value }} - <span class="money">{{ variant.price | money }}</span>
+                          <span class="crossed-out"></span>
+                        </label>
+                      {% endif %}
+                    </div>
+                  {% endunless %}
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+    
+        {% if settings.display_inventory_left %}
+          <div class="items_left">
+            {% if variant.inventory_management != blank and variant.inventory_quantity > 0 %}
+              {% capture items_left_text %}
+                {% if variant.inventory_quantity == 1 %}
+                  {{ 'products.product.items_left_count.one' | t }}
+                {% else %}
+                  {{ 'products.product.items_left_count.other' | t }}
+                {% endif %}
+              {% endcapture %}
+              {% if variant.inventory_quantity <= settings.inventory_threshold %}
+                {{ variant.inventory_quantity }} {{ items_left_text }}
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endif %}
+    
+        <div class="purchase-details">
+          {% if settings.display_product_quantity %}
+            <div class="purchase-details__quantity product-quantity-box">
+              <label for="quantity">{{ 'products.product.quantity' | t }}</label>
+              <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
+              <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" {% if settings.limit_quantity and variant.inventory_management != blank and variant.inventory_policy == "deny" %}max="{{ variant.inventory_quantity }}"{% endif %} />
+              <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
+            </div>
+          {% endif %}
+          <div class="purchase-details__buttons purchase-details__spb--{{ show_payment_button }}">
+            {% if settings.cart_action == 'reload_page' %}
+              <input type="hidden" name="return_to" value="back" />
+            {% elsif settings.cart_action == 'redirect_checkout' %}
+              <input type="hidden" name="return_to" value="/checkout" />
+            {% endif %}
+    
+            {% capture add_to_cart_label %}{% if collection_handles contains 'pre-order' %}{{ 'collections.general.pre_order' | t }}{% elsif Product.title == "AromaPro And Scent Subscription" %}Subscribe Now{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}{% endcapture %}
+            <button type="submit" name="add" class="action_button add_to_cart {% if show_payment_button %} action_button--secondary {% endif %}" data-label={{ add_to_cart_label | json }}>
+              <span class="text">{{ add_to_cart_label }}</span>
+              <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" class="checkmark">
+                <path fill="none" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+              </svg>
+            </button>
+            {% if show_payment_button %}
+              {{ form | payment_button }}
+            {% endif %}
+          </div>
+        </div>
+        <input type="hidden" value="false" name="properties[enroute]">
+        </form>
+        </div>
+        <span class="m-title-bottom">{{product.metafields.Extended_Bottom.Extended_Bottom}}</span>
+      </div>
+      <div class="m-common-sec" style="background-image: url({{product.metafields.Extended_right_image.Extended_right_image}});">
+        <img src="{{product.metafields.Extended_right_image.Extended_right_image}}">
+      </div>
+    </div>
+  </div>
+
+{% endif %}

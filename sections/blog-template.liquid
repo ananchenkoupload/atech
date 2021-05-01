@@ -1,0 +1,123 @@
+<!-- Featured article -->
+{% assign featured_article = articles[section.settings.featured_article] %}
+{% if featured_article %}
+  <div class="page-width2 pb-40">
+    <div class="featured-article-wrapper">
+      <div class="meta">
+        <div class="tags">
+          {{ featured_article.tags | first }} | {{ featured_article.published_at | time_tag: format: 'date' }}
+        </div>
+        <div class="title">
+        	<a href="{{ featured_article.url }}">{{ featured_article.title }}</a>
+        </div>
+      </div>
+      <div class="featured-article-image">
+        <img src="{{ featured_article.image.src | img_url : '585x372', crop: 'center' }}" alt="{{ article.image.alt }}">
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="page-width2 pt-0">
+  <div class="blog-tags-wrapper mt-0">
+    {% for tag in blog.all_tags %}
+      {{ tag | link_to_tag: tag }}
+    {% endfor %}
+  </div>
+</div>
+
+{% paginate blog.articles by 15 %} 
+
+<div class="page-width2 pt-0 pb-0">
+  <ul class="blog-posts-grid">
+    {% for article in blog.articles %}
+      <li class="post-item {% if forloop.first or forloop.index0 == 5 %} first {% endif %} {% if forloop.index0 == 4 %} last {% endif %}">
+        <a href="{{ article.url }}">
+          {% if article.image %}
+            {% capture img_id %}ArticleImage-{{ article.image.id }}{% endcapture %}
+            {% capture img_wrapper_id %}ArticleImageWrapper-{{ article.image.id }}{% endcapture %}
+            {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {% include 'image-style', image: article.image, height: 345, wrapper_id: img_wrapper_id, img_id: img_id %}
+            <div id="{{ img_wrapper_id }}" class="article__grid-image-wrapper js">
+              <div class="article__grid-image-container" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;" data-image-loading-animation>
+                <img id="{{ img_id }}"
+                    class="article__grid-image lazyload"
+                    data-src="{{ img_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                    data-aspectratio="{{ article.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="">
+              </div>
+            </div>
+            <noscript>
+              <div class="article__grid-image-wrapper">
+                {{ article | img_url: '345x345', scale: 2 | img_tag: article.title, 'article__grid-image' }}
+              </div>
+            </noscript> 
+          {% endif %}
+            <!-- <img src="{{ article.image | img_url : '219x180' }}" alt="{{ article.image.alt }}"> -->
+        </a>
+
+        <div class="post-meta">
+          {% if article.tags.size > 0 %}
+            {{ article.tags | first }} | 
+          {% endif %}
+          {{ article.published_at | time_tag: format: 'date' }}
+        </div>
+
+        <h2 class="article_title">
+          <a href="{{ article.url }}">{{ article.title | strip_html | truncate: 50 }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+</div> 
+
+
+{%- if paginate.pages > 1 -%}
+  <div class="page-width2 pt-0">
+    {% include 'pagination-blog', paginate: paginate %}
+  </div>
+{%- endif -%}
+
+
+{% endpaginate %}
+
+
+
+{% schema %}
+{
+  "name": {
+    "cs": "Stránky blogu",
+    "da": "Blogsider",
+    "de": "Blogseiten",
+    "en": "Blog pages",
+    "es": "Páginas del blog",
+    "fi": "Blogisivut",
+    "fr": "Pages du blog",
+    "hi": "ब्लॉग पेज",
+    "it": "Pagine del blog",
+    "ja": "ブログページ",
+    "ko": "블로그 페이지",
+    "nb": "Bloggsider",
+    "nl": "Blogpagina's",
+    "pl": "Strony blogu",
+    "pt-BR": "Páginas do blog",
+    "pt-PT": "Páginas do blogue",
+    "sv": "Bloggsidor",
+    "th": "หน้าบล็อก",
+    "tr": "Blog sayfaları",
+    "vi": "Trang blog",
+    "zh-CN": "博客页面",
+    "zh-TW": "部落格頁面"
+  },
+  "settings": [
+    {
+      "type": "article",
+      "id": "featured_article",
+      "label": "Select featured article"
+    }
+  ]
+}
+{% endschema %}

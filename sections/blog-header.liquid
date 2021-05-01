@@ -1,0 +1,27 @@
+{% if section.settings.page_header_enabled %}
+  {% assign bg_image = section.settings.page_header_bg_image | img_url : '1024x' %}
+  <div class="page-header-wrapper" style="background-image: url({{ bg_image }})">
+    <div class="page-width2">
+      <h1>{{ blog.title }}</h1>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Blog header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "page_header_enabled",
+      "label": "Enable page header",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "page_header_bg_image",
+      "label": "Select image (1600px)"
+    }
+  ]
+}
+{% endschema %}

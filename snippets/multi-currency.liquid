@@ -1,0 +1,44 @@
+{%- assign currency_selector = false -%}
+
+{%- assign show_selectors = false -%}
+
+{%- if section.settings.show_currency_selector and shop.enabled_currencies.size > 1 -%}
+{%- assign currency_selector = true -%}
+{%- endif -%}
+
+{%- if currency_selector -%}
+{%- assign show_selectors = true -%}
+{%- endif -%}
+
+<div class="multi-currency">
+	{%- form 'localization', class: 'selectors-form', data-disclosure-form: '' -%}
+		{%- if currency_selector -%}
+			<div class="switcher">
+				<ul class="currency-switch">
+					{% assign array_currencies = form.available_currencies | reverse %}
+					{% for currency in array_currencies %}
+					<li class="currency-switch-list currency-{{ currency.iso_code  | downcase }}">
+						<a class="currency-switch-link" href="?currency={{ currency.iso_code }}">
+							{% comment %}
+							{% capture currency_flag %}
+							{{ currency.iso_code }}.png
+							{% endcapture %}
+							<img class="currency-flag" src="{{ currency_flag | asset_url }}" alt="{{ currency.iso_code }} flag">
+
+							{% if currency.iso_code == 'CAD'%}
+								<img class="currency-flag" src="{{ "canada.png" | asset_url }}" alt="{{ currency.iso_code }} flag">
+							{%- endif -%}
+							{% if currency.iso_code == 'USD'%}
+								<img class="currency-flag" src="{{ "united-states.png" | asset_url }}" alt="{{ currency.iso_code }} flag">
+							{%- endif -%}
+							{% endcomment %}
+
+							{{ currency.iso_code }}
+						</a>
+					</li>
+					{%- endfor -%}
+				</ul>
+			</div>
+		{%- endif -%}
+	{%- endform -%}
+</div>

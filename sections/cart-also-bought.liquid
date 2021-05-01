@@ -1,0 +1,561 @@
+{% if section.settings.title == "BESTSELLERS" %}
+	<div class="page-width2 section-collection" id="bestsellers">
+{% elsif section.settings.title == "Cities Collection" %}
+	<div class="page-width2 section-collection" id="citiescollection">
+{% elsif section.settings.title == "Room Spray" %}
+	<div class="page-width2 section-collection" id="roomspray">
+{% elsif section.settings.title == "Hair And Body Mist" %}
+	<div class="page-width2 section-collection" id="hairandbodymist">
+{% elsif section.settings.title == "Scent Machines" %}
+	<div class="scent-machine">
+		<div class="page-width2 section-collection" id="scentmachines">
+{% else %}
+	<div class="page-width2 section-collection m-common-sl">
+{% endif %}
+
+{% if section.settings.title != blank %}
+	<div class="section-header text-center">
+		<h2 class="h3">{{ section.settings.title | escape }}</h2>
+	</div>
+{% endif %}
+
+{%- assign collection = collections[section.settings.collection] -%}
+	{% case section.settings.grid %}
+		{% when 2 %}
+			{%- assign max_height = 530 -%}
+			{%- assign grid_item_width = 'medium-up--one-half' -%}
+		{% when 3 %}
+			{%- assign max_height = 345 -%}
+			{%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+		{% when 4 %}
+			{%- assign max_height = 250 -%}
+			{%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+		{% when 5 %}
+			{%- assign max_height = 195 -%}
+			{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+		{% else %}
+			{%- assign max_height = 195 -%}
+			{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+	{% endcase %}
+
+	{%- assign product_limit = section.settings.grid -%}
+
+	<div data-items="{{ section.settings.grid }}"
+		class="{% if section.settings.title == "BESTSELLERS" %} custom-slider {% elsif section.settings.title=="Cities Collection" %}
+		 custom-slider {% elsif section.settings.title=="Room Spray" %} custom-slider {%
+		elsif section.settings.title=="Hair And Body Mist" %} custom-slider {%elsif section.settings.title == "Scent Machines" %} no-custom-slider {% else
+		%} custom-slider {% endif %}">
+		{% for product in collection.products limit: product_limit %}
+			<div class="product-slide-wrapper">
+				{% if section.settings.title == "Scent Machines" %}
+					<div class="product-top scent-machines rte">
+						<link rel="stylesheet"
+							href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+							integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+							crossorigin="anonymous">
+						<div class="product-top scent-machines link-div">
+							<h3 class="h6 product-top scent-machines top-link" href="{{ product.url }}">{{ product.title }}
+							</h3>
+						</div>
+						<div class="reviews">
+							{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '',
+							concierge_install: true, product: product %}
+						</div>
+					</div>
+				{% endif %}
+				{% include 'product-card-grid2', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+				{% if section.settings.title == "Scent Machines" %}
+					<div class="product-description rte" itemprop="description">
+						{{ product.description }}
+					</div>
+				{% endif %}
+				<form action="/cart/add" method="post" id="product-form- {{ product.id }}">
+					<input type="hidden" name="id" value="{{ product.variants.first.id }}">
+					<div class="custom-add-to-cart">
+						<button type="submit" name="add">Add to cart - {% include 'product-price' %}</button>
+					</div>
+				</form>
+			</div>
+		{% else %}
+			{% for i in (1..product_limit) %}
+				<div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+					<div class="grid-view-item product-card">
+						<a class="grid-view-item__link grid-view-item__image-container full-width-link" href="#">
+							<span class="visually-hidden">{{ 'homepage.onboarding.product_title' | t }}</span>
+						</a>
+						<div class="grid-view-item__image-wrapper">
+							{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+							{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+						</div>
+						<div class="h4 grid-view-item__title" aria-hidden="true">{{ 'homepage.onboarding.product_title' | t }}</div>
+						{% include 'product-price' %}
+					</div>
+				</div>
+			{% endfor %}
+		{% endfor %}
+	</div>
+
+	{% if section.settings.show_view_all %}
+		<!-- <hr class="hr--invisible" aria-hidden="true" /> -->
+		<div class="section-button-holder text-center">
+			<div class="links-grid">
+				<div>
+					<a href="/collections" class="btn2 btn2-link"
+						aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+						{% comment %} {{ 'collections.general.view_all' | t }} {% endcomment %}
+						{% if section.settings.title == "Scent Machines" %}
+						SHOP ALL SCENT MACHINES
+						{% else %}
+						shop all
+						{% endif %}
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+</div>
+
+
+{% if section.settings.title == "Scent Machines" %}
+	</div>
+{% endif %}
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#bestsellers').parent().addClass('bestsellers-main active');
+		$('#citiescollection').parent().addClass('citiescollection-main');
+		$('#roomspray').parent().addClass('roomspray-main');
+		$('#hairandbodymist').parent().addClass('hairandbodymist-main');
+
+		$('.m-common-sl').closest('.shopify-section').addClass('active');
+		
+		if ($('body').hasClass('template-cart')) {
+			$(".m-common-sl").before('<div class="main-tab-slider"></div>');
+			$(".main-tab-slider").append($(".m-common-sl"));
+			$(".m-common-sl").before('<div class="tital-tab-slider"></div>');
+		}
+	});
+	$(document).ready(function () {
+		$('.custom-slider').slick({
+	        speed: 300,
+	        infinite: true,
+	        slidesToShow: 5,
+	        slidesToScroll: 1,
+	        prevArrow: '<button type="button" class="slick-prev"></button>',
+	        nextArrow: '<button type="button" class="slick-next"></button>',
+	        responsive: [
+	          {
+	            breakpoint: 1050,
+	            settings: {
+	              arrows: false,
+	              slidesToShow: 3,
+	              slidesToScroll: 1
+	            }
+	          },
+	          {
+	            breakpoint: 767,
+	            settings: {
+	              arrows: false,
+	              slidesToShow: 2,
+	              slidesToScroll: 1
+	            }
+	          },
+	          {
+	            breakpoint: 480,
+	            settings: {
+	              arrows: false,
+	              centerMode: true,
+	              slidesToShow: 1,
+	              centerPadding: '40px',
+	              slidesToScroll: 1
+	            }
+	          }
+	        ]
+	    });
+	});
+</script>
+
+{% if section.settings.title == "BESTSELLERS" %}
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".bestsellers-main").before('<div class="main-tab-slider"></div>');
+			if ($(window).width() > 750) {
+				$(".tital-tab-slider").append($(".bestsellerstitle"));
+				if ($('.citiescollectiontitle').length) {
+					$(".citiescollectiontitle").insertAfter(".bestsellerstitle");
+					if ($('.roomspraytitle').length) {
+						$(".roomspraytitle").insertAfter(".citiescollectiontitle");
+						$(".hairandbodymisttitle").insertAfter(".roomspraytitle");
+					}
+					else {
+						$(".hairandbodymisttitle").insertAfter(".citiescollectiontitle");
+					}
+				}
+				else {
+					if ($('.roomspraytitle').length) {
+						$(".roomspraytitle").insertAfter(".bestsellerstitle");
+						$(".hairandbodymisttitle").insertAfter(".roomspraytitle");
+					}
+					else {
+						$(".hairandbodymisttitle").insertAfter(".bestsellerstitle");
+					}
+				}
+			}
+			else {
+				$(".tital-tab-slider").append('<div class="mobile-tab-tital-div"></div>');
+				var selectedval = $(".bestsellerstitle").html();
+				$(".mobile-tab-tital-div").append(selectedval);
+				$(".tital-tab-slider").append('<ul class="mobile-tab-tital" style="display:none"></ul>');
+				$(".mobile-tab-tital").append('<li class="bestsellerstitle-mobile"></li>');
+				if ($('.citiescollectiontitle').length) {
+					$(".mobile-tab-tital").append('<li class="citiescollectiontitle-mobile"></li>');
+				}
+				if ($('.roomspraytitle').length) {
+					$(".mobile-tab-tital").append('<li class="roomspraytitle-mobile"></li>');
+				}
+				if ($('.hairandbodymisttitle').length) {
+					$(".mobile-tab-tital").append('<li class="hairandbodymisttitle-mobile"></li>');
+				}
+				$(".bestsellerstitle-mobile").append($(".bestsellerstitle"));
+				if ($('.citiescollectiontitle').length) {
+					$(".citiescollectiontitle-mobile").append($(".citiescollectiontitle"));
+				}
+				if ($('.roomspraytitle').length) {
+					$(".roomspraytitle-mobile").append($(".roomspraytitle"));
+				}
+				if ($('.hairandbodymisttitle').length) {
+					$(".hairandbodymisttitle-mobile").append($(".hairandbodymisttitle"));
+				}
+
+			}
+			$(".citiescollection-main").insertAfter(".bestsellers-main");
+			$(".roomspray-main").insertAfter(".citiescollection-main");
+			$(".hairandbodymist-main").insertAfter(".roomspray-main");
+			$('.bestsellerstitle h2').click(function () {
+				$(".hairandbodymist-main").removeClass("active");
+				$(".roomspray-main").removeClass("active");
+				$(".citiescollection-main").removeClass("active");
+				$(".tital-tab-slider .section-header").removeClass("active");
+				$('.bestsellerstitle').addClass('active');
+				var bestsellerstitleselectedval = $(".bestsellerstitle").html();
+				$(".mobile-tab-tital-div").empty();
+				$(".mobile-tab-tital-div").append(bestsellerstitleselectedval);
+				$(".tital-tab-slider").removeClass("active");
+				$(".mobile-tab-tital").hide();
+				if ($(".bestsellers-main").hasClass("active") == false) {
+					$(".bestsellers-main").addClass('active');
+				}
+			});
+			$('.citiescollectiontitle h2').click(function () {
+				$(".hairandbodymist-main").removeClass("active");
+				$(".roomspray-main").removeClass("active");
+				$(".bestsellers-main").removeClass("active");
+				$(".tital-tab-slider .section-header").removeClass("active");
+				$('.citiescollectiontitle').addClass('active');
+				var citiescollectiontitleselectedval = $(".citiescollectiontitle").html();
+				$(".mobile-tab-tital-div").empty();
+				$(".mobile-tab-tital-div").append(citiescollectiontitleselectedval);
+				$(".tital-tab-slider").removeClass("active");
+				$(".mobile-tab-tital").hide();
+				if ($(".citiescollection-main").hasClass("active") == false) {
+					$(".citiescollection-main").addClass('active');
+				}
+			});
+			$('.roomspraytitle h2').click(function () {
+				$(".hairandbodymist-main").removeClass("active");
+				$(".citiescollection-main").removeClass("active");
+				$(".bestsellers-main").removeClass("active");
+				$(".tital-tab-slider .section-header").removeClass("active");
+				$('.roomspraytitle').addClass('active');
+				var roomspraytitleselectedval = $(".roomspraytitle").html();
+				$(".mobile-tab-tital-div").empty();
+				$(".mobile-tab-tital-div").append(roomspraytitleselectedval);
+				$(".tital-tab-slider").removeClass("active");
+				$(".mobile-tab-tital").hide();
+				if ($(".roomspray-main").hasClass("active") == false) {
+					$(".roomspray-main").addClass('active');
+				}
+			});
+			$('.hairandbodymisttitle h2').click(function () {
+				$(".roomspray-main").removeClass("active");
+				$(".citiescollection-main").removeClass("active");
+				$(".bestsellers-main").removeClass("active");
+				$(".tital-tab-slider .section-header").removeClass("active");
+				$('.hairandbodymisttitle').addClass('active');
+				var hairandbodymisttitleselectedval = $(".hairandbodymisttitle").html();
+				$(".mobile-tab-tital-div").empty();
+				$(".mobile-tab-tital-div").append(hairandbodymisttitleselectedval);
+				$(".tital-tab-slider").removeClass("active");
+				$(".mobile-tab-tital").hide();
+				if ($(".hairandbodymist-main").hasClass("active") == false) {
+					$(".hairandbodymist-main").addClass('active');
+				}
+			});
+			$('.mobile-tab-tital-div').click(function () {
+				if ($('.mobile-tab-tital').css('display') == 'none') {
+					$(".mobile-tab-tital").show();
+					$(".tital-tab-slider").addClass('active');
+				}
+				else {
+					$(".mobile-tab-tital").hide();
+					$(".tital-tab-slider").removeClass("active");
+				}
+			});
+		});
+	</script>
+{% endif %}
+
+{% schema %}
+{
+	"name": {
+		"cs": "Propagovaná kolekce",
+		"da": "Udvalgt kollektion",
+		"de": "Vorgestellte Kategorie",
+		"en": "Featured collection new",
+		"es": "Colección destacada",
+		"fi": "Esittelyssä oleva kokoelma",
+		"fr": "Collection en vedette",
+		"hi": "फ़ीचर्ड कलेक्शन",
+		"it": "Collezione in evidenza",
+		"ja": "特集コレクション",
+		"ko": "추천 컬렉션",
+		"nb": "Utvalgt samling",
+		"nl": "Uitgelichte collectie",
+		"pl": "Polecana kolekcja",
+		"pt-BR": "Coleção em destaque",
+		"pt-PT": "Coleção em destaque",
+		"sv": "Utvald kollektion",
+		"th": "คอลเลกชันแนะนำ",
+		"tr": "Öne çıkan koleksiyon",
+		"vi": "Bộ sưu tập nổi bật",
+		"zh-CN": "特色产品系列",
+		"zh-TW": "精選商品系列"
+	},
+	"class": "index-section",
+	"settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": {
+				"cs": "Nadpis",
+				"da": "Overskrift",
+				"de": "Titel",
+				"en": "Heading",
+				"es": "Título",
+				"fi": "Otsake",
+				"fr": "En-tête",
+				"hi": "शीर्षक",
+				"it": "Heading",
+				"ja": "見出し",
+				"ko": "제목",
+				"nb": "Overskrift",
+				"nl": "Kop",
+				"pl": "Nagłówek",
+				"pt-BR": "Título",
+				"pt-PT": "Título",
+				"sv": "Rubrik",
+				"th": "ส่วนหัว",
+				"tr": "Başlık",
+				"vi": "Tiêu đề",
+				"zh-CN": "标题",
+				"zh-TW": "標題"
+			},
+			"default": {
+				"cs": "Propagovaná kolekce",
+				"da": "Udvalgt kollektion",
+				"de": "Vorgestellte Kategorie",
+				"en": "Featured collection",
+				"es": "Colección destacada",
+				"fi": "Esittelyssä oleva kokoelma",
+				"fr": "Collection en vedette",
+				"hi": "फ़ीचर्ड कलेक्शन",
+				"it": "Collezione in evidenza",
+				"ja": "特集コレクション",
+				"ko": "추천 컬렉션",
+				"nb": "Fremhevet samling",
+				"nl": "Uitgelichte collectie",
+				"pl": "Polecana kolekcja",
+				"pt-BR": "Coleção em destaque",
+				"pt-PT": "Coleção em destaque",
+				"sv": "Utvald kollektion",
+				"th": "คอลเลกชันแนะนำ",
+				"tr": "Öne çıkan koleksiyon",
+				"vi": "Bộ sưu tập nổi bật",
+				"zh-CN": "特色产品系列",
+				"zh-TW": "精選商品系列"
+			}
+		},
+		{
+			"id": "collection",
+			"type": "collection",
+			"label": {
+				"cs": "Kolekce",
+				"da": "Kollektion",
+				"de": "Kategorie",
+				"en": "Collection",
+				"es": "Colección",
+				"fi": "Kokoelma",
+				"fr": "Collection",
+				"hi": "कलेक्शन",
+				"it": "Collezione",
+				"ja": "コレクション",
+				"ko": "컬렉션",
+				"nb": "Samling",
+				"nl": "Collectie",
+				"pl": "Kolekcja",
+				"pt-BR": "Coleção",
+				"pt-PT": "Coleção",
+				"sv": "Produktserie",
+				"th": "คอลเลกชัน",
+				"tr": "Koleksiyon",
+				"vi": "Bộ sưu tập",
+				"zh-CN": "收藏",
+				"zh-TW": "商品系列"
+			}
+		},
+		{
+			"type": "range",
+			"id": "grid",
+			"label": {
+				"cs": "Počet produktů na řádek",
+				"da": "Produkter pr. række",
+				"de": "Produkte per Reihe",
+				"en": "Products per row",
+				"es": "Productos por fila",
+				"fi": "Tuotteita per rivi",
+				"fr": "Produits par rangée",
+				"hi": "प्रति पंक्ति उत्पाद",
+				"it": "Prodotti per riga",
+				"ja": "行あたりの商品数",
+				"ko": "열 별 제품",
+				"nb": "Produkter per rad",
+				"nl": "Producten per rij",
+				"pl": "Liczba produktów na wiersz",
+				"pt-BR": "Produtos por linha",
+				"pt-PT": "Produtos por linha",
+				"sv": "Produkter per rad",
+				"th": "สินค้าต่อแถว",
+				"tr": "Satır başına ürün",
+				"vi": "Số sản phẩm trên một hàng",
+				"zh-CN": "每行产品数",
+				"zh-TW": "每列產品數"
+			},
+			"min": 2,
+			"max": 15,
+			"step": 1,
+			"default": 3
+		},
+		
+		{
+			"type": "checkbox",
+			"id": "show_vendor",
+			"label": {
+				"cs": "Zobrazit dodavatele produktů",
+				"da": "Vis produktleverandører",
+				"de": "Produkt-Lieferanten anzeigen",
+				"en": "Show product vendors",
+				"es": "Mostrar proveedores del producto",
+				"fi": "Näytä tuotteen myyjät",
+				"fr": "Afficher les vendeurs",
+				"hi": "उत्पाद विक्रेताओं को दिखाएं",
+				"it": "Mostra fornitori prodotto",
+				"ja": "商品の販売元を表示する",
+				"ko": "제품 공급 업체 표시",
+				"nb": "Vis produktleverandører",
+				"nl": "Productleveranciers weergeven",
+				"pl": "Pokaż dostawców produktu",
+				"pt-BR": "Exibir fornecedores do produto",
+				"pt-PT": "Mostrar fornecedores do produto",
+				"sv": "Visa produktleverantörer",
+				"th": "แสดงผู้ขายสินค้า",
+				"tr": "Ürün satıcılarını göster",
+				"vi": "Hiển thị nhà cung cấp sản phẩm",
+				"zh-CN": "显示产品厂商",
+				"zh-TW": "顯示產品廠商"
+			},
+			"default": false
+		},
+		{
+			"type": "checkbox",
+			"id": "show_view_all",
+			"label": {
+				"cs": "Zobrazit tlačítko Zobrazit vše",
+				"da": "Vis knappen \"Se flere\"",
+				"de": "'Alle anzeigen' Button anzeigen",
+				"en": "Show 'View all' button",
+				"es": "Mostrar el botón 'Ver todo'",
+				"fi": "Näytä \"Näytä kaikki\" -painike",
+				"fr": "Afficher le bouton “Tout voir”",
+				"hi": "'सभी देखें' बटन दिखाएं",
+				"it": "Mostra il pulsante \"Visualizza tutto\"",
+				"ja": "「すべて表示」ボタンを表示する",
+				"ko": "'모두 보기' 버튼 표시",
+				"nb": "Vis «Se alle»-knapp",
+				"nl": "Knop 'Alles weergeven' weergeven",
+				"pl": "Pokaż przycisk „Wyświetl wszystkie”",
+				"pt-BR": "Exibir botão 'Visualizar tudo'",
+				"pt-PT": "Mostrar botão 'Ver tudo'",
+				"sv": "Visa \"Visa alla\"-knappen",
+				"th": "แสดงปุ่ม 'ดูทั้งหมด'",
+				"tr": "\"Tümünü görüntüle\" düğmesini göster",
+				"vi": "Hiển thị nút \"Xem tất cả\"",
+				"zh-CN": "显示“查看全部”按钮",
+				"zh-TW": "顯示「檢視全部」按鈕"
+			},
+			"default": false
+		}
+	],
+	"presets": [
+		{
+			"name": {
+				"cs": "Propagovaná kolekce",
+				"da": "Udvalgt kollektion",
+				"de": "Vorgestellte Kategorie",
+				"en": "Featured collection new",
+				"es": "Colección destacada",
+				"fi": "Esittelyssä oleva kokoelma",
+				"fr": "Collection en vedette",
+				"hi": "फ़ीचर्ड कलेक्शन",
+				"it": "Collezione in evidenza",
+				"ja": "特集コレクション",
+				"ko": "추천 컬렉션",
+				"nb": "Utvalgt samling",
+				"nl": "Uitgelichte collectie",
+				"pl": "Polecana kolekcja",
+				"pt-BR": "Coleção em destaque",
+				"pt-PT": "Coleção em destaque",
+				"sv": "Utvald kollektion",
+				"th": "คอลเลกชันแนะนำ",
+				"tr": "Öne çıkan koleksiyon",
+				"vi": "Bộ sưu tập nổi bật",
+				"zh-CN": "特色产品系列",
+				"zh-TW": "精選商品系列"
+			},
+			"category": {
+				"cs": "Kolekce",
+				"da": "Kollektion",
+				"de": "Kategorie",
+				"en": "Collection",
+				"es": "Colección",
+				"fi": "Kokoelma",
+				"fr": "Collection",
+				"hi": "कलेक्शन",
+				"it": "Collezione",
+				"ja": "コレクション",
+				"ko": "컬렉션",
+				"nb": "Samling",
+				"nl": "Collectie",
+				"pl": "Kolekcja",
+				"pt-BR": "Coleção",
+				"pt-PT": "Coleção",
+				"sv": "Produktserie",
+				"th": "คอลเลกชัน",
+				"tr": "Koleksiyon",
+				"vi": "Bộ sưu tập",
+				"zh-CN": "收藏",
+				"zh-TW": "商品系列"
+			}
+		}
+	]
+}
+{% endschema %}          
