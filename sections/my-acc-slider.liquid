@@ -1,7 +1,6 @@
 
 <div class="page-width2 section-collection m-common-sl">
 
-
 {% if section.settings.title != blank %}
 	<div class="section-header text-center">
         <a href="{{ section.settings.title-link}}">
@@ -48,28 +47,29 @@
 	</div>
 </div>
 
+{% if section.settings.title == "Scent Machines" %}
+	</div>
+{% endif %}
+
 <style>
+	.template-customers-account .main-content .shopify-section > div:not([class*="page-header-wrapper"]) {
+		padding-bottom: 0px;
+	}
+	.template-customers-account .section-collection {
+		padding-bottom: 50px !important;
+	}
+	.section-header.text-center a{
+		text-decoration: none;
+	}
+	
 	@media screen and (max-width:767px){
 		.slideshow-wrapper .slick-next.slick-arrow, .slideshow-wrapper .slick-prev.slick-arrow, .custom-slider .slick-next.slick-arrow, .custom-slider .slick-prev.slick-arrow {
 			display:inline-block !important;
 		}
-
-		.template-customers-account .main-content .shopify-section > div:not([class*="page-header-wrapper"]) {
-			padding-bottom: 0;
-		}
-		.template-customers-account .section-collection {
-			padding-bottom: 50px !important;
-		}
 	}
 	
-	.section-header.text-center a{
-		text-decoration: none;
-	}
+	
 </style>
-
-{% if section.settings.title == "Scent Machines" %}
-	</div>
-{% endif %}
 
 <script type="text/javascript">
 	$(document).ready(function () {
