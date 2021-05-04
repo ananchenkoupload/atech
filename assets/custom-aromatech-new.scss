@@ -576,6 +576,9 @@ div.newsletter-section{
 		// 	padding: 0 9px;
 		// }
 		z-index: 1;
+		@media screen and (max-width: 769px) {
+			padding: 21px;
+		}
 	}
 }
 

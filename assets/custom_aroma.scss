@@ -3445,6 +3445,7 @@ header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
 		//flex-wrap: wrap;
 		//flex-direction: column;
 		padding-bottom: 96px;
+		overflow: auto;
 	}
 
 	header.site-header .mobile-nav-wrapper:not(.sub-nav--is-open) .mobile-nav {
@@ -3452,7 +3453,7 @@ header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav {
 		margin-top: 0;
-		//overflow: initial;
+		overflow:visible;
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav__table {
 		margin-bottom: 113px;

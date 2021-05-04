@@ -116,6 +116,13 @@
 
 <script>
     $(document).ready(function(){
-        $('.menu-carousel__content').slick();
+        $('.btn--link').on('click', function() {
+            $('.menu-carousel__content').slick('refresh');
+        });
+
+        $('.menu-carousel__content').slick({
+            arrows:true
+        })  
     });
+
 </script>

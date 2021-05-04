@@ -5638,7 +5638,7 @@ a.black_button {
 	.tab-menu__item-2th {
 		position: absolute;
 		left: -550px;
-		padding: 0 20px;
+		padding: 0 30px;
 		transition: all .5s;
 		width: 100%;
 
@@ -6776,6 +6776,11 @@ a.black_button {
 	font-size: 40px;
 	line-height: 130%;
 	font-weight: 100;
+	@media (max-width: 767px) {
+		margin-top: 50px;
+		padding: 17.5px 0 0 0;
+		
+	}
 
 }
 
@@ -6818,6 +6823,10 @@ a.black_button {
 .menu-carousel {
 	margin-top: 30px;
 	padding-top: 40px;
+	@media (max-width: 767px) {
+		border-top: 1px solid #D4D4D4;
+		margin:30px;
+	}
 }
 
 .active-tab-2 {
@@ -6834,7 +6843,7 @@ a.black_button {
 	line-height: 24px;
 	font-family: "GT America";
 	padding-bottom: 24px;
-	font-weight: 400;
+	font-weight: 500;
 }
 
 
@@ -6858,11 +6867,17 @@ a.black_button {
 			&::before {
 				left: -60px;
 				transform: rotate(180deg);
+				@media (max-width: 767px) {
+					left: -20px;
+				}
 			}
 		}
 		&.slick-next {
 			&::before {
 				right: -60px;
+				@media (max-width: 767px) {
+					right: -20px;
+				}
 			}
 		}
 	}
@@ -6897,6 +6912,7 @@ a.black_button {
 		flex-direction: column;
 		align-items: center;
 		text-decoration: none;
+		background: #F3F5F4;
 
 		&:hover, &:focus {
 			color: #212121;
@@ -6914,7 +6930,7 @@ a.black_button {
 	letter-spacing: 1.33px;
 	text-transform: uppercase;
 	margin-top: 23px;
-	font-weight: 400;
+	font-weight: 500;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 100%;
