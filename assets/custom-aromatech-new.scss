@@ -576,6 +576,9 @@ div.newsletter-section{
 		// 	padding: 0 9px;
 		// }
 		z-index: 1;
+		@media screen and (max-width: 769px) {
+			padding: 21px;
+		}
 	}
 }
 
@@ -584,7 +587,7 @@ div.newsletter-section{
   #Some custom "code"
 ------------------------------------------------------------------------------------------------------------------------------------
 */
-.two-colum-image-wrap .two-col-rt-img{
+.two-colum-image-wrap .two-col-rt-img{ 
 	padding: 80px;
 	@media screen and (max-width: 767px) {
 		padding: 32px;
