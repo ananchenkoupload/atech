@@ -494,7 +494,7 @@ textarea {
 		text-decoration: none;
 		.icon{
 			height: auto;
-			margin: 0;
+			margin: 0; 
 			width: 24px;
 		}
 	}
@@ -5394,7 +5394,7 @@ div[data-alert="status"].alert {
 	}
 	header.site-header .mobile-nav-wrapper {
 		height: calc(var(--wh, 1vh) * 100 - 71px) !important;
-		top: 71px;
+		top: 67px;
 		transition: none;
 		transform: none !important;
 
