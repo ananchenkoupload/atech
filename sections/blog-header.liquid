@@ -7,6 +7,13 @@
   </div>
 {% endif %}
 
+  {% assign bg_image-m = section.settings.page_header_bg_image-mobile | img_url : 'large' %}
+  <div class="page-header-wrapper-mobile" style="background-image: url({{ bg_image-m }})">
+    <div class="page-width2">
+      <h1>{{ blog.title }}</h1>
+    </div>
+  </div>
+
 {% schema %}
 {
   "name": "Blog header",
@@ -21,6 +28,11 @@
       "type": "image_picker",
       "id": "page_header_bg_image",
       "label": "Select image (1600px)"
+    },
+    {
+      "type": "image_picker",
+      "id": "page_header_bg_image-mobile",
+      "label": "Mobile image"
     }
   ]
 }
