@@ -6815,7 +6815,7 @@ a.black_button {
 }
 
 .mobile-nav__dropdown:not(.is-closing) {
-	overflow: auto;
+	// overflow: auto; //safari bug
 	padding-bottom: 200px;
 }
 

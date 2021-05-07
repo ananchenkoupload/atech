@@ -3451,15 +3451,15 @@ header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
 		//flex-wrap: wrap;
 		//flex-direction: column;
 		padding-bottom: 96px;
-		overflow: auto;
+		// overflow: auto; //safari bug
 	}
 
 	header.site-header .mobile-nav-wrapper:not(.sub-nav--is-open) .mobile-nav {
-		//overflow: auto;
+		// overflow: auto; //safari bug
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav {
 		margin-top: 0;
-		overflow:visible;
+		overflow:initial;
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav__table {
 		margin-bottom: 113px;
