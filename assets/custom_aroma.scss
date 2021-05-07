@@ -1391,6 +1391,9 @@ header .nav-item a.aroma-list-category {
 	color: #212121;
 }
 .nav1 .scroll-link {
+	.hide{
+		display:none;
+	}
 	text-transform: uppercase;
 	// text-decoration: none;
 	font-size: 14px;
