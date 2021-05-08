@@ -3408,6 +3408,13 @@ theme.MobileNav = (function() {
 
   function toggleSubNav(event) {
     if (isTransitioning) return;
+    console.log('toggle subnav', event)
+    // $('.mobile-nav__dropdown').removeClass('test')
+    // $('.mobile-nav__dropdown:not(.is-closing)').addClass('test')
+    // $('.mobile-nav__dropdown:not(.is-closing)[data-level="3"').addClass('test')
+    // $('.mobile-nav__dropdown:not(.is-closing)[data-level="3"').css('overflow', 'auto')
+
+    // $('.mobile-nav__dropdown:not(.is-closing)').show()
 
     var toggleBtn = event.currentTarget;
     var isReturn = toggleBtn.classList.contains(classes.return);
