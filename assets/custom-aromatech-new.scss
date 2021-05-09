@@ -577,10 +577,7 @@ div.newsletter-section{
 		// }
 		z-index: 1;
 		@media screen and (max-width: 769px) {
-			padding: 31px;
-		}
-		@media screen and (max-width: 426px) {
-			padding: 21px;
+			padding: 21px; 
 		}
 	}
 }

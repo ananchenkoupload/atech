@@ -3408,6 +3408,8 @@ theme.MobileNav = (function() {
 
   function toggleSubNav(event) {
     if (isTransitioning) return;
+    
+    // $('.mobile-nav__dropdown[data-level="3"').css('overflow', 'auto')
 
     var toggleBtn = event.currentTarget;
     var isReturn = toggleBtn.classList.contains(classes.return);
