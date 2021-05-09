@@ -9,6 +9,7 @@
 {%- assign max_height = 195 -%}
 {% endcase %}
 
+
 {% assign main_collection = 'scent-diffusers' %}
 <div data-section-id="{{ section.id }}" data-section-type="collection-template" class="collection-template collection-template__new">
 
@@ -31,157 +32,31 @@
 					<ul class="navbar-nav panel-menubar">
 						{% for block in section.blocks %}
 							{% if block.type == 'link' %}
-									{% if block.settings.heading == 'Shop all' %}
-										{% if collection.url != block.settings.link %}
-											<li class="nav-item under-line">
-												<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}-hash"{% else %}href="{{ block.settings.link }}#{{ block.settings.link | handleize }}-hash"{% endif %}><h1>{{ block.settings.heading }}</h1></a>
-											</li>
-										{% endif %}
-										{% comment %}
-									{% elsif block.settings.heading == 'Bestsellers' %}
-										<li class="nav-item under-line">
-											<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}"{% else %}href="{{ block.settings.link }}"{% endif %}><h2>{{ block.settings.heading }}</h2></a>
-										</li>
-										{% endcomment %}
-									{% else %}
-										<li class="nav-item under-line">
-											<a class="nav-link scroll-link {% if collection.url == block.settings.link %}nav-link-active{% endif %}" href="{{ block.settings.link }}"><h2>{{ block.settings.heading }}</h2></a>
+								{% assign heading = block.settings.heading | downcase %}
+								{% if heading == 'shop all' %}
+									{% if collection.url != block.settings.link %}
+										<li class="nav-item under-line test">
+											<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}-hash"{% else %}href="{{ block.settings.link }}#{{ block.settings.link | handleize }}-hash"{% endif %}><h1>{{ block.settings.heading }}</h1></a>
 										</li>
 									{% endif %}
+									{% comment %}
+								{% elsif block.settings.heading == 'Bestsellers' %}
+									<li class="nav-item under-line">
+										<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}"{% else %}href="{{ block.settings.link }}"{% endif %}><h2>{{ block.settings.heading }}</h2></a>
+									</li>
+									{% endcomment %}
+								{% else %}
+									<li class="nav-item under-line">
+										<a class="nav-link scroll-link {% if collection.url == block.settings.link %}nav-link-active{% endif %}" href="{{ block.settings.link }}"><h2>{{ block.settings.heading }}</h2></a>
+									</li>
+								{% endif %}
 							{% endif %}
 						{% endfor %}
 					</ul>
 				</nav>
 			</header>
 		</div>
-
-        {% if collection.handle == main_collection and section.blocks.size > 0%}
-		    <div class="category-collection-full-width read-section">
-			<div class="page-width2 section-collection scroll-collection category-collect">
-				<div class="collection-product">
-
-{% comment %}
-                    {% assign check_bestseller = false %}
-{%endcomment%}
-
-                    {% for block in section.blocks %}
-						{% comment %}
-                        {% if block.type == 'bestseller' %}
-                            {% assign check_bestseller = true %}
-                        {% endif %}
-                        {%endcomment%}
-
-						{% comment %}{% if check_bestseller %}{% endif %}{%endcomment%}
-                            {% if block.type == 'link' and block.settings.heading == 'Bestsellers' %}
-                                <div class="colect-descr" id="{{ block.settings.link | handleize }}">
-                                    <h2 class="collect-title h6">{{ block.settings.heading }}</h2>
-                                    <p class="font-body-small">{{ block.settings.description }}</p>
-                                </div>
-                            {% endif %}
-                    {% endfor %}
-
-                    {% if section.settings.layout == 'grid' %}
-                        {% case section.settings.grid %}
-                        {% when 2 %}
-                        {%- assign grid_item_width = 'medium-up--one-half' -%}
-                        {% when 3 %}
-                        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
-                        {% when 4 %}
-                        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
-                        {% when 5 %}
-                        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
-                        {% endcase %}
-
-                        <ul class="tt collet-product">
-
-
-                            {% comment %}{% for block in section.blocks %}
-                                {% if block.type == 'bestseller' %}
-									{% assign product = all_products[block.settings.bestseller_product] %}
-									{% endif %}
-							 {% endfor %}{% endcomment %}
-							{% assign products_sort = collection.products | sort: 'title' %}
-								{% for product in products_sort %}
-								{% if product.tags contains 'Bestseller' %}
-
-                                <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
-
-                                    {% include 'product-card-grid',
-                                            max_height: max_height,
-                                            product: product,
-                                            show_vendor: section.settings.show_vendor,
-                                            collectionPage: true
-                                    %}
-
-                                    <form action="/cart/add" method="post" id="product-form- {{ product.id }}">
-                                        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                                        <div class="custom-add-to-cart">
-                                            <button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add"
-                                                    data-url="{{ product.url }}">Add to cart {% include 'product-variants' %}</button>
-                                        </div>
-                                    </form>
-                                </li>
-								{% endif %}
-								{% endfor %}
-
-
-
-
-                        </ul>
-					{% else %}
-					<ul class="list-view-items">
-                        {% for block in section.blocks %}
-                            {% assign product = all_products[block.settings.bestseller_product] %}
-                            <li class="list-view-item">
-                                {% include 'product-card-list', product: product, show_vendor: section.settings.show_vendor %}
-                            </li>
-						{% else %}
-
-						{% comment %}
-						Add default products to help with onboarding for collections/all only.
-
-						The onboarding styles and products are only loaded if the
-						store has no products.
-						{% endcomment %}
-						{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0%}
-						{% for i in (1..4) %}
-						<li class="list-view-item">
-							<a href="#" class="list-view-item__link">
-								<div class="list-view-item__image-column">
-									<div class="list-view-item__image-wrapper">
-										<div class="list-view-item__image">
-											{% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
-											{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-										</div>
-									</div>
-								</div>
-
-								<div class="list-view-item__title-column">
-									<div class="list-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-								</div>
-
-								<div class="list-view-item__price-column">
-									<span class="product-price__price">$19.99</span>
-								</div>
-							</a>
-						</li>
-						{% endfor %}
-						{% else %}
-						{%- assign is_empty_collection = true -%}
-						{% endif %}
-						{% endfor %}
-					</ul>
-					{% endif %}
-
-					{% if is_empty_collection %}
-					<div class="grid__item small--text-center">
-						<p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
-					</div>
-					{% endif %}
-				</div> <!-- close collection-product -->
-			</div> <!-- close category-collect -->
-		</div> <!-- close category-collection-full-width -->
-        {% endif %}
+		
 
             <div class="category-collection-full-width read-section">
                 <div class="page-width2 section-collection scroll-collection category-collect">
@@ -292,7 +167,6 @@
 	{% include 'read-more' %}
 	{% endcomment %}
 </div>
-
 <script>
 	$(document).ready(function () {
 		/*$(".category-collection-full-width").slice(0, 3).show();

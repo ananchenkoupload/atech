@@ -1409,7 +1409,7 @@ header .nav-item a.aroma-list-category {
 	h1, h2 {
 		text-transform: uppercase;
 		font-size: 14px;
-		font-weight: 100;
+		font-weight: 300;
 		line-height: 21px;
 		letter-spacing: 0.833333px;
 		margin-bottom: 0;
@@ -1989,6 +1989,9 @@ footer .page-width.connect-footer {
 	display: flex;
 	justify-content: space-between;
 	padding: 45px 0;
+}
+.collection-product .product-card2__footer .price.price--listing .price-item {
+	font-weight: 300;
 }
 // .template-collection footer.site-footer {
 //     padding: 0;
@@ -3445,15 +3448,15 @@ header.site-header .mobile-nav-wrapper ul li .mobile-nav__sublist-link{
 		//flex-wrap: wrap;
 		//flex-direction: column;
 		padding-bottom: 96px;
-		overflow: auto;
+		// overflow: auto; //safari bug
 	}
 
 	header.site-header .mobile-nav-wrapper:not(.sub-nav--is-open) .mobile-nav {
-		//overflow: auto;
+		// overflow: auto; //safari bug
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav {
 		margin-top: 0;
-		overflow:visible;
+		overflow:initial;
 	}
 	header.site-header .mobile-nav-wrapper.sub-nav--is-open .mobile-nav__table {
 		margin-bottom: 113px;
@@ -3846,7 +3849,7 @@ header.site-header nav#AccessibleNav.active {
 // 			height: 18px;
 // 			width: 18px;
 // 			@media(max-width: 749px) {
-// 				height: 25px;
+// 				height: 25px; 
 // 				width: 25px;
 // 			}
 // 		}

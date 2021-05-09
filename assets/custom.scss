@@ -494,8 +494,8 @@ textarea {
 		text-decoration: none;
 		.icon{
 			height: auto;
-			margin: 0;
-			width: 32px;
+			margin: 0; 
+			width: 24px;
 		}
 	}
 	
@@ -768,7 +768,20 @@ header.site-header .currency-switch .custom-line {
 // header.site-header .currency-switch .currency-cad {
 // 	order: 3;
 // }
-@media screen and (min-width: 767px) {
+// @media screen and (max-width: 319px) {
+// 	.template-index, .page-our-story, .page-b2b-landing {
+// 		.index-section--slideshow {
+// 			margin-top: 69px;
+// 		}
+// 	}
+	
+// 	.template-index, .page-our-story, .page-b2b-landing  {
+// 		header.site-header {
+// 			background: transparent;
+// 		}
+// 	}
+// }
+@media screen and (min-width: 769px) {
 	.template-index, .page-our-story, .page-b2b-landing {
 		.index-section--slideshow {
 			margin-top: 90px;
@@ -5393,8 +5406,8 @@ div[data-alert="status"].alert {
 		display: none;
 	}
 	header.site-header .mobile-nav-wrapper {
-		height: calc(var(--wh, 1vh) * 100 - 71px) !important;
-		top: 71px;
+		height: calc(var(--wh, 1vh) * 100 - 67px) !important;
+		top: 67px;
 		transition: none;
 		transform: none !important;
 
@@ -6815,9 +6828,13 @@ a.black_button {
 }
 
 .mobile-nav__dropdown:not(.is-closing) {
-	overflow: auto;
+	// overflow: auto; //safari bug
 	padding-bottom: 200px;
 }
+[data-level="2"] {
+	overflow-y: scroll;
+}
+
 
 
 .menu-carousel {
@@ -6940,7 +6957,7 @@ a.black_button {
 
 .menu-carousel__item-price {
 	font-size: 14px;
-	font-family: "GT America";
+	font-family: "GT America"; 
 	line-height: 21px;
 	letter-spacing: normal;
 	font-weight: 400;

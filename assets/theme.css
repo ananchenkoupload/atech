@@ -6299,10 +6299,12 @@ hr {
 
 .mobile-nav__dropdown[data-level="3"] {
   height: 100%;
+  overflow: auto;
 }
 .mobile-nav__dropdown.is-closing {
   transition: all 0.45s cubic-bezier(0.29, 0.63, 0.44, 1);
-  opacity: 0.99;
+  /* opacity: 0.99; Safari bug */
+  opacity: 1;
   overflow-y: unset;
 }
 
