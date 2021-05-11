@@ -204,8 +204,25 @@
         align-items: stretch;
         height: 456px;
         @media only screen and (max-width: 767px) {
+            display:none;
             height: 350px;
         }
+    }
+    .page-header-wrapper-mobile {
+        display:none;
+        @media only screen and (max-width: 767px) {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            background-size: cover;
+            background-repeat: no-repeat;
+            justify-content: center;
+            align-content: stretch;
+            align-items: stretch;
+            height: 350px;
+            background-position: 50% 90%;
+        }
+     
     }
 
     // .page-header-wrapper h2 {
@@ -472,4 +489,3 @@
         }
     }
 }
-
