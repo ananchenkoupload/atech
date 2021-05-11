@@ -1,4 +1,4 @@
-{% if section.blocks.size > 0 %}
+{% if section.blocks.size > 0 and section.settings.show_features %}
     {% for block in section.blocks %}
         <div class="featured-article page-width2 page-width2--no-side-paddings featured-article__image--{{ block.settings.layout }} featured-article__background--{{block.settings.background}} {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
         {% capture image_layout %}
@@ -94,6 +94,14 @@
                 }
             }
         ]
+    },
+    {
+        "type": "checkbox",
+        "id": "show_features",
+        "label": {
+          "en": "Visible"
+        },
+        "default": true
     }
   ],
   "blocks": [
