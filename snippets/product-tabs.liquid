@@ -9,9 +9,7 @@
     {% assign counter = 0 %}
     {% for title in titles limit: 4 %}
       {% assign counter = counter | plus: 1 %}
-      
       <li><a href="#tab-{{counter}}" class="tab-link h6">{{title}}</a></li>
-
     {% endfor %}
     {% comment %}<li><a href="#reviews" class="review-link h6">{{review}}</a></li>{% endcomment %}
   </ul>
@@ -54,6 +52,8 @@
           </div>
         </li>
       {% endfor %}
+
+      {% comment %}
       <li class="review-link">
         <div class="content">
           <div class="acc">
@@ -65,6 +65,8 @@
           </div>
         </div>
       </li>
+      {% endcomment %}
+
     </ul>
   </div>
 </div> 

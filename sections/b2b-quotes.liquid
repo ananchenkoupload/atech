@@ -4,6 +4,7 @@
 	}
 </style>
 
+{% if section.settings.show_features %}
 <div class="container page-width2 b2b-testimonials {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
   {% if section.settings.title != blank %}
     <div class="quote-title">
@@ -77,6 +78,8 @@
 		</div>
 	</div>
 </div>
+
+{% endif %}
 
 <script>
 	$(document).ready(function () {
@@ -294,6 +297,14 @@
           }
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": {
+        "en": "Visible"
+      },
+      "default": true
     },
     {
       "type": "text",

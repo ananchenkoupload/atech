@@ -26,7 +26,7 @@
 	var auto_rotate_speed_bool = (/true/i).test(auto_rotate_speed);
 </script>
 
-{% assign font_size_heading = '50' %}
+	{% assign font_size_heading = '50' %}
 
 <div data-section-id="{{ section.id }}" class="slideshow-swipe {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
 	{%- if section.blocks.size > 0 -%}
@@ -36,6 +36,7 @@
 
 				<div class="slideshow-frame">
 					{%- for block in section.blocks -%}
+
 						{%- assign font_size_heading = block.settings.font_size_heading -%}
 						{%- assign block_image = block.settings.image -%}
 						<div id="slickSlide-{{ block.id }}" class="{{ block.settings.custom_class }} slideshow__slide--{{ block.id }}{% if forloop.first %} slick-current slick-active{% endif %}" style="background-color: {{ block.settings.color_back_bg }};">

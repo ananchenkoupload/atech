@@ -1,3 +1,4 @@
+{% assign current_tab = '' %}
 <nav class="nav-menu">
     <div class="nav-menu__list">
         <ul>
@@ -21,19 +22,74 @@
             </svg>
         </div>
         {% for link in linklists[linklist].links %}
-            {% if link.links != blank %}
-                <div class="tab-menu__item-2th" id="{{ link.handle }}-2th">
-                    <ul class="tab-menu__item-child-2th">
-                        {% for child_link in link.links %}
-                            <li class="{% if child_link.links != blank %}tab-menu__item-child-2th--arrow{% endif %} {% if child_link.title == 'Shop All' %}tab-menu-bold{% endif %}">
-                                <a href="{{ child_link.url }}" data-href="#{{ child_link.handle }}-3th">
-                                    {{ child_link.title }}
-                                </a>
-                            </li>
+                {% if link.links != blank %}
+                    {% assign current_tab = '' %}
+                    <div class="tab-menu__item-2th" id="{{ link.handle }}-2th">
+                        <ul class="tab-menu__item-child-2th">
+                            {% for child_link in link.links %}
+
+                                {% if current_tab == blank %}
+                                    {% assign current_tab = child_link.url %}
+                                {% endif %}
+
+                                <li class="{% if child_link.links != blank %}tab-menu__item-child-2th--arrow{% endif %} {% if child_link.title == 'Shop All' %}tab-menu-bold{% endif %}">
+                                    <a href="{{ child_link.url }}" data-href="#{{ child_link.handle }}-3th">
+                                        {{ child_link.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+
+
+                        {% assign show_carousel = false %}
+
+                        {% for collection in collections %}
+                            {% if collection.url == current_tab %}
+                                {% assign show_carousel = true %}
+                            {% endif %}
                         {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
+
+                        {% if show_carousel %}
+                        <div class="menu-carousel">
+                            <div class="menu-carousel__title">
+                                BESTSELLERS
+                            </div>
+                            <div class="menu-carousel__wrap">
+
+                                <div class="menu-carousel__content">
+
+                                    {% for collection in collections %}
+                                        {% if collection.url == current_tab %}
+                                            {% assign products_sort = collection.products | sort: 'title' %}
+                                            {% for product in products_sort %}
+                                                {% if product.tags contains 'Bestseller' %}
+                                                    <div class="menu-carousel__item">
+                                                        <a href="{{ product.url | within: collection }}">
+                                                            <div class="menu-carousel__item-image">
+                                                                <img src="{{ product.featured_media.preview_image | img_url: '480x' }}" alt="">
+                                                            </div>
+                                                            <div class="menu-carousel__item-title">{{ product.title }}</div>
+                                                            <div class="menu-carousel__item-price">From {% include 'product-price-listing', product: product, show_vendor: show_vendor, collectionPage: collectionPage %}</div>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+
+
+
+                    </div>
+                {% endif %}
         {% endfor %}
     </div>
     <div class="tab-menu__3th">
@@ -50,10 +106,23 @@
                                 {% for grandchild_link in child_link.links %}
                                     <li><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
                                 {% endfor %}
-                            </ul>
+                            </ul> 
                         </div>
                     {% endif %}
             {% endfor %}
         {% endfor %}
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('.btn--link').on('click', function() {
+            $('.menu-carousel__content').slick('refresh');
+        });
+
+        $('.menu-carousel__content').slick({
+            arrows:true
+        })  
+    });
+
+</script>

@@ -58,7 +58,8 @@ body.page-about-us {
 }
 
 .slideshow--large {
-  height: 720px;
+  height: 575px;
+
   @media screen and (max-width: 992px) {
     height: 500px;
   }

@@ -35,6 +35,7 @@
 					<li class="nav-item under-line">
 						<a class="nav-link scroll-link" href="#">ALL</a>
 					</li>
+
 					{% for block in section.blocks %}
 						{% if collection.all_tags contains block.settings.title %}
 							<li class="nav-item under-line">
@@ -46,6 +47,7 @@
 							</li>
 						{% endif %}
 					{% endfor %}
+
 				</ul>
 			</nav>
 		</header>
@@ -54,14 +56,26 @@
 	<div class="custom-category-parent">
 
 		{% for block in section.blocks %}
-		{% if collection.all_tags contains block.settings.title %}
-		<div class="category-collection-full-width read-section" id="{{ block.settings.title | handleize }}">
+			{% if collection.all_tags contains block.settings.title %}
+				{% assign products_sort_check = collection.products | sort: 'title' %}
+				{% assign check_product_sort = true %}
+				
+				{% for product in products_sort_check %}
+					{% if product.tags contains block.settings.title %}
+						{% assign check_product_sort = false %}
+					{% endif %}
+				{% endfor %}
+
+		<div class="category-collection-full-width read-section" {% if check_product_sort %}style="display: none"{% endif %} id="{{ block.settings.title | handleize }}">
 			<div class="page-width2 section-collection scroll-collection category-collect">
 				<div class="collection-product">
+
+					{% comment %}
 					<div class="colect-descr">
 						<h2 class="collect-title h6">{{ block.settings.title }}</h2>
 						<p class="font-body-small">{{ block.settings.tag_desc | escape }}</p>
 					</div>
+					{% endcomment %}
 
 					{% if section.settings.layout == 'grid' %}
 					{% case section.settings.grid %}
@@ -231,7 +245,7 @@
 	$(".nav-perent-title").hide();
 	// $(window).resize(function(){
 	if ($(window).width() <= 767) {
-		// $(".nav-perent-title").show().addClass('active');
+		// $(".nav-perent-title").addClass('active');
 		$(".panel-menubar").show();
 		$(document).ready(function () {
 			$(".flip-title").click(function () {

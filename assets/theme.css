@@ -1824,6 +1824,7 @@ ol {
   -webkit-overflow-scrolling: touch;
 }
 
+
 /*================ #Links and Buttons ================*/
 
 a:not([disabled]):hover, a:focus {
@@ -3215,9 +3216,14 @@ hr {
     /*margin-top: -55px;*/
   }
 }
+
+
 #shopify-section-b2b-hotel.index-section--flush:last-child {
   margin-bottom: 0!important;
 }
+
+
+
 .index-section--flush:last-child {
   margin-bottom: -35px;
 }
@@ -3486,6 +3492,9 @@ hr {
 .password-header {
   height: 85px;
   display: table-row;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .password-header__inner {
@@ -3525,9 +3534,9 @@ hr {
 }
 
 .password-main__inner {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 27.5px 55px;
+  /*display: table-cell;*/
+  /*vertical-align: middle;*/
+  /*padding: 27.5px 55px;*/
 }
 
 .password-message {
@@ -6278,7 +6287,7 @@ hr {
   top: 0;
   right: -100%;
   display: none;
-  overflow-y: auto;
+  /*overflow: auto;*/
   height: 100%;
   padding-bottom: 96px;
 }
@@ -6290,10 +6299,12 @@ hr {
 
 .mobile-nav__dropdown[data-level="3"] {
   height: 100%;
+  overflow: auto;
 }
 .mobile-nav__dropdown.is-closing {
   transition: all 0.45s cubic-bezier(0.29, 0.63, 0.44, 1);
-  opacity: 0.99;
+  /* opacity: 0.99; Safari bug */
+  opacity: 1;
   overflow-y: unset;
 }
 

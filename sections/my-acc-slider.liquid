@@ -1,0 +1,224 @@
+
+<div class="page-width2 section-collection m-common-sl">
+
+	{% if section.settings.title != blank %}
+		<div class="section-header text-center">
+					<a href="{{ section.settings.title-link}}">
+					<h2 class="h3">{{ section.settings.title | escape }}</h2>
+					</a>
+		</div>
+	{% endif %}
+	
+	{%- assign collection = collections[section.settings.collection] -%}
+		{% case section.settings.grid %}
+			{% when 2 %}
+				{%- assign max_height = 530 -%}
+				{%- assign grid_item_width = 'medium-up--one-half' -%}
+			{% when 3 %}
+				{%- assign max_height = 345 -%}
+				{%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+			{% when 4 %} 
+				{%- assign max_height = 250 -%}
+				{%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+			{% when 5 %}
+				{%- assign max_height = 195 -%}
+				{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+			{% else %}
+				{%- assign max_height = 195 -%}
+				{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+		{% endcase %}
+	
+		{%- assign product_limit = section.settings.grid -%}
+	
+		<div data-items="{{ section.settings.grid }}"
+			class="custom-slider">
+			{% for product in collection.products %}
+				<div class="product-slide-wrapper">
+					{% include 'product-card-grid2', max_height: max_height, product: product, show_vendor: section.settings.show_vendor %}
+				</div>
+			{% endfor %}
+		</div>
+		<div class="section-button-holder text-center">
+			<div class="links-grid">
+				<div>
+					<a href="{{ section.settings.button_link }}" class="btn2" aria-label="{{ ariaLabel }}">{{- section.settings.button_name | escape -}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	{% if section.settings.title == "Scent Machines" %}
+		</div>
+	{% endif %}
+	
+	<style>
+		.template-customers-account .main-content .shopify-section > div:not([class*="page-header-wrapper"]) {
+			padding-bottom: 0px;
+		}
+		.template-customers-account .section-collection {
+			padding-bottom: 50px !important;
+		}
+		.section-header.text-center a{
+			text-decoration: none;
+		}
+		
+		@media screen and (max-width:767px){
+			.slideshow-wrapper .slick-next.slick-arrow, .slideshow-wrapper .slick-prev.slick-arrow, .custom-slider .slick-next.slick-arrow, .custom-slider .slick-prev.slick-arrow {
+				display:inline-block !important;
+			}
+		}
+		
+		
+	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.m-common-sl').closest('.shopify-section').addClass('active');
+			
+		});
+		$(document).ready(function () {
+			$('.custom-slider').slick({
+						speed: 300,
+						infinite: true,
+						slidesToShow: 5,
+						slidesToScroll: 1,
+						prevArrow: '<button type="button" class="slick-prev"></button>',
+						nextArrow: '<button type="button" class="slick-next"></button>',
+						responsive: [
+							{
+								breakpoint: 1050,
+								settings: {
+									arrows: false,
+									slidesToShow: 3,
+									slidesToScroll: 1
+								}
+							},
+							{
+								breakpoint: 767,
+								settings: {
+									arrows: false,
+									slidesToShow: 2,
+									slidesToScroll: 1
+								}
+							},
+							{
+								breakpoint: 480,
+								settings: {
+									arrows: true,
+									centerMode: false,
+									slidesToShow: 1,
+									// centerPadding: '50px',
+									slidesToScroll: 1 
+								}
+							}
+						]
+				});
+		});
+	</script> 
+	
+	{% schema %}
+	{
+		"name": {
+			"en": "Carousel"
+		},
+		"class": "index-section",
+		"settings": [
+			{
+				"type": "text",
+				"id": "title",
+				"label": {
+					"cs": "Nadpis",
+					"da": "Overskrift",
+					"de": "Titel",
+					"en": "Heading",
+					"es": "Título",
+					"fi": "Otsake",
+					"fr": "En-tête",
+					"hi": "शीर्षक",
+					"it": "Heading",
+					"ja": "見出し",
+					"ko": "제목",
+					"nb": "Overskrift",
+					"nl": "Kop",
+					"pl": "Nagłówek",
+					"pt-BR": "Título",
+					"pt-PT": "Título",
+					"sv": "Rubrik",
+					"th": "ส่วนหัว",
+					"tr": "Başlık",
+					"vi": "Tiêu đề",
+					"zh-CN": "标题",
+					"zh-TW": "標題"
+				},
+	
+				"default": {
+					"cs": "Propagovaná kolekce",
+					"da": "Udvalgt kollektion",
+					"de": "Vorgestellte Kategorie",
+					"en": "Featured collection",
+					"es": "Colección destacada",
+					"fi": "Esittelyssä oleva kokoelma",
+					"fr": "Collection en vedette",
+					"hi": "फ़ीचर्ड कलेक्शन",
+					"it": "Collezione in evidenza",
+					"ja": "特集コレクション",
+					"ko": "추천 컬렉션",
+					"nb": "Fremhevet samling",
+					"nl": "Uitgelichte collectie",
+					"pl": "Polecana kolekcja",
+					"pt-BR": "Coleção em destaque",
+					"pt-PT": "Coleção em destaque",
+					"sv": "Utvald kollektion",
+					"th": "คอลเลกชันแนะนำ",
+					"tr": "Öne çıkan koleksiyon",
+					"vi": "Bộ sưu tập nổi bật",
+					"zh-CN": "特色产品系列",
+					"zh-TW": "精選商品系列"
+				}
+			},
+					{
+							"type": "url",
+				"id": "title-link",
+							"label":"Title link" 
+					},
+					{
+							"type": "text",
+				"id": "button_name",
+							"label":"Button name" 
+					},
+					{
+							"type": "url",
+							"id": "button_link",
+							"label": "Button Link"
+					},
+			{
+				"id": "collection",
+				"type": "collection",
+				"label": {
+					"cs": "Kolekce",
+					"da": "Kollektion",
+					"de": "Kategorie",
+					"en": "Collection",
+					"es": "Colección",
+					"fi": "Kokoelma",
+					"fr": "Collection",
+					"hi": "कलेक्शन",
+					"it": "Collezione",
+					"ja": "コレクション",
+					"ko": "컬렉션",
+					"nb": "Samling",
+					"nl": "Collectie",
+					"pl": "Kolekcja",
+					"pt-BR": "Coleção",
+					"pt-PT": "Coleção",
+					"sv": "Produktserie",
+					"th": "คอลเลกชัน",
+					"tr": "Koleksiyon",
+					"vi": "Bộ sưu tập",
+					"zh-CN": "收藏",
+					"zh-TW": "商品系列"
+				}
+			}
+		]
+	}
+	{% endschema %}          

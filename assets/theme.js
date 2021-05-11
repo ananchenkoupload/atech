@@ -988,7 +988,7 @@ slate.Variants = (function() {
       this._updateSKU(variant);
       this.currentVariant = variant;
 
-// sezzleInstall(variant);
+sezzleInstall(variant);
 
       if (this.enableHistoryState) {
         this._updateHistoryState(variant);
@@ -3408,6 +3408,8 @@ theme.MobileNav = (function() {
 
   function toggleSubNav(event) {
     if (isTransitioning) return;
+    
+    // $('.mobile-nav__dropdown[data-level="3"').css('overflow', 'auto')
 
     var toggleBtn = event.currentTarget;
     var isReturn = toggleBtn.classList.contains(classes.return);
@@ -3455,7 +3457,7 @@ theme.MobileNav = (function() {
 
     var openNavClass =
       menuLevel > 2 ? classes.thirdNavShowing : classes.subNavShowing;
-
+    
     cache.mobileNavContainer.style.height = translateMenuHeight + 'px';
     cache.mobileNavContainer.classList.remove(classes.thirdNavShowing);
     cache.mobileNavContainer.classList.add(openNavClass);
@@ -10005,58 +10007,4 @@ function actualCurrency() {
 }
 
 actualCurrency();
-
-$(document).ready(function() {
-
-  let checkGoogleButton = setInterval(() => {
-
-    if ($('[data-testid="GooglePay-button"]').length) {
-      const gPay = '<svg width="16" height="16" class="gpay-svg" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
-          '<path d="M14 6.29922C14.0006 5.86379 13.9586 5.42913 13.8745 5H7V7.46088H10.9374C10.7746 8.2551 10.2486 8.95653 9.48148 9.4026V11H11.8314C13.2073 9.88803 14 8.2436 14 6.29922Z" fill="#4285F4"/>\n' +
-          '<path d="M6.74119 13C8.47523 13 9.9353 12.4521 11 11.5074L8.9286 9.96153C8.35207 10.3377 7.60955 10.5524 6.74119 10.5524C5.06515 10.5524 3.64257 9.46513 3.13387 8H1V9.5931C2.09072 11.6817 4.31211 12.9999 6.74119 13Z" fill="#34A853"/>\n' +
-          '<path d="M3 8.27869C2.71371 7.44916 2.71371 6.55084 3 5.72131V4H0.72839C-0.242797 5.88753 -0.242797 8.11247 0.72839 10L3 8.27869Z" fill="#FBBC04"/>\n' +
-          '<path d="M6.71822 2.44782C7.63092 2.43341 8.51283 2.76656 9.17333 3.37526L11 1.61055C9.8417 0.559512 8.30722 -0.0175241 6.71822 0.000405659C4.29886 0.000512184 2.08636 1.31861 1 3.40703L3.12533 5C3.632 3.53499 5.04889 2.44782 6.71822 2.44782Z" fill="#EA4335"/>\n' +
-          '</svg>'
-      $('[data-testid="GooglePay-button"]').html(`<div>${gPay} Pay</div>`);
-
-      clearInterval(checkGoogleButton);
-    }
-  }, 100);
-
-  let checkApplePayButton = setInterval(() => {
-
-    if ($('[data-testid="ApplePay-button"]').length) {
-      const applePay = '<svg viewBox="0 0 44 18"><path d="M6.948 1.409C7.934.147 9.305.147 9.305.147s.193 1.18-.771 2.316c-1.05 1.2-2.228.993-2.228.993s-.236-.93.642-2.047zM3.82 3.663c-1.735 0-3.6 1.51-3.6 4.363 0 2.916 2.186 6.555 3.943 6.555.6 0 1.543-.6 2.485-.6.922 0 1.607.559 2.464.559 1.907 0 3.322-3.826 3.322-3.826s-2.015-.744-2.015-2.936c0-1.944 1.629-2.73 1.629-2.73s-.836-1.447-2.936-1.447c-1.22 0-2.164.661-2.656.661-.622.021-1.5-.6-2.636-.6zM19.64 1.426c2.453 0 4.188 1.788 4.188 4.396 0 2.608-1.755 4.417-4.248 4.417h-2.932v4.564h-1.974V1.426h4.966zm-2.992 7.067h2.473c1.695 0 2.693-.967 2.693-2.65 0-1.683-.978-2.671-2.693-2.671h-2.473v5.321zm7.559 3.429c0-1.767 1.296-2.777 3.65-2.945l2.572-.147v-.78c0-1.156-.738-1.787-1.994-1.787-1.037 0-1.795.568-1.955 1.43h-1.775c.06-1.788 1.656-3.092 3.79-3.092 2.333 0 3.829 1.304 3.829 3.281v6.9h-1.815v-1.684h-.04c-.519 1.094-1.715 1.788-3.012 1.788-1.934.021-3.25-1.178-3.25-2.965zm6.222-.905v-.778l-2.313.168c-1.297.084-1.975.59-1.975 1.494 0 .862.718 1.409 1.815 1.409 1.396-.021 2.473-.968 2.473-2.293zm3.969 7.383v-1.64c.14.041.438.041.598.041.897 0 1.416-.4 1.735-1.472l.14-.526L33.4 4.707h2.054l2.453 8.224h.04L40.4 4.707h1.994l-3.57 10.538c-.818 2.419-1.715 3.197-3.67 3.197-.14.02-.598-.021-.757-.042z"></path></svg>'
-      $('[data-testid="ApplePay-button"]').html(`<div>Buy with ${applePay}</div>`);
-
-      clearInterval(checkApplePayButton);
-    }
-  }, 100);
-
-  let checkShopPayButton = setInterval(() => {
-
-    if ($('[data-testid="ShopifyPay-button"]').length) {
-      $('[data-testid="ShopifyPay-button"]').html('<div>Shop Pay</div>');
-      clearInterval(checkShopPayButton);
-    }
-  }, 100);
-
-  let checkPayPalButton = setInterval(() => {
-
-    if ($('[data-testid="grid-cell"] .paypalLight').length) {
-      const paypalBtn = $('[data-testid="grid-cell"] .paypalLight').closest('[data-testid="grid-cell"]');
-      paypalBtn.addClass('data-paypal-button');
-      paypalBtn.append(`<div role="button" data-testid="paypal-button"><div>PayPal</div></div>`)
-      clearInterval(checkPayPalButton);
-    }
-  }, 100);
-
-  let removeAddToCartBar = setInterval(() => {
-
-    if ($('#satcb_bar').length) {
-      $('#satcb_bar').remove();
-      clearInterval(removeAddToCartBar);
-    }
-  }, 100);
-});
 

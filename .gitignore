@@ -12,6 +12,7 @@ dist
 upload
 deploy.log
 config.yml
+package-lock.json
 
 # Compiled source #
 ###################
@@ -59,5 +60,8 @@ _site
 secrets.json
 .jekyll-metadata
 .ruby-version
+.vscode
 
-
+# Theme #
+######################
+config/settings_data.json

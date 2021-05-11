@@ -92,7 +92,7 @@
                       right: 5px;
                     }
                 }
-
+              
 			</style>
 			<div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement_bar_label' | t }}" style="display: none;">
 				<div class="announcement-bar__container">
@@ -100,10 +100,10 @@
 					<div class="announcement-bar__link">
 						<div class="announcement-bar__message">{{ section.settings.message_text }}</div>
 					</div>
-                                        
-                    <button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
+
+					<button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
 				</div>
 			</div>
 		{% endif %}
@@ -272,7 +272,14 @@
 									</div>
 								</li>
 
+								{% assign current_tab = '' %}
+
 								{% for childlink in link.links %}
+
+									{% if current_tab == blank %}
+										{% assign current_tab = childlink.url %}
+									{% endif %}
+
 								<li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
 									{% if childlink.links != blank %}
 									{% capture grandchild_list_handle %}{{ childlink.handle }}-{{ outerLoopIndex }}-{{ forloop.index }}{%
@@ -319,7 +326,59 @@
 									{% endif %}
 								</li>
 								{% endfor %}
+
+
+								<script>console.log('current', {{ current_tab | json }})</script>
+
+								{% assign show_carousel = false %}
+
+								{% for collection in collections %}
+									{% if collection.url == current_tab %}
+										{% assign show_carousel = true %}
+									{% endif %}
+								{% endfor %}
+
+								{% if show_carousel %}
+									<div class="menu-carousel">
+										<div class="menu-carousel__title">
+											BESTSELLERS
+										</div>
+										<div class="menu-carousel__wrap">
+
+											<div class="menu-carousel__content">
+
+												{% for collection in collections %}
+													{% if collection.url == current_tab %}
+														{% assign products_sort = collection.products | sort: 'title' %}
+														{% for product in products_sort %}
+															{% if product.tags contains 'Bestseller' %}
+																<div class="menu-carousel__item">
+																	<a href="{{ product.url | within: collection }}">
+																		<div class="menu-carousel__item-image">
+																			<img src="{{ product.featured_media.preview_image | img_url: '480x' }}" alt="">
+																		</div>
+																		<div class="menu-carousel__item-title">{{ product.title }}</div>
+																		<div class="menu-carousel__item-price">From {% include 'product-price-listing', product: product, show_vendor: show_vendor, collectionPage: collectionPage %}</div>
+																	</a>
+																</div>
+															{% endif %}
+														{% endfor %}
+													{% endif %}
+												{% endfor %}
+
+
+											</div>
+										</div>
+									</div>
+								{% endif %}
+
+
+
+
+
 							</ul>
+
+
 						{% else %}
 							<a href="{{ link.url }}" class="mobile-nav__link{% if link.active %} mobile-nav__link--active{% endif %}" {%
 								if link.current %} aria-current="page" {% endif %}>
@@ -488,7 +547,7 @@
           }
         }
       
-		$(document).ready(function () {
+		$(document).ready(function () {       
 			$(".js-mobile-nav-toggle").click(function () {
 				$(".announcement-bar").css("display", "none");
 				$("body").removeClass("has-announcement-bar");

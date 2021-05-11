@@ -1,0 +1,8 @@
+development:
+  password: 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
+  theme_id: "122112704664"
+  store: aromatechdev.myshopify.com
+
+#: theme download -t 122112704664
+#: theme download config/settings_data.json config/settings_schema.json -t 122112704664
+#: theme deploy -e production --allow-live

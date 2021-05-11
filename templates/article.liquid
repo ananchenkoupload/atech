@@ -28,7 +28,7 @@
     {% section 'article-template' %}
   </div>
 </article>
-{% comment %}
+
 {% if blog.comments_enabled? %}
   {% if number_of_comments > 0 %}
     <hr aria-hidden="true">
@@ -72,7 +72,6 @@
   {% endif %}
 
   <hr aria-hidden="true">
-
   <div class="page-width">
     <div class="grid">
       <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
@@ -143,7 +142,7 @@
     </div>
   </div>
 {% endif %}
-{% endcomment %}
+
 {% section 'blog-slider-custom' %}
 
 <!-- 

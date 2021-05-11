@@ -1,5 +1,18 @@
 <div id="contact" class="contact-box">
-	<div class="page-width2">
+
+	<div class="page-width2 rich-text b2b-form ">
+
+		{% if section.settings.title != blank %}
+			<div class="rich-text__heading--medium text-center">
+				<h2 class="h3">{{ section.settings.title }}</h2>
+			</div>
+		{% endif %}
+
+		{% if section.settings.subtitle != blank %}
+			<div class="rich-text__text--medium rte-setting text-center"><p>{{ section.settings.subtitle }}</p></div>
+		{% endif %}
+
+
 		<div class="contact-form font-body-small">
 			{%- assign formId = 'ContactForm' -%}
 
@@ -223,29 +236,17 @@
 		{
 			"type": "text",
 			"id": "button_label",
-			"label": {
-				"cs": "Text tlačítka",
-				"da": "Knaptekst",
-				"de": "Button-Etikett",
-				"en": "Button label",
-				"es": "Etiqueta de botón",
-				"fi": "Tekstipainike",
-				"fr": "Texte du bouton",
-				"it": "Etichetta pulsante",
-				"ja": "ボタンのラベル",
-				"ko": "버튼 레이블",
-				"nb": "Knappetikett",
-				"nl": "Knoplabel",
-				"pl": "Przycisk z etykietą",
-				"pt-BR": "Etiqueta de botão",
-				"pt-PT": "Etiqueta do botão",
-				"sv": "Knappetikett",
-				"th": "ป้ายกำกับปุ่ม",
-				"tr": "Düğme etiketi",
-				"vi": "Nhãn nút",
-				"zh-CN": "按钮标签",
-				"zh-TW": "按鈕標籤"
-			}
+			"label": "Button label"
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title"
+		},
+		{
+			"type": "textarea",
+			"id": "subtitle",
+			"label": "Subtitle"
 		}
 	]
 }

@@ -12,9 +12,11 @@ Usage:
 	<div class="product-card2__badge">
 		{% include 'product-badges' %}
 	</div>
+	{% comment %}
 	<div class="product-card2__review">
 		{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
 	</div>
+	{% endcomment %}
 	{% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
 	{% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
 	{%- assign preview_image = product.featured_media.preview_image -%}
@@ -47,6 +49,9 @@ Usage:
 		<span class="list-price">
 			{% include 'product-price-listing', product: product, show_vendor: show_vendor, collectionPage: collectionPage %}
 		</span>
+	</div>
+	<div class="product-card2__review">
+		{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
 	</div>
 </div>
 

@@ -1214,7 +1214,7 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 			margin-bottom: 15px;
 			max-width: 308px;
 			@media (min-width: 768px) and (max-width: 981px) {
-				max-width: 308px;
+				max-width: 100%;
 			}
 			@media (min-width: 320px) and (max-width: 480px) {
 				max-width: 100% !important;
@@ -1250,7 +1250,7 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 			@media (min-width: 768px) and (max-width: 981px) {
 				width: 149px!important;
 				/* display: none; */
-				margin-left: 159px;
+				margin-left: 175px;
 			}
 			@media (min-width: 320px) and (max-width: 480px) {
 				max-width: 459px;
@@ -1296,6 +1296,10 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 .svg-logo svg {
 	vertical-align: top;
 	width: 100%;
+
+	@media (min-width: 768px) and (max-width: 875px) {
+		width: 80%;
+	}
 }
 /* svg logo */
 // .template-page.page-custom-scenting-1 #shopify-section-header,
@@ -1322,7 +1326,20 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 /* fix */
 .nav-menu .nav-menu__list ul li a {
 	font-size: 14px;
+
+	@media (min-width: 1200px) and (max-width: 1300px) {
+		font-size: 11px;
+	}
+
+	@media (min-width: 1025px) and (max-width: 1199px) {
+		font-size: 11px;
+	}
+
+	@media (min-width: 768px) and (max-width: 875px) {
+		font-size: 12px;
+	}
 }
+
 @media only screen and (min-width: 1300px) {
 	.nav-menu {
 	    max-width: 525px;
@@ -1347,14 +1364,7 @@ div[formtype="POPUP"] div[formtype="POPUP"] {
 		}
 	}
 }
-@media (min-width: 768px) and (max-width: 875px) {
-	.nav-menu .nav-menu__list ul li a {
-		font-size: 12px;
-	}
-	.svg-logo svg {
-		width: 80%;
-	}
-}
+
 @media (min-width: 749px) and (max-width: 767px) {
 	.nav-menu {
 	    display: none!important;

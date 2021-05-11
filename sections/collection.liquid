@@ -116,12 +116,12 @@
 			<div class="links-grid">
 				<div>
 					<a href="{{ collection.url }}" class="btn2"
-					   aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+						aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
 						{% comment %} {{ 'collections.general.view_all' | t }} {% endcomment %}
 						{% if section.settings.title == "Scent Machines" %}
-							SHOP ALL SCENT MACHINES
+						SHOP ALL SCENT MACHINES
 						{% else %}
-							{{ section.settings.button_label }}
+						shop now
 						{% endif %}
 					</a>
 				</div>
@@ -179,9 +179,9 @@
 	            breakpoint: 480,
 	            settings: {
 	              arrows: true,
-	              centerMode: true,
+	              centerMode: false,
 	              slidesToShow: 1,
-	              centerPadding: '40px',
+	              /* centerPadding: '40px', */
 	              slidesToScroll: 1
 	            }
 	          }
