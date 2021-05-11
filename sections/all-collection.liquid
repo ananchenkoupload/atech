@@ -56,15 +56,15 @@
 	<div class="custom-category-parent">
 
 		{% for block in section.blocks %}
-			{% if collection.all_tags contains block.settings.title %}
-				{% assign products_sort_check = collection.products | sort: 'title' %}
-				{% assign check_product_sort = true %}
-				
-				{% for product in products_sort_check %}
-					{% if product.tags contains block.settings.title %}
-						{% assign check_product_sort = false %}
-					{% endif %}
-				{% endfor %}
+		{% if collection.all_tags contains block.settings.title %}
+
+		{% assign products_sort_check = collection.products | sort: 'title' %}
+			{% assign check_product_sort = true %}
+		{% for product in products_sort_check %}
+			{% if product.tags contains block.settings.title %}
+				{% assign check_product_sort = false %}
+			{% endif %}
+		{% endfor %}
 
 		<div class="category-collection-full-width read-section" {% if check_product_sort %}style="display: none"{% endif %} id="{{ block.settings.title | handleize }}">
 			<div class="page-width2 section-collection scroll-collection category-collect">

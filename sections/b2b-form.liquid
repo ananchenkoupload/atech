@@ -1,5 +1,5 @@
-{% if section.settings.show_features %}
 
+{% if section.settings.show_features %}
 <div id="b2b-form" class="page-width2 rich-text b2b-form {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
 	{% if section.settings.section_title != blank %}
 		<div class="rich-text__heading--{{ section.settings.text_size }} text-center">
@@ -234,7 +234,6 @@
 	</div>
 	{% endcomment %}
 </div>
-{% endif %}
 
 {% schema %}
 {
@@ -274,14 +273,6 @@
 					}
 				}
 			]
-		},
-		{
-			"type": "checkbox",
-			"id": "show_features",
-			"label": {
-			  "en": "Visible"
-			},
-			"default": true
 		},
 		{
 			"type": "checkbox",
