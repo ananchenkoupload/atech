@@ -1,0 +1,241 @@
+{% case section.settings.grid %}
+{% when 2 %}
+{%- assign max_height = 530 -%}
+{% when 3 %}
+{%- assign max_height = 345 -%}
+{% when 4 %} 
+{%- assign max_height = 250 -%}
+{% when 5 %}
+{%- assign max_height = 195 -%}
+{% endcase %}
+
+<div data-section-id="{{ section.id }}" data-section-type="collection-template" class="collection-template collection-template__new">
+
+	<div class="custom-category-parent">
+		<div class="page-width2 section-collection scroll-collection category-collect">
+		<ul class="navbar-title-list">
+			<li class="nav-item main-title">
+				<h1 class="scent-diffusers-title">{{ collection.title }}</h1>
+				{% if collection.description != blank %}
+					<div class="scent-diffusers-paragraph">{{ collection.description }}</div>
+				{% endif %}
+			</li>
+		</ul>
+		</div>
+
+	
+            <div class="category-collection-full-width read-section">
+                <div class="page-width2 section-collection scroll-collection category-collect">
+                    <div class="collection-product">
+
+                        {% if section.settings.layout == 'grid' %}
+                            {% case section.settings.grid %}
+                                {% when 2 %}
+                                    {%- assign grid_item_width = 'medium-up--one-half' -%}
+                                {% when 3 %}
+                                    {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+                                {% when 4 %}
+                                    {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+                                {% when 5 %}
+                                    {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+                            {% endcase %}
+
+                            <ul class="tt collet-product">
+                                {% for product in collections[collection.handle].products %}
+                                    <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
+
+                                        {% include 'product-card-grid',
+                                                max_height: max_height,
+                                                product: product,
+                                                show_vendor: section.settings.show_vendor,
+                                                collectionPage: true
+                                        %}
+
+                                        <form action="/cart/add" method="post" id="product-form- {{ product.id }}">
+                                            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                                            <div class="custom-add-to-cart">
+                                                <button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add"
+                                                        data-url="{{ product.url }}">Add to cart {% include 'product-variants' %}</button>
+                                            </div>
+                                        </form>
+
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <ul class="list-view-items">
+                                {% for product in collections[collection.handle].products %}
+                                    <li class="list-view-item">
+                                        {% include 'product-card-list', product: product, show_vendor: section.settings.show_vendor %}
+                                    </li>
+                                {% else %}
+
+                                    {% comment %}
+                                    Add default products to help with onboarding for collections/all only.
+
+                                    The onboarding styles and products are only loaded if the
+                                    store has no products.
+                                    {% endcomment %}
+                                    {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0%}
+                                        {% for i in (1..4) %}
+                                            <li class="list-view-item">
+                                                <a href="#" class="list-view-item__link">
+                                                    <div class="list-view-item__image-column">
+                                                        <div class="list-view-item__image-wrapper">
+                                                            <div class="list-view-item__image">
+                                                                {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+                                                                {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="list-view-item__title-column">
+                                                        <div class="list-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+                                                    </div>
+
+                                                    <div class="list-view-item__price-column">
+                                                        <span class="product-price__price">$19.99</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        {%- assign is_empty_collection = true -%}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        {% if is_empty_collection %}
+                            <div class="grid__item small--text-center">
+                                <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+                            </div>
+                        {% endif %}
+                    </div> <!-- close collection-product -->
+                </div> <!-- close category-collect -->
+            </div> <!-- close category-collection-full-width -->
+
+
+	</div>
+
+	<div class="faq-subsection">{% include 'collection-faq' %}</div>
+
+	{% comment %}
+	{% include 'read-more' %}
+	{% endcomment %}
+</div>
+
+<script>
+	$(document).ready(function () {
+		/*$(".category-collection-full-width").slice(0, 3).show();
+			$(".category-collection-full-width").addClass("read-section");
+			$(".category-collection-full-width:hidden").removeClass("read-section");
+			$(".category-collection-full-width:nth-child(3)").addClass("read-section1");
+
+		$("#read-more-link").click(function(e){
+				e.preventDefault();
+				$(".category-collection-full-width:hidden").slice(0, 3).show();
+				$(".category-collection-full-width").addClass("read-section");
+				if($(".category-collection-full-width:hidden").length == 0){
+						//alert("No more divs"); // alert if there are none left
+//           $("#read-more-link").hide();
+					$(".category-collection-full-width:nth-child(3)").removeClass("read-section1");
+				}
+		});*/
+
+	});
+
+	// $(document).ready(function () {
+	// 	var headerHeight = $('#shopify-section-header').outerHeight();
+	// 	$('.scroll-link').click(function (e) {
+	// 		var targetHref = $(this).attr('href');
+	// 		$('html, body').animate({
+	// 			scrollTop: $(targetHref).offset().top - headerHeight
+	// 		}, 1000);
+	// 		e.preventDefault();
+	// 	});
+	// });
+
+	// click menubar hide/show
+	$(".nav-perent-title").hide();
+	// $(window).resize(function(){
+	if ($(window).width() <= 767) {
+		// $(".nav-perent-title").addClass('active');
+		$(".panel-menubar").show();
+		$(document).ready(function () {
+			$(".flip-title").click(function () {
+				$(".panel-menubar").slideToggle("slow");
+				$(this).closest(".flip-title").toggleClass('active');
+			});
+		});
+	}
+
+</script>
+
+{% schema %}
+{
+	"name": "Customize Collection",
+    
+	"settings": [
+        {
+            "type": "header",
+            "content": "Other settings",
+            "info": "Manage Plugins on [POWR.io](https://www.powr.io)"
+        },
+		{
+			"type": "select",
+			"id": "layout",
+			"label": "Layout",
+			"default": "grid",
+			"options": [
+				{
+					"value": "grid",
+					"label": "Grid"
+				},
+				{
+					"value": "list",
+					"label": "List"
+				}
+			]
+		},
+		{
+			"type": "range",
+			"id": "grid",
+			"label": "Products per row (grid only)",
+			"default": 4,
+			"min": 2,
+			"max": 5,
+			"step": 1
+		},
+		{
+			"type": "range",
+			"id": "rows",
+			"label": "Rows per page (grid only)",
+			"default": 2,
+			"min": 2,
+			"max": 8,
+			"step": 1
+		},
+		{
+			"type": "checkbox",
+			"id": "show_vendor",
+			"label": "Show product vendors",
+			"default": false
+		}
+	]
+}
+{% endschema %}
+
+{% comment %}
+		{
+			"type": "bestseller",
+			"name": "Bestseller products",
+			"settings": [
+				{
+					"type": "product",
+					"id": "bestseller_product",
+					"label": "Bestseller product"
+				}
+			]
+		},
+{% endcomment %}
