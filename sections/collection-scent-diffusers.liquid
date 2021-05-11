@@ -9,7 +9,6 @@
 {%- assign max_height = 195 -%}
 {% endcase %}
 
-
 {% assign main_collection = 'scent-diffusers' %}
 <div data-section-id="{{ section.id }}" data-section-type="collection-template" class="collection-template collection-template__new">
 
@@ -34,22 +33,22 @@
 							{% if block.type == 'link' %}
 								{% assign heading = block.settings.heading | downcase %}
 								{% if heading == 'shop all' %}
-									{% if collection.url != block.settings.link %}
-										<li class="nav-item under-line test">
-											<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}-hash"{% else %}href="{{ block.settings.link }}#{{ block.settings.link | handleize }}-hash"{% endif %}><h1>{{ block.settings.heading }}</h1></a>
+										{% if collection.url != block.settings.link %}
+											<li class="nav-item under-line">
+												<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}-hash"{% else %}href="{{ block.settings.link }}#{{ block.settings.link | handleize }}-hash"{% endif %}><h1>{{ block.settings.heading }}</h1></a>
+											</li>
+										{% endif %}
+										{% comment %}
+									{% elsif block.settings.heading == 'Bestsellers' %}
+										<li class="nav-item under-line">
+											<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}"{% else %}href="{{ block.settings.link }}"{% endif %}><h2>{{ block.settings.heading }}</h2></a>
+										</li>
+										{% endcomment %}
+									{% else %}
+										<li class="nav-item under-line">
+											<a class="nav-link scroll-link {% if collection.url == block.settings.link %}nav-link-active{% endif %}" href="{{ block.settings.link }}"><h2>{{ block.settings.heading }}</h2></a>
 										</li>
 									{% endif %}
-									{% comment %}
-								{% elsif block.settings.heading == 'Bestsellers' %}
-									<li class="nav-item under-line">
-										<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}"{% else %}href="{{ block.settings.link }}"{% endif %}><h2>{{ block.settings.heading }}</h2></a>
-									</li>
-									{% endcomment %}
-								{% else %}
-									<li class="nav-item under-line">
-										<a class="nav-link scroll-link {% if collection.url == block.settings.link %}nav-link-active{% endif %}" href="{{ block.settings.link }}"><h2>{{ block.settings.heading }}</h2></a>
-									</li>
-								{% endif %}
 							{% endif %}
 						{% endfor %}
 					</ul>
@@ -167,6 +166,7 @@
 	{% include 'read-more' %}
 	{% endcomment %}
 </div>
+
 <script>
 	$(document).ready(function () {
 		/*$(".category-collection-full-width").slice(0, 3).show();

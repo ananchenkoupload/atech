@@ -31,8 +31,8 @@
 					<ul class="navbar-nav panel-menubar">
 						{% for block in section.blocks %}
 							{% if block.type == 'link' %}
-									{% assign heading = block.settings.heading | downcase %}
-									{% if heading == 'shop all' %}
+                {% assign heading = block.settings.heading | downcase %}
+                {% if heading == 'shop all' %}
 										{% if collection.url != block.settings.link %}
 											<li class="nav-item under-line">
 												<a class="nav-link scroll-link" {% if collection.handle == main_collection %}href="#{{ block.settings.link | handleize }}-hash"{% else %}href="{{ block.settings.link }}#{{ block.settings.link | handleize }}-hash"{% endif %}><h1>{{ block.settings.heading }}</h1></a>
@@ -46,7 +46,7 @@
 										{% endcomment %}
 									{% else %}
 										<li class="nav-item under-line">
-											<a class="{% if collection.handle == main_collection and block.settings.link == '/collections'%}hide {% endif%} nav-link scroll-link {% if collection.url == block.settings.link %}nav-link-active{% endif %}" href="{{ block.settings.link }}"><h2> {{ block.settings.heading }}</h2></a>
+											<a class="nav-link scroll-link {% if collection.url == block.settings.link %}nav-link-active{% endif %}" href="{{ block.settings.link }}"><h2> {{ block.settings.heading }}</h2></a>
 										</li>
 									{% endif %}
 							{% endif %}
