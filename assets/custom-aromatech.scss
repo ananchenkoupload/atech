@@ -840,6 +840,11 @@ body,
 */
 
 .template-product {
+	.site-header .header-content{
+		@media screen and (max-width:769px) {
+			padding:21px;
+		}
+	}
 	.main-content .shopify-section {
 		.product-template__container {
 			padding-bottom: 0;
