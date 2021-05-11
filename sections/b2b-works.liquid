@@ -1,3 +1,5 @@
+{% if section.settings.show_features %}
+
 <div class="page-width2 section-feature-column b2b-work {% if section.settings.paddings != "default" %}{{ section.settings.paddings }}{% endif %}">
 	<div class="custom-width">
 		{% if section.settings.title != blank %}
@@ -106,6 +108,8 @@
 
 </div>
 </div>
+{% endif %}
+
 
 {% schema %}
 {
@@ -169,6 +173,14 @@
 				}
 			}
 			]
+		},
+		{
+			"type": "checkbox",
+			"id": "show_features",
+			"label": {
+			  "en": "Visible"
+			},
+			"default": true
 		},
 		{
 			"type": "text",
