@@ -66,140 +66,140 @@
 					{% endif %}
 				{% endfor %}
 
-		<div class="category-collection-full-width read-section" {% if check_product_sort %}style="display: none"{% endif %} id="{{ block.settings.title | handleize }}">
-			<div class="page-width2 section-collection scroll-collection category-collect">
-				<div class="collection-product">
+				<div class="category-collection-full-width read-section" {% if check_product_sort %}style="display: none"{% endif %} id="{{ block.settings.title | handleize }}">
+					<div class="page-width2 section-collection scroll-collection category-collect">
+						<div class="collection-product">
 
-					{% comment %}
-					<div class="colect-descr">
-						<h2 class="collect-title h6">{{ block.settings.title }}</h2>
-						<p class="font-body-small">{{ block.settings.tag_desc | escape }}</p>
-					</div>
-					{% endcomment %}
-
-					{% if section.settings.layout == 'grid' %}
-					{% case section.settings.grid %}
-					{% when 2 %}
-					{%- assign grid_item_width = 'medium-up--one-half' -%}
-					{% when 3 %}
-					{%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
-					{% when 4 %}
-					{%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
-					{% when 5 %}
-					{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
-					{% endcase %}
-
-					<ul class="tt collet-product">
-						{% assign products_sort = collection.products | sort: 'title' %}
-						{% for product in products_sort %}
-							{% if product.tags contains block.settings.title %}
-									<li class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
-										
-										{% include 'product-card-grid', 
-											max_height: max_height, 
-											product: product, 
-											show_vendor: section.settings.show_vendor,
-											collectionPage: true 
-										%}
-
-										<form action="/cart/add" method="post" id="product-form- {{ product.id }}">
-											<input type="hidden" name="id" value="{{ product.variants.first.id }}">
-											<div class="custom-add-to-cart">
-												<button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add"
-													data-url="{{ product.url }}">Add to cart {% include 'product-variants' %}</button>
-											</div>
-										</form>
-
-									</li>
-								{% endif %}
-							{% else %}
 							{% comment %}
-							Add default products to help with onboarding for collections/all only.
-
-							The onboarding styles and products are only loaded if the
-							store has no products.
+							<div class="colect-descr">
+								<h2 class="collect-title h6">{{ block.settings.title }}</h2>
+								<p class="font-body-small">{{ block.settings.tag_desc | escape }}</p>
+							</div>
 							{% endcomment %}
-							{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-								{% if product.tags contains block.settings.title %}
-									<li class="grid__item">
-										<div class="grid grid--uniform">
-											{% for i in (1..limit) %}
-												<div class="grid__item {{ grid_item_width }}">
-													<div class="grid-view-item">
-														<a href="#" class="grid-view-item__link">
-															<div class="grid-view-item__image">
-																{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-																{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-															</div>
-															<div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-															{% include 'product-price' %}
-														</a>
+
+							{% if section.settings.layout == 'grid' %}
+							{% case section.settings.grid %}
+							{% when 2 %}
+							{%- assign grid_item_width = 'medium-up--one-half' -%}
+							{% when 3 %}
+							{%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+							{% when 4 %}
+							{%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+							{% when 5 %}
+							{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+							{% endcase %}
+
+							<ul class="tt collet-product">
+								{% assign products_sort = collection.products | sort: 'title' %}
+								{% for product in products_sort %}
+									{% if product.tags contains block.settings.title %}
+											<li class="grid__item grid__item--{{section.id}} {{ grid_item_width }} {% if forloop.first or forloop.index0 == 4 %} first {% endif %} {% if forloop.last or forloop.index0 == 3 %} last {% endif %}">
+												
+												{% include 'product-card-grid', 
+													max_height: max_height, 
+													product: product, 
+													show_vendor: section.settings.show_vendor,
+													collectionPage: true 
+												%}
+
+												<form action="/cart/add" method="post" id="product-form- {{ product.id }}">
+													<input type="hidden" name="id" value="{{ product.variants.first.id }}">
+													<div class="custom-add-to-cart">
+														<button class="cart-btn js-ajax-add-to-cart-collection" type="submit" name="add"
+															data-url="{{ product.url }}">Add to cart {% include 'product-variants' %}</button>
 													</div>
+												</form>
+
+											</li>
+										{% endif %}
+									{% else %}
+									{% comment %}
+									Add default products to help with onboarding for collections/all only.
+
+									The onboarding styles and products are only loaded if the
+									store has no products.
+									{% endcomment %}
+									{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+										{% if product.tags contains block.settings.title %}
+											<li class="grid__item">
+												<div class="grid grid--uniform">
+													{% for i in (1..limit) %}
+														<div class="grid__item {{ grid_item_width }}">
+															<div class="grid-view-item">
+																<a href="#" class="grid-view-item__link">
+																	<div class="grid-view-item__image">
+																		{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+																		{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+																	</div>
+																	<div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+																	{% include 'product-price' %}
+																</a>
+															</div>
+														</div>
+													{% endfor %}
 												</div>
-											{% endfor %}
-										</div>
-									</li>
-								{% endif %}
+											</li>
+										{% endif %}
+									{% else %}
+										{%- assign is_empty_collection = true -%}
+									{% endif %}
+								{% endfor %}
+							</ul>
 							{% else %}
-								{%- assign is_empty_collection = true -%}
-							{% endif %}
-						{% endfor %}
-					</ul>
-					{% else %}
-					<ul class="list-view-items">
-						{% for product in collection.products %}
-						{% if product.tags contains block.settings.title %}
-						<li class="list-view-item">
-							{% include 'product-card-list', product: product, show_vendor: section.settings.show_vendor %}
-						</li>
-						{% endif %}
-						{% else %}
+							<ul class="list-view-items">
+								{% for product in collection.products %}
+								{% if product.tags contains block.settings.title %}
+								<li class="list-view-item">
+									{% include 'product-card-list', product: product, show_vendor: section.settings.show_vendor %}
+								</li>
+								{% endif %}
+								{% else %}
 
-						{% comment %}
-						Add default products to help with onboarding for collections/all only.
+								{% comment %}
+								Add default products to help with onboarding for collections/all only.
 
-						The onboarding styles and products are only loaded if the
-						store has no products.
-						{% endcomment %}
-						{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0%}
-						{% for i in (1..4) %}
-						<li class="list-view-item">
-							<a href="#" class="list-view-item__link">
-								<div class="list-view-item__image-column">
-									<div class="list-view-item__image-wrapper">
-										<div class="list-view-item__image">
-											{% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
-											{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+								The onboarding styles and products are only loaded if the
+								store has no products.
+								{% endcomment %}
+								{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0%}
+								{% for i in (1..4) %}
+								<li class="list-view-item">
+									<a href="#" class="list-view-item__link">
+										<div class="list-view-item__image-column">
+											<div class="list-view-item__image-wrapper">
+												<div class="list-view-item__image">
+													{% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
+													{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
 
-								<div class="list-view-item__title-column">
-									<div class="list-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-								</div>
+										<div class="list-view-item__title-column">
+											<div class="list-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
+										</div>
 
-								<div class="list-view-item__price-column">
-									<span class="product-price__price">$19.99</span>
-								</div>
-							</a>
-						</li>
-						{% endfor %}
-						{% else %}
-						{%- assign is_empty_collection = true -%}
-						{% endif %}
-						{% endfor %}
-					</ul>
-					{% endif %}
+										<div class="list-view-item__price-column">
+											<span class="product-price__price">$19.99</span>
+										</div>
+									</a>
+								</li>
+								{% endfor %}
+								{% else %}
+								{%- assign is_empty_collection = true -%}
+								{% endif %}
+								{% endfor %}
+							</ul>
+							{% endif %}
 
-					{% if is_empty_collection %}
-					<div class="grid__item small--text-center">
-						<p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
-					</div>
-					{% endif %}
-				</div> <!-- close collection-product -->
-			</div> <!-- close category-collect -->
-		</div> <!-- close category-collection-full-width -->
-		{% endif %}
+							{% if is_empty_collection %}
+							<div class="grid__item small--text-center">
+								<p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+							</div>
+							{% endif %}
+						</div> <!-- close collection-product -->
+					</div> <!-- close category-collect -->
+				</div> <!-- close category-collection-full-width -->
+			{% endif %}
 		{% endfor %}
 	</div>
 
