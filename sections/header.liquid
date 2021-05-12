@@ -644,6 +644,7 @@
 	{% endif %}
 </div>
 
+{% comment %}
 <script type="application/ld+json">
 {
 	"@context": "http://schema.org",
@@ -666,9 +667,12 @@
 	"url": {{ shop.url | append: page.url | json }}
 }
 </script>
+{% endcomment %}
 
 {% if request.page_type == 'index' %}
 {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+
+{% comment %}
 <script type="application/ld+json">
 		{
 			"@context": "http://schema.org",
@@ -682,6 +686,7 @@
 			"url": {{ shop.url | append: page.url | json }}
 		}
 	</script>
+{% endcomment %}
 {% endif %}
 
 {% schema %}
