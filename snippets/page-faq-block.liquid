@@ -10,16 +10,16 @@
 		</div>
 
 		<div class="section-collection-faq faq-wrapper">
-			<div class="faq-cat-wrapper" itemscope itemtype="https://schema.org/FAQPage">
+			<div class="faq-cat-wrapper" {% comment %}itemscope itemtype="https://schema.org/FAQPage"{% endcomment %}>
 				{% if faqSubTitle != blank %}
 					<h2 class="h4">{{ faqSubTitle | escape }}</h2>
 				{% endif %}
 				{% for q in question %}
 					{% if question[forloop.index0] != blank and answer[forloop.index0] != blank %}
-						<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="collection-faq-wrapper">
-							<h3 itemprop="name" class="accordion">{{ question[forloop.index0] }}</h3>
-							<div class="panel" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-								<div itemprop="text"> 
+						<div {% comment %}itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"{% endcomment %} class="collection-faq-wrapper">
+							<h3 {% comment %}itemprop="name"{% endcomment %} class="accordion">{{ question[forloop.index0] }}</h3>
+							<div class="panel" {% comment %}itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"{% endcomment %}>
+								<div {% comment %}itemprop="text"{% endcomment %}> 
 									<p>
 										{{ answer[forloop.index0] | strip_html }}
 									</p>
