@@ -18,10 +18,10 @@
             <h2 class="h4">{{ faq_cat }}</h2>
             {% for q in page.metafields.page_faq.title %}
                 {% if page.metafields.faq_category.faq_category[forloop.index0] == faq_cat %}
-                    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 class="accordion {% if page.metafields.faq_video.faq_video[forloop.index0] != blank %}has-video{% endif %}" itemprop="name">{{ page.metafields.page_faq.title[forloop.index0] | escape }}</h3>
-                        <div class="panel" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
+                    <div {% comment %} itemscope itemprop="mainEntity"  itemtype="https://schema.org/Question" {% endcomment %}>
+                        <h3 class="accordion {% if page.metafields.faq_video.faq_video[forloop.index0] != blank %}has-video{% endif %}" {% comment %}itemprop="name"{% endcomment %}>{{ page.metafields.page_faq.title[forloop.index0] | escape }}</h3>
+                        <div class="panel" {% comment %}itemscope itemprop="acceptedAnswer"  itemtype="https://schema.org/Answer" {% endcomment %}>
+                            <div {% comment %}itemprop="text"{% endcomment %}>
                                 {{ page.metafields.page_faq.description[forloop.index0] }}
 
                                 {% if page.metafields.faq_video.faq_video[forloop.index0] != blank %}
