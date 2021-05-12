@@ -17,8 +17,8 @@
 		<ul class="navbar-title-list">
 			<li class="nav-item main-title">
 				<h1 class="scent-diffusers-title">{{ collection.title }}</h1>
-				{% if section.settings.paragraph != blank %}
-					<div class="scent-diffusers-paragraph">{{ section.settings.paragraph }}</div>
+				{% if collection.description != blank %}
+					<div class="scent-diffusers-paragraph">{{ collection.description }}</div>
 				{% endif %}
 			</li>
 		</ul>
@@ -280,11 +280,6 @@
 			"id": "tags_enable",
 			"label": "Enable tag filtering",
 			"default": true
-		},
-		{
-			"type": "richtext",
-			"id": "paragraph",
-			"label": "Paragraph"
 		}
 	],
 	"blocks": [
