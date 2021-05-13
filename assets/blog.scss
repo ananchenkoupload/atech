@@ -358,8 +358,11 @@
             // line-height: 22px;
             // color: #212121;
             &,
-            p{
+            p, p span, span {
                 color: inherit;
+            }
+            p span, span {
+                font-weight: inherit !important;
             }
 
             ul, ol {
