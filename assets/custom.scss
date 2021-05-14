@@ -6079,7 +6079,7 @@ a.black_button {
 				cursor: pointer;
 
 				> span {
-					display: none !important;
+					//display: none !important;
 				}
 
 				&:hover {
@@ -6977,4 +6977,30 @@ a.black_button {
 		letter-spacing: normal;
 		font-weight: 400;
 	}
+}
+.template-product .product-template__container div.product-single div.shopify-payment-button .shopify-payment-button__button--unbranded {
+	color: #fff!important;
+    border: 1px solid #262626;
+    background: #3a3a3a;
+}
+  
+.template-product .product-template__container div.product-single div.shopify-payment-button .shopify-payment-button__button--unbranded:hover {
+	background: #606060!important;
+	border-color: #606060;
+}
+  
+.additional-checkout-buttons .shopify-cleanslate [data-testid][role=button], 
+.shopify-payment-button__button .shopify-cleanslate [data-testid][role=button] {
+	color: #fff!important;
+    border: 1px solid #262626!important;
+    background: #3a3a3a!important;
+}
+.additional-checkout-buttons .shopify-cleanslate [data-testid][role=button]:hover, 
+.shopify-payment-button__button .shopify-cleanslate [data-testid][role=button]:hover {
+	background: #606060!important;
+	border-color: #606060!important;
+}
+  
+.template-product form[action^="/cart/add"] [type=submit] {
+  	visibility: visible;
 }
