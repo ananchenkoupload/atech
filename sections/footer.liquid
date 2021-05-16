@@ -312,7 +312,7 @@
 									Site name gets precedence with H1 tag on homepage, div on other pages.
 								{% endcomment %}
 								{% if request.page_type == 'index' %}
-									<h1 class="h2 site-header__logo">
+									<h2 class="h2 site-header__logo">
 								{% else %}
 									<div class="h2 site-header__logo">
 								{% endif %}
@@ -341,7 +341,7 @@
 										<a class="site-header__logo-link" href="{{ routes.root_url }}">{{ shop.name }}</a>
 									{% endif %}
 								{% if request.page_type == 'index' %}
-									</h1>
+									</h2>
 								{% else %}
 									</div>
 								{% endif %}
@@ -532,6 +532,27 @@
 	</div>
 	</div>
 </footer>
+
+<script>
+ function getIP(json) {
+   if (json) {
+   	EIPL=json;
+   }
+   if (EIPL.org) {
+   	if (typeof ga === 'function' && typeof ga.getAll() === 'object') {
+		ga(ga.getAll()[0].get('name')+'.send', {
+		  hitType: 'event',
+		  dimension4: EIPL.org,
+		  nonInteraction: true
+		});
+	}
+	else {
+		setTimeout(function() {getIP();}, 200);
+	}
+   }
+ }
+</script>
+<script src="//extreme-ip-lookup.com/json/?callback=getIP" async defer></script>
 
 
 

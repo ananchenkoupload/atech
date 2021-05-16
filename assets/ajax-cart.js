@@ -65,6 +65,35 @@ $('.js-ajax-add-to-cart-collection').on('click', function(e) {
     window.location.href = url; 
 })
 
+function reChargeProcessCart() {
+    function get_cookie(name){ return( document.cookie.match('(^|; )'+name+'=([^;]*)')||0 )[2] }
+    do {
+            token=get_cookie('cart');
+    }
+    while(token == undefined);	var myshopify_domain='{{ shop.permanent_domain }}'
+    try { var ga_linker = ga.getAll()[0].get('linkerParam') } catch(err) { var ga_linker ='' }
+
+    return checkout_url= "https://checkout.rechargeapps.com/r/checkout?myshopify_domain=aromatech-systems-canada.myshopify.com&cart_token="+token+"&"+ga_linker;
+}
+
+function buildCheckoutLink(cart) {
+    if(!cart) return
+
+    let checkoutUrl = '/checkout'
+    const checkoutBtn = document.querySelector('.ajax-cart-drawer__buttons a')
+    const rechargeProperties = cart.items?.filter(item => item.properties.shipping_interval_frequency)
+
+    if(rechargeProperties.length > 0 && checkoutUrl){
+        checkoutUrl = reChargeProcessCart()
+
+        checkoutBtn.setAttribute('href', checkoutUrl)
+        // console.error('checkout url', checkoutUrl)
+    } else {
+        checkoutBtn.setAttribute('href', checkoutUrl)
+        // console.error('checkout url', checkoutUrl)
+    }
+}
+
 function addProductToCart(formID) {
     $.ajax({
         type: 'POST',
@@ -84,6 +113,8 @@ function fetchCart() {
         dataType: 'json',
         success: function(cart) {
             onCartUpdate(cart);
+            buildCheckoutLink(cart)
+
             if (cart.item_count === 0) {
                 cartDrawerContent.innerHTML = '<p class="empty-cart">You have no items in your shopping cart.</p>';
                 checkoutButton.classList.add('is-hidden');
