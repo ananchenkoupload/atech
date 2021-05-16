@@ -14,6 +14,41 @@
   </div>
 {% endif %}
 {% endcomment %}
+<style>
+  .additional-payment-button {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+<script>
+  $('document').ready(function() {
+    const selectedRechargeInput = $('.rc_block__type.rc_block__type--active input')
+
+    if(selectedRechargeInput && selectedRechargeInput.val() == 'autodeliver'){
+      // $('.additional-payment-button').hide()
+      $('.additional-payment-button').css('opacity','0');
+      $('.additional-payment-button').css('pointer-events','none');
+    } else {
+      // $('.additional-payment-button').show()
+      $('.additional-payment-button').css('opacity','1');
+      $('.additional-payment-button').css('pointer-events','auto');
+    }
+  })
+  $(document).on('click', '.rc_block__type', function(e){
+    const selectedRechargeInput = $(e.target).closest('.rc_block__type').find('input.rc_radio')
+
+    console.error('selectedRechargeInput.val()', selectedRechargeInput.val())
+    if(selectedRechargeInput && selectedRechargeInput.val() == 'onetime') {
+      // $('.additional-payment-button').show()
+      $('.additional-payment-button').css('opacity','1');
+      $('.additional-payment-button').css('pointer-events','auto');
+    }else if(selectedRechargeInput && selectedRechargeInput.val() == 'autodeliver'){
+      // $('.additional-payment-button').hide()
+      $('.additional-payment-button').css('opacity','0');
+      $('.additional-payment-button').css('pointer-events','none');
+    } 
+  })
+</script>
 
 <script>
   // Override default values of shop.strings for each template.
@@ -25,52 +60,52 @@
     unavailable: {{ 'products.product.unavailable' | t | json }}
   }
 </script>
-{{ 'option_selection.js' | asset_url | script_tag }}
+{% comment pluginspeed replaced-js DON'T CHANGE %}{{ 'option_selection.js' | asset_url | script_tag }}{% endcomment %}{%- include 'pluginspeed-minify-asset', asset: 'option_selection.js', tag: 'script', liquid_tag: true -%}
 <script>
-  var selectCallback = function(variant, selector) {
-    // BEGIN SWATCHES
-    var form = jQuery('#' + selector.domIdPrefix).closest('form');
-    var radioButton;
-    if (variant) {
-      for (var i = 0, length = variant.options.length; i < length; i++) {
-        radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i].replace(/(['"])/g, "\\$1") +'"]');
-        if (radioButton.length) {
-          radioButton.get(0).checked = true;
-        }
-
+var selectCallback = function(variant, selector) {
+  // BEGIN SWATCHES
+  var form = jQuery('#' + selector.domIdPrefix).closest('form');
+  var radioButton;
+  if (variant) {  
+    for (var i = 0, length = variant.options.length; i < length; i++) {
+      radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i].replace(/(['"])/g, "\\$1") +'"]');
+      if (radioButton.length) {
+        radioButton.get(0).checked = true;
       }
+      
     }
-    // END SWATCHES
-    if (variant && variant.available) {
-      jQuery('#add-to-cart').removeAttr('disabled').removeClass('disabled'); // remove unavailable class from add-to-cart button, and re-enable button
-      if(variant.price < variant.compare_at_price){
-        jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "") + " <del>" + Shopify.formatMoney(variant.compare_at_price, "") + "</del>");
-      } else {
-        jQuery('#price-preview').html(Shopify.formatMoney(variant.price, ""));
-      }
+  }
+  // END SWATCHES
+  if (variant && variant.available) {
+    jQuery('#add-to-cart').removeAttr('disabled').removeClass('disabled'); // remove unavailable class from add-to-cart button, and re-enable button
+    if(variant.price < variant.compare_at_price){
+      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "") + " <del>" + Shopify.formatMoney(variant.compare_at_price, "") + "</del>");
     } else {
-      jQuery('#add-to-cart').addClass('disabled').attr('disabled', 'disabled'); // set add-to-cart button to unavailable class and disable button
-      var message = variant ? "Sold Out" : "Unavailable";
-      jQuery('#price-preview').text(message);
+      jQuery('#price-preview').html(Shopify.formatMoney(variant.price, ""));
     }
+  } else {
+    jQuery('#add-to-cart').addClass('disabled').attr('disabled', 'disabled'); // set add-to-cart button to unavailable class and disable button
+    var message = variant ? "Sold Out" : "Unavailable";
+    jQuery('#price-preview').text(message);
+  }
 
-    $('document').ready(function() {
-      var variant_img = variant.featured_media.id;
-      var current_img = $('.slick-active').data('image-id');
+$('document').ready(function() {
+  var variant_img = variant.featured_media.id;
+  var current_img = $('.slick-active').data('image-id');
 
-      if (variant_img) {
-        if (variant_img != current_img) {
-          var target_image_id = $('.slick-slide[data-image-id*="'+ variant_img +'"]').data('slick-index');
-          $('.productsingle-slider').slick('slickGoTo', target_image_id);
-        }
-      }
-    })
+  if (variant_img) {
+    if (variant_img != current_img) {
+      var target_image_id = $('.slick-slide[data-image-id*="'+ variant_img +'"]').data('slick-index');
+      $('.productsingle-slider').slick('slickGoTo', target_image_id); 
+    }
+  }
+})
 
-    //console.log(variant.featured_media.id);
+  //console.log(variant.featured_media.id);
 
 
-  };
-
+};
+  
   jQuery(document).ready(function($){
     new Shopify.OptionSelectors("product-select", { product: {{ product | json }}, onVariantSelected: selectCallback });
   });
@@ -82,30 +117,30 @@
       var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
       var optionValue = jQuery(this).val();
       jQuery(this)
-              .closest('form')
-              .find('.single-option-selector')
-              .eq(optionIndex)
-              .val(optionValue)
-              .trigger('change');
-    });
+        .closest('form')
+        .find('.single-option-selector')
+        .eq(optionIndex)
+        .val(optionValue)
+        .trigger('change');
+    }); 
   });
 </script>
 
 <script>
-  $(window).on('load', function() {
-    console.log('test');
-    jQuery('.trigger-click label').trigger('click');
-    /*var variant_img = jQuery('.trigger-click').data('variant-image');
-    var target_image_id = $('.slick-slide[data-image-id*="'+ variant_img +'"]').data('slick-index');
-    console.log(variant_img);
-    console.log(target_image_id);
-    $('.productsingle-slider').slick('slickGoTo', target_image_id);*/
-  });
+$(window).on('load', function() {
+  console.log('test');
+  jQuery('.trigger-click label').trigger('click');
+  /*var variant_img = jQuery('.trigger-click').data('variant-image');
+  var target_image_id = $('.slick-slide[data-image-id*="'+ variant_img +'"]').data('slick-index');
+  console.log(variant_img);
+  console.log(target_image_id);
+  $('.productsingle-slider').slick('slickGoTo', target_image_id);*/
+});
 </script>
 
 {% assign current_variant = product.selected_or_first_available_variant %}
 
-<meta itemprop='itemReviewed' content='{{product.title}}'>
+<meta itemprop='itemReviewed' content='{{product.title}}'> 
 
 
 
@@ -150,191 +185,222 @@
 
 
 <script>
+  
+      var product = {{id}};
+      
+      var priceIt = '{{price}}';
 
-  var product = {{id}};
+      var flagO = true;
 
-  var priceIt = '{{price}}';
+      var flagI = true;
 
-  var flagO = true;
-
-  var flagI = true;
-
-  const bacKr = {{bcpP}},
+      const bacKr = {{bcpP}},
           bacKp = '{{bcpR}}';
 
-  function recalcEnrouteTRK(flagChangeO,flagChangeI) {
+      function recalcEnrouteTRK(flagChangeO,flagChangeI) {
 
 
-    if (flagChangeO !== undefined) {
-      flagO = true;
-    }
-
-    if (flagChangeI !== undefined) {
-      flagI = true;
-    }
-
-    setTimeout(function(){
-      jQuery.getJSON('/cart.js', function(cart) {
-
-        var total_price = cart.total_price / 100;
-        var threshold_2 = {{ threshold_2 }};
-
-        console.log('huutus')
-
-        console.log(total_price)
-
-        if (total_price < {{threshold_2}}) {
-          product = bacKr;
-          priceIt = bacKp;
-          console.log('price one')
-        } else if (total_price > {{threshold_2}} && total_price < {{threshold_3}}) {
-          product = {{enroute_product_2_id}};
-          priceIt = '{{enroute_product_2_price}}';
-          if (flagO == true) {
-            console.log('changing tw')
-            if ($('div#is-a-gift .tt').hasClass('m-active')) {
-              $('div#is-a-gift .tt').removeClass('m-active');
-              console.log('rmv 1')
-            }
-            flagO = false;
-          }
-          console.log('price two')
-        } else if (total_price > {{threshold_3}} && total_price < {{threshold_4}}) {
-          product = {{enroute_product_3_id}};
-          priceIt = '{{enroute_product_3_price}}';
-          if (flagO == true) {
-            console.log('changing tw')
-            if ($('div#is-a-gift .tt').hasClass('m-active')) {
-              $('div#is-a-gift .tt').removeClass('m-active');
-              console.log('rmv 1')
-            }
-            flagO = false;
-          }
-          console.log('price three')
-        } else if (total_price > {{threshold_4}}) {
-          product = {{enroute_product_4_id}};
-          priceIt = '{{enroute_product_4_price}}';
-          if (flagI == true) {
-            console.log('changing thr')
-            if ($('div#is-a-gift .tt').hasClass('m-active')) {
-              $('div#is-a-gift .tt').removeClass('m-active');
-              console.log('rmv 2')
-            }
-            flagI = false;
-          }
-          console.log('price four')
+        if (flagChangeO !== undefined) {
+          flagO = true;
         }
 
-        if (flagChangeO == false && flagChangeI == false) {
-          product = bacKr;
-          priceIt = bacKp;
-          console.log(product, priceIt)
+         if (flagChangeI !== undefined) {
+          flagI = true;
         }
 
-        console.log(priceIt)
+        setTimeout(function(){
+          jQuery.getJSON('/cart.js', function(cart) {
+                
+                var total_price = cart.total_price / 100;
+                var threshold_2 = {{ threshold_2 }}; 
 
-        $('#is-a-gift label.tt').html('<input id="enroute" type="checkbox" name="attributes[enroute]" value="yes" style="float: none" /><span class="fake-checkbox"></span>Add AROMATECH Full Coverage Shipping Insurance for <span class="enroute-price">' + priceIt + '</span><span class="tooltiptext">Optional full shipping coverage starting at a low fee that effortlessly resolve any shipment issues. Lost, damaged, or stolen items are easily taken care of by contacting our Customer Service.</span>');
+                //console.log('huutus')
+        
+                console.log(total_price)
+
+                if (total_price < {{threshold_2}}) {
+                  product = bacKr;
+                  priceIt = bacKp;
+                  //console.log('price one')
+                } else if (total_price > {{threshold_2}} && total_price < {{threshold_3}}) {
+                  product = {{enroute_product_2_id}};
+                  priceIt = '{{enroute_product_2_price}}';
+                  if (flagO == true) {
+                    console.log('changing tw')
+                    if ($('div#is-a-gift .tt').hasClass('m-active')) {
+                      $('div#is-a-gift .tt').removeClass('m-active');
+                       console.log('rmv 1')
+                    }
+                    flagO = false;
+                  }
+                  console.log('price two')
+                } else if (total_price > {{threshold_3}} && total_price < {{threshold_4}}) {
+                  product = {{enroute_product_3_id}};
+                  priceIt = '{{enroute_product_3_price}}';
+                  if (flagO == true) {
+                    //console.log('changing tw')
+                    if ($('div#is-a-gift .tt').hasClass('m-active')) {
+                      $('div#is-a-gift .tt').removeClass('m-active');
+                       //console.log('rmv 1')
+                    }
+                    flagO = false;
+                  }
+                  //console.log('price three')
+                } else if (total_price > {{threshold_4}}) {
+                  product = {{enroute_product_4_id}};
+                  priceIt = '{{enroute_product_4_price}}';
+                  if (flagI == true) {
+                    console.log('changing thr')
+                    if ($('div#is-a-gift .tt').hasClass('m-active')) {
+                      $('div#is-a-gift .tt').removeClass('m-active');
+                           console.log('rmv 2')
+                    }
+                    flagI = false;
+                  }
+                  //console.log('price four')
+                } 
+                
+                if (flagChangeO == false && flagChangeI == false) {
+                  product = bacKr;
+                  priceIt = bacKp;
+                  //console.log(product, priceIt)
+                }
+                
+                //console.log(priceIt)
+            
+                $('#is-a-gift label.tt').html('<input id="enroute" type="checkbox" name="attributes[enroute]" value="yes" style="float: none" /><span class="fake-checkbox"></span>Add AROMATECH Full Coverage Shipping Insurance for <span class="enroute-price">' + priceIt + '</span><span class="tooltiptext">Optional full shipping coverage starting at a low fee that effortlessly resolve any shipment issues. Lost, damaged, or stolen items are easily taken care of by contacting our Customer Service.</span>');
+
+          });
+        }, 500);
+        
+      }
+
+    function recalcEnroutePr() {
+
+      Shopify.Cart = Shopify.Cart || {};
+      Shopify.Cart.GiftWrap = {};
+
+      $(document).on("click",".ajax-cart-item__quantity-button",function(event) {
+
+        recalcEnrouteTRK()
 
       });
-    }, 500);
-
-  }
-
-  function recalcEnroutePr() {
-
-    Shopify.Cart = Shopify.Cart || {};
-    Shopify.Cart.GiftWrap = {};
-
-    $(document).on("click",".ajax-cart-item__quantity-button",function(event) {
 
       recalcEnrouteTRK()
 
-    });
+      Shopify.Cart.GiftWrap.remove2 = function() {
 
-    recalcEnrouteTRK()
+        let nubmerCr = parseInt(product);
 
-    Shopify.Cart.GiftWrap.remove2 = function() {
-
-      let nubmerCr = parseInt(product);
-
-      let rmIte = $('.cart__row[data-id="'+nubmerCr+'"]');
+        let rmIte = $('.cart__row[data-id="'+nubmerCr+'"]');
       $('.ajax-cart-summary.ajax-cart-enroute').addClass('m-stack')
-      jQuery.ajax({
-        type: 'POST',
-        url: '/cart/change.js',
-        data: { quantity: 0, id: nubmerCr },
-        dataType: 'json',
-        success: function() {
-          fetchCart();
-          setTimeout(function(){
-            $('.ajax-cart-summary.ajax-cart-enroute').removeClass('m-stack')
-          }, 500);
-        }
-      });
-    }
+        jQuery.ajax({
+          type: 'POST',
+          url: '/cart/change.js',
+          data: { quantity: 0, id: nubmerCr }, 
+          dataType: 'json',
+          success: function() {
+            fetchCart();
+            setTimeout(function(){
+              $('.ajax-cart-summary.ajax-cart-enroute').removeClass('m-stack')
+            }, 500);
+          }
+        });
+      }
 
-    Shopify.Cart.GiftWrap.set2 = function() {
+      Shopify.Cart.GiftWrap.set2 = function() {
 
-      var headers = new Headers({ 'Content-Type': 'application/json' });
+        var headers = new Headers({ 'Content-Type': 'application/json' });
 
-      var indexCr = $('.cart tbody .cart__row').length;
+        var indexCr = $('.cart tbody .cart__row').length;
+        
+        let nubmerCr = parseInt(product);
+        $('.ajax-cart-summary.ajax-cart-enroute').addClass('m-stack')
+        $.ajax({
+          type: 'POST',
+          url: '/cart/add.js',
+          data: {
+            quantity: 1,
+            id: nubmerCr,
+            properties: { 'enroute': true }
+          },
+          dataType: 'json', 
+          success: function (locProduct) {
+            fetchCart();
+            setTimeout(function(){
+              $('.ajax-cart-summary.ajax-cart-enroute').removeClass('m-stack')
+            }, 500);
+          } 
+        });
 
-      let nubmerCr = parseInt(product);
-      $('.ajax-cart-summary.ajax-cart-enroute').addClass('m-stack')
-      $.ajax({
-        type: 'POST',
-        url: '/cart/add.js',
-        data: {
-          quantity: 1,
-          id: nubmerCr,
-          properties: { 'enroute': true }
-        },
-        dataType: 'json',
-        success: function (locProduct) {
-          fetchCart();
-          setTimeout(function(){
-            $('.ajax-cart-summary.ajax-cart-enroute').removeClass('m-stack')
-          }, 500);
-        }
-      });
+      }
 
-    }
-
-    $.fn.hasAttr = function(name) {
+      $.fn.hasAttr = function(name) {  
       return this.attr(name) !== undefined;
-    };
+      };
 
-    $('.cart-table .cart__row').each(function (){
-      let crItm = $(this)
-      if (crItm.attr('data-enroute') == true){
-        $('div#is-a-gift .tt').addClass('m-active');
-        $('div#is-a-gift .tt #enroute').prop('checked', true);
-        console.log('added class rmv')
-      }
-    });
+      $('.cart-table .cart__row').each(function (){
+        let crItm = $(this)
+        if (crItm.attr('data-enroute') == true){
+          $('div#is-a-gift .tt').addClass('m-active');
+          $('div#is-a-gift .tt #enroute').prop('checked', true);
+          console.log('added class rmv')
+        }
+      });
 
 
-    $(document).on("change","div#is-a-gift .tt #enroute",function(event) {
-      console.log('chngng')
-      if ($('div#is-a-gift .tt').hasClass('m-active')) {
-        console.log('rmv 3')
-        Shopify.Cart.GiftWrap.remove2();
-        $('div#is-a-gift .tt').removeClass('m-active');
-        setTimeout(function() {
-          let counterCart = parseInt($('.js-ajax-cart-counter-header').text())
-          if (counterCart < 1) {
-            $('.site-header__cart-count').addClass('_hide')
-          }
-        }, 700);
-      } else {
-        Shopify.Cart.GiftWrap.set2();
-        $(' div#is-a-gift .tt').addClass('m-active');
-      }
+      $(document).on("change","div#is-a-gift .tt #enroute",function(event) {
+        //console.log('chngng')
+        if ($('div#is-a-gift .tt').hasClass('m-active')) {
+          //console.log('rmv 3')
+          Shopify.Cart.GiftWrap.remove2();
+          $('div#is-a-gift .tt').removeClass('m-active');
+          setTimeout(function() {
+            let counterCart = parseInt($('.js-ajax-cart-counter-header').text())
+            if (counterCart < 1) {
+                $('.site-header__cart-count').addClass('_hide')
+            }
+          }, 700);
+        } else {
+          Shopify.Cart.GiftWrap.set2();
+          $(' div#is-a-gift .tt').addClass('m-active');
+        } 
 
-      recalcEnrouteTRK()
-    });
-  }
+        recalcEnrouteTRK()
+      });
+    }
 
-  recalcEnroutePr()
-
+    recalcEnroutePr()
+  
 </script>
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>
+
+
+<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=534c3c05-c28e-47ea-8c39-9ceff0712f80"></script>

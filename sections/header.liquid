@@ -23,8 +23,14 @@
 				.announcement-bar {
 					background-color: {{ section.settings.color_bg }};
 				}
-                            
-                .announcement-bar__container {
+				.announcement-bar__container--mobile{
+					display:none;
+				}
+				.announcement-bar__container {
+					display:block;
+				}           
+                .announcement-bar__container,
+				.announcement-bar__container--mobile {
 					padding: 11px 0 12px;
 				}      
               
@@ -32,27 +38,39 @@
 				    text-decoration-line: none;
 				}
 
-				.announcement-bar__container a {
+				.announcement-bar__container a,
+				.announcement-bar__container--mobile a {
 					color: {{ section.settings.color_text }};
 					text-decoration: none;
 				}
 				@media (max-width: 767px) {
-					.announcement-bar__container p a:last-child {
+					.announcement-bar__container{
+						display:none;
+					}
+					.announcement-bar__container p a:last-child,
+					.announcement-bar__container--mobile p a:last-child{
 						display: block;
 					}
-
-					.announcement-bar__container a {
+					.announcement-bar__container p a:last-child,
+					.announcement-bar__container--mobile p a:last-child {
+						display: block;
+					}
+					.announcement-bar__container a,
+					.announcement-bar__container--mobile a {
 						font-size: 10px;
 						line-height: 12px;
 					}
+
 				}
 				.announcement-bar__container a:hover {
 					color: #BA9163;
 				}
-				.announcement-bar__container p {
+				.announcement-bar__container p,
+				.announcement-bar__container--mobile p {
 					margin-bottom: 0;
 					color: {{ section.settings.color_text }};
 				}
+			
 				.announcement-bar__link:hover {   
                  
                   {% comment %}
@@ -76,7 +94,7 @@
                   	display: inline;
 					color: {{ section.settings.color_text }};
 				}
-              
+				
                 .announcement-bar__close-btn {
                   position: absolute;
                   top: 6px;
@@ -87,10 +105,16 @@
                 }
               
               	@media only screen and (max-width: 767px) {
+					.announcement-bar__container--mobile{
+						display:block;
+				}
                     .announcement-bar__close-btn {
-                      top: 8px;
+                      top: 14px;
                       right: 5px;
                     }
+					#text{
+						display: none;
+					}
                 }
               
 			</style>
@@ -99,6 +123,16 @@
 
 					<div class="announcement-bar__link">
 						<div class="announcement-bar__message">{{ section.settings.message_text }}</div>
+					</div>
+
+					<button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="announcement-bar__container--mobile">
+
+					<div class="announcement-bar__link">
+						<div class="announcement-bar__message">{{ section.settings.message_text-mobile }}</div>
 					</div>
 
 					<button type="button" class="announcement-bar__close-btn" onclick="hideAnnouncementBar()" class="close" aria-label="Close">
@@ -351,7 +385,7 @@
 													{% if collection.url == current_tab %}
 														{% assign products_sort = collection.products | sort: 'title' %}
 														{% for product in products_sort %}
-															{% if product.tags contains 'Bestseller' %}
+															{% if product.tags contains 'BestSeller' or product.tags contains 'Bestseller' or product.tags contains 'bestseller' %}
 																<div class="menu-carousel__item">
 																	<a href="{{ product.url | within: collection }}">
 																		<div class="menu-carousel__item-image">
@@ -644,7 +678,6 @@
 	{% endif %}
 </div>
 
-{% comment %}
 <script type="application/ld+json">
 {
 	"@context": "http://schema.org",
@@ -667,12 +700,9 @@
 	"url": {{ shop.url | append: page.url | json }}
 }
 </script>
-{% endcomment %}
 
 {% if request.page_type == 'index' %}
 {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-
-{% comment %}
 <script type="application/ld+json">
 		{
 			"@context": "http://schema.org",
@@ -686,7 +716,6 @@
 			"url": {{ shop.url | append: page.url | json }}
 		}
 	</script>
-{% endcomment %}
 {% endif %}
 
 {% schema %}
@@ -1016,6 +1045,13 @@
 				"vi": "Văn bản",
 				"zh-CN": "文本",
 				"zh-TW": "文字"
+			}
+		},
+		{
+			"type": "richtext",
+			"id": "message_text-mobile",
+			"label": {
+				"en": "Text mobile"
 			}
 		},
 		{
